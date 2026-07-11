@@ -1364,6 +1364,15 @@ function SectionDivider() {
 function LandingPage() {
   return (
     <main className="relative min-h-screen bg-background text-foreground">
+      {/* Premium Antigravity-style Dot Grid Background */}
+      <div 
+        className="pointer-events-none fixed inset-0 -z-50 opacity-[0.03] dark:opacity-[0.05]" 
+        style={{
+          backgroundImage: `radial-gradient(circle, currentColor 1px, transparent 1px)`,
+          backgroundSize: "24px 24px"
+        }} 
+      />
+
       <Nav />
       <Hero />
       <SectionDivider />

@@ -311,32 +311,40 @@ export function LiquidityCalculator() {
               </div>
 
               {/* Legends with Values */}
-              <div className="mt-4 grid grid-cols-2 gap-x-4 gap-y-2 text-xs">
-                <div className="flex items-center gap-2">
-                  <span className="h-2.5 w-2.5 shrink-0 rounded bg-emerald-500" />
-                  <span className="text-foreground/60">T+1 Cash Advance:</span>
-                  <span className="ml-auto font-mono font-semibold text-foreground/95">
+              <div className="mt-5 space-y-2.5 text-xs select-none">
+                <div className="flex items-center justify-between border-b border-foreground/[0.04] pb-2">
+                  <div className="flex items-center gap-2">
+                    <span className="h-2.5 w-2.5 shrink-0 rounded bg-emerald-500" />
+                    <span className="text-foreground/60">T+1 Cash Advance</span>
+                  </div>
+                  <span className="font-mono font-semibold text-foreground/95">
                     ₹{advanceAmount.toLocaleString("en-IN")}
                   </span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <span className="h-2.5 w-2.5 shrink-0 rounded bg-emerald-500/30" />
-                  <span className="text-foreground/60">Released Holdback:</span>
-                  <span className="ml-auto font-mono font-semibold text-foreground/95 text-emerald-400">
+                <div className="flex items-center justify-between border-b border-foreground/[0.04] pb-2">
+                  <div className="flex items-center gap-2">
+                    <span className="h-2.5 w-2.5 shrink-0 rounded bg-emerald-500/30" />
+                    <span className="text-foreground/60">Released Holdback</span>
+                  </div>
+                  <span className="font-mono font-semibold text-emerald-400">
                     ₹{remainingHoldback.toLocaleString("en-IN")}
                   </span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <span className="h-2.5 w-2.5 shrink-0 rounded bg-indigo-500/40" />
-                  <span className="text-foreground/60">Financing Fees:</span>
-                  <span className="ml-auto font-mono font-semibold text-foreground/95">
+                <div className="flex items-center justify-between border-b border-foreground/[0.04] pb-2">
+                  <div className="flex items-center gap-2">
+                    <span className="h-2.5 w-2.5 shrink-0 rounded bg-indigo-500/40" />
+                    <span className="text-foreground/60">Financing Fees</span>
+                  </div>
+                  <span className="font-mono font-semibold text-foreground/95">
                     ₹{(bankDiscount + platformFee).toLocaleString("en-IN")}
                   </span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <span className="h-2.5 w-2.5 shrink-0 rounded bg-rose-500/45" />
-                  <span className="text-foreground/60">Deductions/Penalties:</span>
-                  <span className="ml-auto font-mono font-semibold text-foreground/95 text-rose-400">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <span className="h-2.5 w-2.5 shrink-0 rounded bg-rose-500/45" />
+                    <span className="text-foreground/60">Deductions/Penalties</span>
+                  </div>
+                  <span className="font-mono font-semibold text-rose-400">
                     ₹{deductionsAmount.toLocaleString("en-IN")}
                   </span>
                 </div>
