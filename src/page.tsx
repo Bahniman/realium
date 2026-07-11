@@ -1399,29 +1399,32 @@ function LandingPage() {
 
   return (
     <main className="relative min-h-screen bg-transparent text-foreground overflow-hidden">
-      {/* Base background with theme-aware grid */}
-      <div className="pointer-events-none fixed inset-0 -z-[100] bg-background grid-bg" />
+      {/* Base solid background color */}
+      <div className="pointer-events-none fixed inset-0 -z-[100] bg-background" />
 
-      {/* Parallax-moving larger grid overlay */}
+      {/* Clean Interactive Parallax Tech Network Watermark — no dot matrix grids */}
       <div className="pointer-events-none fixed inset-0 -z-[90] overflow-hidden select-none">
         <motion.div
           style={{ y: bgY, scale: bgScale, rotate: bgRotate }}
           className="absolute inset-0 h-[120%] w-[120%] -left-[10%] -top-[10%]"
         >
+          {/* Light Mode: Inverted watermark map (renders as soft dark lines) */}
           <div
-            className="absolute inset-0"
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-[0.10] invert dark:hidden"
             style={{
-              backgroundImage: `
-                linear-gradient(to right, rgba(99,102,241,0.07) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(99,102,241,0.07) 1px, transparent 1px)
-              `,
-              backgroundSize: '200px 200px',
+              backgroundImage: `url('${import.meta.env.BASE_URL}bg-network.jpg')`,
             }}
           />
-          {/* Radial glow pulse — top-left */}
-          <div className="absolute -top-[20%] -left-[10%] h-[800px] w-[800px] rounded-full bg-emerald-500/15 dark:bg-emerald-500/10 blur-[100px] animate-pulse" />
-          {/* Radial glow pulse — bottom-right */}
-          <div className="absolute -bottom-[20%] -right-[10%] h-[700px] w-[700px] rounded-full bg-indigo-500/15 dark:bg-indigo-500/10 blur-[100px] animate-pulse [animation-delay:2s]" />
+          {/* Dark Mode: Standard watermark map (renders as soft glowing lines) */}
+          <div
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-[0.10] hidden dark:block"
+            style={{
+              backgroundImage: `url('${import.meta.env.BASE_URL}bg-network.jpg')`,
+            }}
+          />
+          {/* Ambient Glows */}
+          <div className="absolute -top-[10%] -left-[5%] h-[700px] w-[700px] rounded-full bg-emerald-500/5 dark:bg-emerald-500/[0.04] blur-[120px]" />
+          <div className="absolute -bottom-[10%] -right-[5%] h-[600px] w-[600px] rounded-full bg-indigo-500/5 dark:bg-indigo-500/[0.04] blur-[120px]" />
         </motion.div>
       </div>
 

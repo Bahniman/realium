@@ -108,12 +108,6 @@ html {
 html, body {
   background-color: var(--scene-bg);
   color: var(--foreground);
-  background-image:
-    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px),
-    radial-gradient(circle, var(--grid-dot) 1.5px, transparent 1.5px);
-  background-size: 56px 56px, 56px 56px, 56px 56px;
-  background-attachment: fixed;
 }
 
 @layer base {
