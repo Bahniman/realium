@@ -1376,49 +1376,37 @@ function LandingPage() {
         {/* Blob 1 (Emerald) */}
         <motion.div 
           style={{ y: y1, x: x1, scale: scale1 }}
-          className="absolute -top-20 left-[-15%] h-[650px] w-[650px] rounded-full bg-emerald-500/10 dark:bg-emerald-500/[0.06] blur-[140px]" 
+          className="absolute -top-20 left-[-15%] h-[650px] w-[650px] rounded-full bg-emerald-500/18 dark:bg-emerald-500/12 blur-[140px]" 
         />
         {/* Blob 2 (Indigo) */}
         <motion.div 
           style={{ y: y2, x: x2, scale: scale2 }}
-          className="absolute bottom-[-10%] right-[-15%] h-[650px] w-[650px] rounded-full bg-indigo-500/10 dark:bg-indigo-500/[0.06] blur-[140px]" 
+          className="absolute bottom-[-10%] right-[-15%] h-[650px] w-[650px] rounded-full bg-indigo-500/18 dark:bg-indigo-500/15 blur-[140px]" 
         />
       </div>
 
       {/* Premium Antigravity-style Dot Grid Background */}
       <div 
-        className="pointer-events-none fixed inset-0 -z-50 opacity-[0.03] dark:opacity-[0.05]" 
+        className="pointer-events-none fixed inset-0 -z-50 opacity-40 dark:opacity-30" 
         style={{
-          backgroundImage: `radial-gradient(circle, currentColor 1px, transparent 1px)`,
-          backgroundSize: "24px 24px"
+          backgroundImage: `radial-gradient(rgba(120, 119, 198, 0.18) 1.5px, transparent 1.5px)`,
+          backgroundSize: "28px 28px"
         }} 
       />
 
       <Nav />
       <Hero />
-      <SectionDivider />
       <Problem />
-      <SectionDivider />
       <Architecture />
-      <SectionDivider />
       <MoneyFlow />
-      <SectionDivider />
       <RedTeam />
-      <SectionDivider />
       <Synergy />
-      <SectionDivider />
       <Value />
-      <SectionDivider />
       <LiveDemo />
-      <SectionDivider />
       <MandateSection />
-      <SectionDivider />
       <Validation />
-      <SectionDivider />
       <Roadmap />
-      <SectionDivider />
       <Sources />
-      <SectionDivider />
       <CTA />
       <Footer />
     </main>
