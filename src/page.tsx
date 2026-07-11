@@ -1383,8 +1383,10 @@ function SectionDivider() {
 function LandingPage() {
   const { scrollYProgress } = useScroll();
 
-  // Parallax transforms for the interactive background image (extremely subtle vertical drift)
-  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "-4%"]);
+  // Parallax transforms for the interactive background image
+  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "-10%"]);
+  const bgScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.1, 1.3, 1.15]);
+  const bgRotate = useTransform(scrollYProgress, [0, 1], ["0deg", "4deg"]);
 
   // Transform scroll progress into shifting positions and scales for background color blobs
   const y1 = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
@@ -1400,15 +1402,15 @@ function LandingPage() {
       {/* Solid Background Color Base (Stacking index -100) */}
       <div className="pointer-events-none fixed inset-0 -z-[100] bg-background" />
 
-      {/* Interactive Background Image (Parallax scroll-linked watermark) */}
+      {/* Interactive Background Image (Parallax scroll-linked) */}
       <div className="pointer-events-none fixed inset-0 -z-[90] overflow-hidden select-none">
         <motion.div 
-          style={{ y: bgY }}
-          className="absolute inset-0 h-[105%] w-full"
+          style={{ y: bgY, scale: bgScale, rotate: bgRotate }}
+          className="absolute inset-0 h-[120%] w-[120%] -left-[10%] -top-[10%]"
         >
           {/* Main Network Background Image */}
           <div 
-            className="h-full w-full bg-cover bg-center bg-no-repeat opacity-[0.02] dark:opacity-[0.04]" 
+            className="h-full w-full bg-cover bg-center bg-no-repeat opacity-30 dark:opacity-40" 
             style={{
               backgroundImage: `url('${import.meta.env.BASE_URL}bg-network.jpg')`
             }} 
