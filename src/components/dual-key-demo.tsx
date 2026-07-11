@@ -263,7 +263,7 @@ export function DualKeyDemo() {
                   </div>
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center justify-between gap-2">
-                      <div className="truncate text-sm font-medium text-foreground">
+                      <div className="text-sm font-medium text-foreground">
                         {s.label}
                       </div>
                       {state === "await" && (
@@ -275,7 +275,7 @@ export function DualKeyDemo() {
                         </button>
                       )}
                     </div>
-                    <div className="mt-0.5 truncate font-mono text-[11px] text-foreground/50">
+                    <div className="mt-0.5 font-mono text-[11px] text-foreground/50 whitespace-normal break-all">
                       {s.detail}
                     </div>
                   </div>

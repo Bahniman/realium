@@ -377,7 +377,7 @@ export function LiquidityCalculator() {
               Net Capital Take-Home Comparison
             </div>
             
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {/* Realium */}
               <div className="rounded-lg border border-emerald-500/25 bg-emerald-500/[0.04] p-3">
                 <div className="text-xs font-semibold uppercase tracking-wider text-emerald-400 flex items-center gap-1">

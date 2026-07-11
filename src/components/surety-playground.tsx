@@ -198,18 +198,17 @@ export function SuretyPlayground() {
                 >
                   <Icon className={`mt-0.5 h-4 w-4 shrink-0 ${toneText}`} />
                   <div className="min-w-0 flex-1">
-                    <div className="flex items-center justify-between gap-2 font-mono text-xs text-foreground/80">
-                      <span className="truncate">
-                        certify({a.workId}, {a.category}, ₹
-                        {a.amount.toLocaleString("en-IN")})
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 sm:gap-2 font-mono text-xs text-foreground/80">
+                      <span className="break-all whitespace-normal font-semibold">
+                        certify({a.workId}, {a.category}, ₹{a.amount.toLocaleString("en-IN")})
                       </span>
                       <span
-                        className={`shrink-0 text-[10px] uppercase tracking-widest ${toneText}`}
+                        className={`shrink-0 text-[10px] uppercase tracking-widest font-bold self-start sm:self-auto ${toneText}`}
                       >
                         {a.verdict}
                       </span>
                     </div>
-                    <div className="mt-0.5 text-[11px] text-foreground/50">
+                    <div className="mt-1 text-[11px] text-foreground/50 whitespace-normal">
                       {a.reason}
                     </div>
                   </div>

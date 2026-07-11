@@ -26,10 +26,10 @@ import { PipelineVisualizer } from "@/components/pipeline-visualizer";
 
 
 const fadeUp = {
-  initial: { opacity: 0, y: 35 },
+  initial: { opacity: 0, y: 15 },
   whileInView: { opacity: 1, y: 0 },
-  viewport: { once: false, margin: "-120px 0px" },
-  transition: { duration: 0.8, ease: "easeOut" },
+  viewport: { once: true, margin: "-80px" },
+  transition: { duration: 0.5, ease: "easeOut" },
 };
 
 /* ============================ HOOKS / HELPERS ============================ */
@@ -1383,10 +1383,8 @@ function SectionDivider() {
 function LandingPage() {
   const { scrollYProgress } = useScroll();
 
-  // Parallax transforms for the interactive background image
-  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "-12%"]);
-  const bgScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.1, 1.25, 1.12]);
-  const bgRotate = useTransform(scrollYProgress, [0, 1], ["0deg", "5deg"]);
+  // Parallax transforms for the interactive background image (extremely subtle vertical drift)
+  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "-4%"]);
 
   // Transform scroll progress into shifting positions and scales for background color blobs
   const y1 = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
@@ -1402,15 +1400,15 @@ function LandingPage() {
       {/* Solid Background Color Base (Stacking index -100) */}
       <div className="pointer-events-none fixed inset-0 -z-[100] bg-background" />
 
-      {/* Interactive Background Image (Parallax scroll-linked) */}
+      {/* Interactive Background Image (Parallax scroll-linked watermark) */}
       <div className="pointer-events-none fixed inset-0 -z-[90] overflow-hidden select-none">
         <motion.div 
-          style={{ y: bgY, scale: bgScale, rotate: bgRotate }}
-          className="absolute inset-0 h-[120%] w-[120%] -left-[10%] -top-[10%]"
+          style={{ y: bgY }}
+          className="absolute inset-0 h-[105%] w-full"
         >
           {/* Main Network Background Image */}
           <div 
-            className="h-full w-full bg-cover bg-center bg-no-repeat opacity-[0.24] dark:opacity-[0.35]" 
+            className="h-full w-full bg-cover bg-center bg-no-repeat opacity-[0.02] dark:opacity-[0.04]" 
             style={{
               backgroundImage: `url('${import.meta.env.BASE_URL}bg-network.jpg')`
             }} 
@@ -1423,12 +1421,12 @@ function LandingPage() {
         {/* Blob 1 (Emerald) */}
         <motion.div 
           style={{ y: y1, x: x1, scale: scale1 }}
-          className="absolute -top-20 left-[-15%] h-[650px] w-[650px] rounded-full bg-emerald-500/18 dark:bg-emerald-500/12 blur-[140px]" 
+          className="absolute -top-20 left-[-15%] h-[650px] w-[650px] rounded-full bg-emerald-500/8 dark:bg-emerald-500/[0.04] blur-[150px]" 
         />
         {/* Blob 2 (Indigo) */}
         <motion.div 
           style={{ y: y2, x: x2, scale: scale2 }}
-          className="absolute bottom-[-10%] right-[-15%] h-[650px] w-[650px] rounded-full bg-indigo-500/18 dark:bg-indigo-500/15 blur-[140px]" 
+          className="absolute bottom-[-10%] right-[-15%] h-[650px] w-[650px] rounded-full bg-indigo-500/8 dark:bg-indigo-500/[0.04] blur-[150px]" 
         />
       </div>
 

@@ -123,7 +123,7 @@ export function PipelineVisualizer() {
       </div>
 
       {/* SVG Canvas for pipeline connections */}
-      <div className="relative h-[255px] w-full">
+      <div className="relative w-full aspect-[520/320] max-h-[255px] sm:max-h-none">
         <svg className="absolute inset-0 h-full w-full" viewBox="0 0 520 320">
           <defs>
             <linearGradient id="grad-green-indigo" x1="0%" y1="0%" x2="100%" y2="100%">
