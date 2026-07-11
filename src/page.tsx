@@ -1399,19 +1399,8 @@ function LandingPage() {
 
   return (
     <main className="relative min-h-screen bg-transparent text-foreground overflow-hidden">
-      {/* Base background WITH grid baked in — guaranteed visible */}
-      <div 
-        className="pointer-events-none fixed inset-0 -z-[100]" 
-        style={{
-          backgroundColor: 'var(--background)',
-          backgroundImage: `
-            linear-gradient(to right, rgba(16,185,129,0.35) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(16,185,129,0.35) 1px, transparent 1px),
-            radial-gradient(circle, rgba(16,185,129,0.50) 2.5px, transparent 2.5px)
-          `,
-          backgroundSize: '60px 60px, 60px 60px, 60px 60px',
-        }}
-      />
+      {/* Base background with theme-aware grid */}
+      <div className="pointer-events-none fixed inset-0 -z-[100] bg-background grid-bg" />
 
       {/* Parallax-moving larger grid overlay */}
       <div className="pointer-events-none fixed inset-0 -z-[90] overflow-hidden select-none">

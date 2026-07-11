@@ -60,7 +60,8 @@
   --scene-bg: #fafaf9;
   --glass-bg: rgba(255, 255, 255, 0.60);
   --glass-border: rgba(10, 10, 10, 0.08);
-  --grid-line: rgba(10, 10, 10, 0.06);
+  --grid-line: rgba(10, 10, 10, 0.12);
+  --grid-dot: rgba(10, 10, 10, 0.22);
   --blob-emerald: rgba(16, 185, 129, 0.18);
   --blob-indigo: rgba(99, 102, 241, 0.18);
 }
@@ -89,7 +90,8 @@
   --scene-bg: #050505;
   --glass-bg: rgba(255, 255, 255, 0.05);
   --glass-border: rgba(255, 255, 255, 0.10);
-  --grid-line: rgba(255, 255, 255, 0.06);
+  --grid-line: rgba(255, 255, 255, 0.12);
+  --grid-dot: rgba(255, 255, 255, 0.22);
   --blob-emerald: rgba(16, 185, 129, 0.20);
   --blob-indigo: rgba(99, 102, 241, 0.25);
 }
@@ -106,6 +108,12 @@ html {
 html, body {
   background-color: var(--scene-bg);
   color: var(--foreground);
+  background-image:
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px),
+    radial-gradient(circle, var(--grid-dot) 1.5px, transparent 1.5px);
+  background-size: 56px 56px, 56px 56px, 56px 56px;
+  background-attachment: fixed;
 }
 
 @layer base {
@@ -136,8 +144,9 @@ html, body {
 @utility grid-bg {
   background-image:
     linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
-  background-size: 56px 56px;
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px),
+    radial-gradient(circle, var(--grid-dot) 1.5px, transparent 1.5px);
+  background-size: 56px 56px, 56px 56px, 56px 56px;
 }
 
 @utility btn-press {
