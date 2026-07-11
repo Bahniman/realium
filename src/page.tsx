@@ -1413,8 +1413,8 @@ function LandingPage() {
             className="absolute inset-0"
             style={{
               backgroundImage: `
-                linear-gradient(to right, rgba(16,185,129,0.08) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(16,185,129,0.08) 1px, transparent 1px)
+                linear-gradient(to right, rgba(16,185,129,0.18) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(16,185,129,0.18) 1px, transparent 1px)
               `,
               backgroundSize: '80px 80px',
             }}
@@ -1424,21 +1424,21 @@ function LandingPage() {
             className="absolute inset-0"
             style={{
               backgroundImage: `
-                linear-gradient(to right, rgba(99,102,241,0.05) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(99,102,241,0.05) 1px, transparent 1px)
+                linear-gradient(to right, rgba(99,102,241,0.10) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(99,102,241,0.10) 1px, transparent 1px)
               `,
               backgroundSize: '20px 20px',
             }}
           />
           {/* Radial glow pulse — top-left */}
-          <div className="absolute -top-[20%] -left-[10%] h-[600px] w-[600px] rounded-full bg-emerald-500/[0.06] dark:bg-emerald-500/[0.08] blur-[120px] animate-pulse" />
+          <div className="absolute -top-[20%] -left-[10%] h-[800px] w-[800px] rounded-full bg-emerald-500/15 dark:bg-emerald-500/10 blur-[100px] animate-pulse" />
           {/* Radial glow pulse — bottom-right */}
-          <div className="absolute -bottom-[20%] -right-[10%] h-[500px] w-[500px] rounded-full bg-indigo-500/[0.06] dark:bg-indigo-500/[0.08] blur-[120px] animate-pulse [animation-delay:2s]" />
+          <div className="absolute -bottom-[20%] -right-[10%] h-[700px] w-[700px] rounded-full bg-indigo-500/15 dark:bg-indigo-500/10 blur-[100px] animate-pulse [animation-delay:2s]" />
           {/* Scattered dot nodes at grid intersections */}
           <div
-            className="absolute inset-0 opacity-60 dark:opacity-40"
+            className="absolute inset-0"
             style={{
-              backgroundImage: `radial-gradient(circle, rgba(16,185,129,0.25) 1.5px, transparent 1.5px)`,
+              backgroundImage: `radial-gradient(circle, rgba(16,185,129,0.35) 2px, transparent 2px)`,
               backgroundSize: '80px 80px',
               backgroundPosition: '0 0',
             }}
