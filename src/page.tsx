@@ -26,10 +26,10 @@ import { PipelineVisualizer } from "@/components/pipeline-visualizer";
 
 
 const fadeUp = {
-  initial: { opacity: 0, y: 20 },
+  initial: { opacity: 0, y: 35 },
   whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: "-80px" },
-  transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] as const },
+  viewport: { once: false, margin: "-120px 0px" },
+  transition: { duration: 0.8, ease: "easeOut" },
 };
 
 /* ============================ HOOKS / HELPERS ============================ */
@@ -265,6 +265,24 @@ function Hero() {
               >
                 The uncomfortable question
               </a>
+            </motion.div>
+
+            {/* Scroll indicator prompt urging users to scroll down */}
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.45 }}
+              transition={{ delay: 1.2, duration: 1 }}
+              onClick={() => document.getElementById('problem')?.scrollIntoView({ behavior: 'smooth' })}
+              className="mt-14 inline-flex items-center gap-3 text-[10px] sm:text-xs uppercase tracking-[0.25em] text-foreground/50 select-none cursor-pointer hover:text-foreground/80 transition-colors"
+            >
+              <span>Scroll to explore</span>
+              <motion.div
+                animate={{ y: [0, 6, 0] }}
+                transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+                className="flex h-7 w-4 items-start justify-center rounded-full border border-foreground/30 p-1"
+              >
+                <div className="h-1.5 w-1 rounded-full bg-emerald-400" />
+              </motion.div>
             </motion.div>
           </div>
 
@@ -1357,6 +1375,11 @@ function SectionDivider() {
 function LandingPage() {
   const { scrollYProgress } = useScroll();
 
+  // Parallax transforms for the interactive background image
+  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "-12%"]);
+  const bgScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.1, 1.25, 1.12]);
+  const bgRotate = useTransform(scrollYProgress, [0, 1], ["0deg", "5deg"]);
+
   // Transform scroll progress into shifting positions and scales for background color blobs
   const y1 = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
   const x1 = useTransform(scrollYProgress, [0, 1], ["-10%", "15%"]);
@@ -1370,6 +1393,22 @@ function LandingPage() {
     <main className="relative min-h-screen bg-transparent text-foreground overflow-hidden">
       {/* Solid Background Color Base (Stacking index -100) */}
       <div className="pointer-events-none fixed inset-0 -z-[100] bg-background" />
+
+      {/* Interactive Background Image (Parallax scroll-linked) */}
+      <div className="pointer-events-none fixed inset-0 -z-[90] overflow-hidden select-none">
+        <motion.div 
+          style={{ y: bgY, scale: bgScale, rotate: bgRotate }}
+          className="absolute inset-0 h-[120%] w-[120%] -left-[10%] -top-[10%]"
+        >
+          {/* Main Network Background Image */}
+          <div 
+            className="h-full w-full bg-cover bg-center bg-no-repeat opacity-[0.06] dark:opacity-[0.09]" 
+            style={{
+              backgroundImage: `url('${import.meta.env.BASE_URL}bg-network.jpg')`
+            }} 
+          />
+        </motion.div>
+      </div>
 
       {/* Shifting Ambient Background Blobs */}
       <div className="pointer-events-none fixed inset-0 -z-30 overflow-hidden select-none">
