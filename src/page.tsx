@@ -1402,25 +1402,46 @@ function LandingPage() {
       {/* Solid Background Color Base (Stacking index -100) */}
       <div className="pointer-events-none fixed inset-0 -z-[100] bg-background" />
 
-      {/* Interactive Background Image (Parallax scroll-linked) */}
+      {/* Interactive CSS Network Grid Background — works on both light and dark */}
       <div className="pointer-events-none fixed inset-0 -z-[90] overflow-hidden select-none">
-        <motion.div 
+        <motion.div
           style={{ y: bgY, scale: bgScale, rotate: bgRotate }}
           className="absolute inset-0 h-[120%] w-[120%] -left-[10%] -top-[10%]"
         >
-          {/* Light mode: invert image (black bg→white, neon→dark) + multiply blend (white vanishes, dark lines show) */}
-          <div 
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20 invert mix-blend-multiply dark:hidden" 
+          {/* Fine grid lines */}
+          <div
+            className="absolute inset-0"
             style={{
-              backgroundImage: `url('${import.meta.env.BASE_URL}bg-network.jpg')`
-            }} 
+              backgroundImage: `
+                linear-gradient(to right, rgba(16,185,129,0.08) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(16,185,129,0.08) 1px, transparent 1px)
+              `,
+              backgroundSize: '80px 80px',
+            }}
           />
-          {/* Dark mode: screen blend (black vanishes, neon lines glow through) */}
-          <div 
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-60 mix-blend-screen hidden dark:block" 
+          {/* Secondary finer sub-grid */}
+          <div
+            className="absolute inset-0"
             style={{
-              backgroundImage: `url('${import.meta.env.BASE_URL}bg-network.jpg')`
-            }} 
+              backgroundImage: `
+                linear-gradient(to right, rgba(99,102,241,0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(99,102,241,0.05) 1px, transparent 1px)
+              `,
+              backgroundSize: '20px 20px',
+            }}
+          />
+          {/* Radial glow pulse — top-left */}
+          <div className="absolute -top-[20%] -left-[10%] h-[600px] w-[600px] rounded-full bg-emerald-500/[0.06] dark:bg-emerald-500/[0.08] blur-[120px] animate-pulse" />
+          {/* Radial glow pulse — bottom-right */}
+          <div className="absolute -bottom-[20%] -right-[10%] h-[500px] w-[500px] rounded-full bg-indigo-500/[0.06] dark:bg-indigo-500/[0.08] blur-[120px] animate-pulse [animation-delay:2s]" />
+          {/* Scattered dot nodes at grid intersections */}
+          <div
+            className="absolute inset-0 opacity-60 dark:opacity-40"
+            style={{
+              backgroundImage: `radial-gradient(circle, rgba(16,185,129,0.25) 1.5px, transparent 1.5px)`,
+              backgroundSize: '80px 80px',
+              backgroundPosition: '0 0',
+            }}
           />
         </motion.div>
       </div>
@@ -1439,7 +1460,7 @@ function LandingPage() {
         />
       </div>
 
-      {/* Premium Antigravity-style Dot Grid Background */}
+      {/* Fine dot grid overlay */}
       <div 
         className="pointer-events-none fixed inset-0 -z-50 opacity-40 dark:opacity-30" 
         style={{
