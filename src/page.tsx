@@ -1410,7 +1410,7 @@ function LandingPage() {
         >
           {/* Main Network Background Image */}
           <div 
-            className="h-full w-full bg-cover bg-center bg-no-repeat opacity-30 dark:opacity-40" 
+            className="h-full w-full bg-cover bg-center bg-no-repeat mix-blend-screen opacity-50 dark:opacity-75" 
             style={{
               backgroundImage: `url('${import.meta.env.BASE_URL}bg-network.jpg')`
             }} 
