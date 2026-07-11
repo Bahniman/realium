@@ -269,10 +269,10 @@ function Hero() {
             {/* Scroll indicator prompt urging users to scroll down */}
             <motion.div 
               initial={{ opacity: 0 }}
-              animate={{ opacity: 0.45 }}
+              animate={{ opacity: 1 }}
               transition={{ delay: 1.2, duration: 1 }}
               onClick={() => document.getElementById('problem')?.scrollIntoView({ behavior: 'smooth' })}
-              className="mt-14 inline-flex items-center gap-3 text-[10px] sm:text-xs uppercase tracking-[0.25em] text-foreground/50 select-none cursor-pointer hover:text-foreground/80 transition-colors"
+              className="mt-14 inline-flex items-center gap-3 text-[10px] sm:text-xs uppercase tracking-[0.25em] text-muted-foreground select-none cursor-pointer hover:text-foreground transition-colors"
             >
               <span>Scroll to explore</span>
               <motion.div
@@ -280,7 +280,7 @@ function Hero() {
                 transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
                 className="flex h-7 w-4 items-start justify-center rounded-full border border-foreground/30 p-1"
               >
-                <div className="h-1.5 w-1 rounded-full bg-emerald-400" />
+                <div className="h-1.5 w-1 rounded-full bg-emerald-500" />
               </motion.div>
             </motion.div>
           </div>
@@ -359,8 +359,8 @@ function Problem() {
               <div className="text-3xl font-semibold tracking-tight text-foreground tabular-nums sm:text-4xl text-neon-emerald">
                 <CountUpStat text={c.stat} />
               </div>
-              <div className="mt-1 text-[11px] uppercase tracking-widest text-foreground/40">
-                {c.label} <span className="text-foreground/25">[{c.src}]</span>
+              <div className="mt-1 text-[11px] uppercase tracking-widest text-muted-foreground">
+                {c.label} <span className="text-muted-foreground/60">[{c.src}]</span>
               </div>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                 {c.body}
@@ -377,17 +377,17 @@ function Problem() {
       >
         <GlowCard className="grid grid-cols-1 gap-6 border-amber-500/20 bg-amber-500/[0.04] p-8 lg:grid-cols-[1fr_1.3fr] rounded-2xl" showTechBrackets={false}>
           <div>
-            <div className="text-xs uppercase tracking-widest text-amber-400/90">
+            <div className="text-xs uppercase tracking-widest text-amber-700 dark:text-amber-400">
               Why &quot;just digitise it&quot; failed
             </div>
             <h3 className="mt-2 text-2xl font-semibold tracking-tight text-foreground">
               CPWD&apos;s e-Measurement Book already exists.
             </h3>
-            <div className="mt-3 font-mono text-sm text-foreground/60">
+            <div className="mt-3 font-mono text-sm text-amber-800 dark:text-amber-300">
               ~₹20,000 Cr/yr paid on it. Money is still slow.
             </div>
           </div>
-          <div className="text-foreground/80">
+          <div className="text-foreground/90">
             <p>
               A digital record is not a financial instrument. An e-MB entry sits
               in a state IT system that no bank underwrites and no queue makes
@@ -395,11 +395,11 @@ function Problem() {
               (a) the record isn&apos;t bank-grade, and (b) when the file stalls,
               no one can point to whose desk it&apos;s sitting on.
             </p>
-            <p className="mt-3 text-sm text-foreground/60">
+            <p className="mt-3 text-sm text-muted-foreground">
               Realium closes both. Verified evidence becomes a signed
               instrument, and every human touch on that instrument is a signed,
               timestamped event in a tamper-evident chain.
-              <span className="text-foreground/30"> [4]</span>
+              <span className="text-muted-foreground/60"> [4]</span>
             </p>
           </div>
         </GlowCard>
@@ -462,7 +462,7 @@ function Architecture() {
   return (
     <section id="architecture" className="mx-auto max-w-7xl px-4 py-16">
       <motion.div {...fadeUp} className="mb-14 max-w-3xl">
-        <div className="text-xs uppercase tracking-[0.2em] text-emerald-400/80">
+        <div className="text-xs uppercase tracking-[0.2em] text-emerald-600 dark:text-emerald-400">
           The solution · one platform, three layers
         </div>
         <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-5xl">
@@ -489,14 +489,14 @@ function Architecture() {
               }`}
             >
               <div className="flex items-center gap-2">
-                <span className="font-mono text-[11px] text-foreground/40">
+                <span className="font-mono text-[11px] text-muted-foreground">
                   {l.n}
                 </span>
                 <span className="text-sm font-semibold text-foreground">
                   {l.tag}
                 </span>
               </div>
-              <div className="mt-1.5 text-xs text-foreground/60">
+              <div className="mt-1.5 text-xs text-muted-foreground">
                 {l.key === "evidence"
                   ? "site → certified e-invoice"
                   : l.key === "authority"
@@ -513,8 +513,8 @@ function Architecture() {
                       : "from-indigo-500/60 to-amber-500/60"
                   }`}
                 />
-                <span className="mx-1 flex h-8 w-8 items-center justify-center rounded-full border border-foreground/15 bg-background shadow-sm">
-                  <ArrowRight className="h-3.5 w-3.5 text-foreground/60" />
+                <span className="mx-1 flex h-8 w-8 items-center justify-center rounded-full border border-border bg-background shadow-sm">
+                  <ArrowRight className="h-3.5 w-3.5 text-muted-foreground" />
                 </span>
                 <span
                   className={`h-px w-6 bg-gradient-to-r ${
@@ -534,10 +534,10 @@ function Architecture() {
           const Icon = l.icon;
           const accent =
             l.color === "emerald"
-              ? "text-emerald-400 border-emerald-500/30 bg-emerald-500/10"
+              ? "text-emerald-600 dark:text-emerald-400 border-emerald-500/30 bg-emerald-500/10"
               : l.color === "indigo"
-                ? "text-indigo-400 border-indigo-500/30 bg-indigo-500/10"
-                : "text-amber-400 border-amber-500/30 bg-amber-500/10";
+                ? "text-indigo-600 dark:text-indigo-400 border-indigo-500/30 bg-indigo-500/10"
+                : "text-amber-600 dark:text-amber-400 border-amber-500/30 bg-amber-500/10";
           return (
             <Fragment key={l.key}>
               <motion.div
@@ -557,17 +557,17 @@ function Architecture() {
                     >
                       <Icon className="h-5 w-5" />
                     </div>
-                    <div className="font-mono text-xs text-foreground/40">
+                    <div className="font-mono text-xs text-muted-foreground">
                       Layer {l.n}
                     </div>
                   </div>
                   <div
-                    className={`mt-5 text-[11px] uppercase tracking-widest ${
+                    className={`mt-5 text-[11px] uppercase tracking-widest font-semibold ${
                       l.color === "emerald"
-                        ? "text-emerald-400/90"
+                        ? "text-emerald-600 dark:text-emerald-400"
                         : l.color === "indigo"
-                          ? "text-indigo-400/90"
-                          : "text-amber-400/90"
+                          ? "text-indigo-600 dark:text-indigo-400"
+                          : "text-amber-600 dark:text-amber-400"
                     }`}
                   >
                     {l.tag}
@@ -582,15 +582,15 @@ function Architecture() {
                     {l.bullets.map((b) => (
                       <li
                         key={b}
-                        className="flex gap-2.5 text-sm text-foreground/75"
+                        className="flex gap-2.5 text-sm text-foreground/90"
                       >
                         <span
                           className={`mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full ${
                             l.color === "emerald"
-                              ? "bg-emerald-400"
+                              ? "bg-emerald-500"
                               : l.color === "indigo"
-                                ? "bg-indigo-400"
-                                : "bg-amber-400"
+                                ? "bg-indigo-500"
+                                : "bg-amber-500"
                           }`}
                         />
                         <span>{b}</span>
@@ -598,20 +598,20 @@ function Architecture() {
                     ))}
                   </ul>
                   {l.footnote && (
-                    <div className="mt-5 rounded-md border border-foreground/10 bg-foreground/[0.03] p-3 text-[11px] text-foreground/50">
+                    <div className="mt-5 rounded-md border border-border bg-foreground/[0.03] p-3 text-[11px] text-muted-foreground">
                       {l.footnote}
                     </div>
                   )}
 
                   {/* Interactivity prompt */}
-                  <div className="mt-auto pt-6 flex items-center justify-between border-t border-foreground/5 font-mono text-[9px] text-foreground/40 group-hover:text-foreground/75 transition-colors">
+                  <div className="mt-auto pt-6 flex items-center justify-between border-t border-border font-mono text-[9px] text-muted-foreground group-hover:text-foreground transition-colors">
                     <span className="flex items-center gap-1.5">
                       <span className={`h-1.5 w-1.5 rounded-full animate-pulse ${
                         l.color === "emerald"
-                          ? "bg-emerald-400"
+                          ? "bg-emerald-500"
                           : l.color === "indigo"
-                            ? "bg-indigo-400"
-                            : "bg-amber-400"
+                            ? "bg-indigo-500"
+                            : "bg-amber-500"
                       }`} />
                       TEST LIVE ENGINE
                     </span>
@@ -634,8 +634,8 @@ function Architecture() {
                         : "from-indigo-500/60 to-amber-500/60"
                     }`}
                   />
-                  <span className="flex h-7 w-7 items-center justify-center rounded-full border border-foreground/15 bg-background shadow-sm">
-                    <ArrowRight className="h-3 w-3 rotate-90 text-foreground/60" />
+                  <span className="flex h-7 w-7 items-center justify-center rounded-full border border-border bg-background shadow-sm">
+                    <ArrowRight className="h-3 w-3 rotate-90 text-muted-foreground" />
                   </span>
                   <span
                     className={`h-6 w-px bg-gradient-to-b ${
@@ -688,7 +688,7 @@ function MoneyFlow() {
   return (
     <section id="flow" className="mx-auto max-w-7xl px-4 py-16">
       <motion.div {...fadeUp} className="mb-12 max-w-3xl">
-        <div className="text-xs uppercase tracking-[0.2em] text-emerald-400/80">
+        <div className="text-xs uppercase tracking-[0.2em] text-emerald-600 dark:text-emerald-400">
           How money moves
         </div>
         <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-5xl">
@@ -846,7 +846,7 @@ function Synergy() {
   return (
     <section className="mx-auto max-w-7xl px-4 py-10">
       <motion.div {...fadeUp} className="mb-10 max-w-3xl">
-        <div className="text-xs uppercase tracking-[0.2em] text-foreground/60">
+        <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
           Event theme · Human-AI Synergy
         </div>
         <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
@@ -857,10 +857,10 @@ function Synergy() {
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         <motion.div {...fadeUp} className="h-full">
           <GlowCard className="h-full border-emerald-500/20 bg-emerald-500/[0.02]" showTechBrackets={true}>
-            <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-emerald-500/30 bg-emerald-500/10 text-emerald-400">
+            <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
               <Cpu className="h-5 w-5" />
             </div>
-            <div className="text-[11px] uppercase tracking-widest text-emerald-400/90">
+            <div className="text-[11px] uppercase tracking-widest font-semibold text-emerald-600 dark:text-emerald-400">
               AI does what scales
             </div>
             <ul className="mt-3 space-y-2 text-foreground/85">
@@ -872,10 +872,10 @@ function Synergy() {
         </motion.div>
         <motion.div {...fadeUp} className="h-full">
           <GlowCard className="h-full border-indigo-500/20 bg-indigo-500/[0.02]" showTechBrackets={true}>
-            <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-indigo-500/30 bg-indigo-500/10 text-indigo-400">
+            <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-indigo-500/30 bg-indigo-500/10 text-indigo-600 dark:text-indigo-400">
               <Fingerprint className="h-5 w-5" />
             </div>
-            <div className="text-[11px] uppercase tracking-widest text-indigo-400/90">
+            <div className="text-[11px] uppercase tracking-widest font-semibold text-indigo-600 dark:text-indigo-400">
               Humans do what carries legal weight
             </div>
             <ul className="mt-3 space-y-2 text-foreground/85">
@@ -886,7 +886,7 @@ function Synergy() {
           </GlowCard>
         </motion.div>
       </div>
-      <div className="mt-6 text-center font-mono text-sm text-foreground/50">
+      <div className="mt-6 text-center font-mono text-sm text-muted-foreground">
         Neither side moves money alone. Dual-key, enforced in code at every
         layer.
       </div>
@@ -921,7 +921,7 @@ function Value() {
   return (
     <section className="mx-auto max-w-7xl px-4 py-16">
       <motion.div {...fadeUp} className="mb-12 max-w-3xl">
-        <div className="text-xs uppercase tracking-[0.2em] text-emerald-400/80">
+        <div className="text-xs uppercase tracking-[0.2em] text-emerald-600 dark:text-emerald-400">
           Value
         </div>
         <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-5xl">
@@ -943,12 +943,12 @@ function Value() {
               onClick={() => document.getElementById('flow')?.scrollIntoView({ behavior: 'smooth' })}
             >
               <div
-                className={`text-[11px] uppercase tracking-widest ${
+                className={`text-[11px] uppercase tracking-widest font-semibold ${
                   v.color === "emerald"
-                    ? "text-emerald-400/90"
+                    ? "text-emerald-600 dark:text-emerald-400"
                     : v.color === "indigo"
-                      ? "text-indigo-400/90"
-                      : "text-amber-400/90"
+                      ? "text-indigo-600 dark:text-indigo-400"
+                      : "text-amber-600 dark:text-amber-400"
                 }`}
               >
                 {v.who}
@@ -959,14 +959,14 @@ function Value() {
               <p className="mt-3 text-sm text-muted-foreground mb-6">{v.lo}</p>
 
               {/* Simulator redirect */}
-              <div className="mt-auto pt-6 flex items-center justify-between border-t border-foreground/5 font-mono text-[9px] text-foreground/40 group-hover:text-foreground/75 transition-colors">
+              <div className="mt-auto pt-6 flex items-center justify-between border-t border-border font-mono text-[9px] text-muted-foreground group-hover:text-foreground transition-colors">
                 <span className="flex items-center gap-1.5">
                   <span className={`h-1.5 w-1.5 rounded-full animate-pulse ${
                     v.color === "emerald"
-                      ? "bg-emerald-400"
+                      ? "bg-emerald-500"
                       : v.color === "indigo"
-                        ? "bg-indigo-400"
-                        : "bg-amber-400"
+                        ? "bg-indigo-500"
+                        : "bg-amber-500"
                   }`} />
                   SIMULATE VALUE
                 </span>
@@ -986,14 +986,14 @@ function Value() {
       >
         <GlowCard showTechBrackets={false} className="border-emerald-500/20 bg-emerald-500/[0.03] p-7 sm:p-8">
           <div className="flex items-start gap-4">
-            <div className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-emerald-500/30 bg-emerald-500/10 text-emerald-400">
+            <div className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
               <BadgeCheck className="h-5 w-5" />
             </div>
             <div>
-              <div className="text-xs uppercase tracking-widest text-emerald-400/90">
+              <div className="text-xs uppercase tracking-widest font-semibold text-emerald-600 dark:text-emerald-400">
                 The flywheel
               </div>
-              <p className="mt-2 max-w-3xl text-foreground/85">
+              <p className="mt-2 max-w-3xl text-foreground/90">
                 Every settled cycle mints proprietary data on payer and payee
                 behavior. That data steps the advance rate for the next cycle.
                 Competitors can copy the UI in a weekend; they cannot copy five
@@ -1013,7 +1013,7 @@ function LiveDemo() {
   return (
     <section id="try" className="mx-auto max-w-7xl px-4 py-20">
       <motion.div {...fadeUp} className="mb-10 max-w-3xl">
-        <div className="text-xs uppercase tracking-[0.2em] text-emerald-400/80">
+        <div className="text-xs uppercase tracking-[0.2em] text-emerald-600 dark:text-emerald-400">
           Live · Layer 1 · try it
         </div>
         <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-5xl">
@@ -1036,7 +1036,7 @@ function MandateSection() {
   return (
     <section id="mandate" className="mx-auto max-w-7xl px-4 py-20">
       <motion.div {...fadeUp} className="mb-10 max-w-3xl">
-        <div className="text-xs uppercase tracking-[0.2em] text-indigo-400/80">
+        <div className="text-xs uppercase tracking-[0.2em] text-indigo-600 dark:text-indigo-400">
           Live · Layer 2 · Approver mandate playground
         </div>
         <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-5xl">
@@ -1085,7 +1085,7 @@ function Validation() {
   return (
     <section id="validation" className="mx-auto max-w-7xl px-4 py-24">
       <motion.div {...fadeUp} className="mb-12 max-w-3xl">
-        <div className="text-xs uppercase tracking-[0.2em] text-emerald-400/80">
+        <div className="text-xs uppercase tracking-[0.2em] text-emerald-600 dark:text-emerald-400">
           Validation
         </div>
         <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-5xl">
@@ -1101,7 +1101,7 @@ function Validation() {
             className="h-full"
           >
             <GlowCard className="h-full border-foreground/10" showTechBrackets={true}>
-              <div className="text-[11px] uppercase tracking-widest text-emerald-400/80">
+              <div className="text-[11px] uppercase tracking-widest font-semibold text-emerald-600 dark:text-emerald-400">
                 {v.tag}
               </div>
               <div className="mt-2 text-lg font-semibold text-foreground">
@@ -1157,7 +1157,7 @@ function Roadmap() {
   return (
     <section className="mx-auto max-w-7xl px-4 py-24">
       <motion.div {...fadeUp} className="mb-12 max-w-3xl">
-        <div className="text-xs uppercase tracking-[0.2em] text-foreground/60">
+        <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
           Roadmap
         </div>
         <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-5xl">
@@ -1174,16 +1174,16 @@ function Roadmap() {
           >
             <GlowCard className="h-full border-foreground/10" showTechBrackets={true}>
               <div className="mb-4 flex items-center justify-between">
-                <div className="font-mono text-[11px] uppercase tracking-widest text-foreground/40">
+                <div className="font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
                   Phase {i + 1}
                 </div>
                 <div
                   className={`rounded-full border px-2 py-0.5 font-mono text-[10px] ${
                     p.color === "emerald"
-                      ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-400"
+                      ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
                       : p.color === "indigo"
-                        ? "border-indigo-500/30 bg-indigo-500/10 text-indigo-400"
-                        : "border-amber-500/30 bg-amber-500/10 text-amber-400"
+                        ? "border-indigo-500/30 bg-indigo-500/10 text-indigo-600 dark:text-indigo-400"
+                        : "border-amber-500/30 bg-amber-500/10 text-amber-600 dark:text-amber-400"
                   }`}
                 >
                   {p.when}
@@ -1194,14 +1194,14 @@ function Roadmap() {
               </h3>
               <ul className="mt-5 space-y-3">
                 {p.items.map((item, j) => (
-                  <li key={j} className="flex gap-3 text-sm text-foreground/75">
+                  <li key={j} className="flex gap-3 text-sm text-foreground/90">
                     <Clock
                       className={`mt-0.5 h-3.5 w-3.5 shrink-0 ${
                         p.color === "emerald"
-                          ? "text-emerald-400"
+                          ? "text-emerald-600 dark:text-emerald-400"
                           : p.color === "indigo"
-                            ? "text-indigo-400"
-                            : "text-amber-400"
+                            ? "text-indigo-600 dark:text-indigo-400"
+                            : "text-amber-600 dark:text-amber-400"
                       }`}
                     />
                     <span className="leading-relaxed">{item}</span>
@@ -1253,31 +1253,31 @@ function Sources() {
   return (
     <section id="sources" className="mx-auto max-w-7xl px-4 py-20">
       <motion.div {...fadeUp} className="mb-8 max-w-3xl">
-        <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-foreground/60">
+        <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">
           <BookOpen className="h-3.5 w-3.5" /> Sources
         </div>
         <h2 className="mt-3 text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
           Every number above traces back to a public source.
         </h2>
       </motion.div>
-      <ol className="glass space-y-3 rounded-2xl p-6 text-sm text-foreground/75">
-        {sources.map((s) => (
-          <li key={s.n} className="flex gap-3">
-            <span className="w-6 shrink-0 font-mono text-foreground/40">
-              [{s.n}]
+      <ol className="glass space-y-3 rounded-2xl p-6 text-sm text-foreground/90">
+        {sources.map((n) => (
+          <li key={n.n} className="flex gap-3">
+            <span className="w-6 shrink-0 font-mono text-muted-foreground">
+              [{n.n}]
             </span>
             <a
-              href={s.href}
+              href={n.href}
               target="_blank"
               rel="noreferrer"
-              className="hover:text-emerald-400 hover:underline"
+              className="hover:text-emerald-600 dark:hover:text-emerald-400 hover:underline"
             >
-              {s.label}
+              {n.label}
             </a>
           </li>
         ))}
       </ol>
-      <p className="mt-4 max-w-3xl text-xs text-foreground/50">
+      <p className="mt-4 max-w-3xl text-xs text-muted-foreground">
         Disclaimer: worked-example figures on this page are illustrative.
         Financing assumptions — 11% p.a. bank yield, 0.35% platform fee, and
         the 50→85% reliability advance curve — are stated as assumptions, not
@@ -1336,18 +1336,18 @@ function Footer() {
             <div className="text-[11px] uppercase tracking-widest text-emerald-400/80">
               Team Realium
             </div>
-            <div className="mt-1 text-sm text-foreground/85">
+            <div className="mt-1 text-sm text-foreground">
               Ananthanarayan · Bahniman · Nandini · Srishti · Uditanshu
             </div>
           </div>
-          <div className="font-mono text-[11px] text-foreground/50">
+          <div className="font-mono text-[11px] text-muted-foreground">
             PGDM-GM, XLRI Jamshedpur · Built for ReEnvision 5.0 (Group 10)
           </div>
         </div>
-        <div className="flex flex-col items-center justify-between gap-3 text-sm text-foreground/50 sm:flex-row w-full">
+        <div className="flex flex-col items-center justify-between gap-3 text-sm text-muted-foreground sm:flex-row w-full">
           <div className="flex items-center gap-2">
-            <span className="font-semibold text-foreground/80">Realium</span>
-            <span className="mx-2 text-foreground/20">|</span>
+            <span className="font-semibold text-foreground">Realium</span>
+            <span className="mx-2 text-border">|</span>
             <span>
               Top 3 · ReEnvision 5.0 · XLRI Digital Transformation Conclave · July 2026
             </span>

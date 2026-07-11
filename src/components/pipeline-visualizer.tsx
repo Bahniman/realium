@@ -111,9 +111,9 @@ export function PipelineVisualizer() {
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
 
       {/* Header bar indicating interactivity */}
-      <div className="flex items-center justify-between border-b border-foreground/10 pb-4 mb-4 select-none">
+      <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-4 select-none">
         <div className="flex items-center gap-2">
-          <span className="font-mono text-[10px] text-foreground/60 uppercase tracking-wider">
+          <span className="font-mono text-[10px] text-zinc-400 uppercase tracking-wider">
             Realium ledger map
           </span>
         </div>
@@ -212,14 +212,14 @@ export function PipelineVisualizer() {
                   cy={n.y}
                   r="24"
                   fill="#0c0c0e"
-                  stroke={isActive ? (n.color.includes("emerald") ? "#10B981" : n.color.includes("indigo") ? "#6366F1" : "#F59E0B") : "rgba(255,255,255,0.1)"}
+                  stroke={isActive ? (n.color.includes("emerald") ? "#10B981" : n.color.includes("indigo") ? "#6366F1" : "#F59E0B") : "rgba(255,255,255,0.15)"}
                   strokeWidth={isActive ? "2" : "1.5"}
-                  className="transition-all duration-300 group-hover:stroke-foreground/40"
+                  className="transition-all duration-300 group-hover:stroke-white/40"
                 />
 
                 {/* Icon wrapper inside SVG */}
                 <foreignObject x={n.x - 10} y={n.y - 10} width="20" height="20">
-                  <div className={`flex h-full w-full items-center justify-center ${isActive ? n.color : "text-foreground/40 group-hover:text-foreground/80"} transition-colors duration-300`}>
+                  <div className={`flex h-full w-full items-center justify-center ${isActive ? n.color : "text-zinc-500 group-hover:text-zinc-300"} transition-colors duration-300`}>
                     <NodeIcon className="h-4.5 w-4.5" />
                   </div>
                 </foreignObject>
@@ -229,7 +229,7 @@ export function PipelineVisualizer() {
                   x={n.x}
                   y={n.y - 36}
                   textAnchor="middle"
-                  className={`font-mono text-[11px] uppercase tracking-wider ${isActive ? "fill-foreground font-semibold" : "fill-foreground/45"} transition-all duration-300`}
+                  className={`font-mono text-[11px] uppercase tracking-wider ${isActive ? "fill-white font-semibold" : "fill-zinc-400"} transition-all duration-300`}
                 >
                   {n.label}
                 </text>
@@ -237,7 +237,7 @@ export function PipelineVisualizer() {
                   x={n.x}
                   y={n.y + 38}
                   textAnchor="middle"
-                  className={`text-[10px] ${isActive ? "fill-foreground/85" : "fill-foreground/40"} transition-all duration-300`}
+                  className={`text-[10px] ${isActive ? "fill-zinc-300" : "fill-zinc-500"} transition-all duration-300`}
                 >
                   {n.subLabel}
                 </text>

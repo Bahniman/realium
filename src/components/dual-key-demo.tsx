@@ -288,13 +288,13 @@ export function DualKeyDemo() {
         {/* Console & attestation details */}
         <div className="flex flex-col justify-between p-6">
           {/* Real-time telemetry console */}
-          <div className="relative mb-5 min-h-[175px] rounded-xl border border-foreground/10 bg-[#040405] p-4 font-mono text-xs text-foreground overflow-hidden">
+          <div className="relative mb-5 min-h-[175px] rounded-xl border border-white/10 bg-[#040405] p-4 font-mono text-xs text-zinc-300 overflow-hidden">
             {/* Grid overlay */}
             <div className="absolute inset-0 -z-0 opacity-40 bg-[linear-gradient(rgba(16,185,129,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(16,185,129,0.04)_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none" />
             
             <div className="relative z-10 flex h-full flex-col justify-between gap-3">
               {/* Console header */}
-              <div className="flex items-center justify-between border-b border-foreground/10 pb-1.5 text-[9px] uppercase tracking-wider text-foreground/45 select-none">
+              <div className="flex items-center justify-between border-b border-white/10 pb-1.5 text-[9px] uppercase tracking-wider text-zinc-500 select-none">
                 <span className="flex items-center gap-1.5">
                   <Activity className="h-3 w-3 text-emerald-400 animate-pulse" />
                   Console // Telemetry stream
@@ -305,7 +305,7 @@ export function DualKeyDemo() {
               {/* Console content based on active step */}
               <div className="flex-1 flex flex-col justify-start overflow-y-auto space-y-1.5 min-h-[135px] max-h-[155px] pr-1 select-none">
                 {consoleLines.length === 0 && (
-                  <div className="text-center text-foreground/40 py-8 font-mono">
+                  <div className="text-center text-zinc-500 py-8 font-mono">
                     <p className="animate-pulse">AWAITING SYSTEM VERIFICATION PASS...</p>
                     <p className="mt-1 text-[10px]">Click &quot;Run verification&quot; to begin scanning.</p>
                   </div>
@@ -325,7 +325,7 @@ export function DualKeyDemo() {
                             ? "text-amber-400 font-semibold"
                             : isIndigo 
                               ? "text-indigo-400" 
-                              : "text-foreground/75"
+                              : "text-zinc-300"
                       }`}
                     >
                       {line}
@@ -370,7 +370,7 @@ export function DualKeyDemo() {
               </div>
 
               {/* Console footer */}
-              <div className="border-t border-foreground/10 pt-1 text-[10px] text-foreground/30 flex justify-between select-none">
+              <div className="border-t border-white/10 pt-1 text-[10px] text-zinc-600 flex justify-between select-none">
                 <span>SECURE ENCLAVE v1.02 // Ed25519</span>
                 <span>HASHCHAIN: OK</span>
               </div>
