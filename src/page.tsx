@@ -1399,75 +1399,54 @@ function LandingPage() {
 
   return (
     <main className="relative min-h-screen bg-transparent text-foreground overflow-hidden">
-      {/* Solid Background Color Base (Stacking index -100) */}
-      <div className="pointer-events-none fixed inset-0 -z-[100] bg-background" />
+      {/* Base background WITH grid baked in — guaranteed visible */}
+      <div 
+        className="pointer-events-none fixed inset-0 -z-[100]" 
+        style={{
+          backgroundColor: 'var(--background)',
+          backgroundImage: `
+            linear-gradient(to right, rgba(16,185,129,0.35) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(16,185,129,0.35) 1px, transparent 1px),
+            radial-gradient(circle, rgba(16,185,129,0.50) 2.5px, transparent 2.5px)
+          `,
+          backgroundSize: '60px 60px, 60px 60px, 60px 60px',
+        }}
+      />
 
-      {/* Interactive CSS Network Grid Background — works on both light and dark */}
+      {/* Parallax-moving larger grid overlay */}
       <div className="pointer-events-none fixed inset-0 -z-[90] overflow-hidden select-none">
         <motion.div
           style={{ y: bgY, scale: bgScale, rotate: bgRotate }}
           className="absolute inset-0 h-[120%] w-[120%] -left-[10%] -top-[10%]"
         >
-          {/* Fine grid lines */}
           <div
             className="absolute inset-0"
             style={{
               backgroundImage: `
-                linear-gradient(to right, rgba(16,185,129,0.18) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(16,185,129,0.18) 1px, transparent 1px)
+                linear-gradient(to right, rgba(99,102,241,0.07) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(99,102,241,0.07) 1px, transparent 1px)
               `,
-              backgroundSize: '80px 80px',
-            }}
-          />
-          {/* Secondary finer sub-grid */}
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage: `
-                linear-gradient(to right, rgba(99,102,241,0.10) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(99,102,241,0.10) 1px, transparent 1px)
-              `,
-              backgroundSize: '20px 20px',
+              backgroundSize: '200px 200px',
             }}
           />
           {/* Radial glow pulse — top-left */}
           <div className="absolute -top-[20%] -left-[10%] h-[800px] w-[800px] rounded-full bg-emerald-500/15 dark:bg-emerald-500/10 blur-[100px] animate-pulse" />
           {/* Radial glow pulse — bottom-right */}
           <div className="absolute -bottom-[20%] -right-[10%] h-[700px] w-[700px] rounded-full bg-indigo-500/15 dark:bg-indigo-500/10 blur-[100px] animate-pulse [animation-delay:2s]" />
-          {/* Scattered dot nodes at grid intersections */}
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage: `radial-gradient(circle, rgba(16,185,129,0.35) 2px, transparent 2px)`,
-              backgroundSize: '80px 80px',
-              backgroundPosition: '0 0',
-            }}
-          />
         </motion.div>
       </div>
 
       {/* Shifting Ambient Background Blobs */}
       <div className="pointer-events-none fixed inset-0 -z-30 overflow-hidden select-none">
-        {/* Blob 1 (Emerald) */}
         <motion.div 
           style={{ y: y1, x: x1, scale: scale1 }}
           className="absolute -top-20 left-[-15%] h-[650px] w-[650px] rounded-full bg-emerald-500/8 dark:bg-emerald-500/[0.04] blur-[150px]" 
         />
-        {/* Blob 2 (Indigo) */}
         <motion.div 
           style={{ y: y2, x: x2, scale: scale2 }}
           className="absolute bottom-[-10%] right-[-15%] h-[650px] w-[650px] rounded-full bg-indigo-500/8 dark:bg-indigo-500/[0.04] blur-[150px]" 
         />
       </div>
-
-      {/* Fine dot grid overlay */}
-      <div 
-        className="pointer-events-none fixed inset-0 -z-50 opacity-40 dark:opacity-30" 
-        style={{
-          backgroundImage: `radial-gradient(rgba(120, 119, 198, 0.18) 1.5px, transparent 1.5px)`,
-          backgroundSize: "28px 28px"
-        }} 
-      />
 
       <Nav />
       <Hero />

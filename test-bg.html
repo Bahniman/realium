@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Background Grid Test</title>
+<style>
+  body { margin: 0; height: 300vh; font-family: sans-serif; }
+  .bg-grid {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background-color: #fafaf9;
+    background-image:
+      linear-gradient(to right, rgba(16,185,129,0.10) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(16,185,129,0.10) 1px, transparent 1px),
+      radial-gradient(circle, rgba(16,185,129,0.20) 1.5px, transparent 1.5px);
+    background-size: 60px 60px, 60px 60px, 60px 60px;
+  }
+  h1 { text-align: center; padding-top: 200px; color: #333; }
+</style>
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <h1>Can you see the grid behind this text?</h1>
+</body>
+</html>
+</style>
+</head>
+</html>

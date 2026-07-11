@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Background Grid Test - HIGH CONTRAST</title>
+<style>
+  body { margin: 0; height: 300vh; font-family: sans-serif; }
+  .bg-grid {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background-color: #fafaf9;
+    background-image:
+      linear-gradient(to right, rgba(16,185,129,0.35) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(16,185,129,0.35) 1px, transparent 1px),
+      radial-gradient(circle, rgba(16,185,129,0.50) 2.5px, transparent 2.5px);
+    background-size: 60px 60px, 60px 60px, 60px 60px;
+  }
+  h1 { text-align: center; padding-top: 200px; color: #333; }
+</style>
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <h1>HIGH CONTRAST VERSION - Can you see the grid now?</h1>
+</body>
+</html>
