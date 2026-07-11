@@ -58,6 +58,7 @@
 
   /* Custom scene tokens */
   --scene-bg: #fafaf9;
+  --scene-bg-gradient: #eaebee;
   --glass-bg: rgba(255, 255, 255, 0.60);
   --glass-border: rgba(10, 10, 10, 0.08);
   --grid-line: rgba(10, 10, 10, 0.12);
@@ -88,6 +89,7 @@
   --ring: #10B981;
 
   --scene-bg: #050505;
+  --scene-bg-gradient: #020204;
   --glass-bg: rgba(255, 255, 255, 0.05);
   --glass-border: rgba(255, 255, 255, 0.10);
   --grid-line: rgba(255, 255, 255, 0.12);
@@ -105,8 +107,13 @@ html {
   html { scroll-behavior: auto; }
 }
 
-html, body {
+html {
   background-color: var(--scene-bg);
+}
+
+body {
+  background: linear-gradient(180deg, var(--background) 0%, var(--scene-bg-gradient) 100%);
+  background-attachment: fixed;
   color: var(--foreground);
 }
 
