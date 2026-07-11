@@ -1314,10 +1314,12 @@ function CTA() {
             Try the live demo <ArrowRight className="h-4 w-4" />
           </a>
           <a
-            href="#sources"
+            href="https://github.com/Bahniman/realium"
+            target="_blank"
+            rel="noreferrer"
             className="btn-press inline-flex items-center gap-2 rounded-md border border-foreground/20 px-6 py-3 text-foreground transition-colors hover:bg-foreground/10"
           >
-            Read the sources
+            View GitHub Code
           </a>
         </div>
       </motion.div>
@@ -1342,7 +1344,7 @@ function Footer() {
             PGDM-GM, XLRI Jamshedpur · Built for ReEnvision 5.0 (Group 10)
           </div>
         </div>
-        <div className="flex flex-col items-center justify-between gap-3 text-sm text-foreground/50 sm:flex-row">
+        <div className="flex flex-col items-center justify-between gap-3 text-sm text-foreground/50 sm:flex-row w-full">
           <div className="flex items-center gap-2">
             <span className="font-semibold text-foreground/80">Realium</span>
             <span className="mx-2 text-foreground/20">|</span>
@@ -1350,8 +1352,17 @@ function Footer() {
               Top 3 · ReEnvision 5.0 · XLRI Digital Transformation Conclave · July 2026
             </span>
           </div>
-          <div className="font-mono text-xs text-foreground/30">
-            © {new Date().getFullYear()}
+          <div className="flex items-center gap-4 font-mono text-xs">
+            <a 
+              href="https://github.com/Bahniman/realium" 
+              target="_blank" 
+              rel="noreferrer" 
+              className="hover:text-foreground/80 hover:underline"
+            >
+              GitHub Codebase
+            </a>
+            <span className="text-foreground/20">·</span>
+            <span>© {new Date().getFullYear()}</span>
           </div>
         </div>
       </div>
@@ -1399,7 +1410,7 @@ function LandingPage() {
         >
           {/* Main Network Background Image */}
           <div 
-            className="h-full w-full bg-cover bg-center bg-no-repeat opacity-[0.06] dark:opacity-[0.09]" 
+            className="h-full w-full bg-cover bg-center bg-no-repeat opacity-[0.24] dark:opacity-[0.35]" 
             style={{
               backgroundImage: `url('${import.meta.env.BASE_URL}bg-network.jpg')`
             }} 

@@ -153,20 +153,20 @@ export function SuretyPlayground() {
       </div>
 
       {/* action log */}
-      <div className="rounded-xl border border-foreground/10 bg-foreground/[0.02] p-4">
+      <div className="rounded-xl border border-foreground/10 bg-foreground/[0.02] p-4 flex flex-col h-full min-h-[340px]">
         <div className="mb-3 flex items-center justify-between font-mono text-[11px] uppercase tracking-widest text-foreground/40">
           <span>Signed approval chain</span>
           <span>tamper-evident · hash-linked</span>
         </div>
 
         {log.length === 0 && (
-          <div className="flex h-64 items-center justify-center text-center text-sm text-foreground/40">
+          <div className="flex flex-1 items-center justify-center text-center text-sm text-foreground/40 min-h-[220px]">
             Every approval, non-approval, and block is a signed, timestamped
             event. Try a certification.
           </div>
         )}
 
-        <ul className="space-y-2">
+        <ul className="space-y-2 flex-1 overflow-y-auto">
           <AnimatePresence initial={false}>
             {log.map((a) => {
               const Icon =
