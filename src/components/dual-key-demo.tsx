@@ -30,21 +30,21 @@ const steps: Step[] = [
     label: "Drone pass captured",
     detail: "geo:19.0760,72.8777 · 4,812 frames · SHA 0x9a…c1",
     icon: Camera,
-    duration: 1600, // expanded duration to let animation play out nicely
+    duration: 2600,
   },
   {
     key: "assess",
     label: "AI quantity assessment",
     detail: "Bituminous concrete · 1,240 m² ±0.8% · confidence 0.982",
     icon: Cpu,
-    duration: 1800,
+    duration: 2800,
   },
   {
     key: "prefill",
     label: "Measurement Book prefilled",
     detail: "Item 3.2 · Ch. 12+400 to 13+640 · variance vs. BOQ 0.4%",
     icon: CheckCircle2,
-    duration: 1400,
+    duration: 2400,
   },
   {
     key: "sign",
@@ -58,7 +58,7 @@ const steps: Step[] = [
     label: "T+2 bank payout initiated",
     detail: "₹18,63,900 · IFSC HDFC0000240 · UTR pending",
     icon: Banknote,
-    duration: 1600,
+    duration: 2800,
   },
 ];
 
@@ -69,12 +69,13 @@ export function DualKeyDemo() {
 
   // Telemetry frame counter animation for Step 0
   const [frameCount, setFrameCount] = useState(0);
+  const [consoleLines, setConsoleLines] = useState<string[]>([]);
 
   useEffect(() => {
     if (active === 0) {
       setFrameCount(0);
       const startTime = performance.now();
-      const duration = 1400; // slightly less than step duration
+      const duration = 2400; // slightly less than step duration
       let animFrameId: number;
 
       const animate = (now: number) => {
@@ -98,6 +99,67 @@ export function DualKeyDemo() {
     }
   }, [active, done]);
 
+  // Telemetry stream generator that writes lines line-by-line
+  useEffect(() => {
+    setConsoleLines([]);
+    const timers: number[] = [];
+
+    const addLine = (text: string, delay: number) => {
+      const t = window.setTimeout(() => {
+        setConsoleLines((prev) => [...prev, text]);
+      }, delay);
+      timers.push(t);
+    };
+
+    if (active === -1) {
+      if (done) {
+        addLine("✔ PAYOUT VERIFIED & ENQUEUED", 100);
+        addLine("✔ LEDGER WRITTEN SUCCESSFUL", 400);
+        addLine("Tamper-evident chain is locked. Attestation receipt generated.", 800);
+        addLine("UTR: TX_982631892_PWD_INIT", 1200);
+        addLine("CREDIT: ₹11,18,340 (60% advance T+1)", 1500);
+        addLine("HOLDBACK: ₹7,45,560 (40% buffer)", 1800);
+        addLine("SYSTEM READY: escrows completed.", 2200);
+      } else {
+        addLine("AWAITING SYSTEM VERIFICATION PASS...", 100);
+        addLine("Click 'Run verification' to begin scanning.", 400);
+      }
+    } else if (active === 0) {
+      addLine("DRONE_TELEMETRY: CONNECTING TO SECURE CORE...", 100);
+      addLine("GPS witness lock: OK (19.0760° N, 72.8777° E)", 500);
+      addLine("Alt: 42.5m (BVLOS) · Speed: 4.8 m/s · S-Heading 182°", 1000);
+      addLine("Scanning video frames into enclave for verification...", 1500);
+      addLine("Encrypting image hashes with RFC 8032 signature...", 2000);
+    } else if (active === 1) {
+      addLine("AI_ENGINE: INITIALIZING CONVOLUTIONAL MODEL...", 100);
+      addLine("Segmentation: Bituminous Concrete surface layer detected", 600);
+      addLine("Calculating cross section depth & volume...", 1200);
+      addLine("Measured Area: 1,240 m² (Variance: +0.4% in tolerance)", 1800);
+      addLine("Model Confidence score: 98.2% · PASS", 2300);
+    } else if (active === 2) {
+      addLine("e-MB PRE-FILL SERVICE: INITIALIZING ESCROW DATA...", 100);
+      addLine("Writing item code 3.2 (Bituminous Concrete) pre-fills...", 600);
+      addLine("Validating chainage scope: Ch. 12+400 to 13+640", 1200);
+      addLine("Linking tamper-evident ledger block: hash_block_1982", 1700);
+      addLine("System verification audit: PASSED", 2100);
+    } else if (active === 3) {
+      addLine("AWAITING ACCOUNTABLE HUMAN SIGNATURE...", 100);
+      addLine("Restricted scope: work_id/PWD-MH-1863900", 500);
+      addLine("Mandate check (value cap ₹50.0L vs. ₹18.6L): OK", 1000);
+      addLine("Attestation hash: 0x8b3fd21f22e89643d9f21ab2cd97e021", 1500);
+      addLine("Authorized SDE Cryptographic Key Required.", 2000);
+    } else if (active === 4) {
+      addLine("AUTHENTICATING SDE SIGNATURE (0xF4...9C)...", 100);
+      addLine("Authorizing SDE Maharashtra Key... SIGNED OK", 500);
+      addLine("Broadcasting attestations to ledger network...", 1000);
+      addLine("Writing UTR receipts: TX_982631892_PWD_INIT", 1500);
+      addLine("ESCROW DIRECTIVES: 60% T+1, 40% holdback buffer", 2000);
+      addLine("Writing transaction receipts to disk...", 2400);
+    }
+
+    return () => timers.forEach(clearTimeout);
+  }, [active, done]);
+
   const run = async () => {
     setDone(false);
     setSigned(false);
@@ -114,6 +176,7 @@ export function DualKeyDemo() {
     setActive(4);
     await new Promise((r) => setTimeout(r, steps[4].duration));
     setDone(true);
+    setActive(-1); // Reset active back to -1 so the done state console logs show
   };
 
   const reset = () => {
@@ -240,120 +303,68 @@ export function DualKeyDemo() {
               </div>
 
               {/* Console content based on active step */}
-              <div className="flex-1 flex flex-col justify-center">
-                {active === -1 && !done && (
-                  <div className="text-center text-foreground/40 py-2">
+              <div className="flex-1 flex flex-col justify-start overflow-y-auto space-y-1.5 min-h-[135px] max-h-[155px] pr-1 select-none">
+                {consoleLines.length === 0 && (
+                  <div className="text-center text-foreground/40 py-8 font-mono">
                     <p className="animate-pulse">AWAITING SYSTEM VERIFICATION PASS...</p>
                     <p className="mt-1 text-[10px]">Click &quot;Run verification&quot; to begin scanning.</p>
                   </div>
                 )}
+                {consoleLines.map((line, idx) => {
+                  const isSuccess = line.startsWith("✔") || line.includes("SIGNED") || line.includes("PASSED") || line.includes("OK");
+                  const isWarning = line.includes("AWAITING") || line.includes("Required") || line.includes("Verification") || line.includes("RESTRICTION") || line.includes("Action");
+                  const isIndigo = active === 3 || line.includes("SDE") || line.includes("Authorized") || line.includes("AUTHENTICATING");
 
-                {active === 0 && (
-                  <div className="space-y-1.5 text-emerald-400">
-                    <div className="flex items-center justify-between">
-                      <span>DRONE_TELEMETRY: CONNECTED</span>
-                      <span className="animate-pulse">●</span>
+                  return (
+                    <div 
+                      key={idx} 
+                      className={`leading-relaxed text-[11px] font-mono transition-opacity duration-200 ${
+                        isSuccess 
+                          ? "text-emerald-400 font-semibold" 
+                          : isWarning 
+                            ? "text-amber-400 font-semibold"
+                            : isIndigo 
+                              ? "text-indigo-400" 
+                              : "text-foreground/75"
+                      }`}
+                    >
+                      {line}
                     </div>
-                    <div className="grid grid-cols-2 text-[10px] text-foreground/60">
-                      <span>GPS: 19.0760° N, 72.8777° E</span>
-                      <span>ALT: 42.5m (BVLOS)</span>
-                    </div>
-                    <div className="text-[10px] text-foreground/60">
-                      SPEED: 4.8 m/s · HEADING: 182° S
-                    </div>
-                    <div className="pt-1 flex items-center justify-between border-t border-emerald-500/10 text-sm font-semibold">
-                      <span>FRAMES SCANNING:</span>
-                      <span className="font-mono tabular-nums">{frameCount} / 4812</span>
-                    </div>
+                  );
+                })}
+
+                {/* Inline frame counter during active === 0 */}
+                {active === 0 && consoleLines.length >= 3 && (
+                  <div className="mt-2 pt-2 border-t border-emerald-500/10 text-[11px] font-semibold text-emerald-400 flex items-center justify-between">
+                    <span>SCAN RATE: 120 fps</span>
+                    <span className="font-mono tabular-nums">FRAMES: {frameCount} / 4812</span>
                   </div>
                 )}
 
-                {active === 1 && (
-                  <div className="space-y-1.5 text-emerald-300">
-                    <div className="flex items-center justify-between">
-                      <span>AI_ENGINE: MODEL SEGMENTATION</span>
-                      <Loader2 className="h-3 w-3 animate-spin text-emerald-400" />
-                    </div>
-                    
-                    {/* Visual road layer cross section scanning */}
-                    <div className="relative h-6 w-full rounded border border-emerald-500/20 bg-emerald-500/5 overflow-hidden my-1 flex">
-                      <div className="h-full bg-emerald-500/20 border-r border-emerald-500/30 flex items-center justify-center text-[8px] select-none" style={{ width: "30%" }}>SUB-BASE</div>
-                      <div className="h-full bg-emerald-500/35 border-r border-emerald-500/30 flex items-center justify-center text-[8px] select-none" style={{ width: "40%" }}>BASE</div>
-                      <div className="h-full bg-emerald-500/50 flex items-center justify-center text-[8px] select-none" style={{ width: "30%" }}>BITUMINOUS</div>
+                {/* Inline segmentation visual scan bar during active === 1 */}
+                {active === 1 && consoleLines.length >= 2 && (
+                  <div className="mt-1 space-y-1">
+                    <div className="relative h-6 w-full rounded border border-emerald-500/20 bg-emerald-500/5 overflow-hidden flex select-none">
+                      <div className="h-full bg-emerald-500/15 border-r border-emerald-500/20 flex items-center justify-center text-[7px] text-emerald-400/80 font-bold" style={{ width: "30%" }}>SUB-BASE</div>
+                      <div className="h-full bg-emerald-500/25 border-r border-emerald-500/20 flex items-center justify-center text-[7px] text-emerald-400/80 font-bold" style={{ width: "40%" }}>BASE</div>
+                      <div className="h-full bg-emerald-500/40 flex items-center justify-center text-[7px] text-emerald-400/80 font-bold" style={{ width: "30%" }}>BITUMINOUS</div>
                       <motion.div 
                         className="absolute top-0 bottom-0 w-0.5 bg-emerald-400 shadow-[0_0_8px_rgb(52,211,153)]"
                         animate={{ left: ["0%", "100%", "0%"] }}
                         transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
                       />
                     </div>
-
-                    <div className="grid grid-cols-2 text-[10px] text-foreground/65 leading-none">
-                      <div>BOQ: Bituminous concrete</div>
-                      <div className="text-right">Variance: +0.4%</div>
-                      <div>Quantity: 1,240 m²</div>
-                      <div className="text-right">Confidence: 98.2%</div>
-                    </div>
                   </div>
                 )}
 
-                {active === 2 && (
-                  <div className="space-y-1.5 text-emerald-300">
-                    <div className="flex items-center gap-1.5">
-                      <FileText className="h-3.5 w-3.5 text-emerald-400" />
-                      <span>e-MB PRE-FILL SERVICE</span>
-                    </div>
-                    <div className="text-[10px] text-foreground/70 bg-foreground/5 p-1.5 rounded border border-foreground/10 space-y-0.5 leading-snug">
-                      <div>[ITEM CODE 3.2] Prefilling measurement record...</div>
-                      <div>[CHAINAGE] Ch. 12+400 to 13+640 · OK</div>
-                      <div>[STATUS] Tamper-evident ledger link: hash_block_1982</div>
-                    </div>
-                  </div>
-                )}
-
-                {active === 3 && (
-                  <div className="space-y-2 text-indigo-300">
-                    <div className="flex items-center gap-1.5">
-                      <Key className="h-3.5 w-3.5 text-indigo-400 animate-bounce" />
-                      <span>AWAITING ACCOUNTABLE SIGNATURE</span>
-                    </div>
-                    <p className="text-[10px] text-foreground/70 leading-normal">
-                      Security policy: scope restricted to PWD-MH-1863900. Mandate value cap ₹50.0L is verified. 
-                    </p>
-                    <div className="flex items-center gap-2 rounded border border-indigo-500/25 bg-indigo-500/5 p-1.5 text-[10px]">
-                      <span className="relative flex h-2 w-2">
-                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-indigo-400 opacity-75" />
-                        <span className="relative inline-flex h-2 w-2 rounded-full bg-indigo-500" />
-                      </span>
-                      <span>Authorized SDE Cryptographic Key Required.</span>
-                    </div>
-                  </div>
-                )}
-
-                {active === 4 && (
-                  <div className="space-y-2 text-emerald-300">
-                    <div className="flex items-center justify-between">
-                      <span className="flex items-center gap-1.5 text-emerald-400 font-semibold">
-                        <CheckCircle2 className="h-3.5 w-3.5" /> PAYOUT VERIFIED & ENQUEUED
-                      </span>
-                    </div>
-                    <div className="space-y-0.5 text-xs text-foreground/75 leading-tight">
-                      <div>UTR: TX_982631892_PWD_INIT</div>
-                      <div>CREDIT: ₹11,18,340 (60% advance T+1)</div>
-                      <div>HOLDBACK: ₹7,45,560 (40% buffer)</div>
-                      <div className="truncate">HASH: 0x8b3fd21f22e89643d9f21ab2cd97e021</div>
-                    </div>
-                  </div>
-                )}
-
-                {done && (
-                  <div className="space-y-2 text-emerald-400">
-                    <div className="flex items-center gap-1.5 font-semibold">
-                      <CheckCircle2 className="h-3.5 w-3.5" />
-                      <span>LEDGER WRITTEN SUCCESSFUL</span>
-                    </div>
-                    <p className="text-xs text-foreground/60 leading-normal">
-                      Tamper-evident chain is locked. Attestation receipt is generated. Receiver bank discount enqueued.
-                    </p>
+                {/* Inline ping warning for co-signing during active === 3 */}
+                {active === 3 && consoleLines.length >= 4 && (
+                  <div className="mt-2 flex items-center gap-2 rounded border border-indigo-500/25 bg-indigo-500/5 p-1.5 text-[10px] text-indigo-400 animate-pulse">
+                    <span className="relative flex h-2 w-2">
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-indigo-400 opacity-75" />
+                      <span className="relative inline-flex h-2 w-2 rounded-full bg-indigo-500" />
+                    </span>
+                    <span>Action required: co-sign with SDE key on the left panel.</span>
                   </div>
                 )}
               </div>
