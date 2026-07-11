@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useRef, useState } from "react";
-import { motion, useScroll, useSpring } from "framer-motion";
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import {
   Sparkles,
   ArrowRight,
@@ -1355,8 +1355,33 @@ function SectionDivider() {
 /* ============================ PAGE ============================ */
 
 function LandingPage() {
+  const { scrollYProgress } = useScroll();
+
+  // Transform scroll progress into shifting positions and scales for background color blobs
+  const y1 = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const x1 = useTransform(scrollYProgress, [0, 1], ["-10%", "15%"]);
+  const scale1 = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.25, 0.85]);
+
+  const y2 = useTransform(scrollYProgress, [0, 1], ["0%", "-40%"]);
+  const x2 = useTransform(scrollYProgress, [0, 1], ["10%", "-15%"]);
+  const scale2 = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.85, 1.25]);
+
   return (
-    <main className="relative min-h-screen bg-background text-foreground">
+    <main className="relative min-h-screen bg-background text-foreground overflow-hidden">
+      {/* Shifting Ambient Background Blobs */}
+      <div className="pointer-events-none fixed inset-0 -z-30 overflow-hidden select-none">
+        {/* Blob 1 (Emerald) */}
+        <motion.div 
+          style={{ y: y1, x: x1, scale: scale1 }}
+          className="absolute -top-20 left-[-15%] h-[650px] w-[650px] rounded-full bg-emerald-500/10 dark:bg-emerald-500/[0.06] blur-[140px]" 
+        />
+        {/* Blob 2 (Indigo) */}
+        <motion.div 
+          style={{ y: y2, x: x2, scale: scale2 }}
+          className="absolute bottom-[-10%] right-[-15%] h-[650px] w-[650px] rounded-full bg-indigo-500/10 dark:bg-indigo-500/[0.06] blur-[140px]" 
+        />
+      </div>
+
       {/* Premium Antigravity-style Dot Grid Background */}
       <div 
         className="pointer-events-none fixed inset-0 -z-50 opacity-[0.03] dark:opacity-[0.05]" 
