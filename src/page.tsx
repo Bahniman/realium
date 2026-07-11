@@ -1344,6 +1344,21 @@ function Footer() {
   );
 }
 
+/* ============================ DIVIDER ============================ */
+
+function SectionDivider() {
+  return (
+    <div className="relative mx-auto max-w-7xl px-4 my-10 flex items-center justify-center select-none">
+      <div className="absolute inset-0 flex items-center" aria-hidden="true">
+        <div className="w-full border-t border-foreground/[0.06]" />
+      </div>
+      <div className="relative flex h-8 w-8 items-center justify-center rounded-full border border-foreground/[0.08] bg-background shadow-[0_0_20px_rgba(16,185,129,0.04)]">
+        <div className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.8)]" />
+      </div>
+    </div>
+  );
+}
+
 /* ============================ PAGE ============================ */
 
 function LandingPage() {
@@ -1351,17 +1366,29 @@ function LandingPage() {
     <main className="relative min-h-screen bg-background text-foreground">
       <Nav />
       <Hero />
+      <SectionDivider />
       <Problem />
+      <SectionDivider />
       <Architecture />
+      <SectionDivider />
       <MoneyFlow />
+      <SectionDivider />
       <RedTeam />
+      <SectionDivider />
       <Synergy />
+      <SectionDivider />
       <Value />
+      <SectionDivider />
       <LiveDemo />
+      <SectionDivider />
       <MandateSection />
+      <SectionDivider />
       <Validation />
+      <SectionDivider />
       <Roadmap />
+      <SectionDivider />
       <Sources />
+      <SectionDivider />
       <CTA />
       <Footer />
     </main>
