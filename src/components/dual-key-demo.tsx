@@ -128,7 +128,6 @@ export function DualKeyDemo() {
       {/* Header bar */}
       <div className="flex items-center justify-between border-b border-foreground/10 px-6 py-4">
         <div className="flex items-center gap-3">
-          <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_10px_rgb(16,185,129,0.8)]" />
           <span className="font-mono text-xs text-foreground/60">
             work_id · PWD-MH-1863900 · Ch. 12+400 → 13+640
           </span>

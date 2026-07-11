@@ -113,13 +113,11 @@ export function PipelineVisualizer() {
       {/* Header bar indicating interactivity */}
       <div className="flex items-center justify-between border-b border-foreground/10 pb-4 mb-4 select-none">
         <div className="flex items-center gap-2">
-          <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_10px_rgb(16,185,129,0.8)] animate-pulse" />
           <span className="font-mono text-[10px] text-foreground/60 uppercase tracking-wider">
             Realium ledger map
           </span>
         </div>
         <div className="flex items-center gap-1.5 rounded-full border border-indigo-500/20 bg-indigo-500/5 px-2.5 py-0.5 text-[9px] text-indigo-400">
-          <span className="h-1.5 w-1.5 rounded-full bg-indigo-400 animate-pulse" />
           Interactive: Hover/Click Nodes
         </div>
       </div>

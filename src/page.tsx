@@ -698,7 +698,7 @@ function MoneyFlow() {
                 transition={{ ...fadeUp.transition, delay: i * 0.05 }}
                 className="relative pl-10"
               >
-                <span className="absolute left-1.5 top-3 h-3 w-3 rounded-full bg-emerald-400 shadow-[0_0_10px_rgb(16,185,129,0.7)] ring-4 ring-background" />
+                <span className="absolute left-1.5 top-3 h-3 w-3 rounded-full bg-emerald-500 ring-4 ring-background" />
                 <div className="glass rounded-xl p-4">
                   <div className="flex items-center justify-between gap-3">
                     <div className="text-sm font-semibold text-foreground">
@@ -1348,14 +1348,7 @@ function Footer() {
 
 function SectionDivider() {
   return (
-    <div className="relative mx-auto max-w-7xl px-4 my-10 flex items-center justify-center select-none">
-      <div className="absolute inset-0 flex items-center" aria-hidden="true">
-        <div className="w-full border-t border-foreground/[0.06]" />
-      </div>
-      <div className="relative flex h-8 w-8 items-center justify-center rounded-full border border-foreground/[0.08] bg-background shadow-[0_0_20px_rgba(16,185,129,0.04)]">
-        <div className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.8)]" />
-      </div>
-    </div>
+    <div className="py-12 lg:py-16" />
   );
 }
 
