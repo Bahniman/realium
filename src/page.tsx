@@ -460,16 +460,17 @@ function Architecture() {
       </motion.div>
 
       {/* horizontal chain diagram — desktop */}
-      <div className="mb-14 hidden lg:grid grid-cols-[1fr_auto_1fr_auto_1fr] items-stretch gap-0">
+      <div className="mb-14 hidden lg:grid grid-cols-[1fr_auto_1fr_auto_1fr] items-stretch gap-0 select-none">
         {layers.map((l, i) => (
           <Fragment key={l.key}>
             <div
-              className={`flex h-full min-h-[104px] flex-col justify-center rounded-xl border p-5 backdrop-blur transition-all hover:-translate-y-0.5 hover:shadow-lg ${
+              onClick={() => document.getElementById(l.key)?.scrollIntoView({ behavior: 'smooth' })}
+              className={`flex h-full min-h-[104px] flex-col justify-center rounded-xl border p-5 backdrop-blur transition-all hover:-translate-y-1 hover:scale-[1.01] hover:shadow-lg cursor-pointer active:scale-[0.99] ${
                 l.color === "emerald"
-                  ? "border-emerald-500/40 bg-emerald-500/[0.06] hover:shadow-emerald-500/20"
+                  ? "border-emerald-500/40 bg-emerald-500/[0.06] hover:border-emerald-400/60 hover:shadow-emerald-500/10"
                   : l.color === "indigo"
-                    ? "border-indigo-500/40 bg-indigo-500/[0.06] hover:shadow-indigo-500/20"
-                    : "border-amber-500/40 bg-amber-500/[0.06] hover:shadow-amber-500/20"
+                    ? "border-indigo-500/40 bg-indigo-500/[0.06] hover:border-indigo-400/60 hover:shadow-indigo-500/10"
+                    : "border-amber-500/40 bg-amber-500/[0.06] hover:border-amber-400/60 hover:shadow-amber-500/10"
               }`}
             >
               <div className="flex items-center gap-2">
@@ -527,59 +528,84 @@ function Architecture() {
               <motion.div
                 {...fadeUp}
                 transition={{ ...fadeUp.transition, delay: i * 0.08 }}
-                className="glass relative flex h-full flex-col overflow-hidden rounded-2xl p-6 transition-all hover:-translate-y-0.5 hover:border-foreground/20 sm:p-7"
+                className="h-full"
               >
-                <div className="flex items-center justify-between">
-                  <div
-                    className={`inline-flex h-11 w-11 items-center justify-center rounded-xl border ${accent}`}
-                  >
-                    <Icon className="h-5 w-5" />
-                  </div>
-                  <div className="font-mono text-xs text-foreground/40">
-                    Layer {l.n}
-                  </div>
-                </div>
-                <div
-                  className={`mt-5 text-[11px] uppercase tracking-widest ${
-                    l.color === "emerald"
-                      ? "text-emerald-400/90"
-                      : l.color === "indigo"
-                        ? "text-indigo-400/90"
-                        : "text-amber-400/90"
-                  }`}
+                <GlowCard 
+                  className="flex flex-col h-full cursor-pointer group" 
+                  showTechBrackets={true} 
+                  id={l.key} 
+                  onClick={() => document.getElementById(l.key === 'evidence' ? 'try' : l.key === 'authority' ? 'mandate' : 'flow')?.scrollIntoView({ behavior: 'smooth' })}
                 >
-                  {l.tag}
-                </div>
-                <h3 className="mt-1 text-xl font-semibold tracking-tight text-foreground">
-                  {l.title}
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                  {l.body}
-                </p>
-                <ul className="mt-5 space-y-2 border-t border-foreground/10 pt-5">
-                  {l.bullets.map((b) => (
-                    <li
-                      key={b}
-                      className="flex gap-2.5 text-sm text-foreground/75"
+                  <div className="flex items-center justify-between">
+                    <div
+                      className={`inline-flex h-11 w-11 items-center justify-center rounded-xl border ${accent}`}
                     >
-                      <span
-                        className={`mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full ${
-                          l.color === "emerald"
-                            ? "bg-emerald-400"
-                            : l.color === "indigo"
-                              ? "bg-indigo-400"
-                              : "bg-amber-400"
-                        }`}
-                      />
-                      <span>{b}</span>
-                    </li>
-                  ))}
-                </ul>
-                {l.footnote && (
-                  <div className="mt-5 rounded-md border border-foreground/10 bg-foreground/[0.03] p-3 text-[11px] text-foreground/50">
-                    {l.footnote}
+                      <Icon className="h-5 w-5" />
+                    </div>
+                    <div className="font-mono text-xs text-foreground/40">
+                      Layer {l.n}
+                    </div>
                   </div>
-                )}
+                  <div
+                    className={`mt-5 text-[11px] uppercase tracking-widest ${
+                      l.color === "emerald"
+                        ? "text-emerald-400/90"
+                        : l.color === "indigo"
+                          ? "text-indigo-400/90"
+                          : "text-amber-400/90"
+                    }`}
+                  >
+                    {l.tag}
+                  </div>
+                  <h3 className="mt-1 text-xl font-semibold tracking-tight text-foreground">
+                    {l.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                    {l.body}
+                  </p>
+                  <ul className="mt-5 space-y-3 border-t border-foreground/10 pt-5">
+                    {l.bullets.map((b) => (
+                      <li
+                        key={b}
+                        className="flex gap-2.5 text-sm text-foreground/75"
+                      >
+                        <span
+                          className={`mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full ${
+                            l.color === "emerald"
+                              ? "bg-emerald-400"
+                              : l.color === "indigo"
+                                ? "bg-indigo-400"
+                                : "bg-amber-400"
+                          }`}
+                        />
+                        <span>{b}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  {l.footnote && (
+                    <div className="mt-5 rounded-md border border-foreground/10 bg-foreground/[0.03] p-3 text-[11px] text-foreground/50">
+                      {l.footnote}
+                    </div>
+                  )}
+
+                  {/* Interactivity prompt */}
+                  <div className="mt-auto pt-6 flex items-center justify-between border-t border-foreground/5 font-mono text-[9px] text-foreground/40 group-hover:text-foreground/75 transition-colors">
+                    <span className="flex items-center gap-1.5">
+                      <span className={`h-1.5 w-1.5 rounded-full animate-pulse ${
+                        l.color === "emerald"
+                          ? "bg-emerald-400"
+                          : l.color === "indigo"
+                            ? "bg-indigo-400"
+                            : "bg-amber-400"
+                      }`} />
+                      TEST LIVE ENGINE
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <span>Go to Sandbox</span>
+                      <ArrowRight className="h-3 w-3 group-hover:translate-x-0.5 transition-transform" />
+                    </span>
+                  </div>
+                </GlowCard>
               </motion.div>
               {i < layers.length - 1 && (
                 <div
@@ -896,7 +922,11 @@ function Value() {
             transition={{ ...fadeUp.transition, delay: i * 0.08 }}
             className="h-full"
           >
-            <GlowCard className="h-full border-foreground/10" showTechBrackets={true}>
+            <GlowCard 
+              className="flex flex-col h-full border-foreground/10 cursor-pointer group" 
+              showTechBrackets={true}
+              onClick={() => document.getElementById('flow')?.scrollIntoView({ behavior: 'smooth' })}
+            >
               <div
                 className={`text-[11px] uppercase tracking-widest ${
                   v.color === "emerald"
@@ -911,7 +941,25 @@ function Value() {
               <div className="mt-2 text-2xl font-semibold tracking-tight text-foreground">
                 {v.hi}
               </div>
-              <p className="mt-3 text-sm text-muted-foreground">{v.lo}</p>
+              <p className="mt-3 text-sm text-muted-foreground mb-6">{v.lo}</p>
+
+              {/* Simulator redirect */}
+              <div className="mt-auto pt-6 flex items-center justify-between border-t border-foreground/5 font-mono text-[9px] text-foreground/40 group-hover:text-foreground/75 transition-colors">
+                <span className="flex items-center gap-1.5">
+                  <span className={`h-1.5 w-1.5 rounded-full animate-pulse ${
+                    v.color === "emerald"
+                      ? "bg-emerald-400"
+                      : v.color === "indigo"
+                        ? "bg-indigo-400"
+                        : "bg-amber-400"
+                  }`} />
+                  SIMULATE VALUE
+                </span>
+                <span className="flex items-center gap-1">
+                  <span>Open Calculator</span>
+                  <ArrowRight className="h-3 w-3 group-hover:translate-x-0.5 transition-transform" />
+                </span>
+              </div>
             </GlowCard>
           </motion.div>
         ))}
@@ -971,7 +1019,7 @@ function LiveDemo() {
 
 function MandateSection() {
   return (
-    <section className="mx-auto max-w-7xl px-4 py-20">
+    <section id="mandate" className="mx-auto max-w-7xl px-4 py-20">
       <motion.div {...fadeUp} className="mb-10 max-w-3xl">
         <div className="text-xs uppercase tracking-[0.2em] text-indigo-400/80">
           Live · Layer 2 · Approver mandate playground
@@ -1281,7 +1329,6 @@ function Footer() {
         </div>
         <div className="flex flex-col items-center justify-between gap-3 text-sm text-foreground/50 sm:flex-row">
           <div className="flex items-center gap-2">
-            <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_10px_rgb(16,185,129,0.8)]" />
             <span className="font-semibold text-foreground/80">Realium</span>
             <span className="mx-2 text-foreground/20">|</span>
             <span>

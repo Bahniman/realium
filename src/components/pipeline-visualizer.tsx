@@ -110,8 +110,22 @@ export function PipelineVisualizer() {
       {/* Grid pattern background */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
 
+      {/* Header bar indicating interactivity */}
+      <div className="flex items-center justify-between border-b border-foreground/10 pb-4 mb-4 select-none">
+        <div className="flex items-center gap-2">
+          <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_10px_rgb(16,185,129,0.8)] animate-pulse" />
+          <span className="font-mono text-[10px] text-foreground/60 uppercase tracking-wider">
+            Realium ledger map
+          </span>
+        </div>
+        <div className="flex items-center gap-1.5 rounded-full border border-indigo-500/20 bg-indigo-500/5 px-2.5 py-0.5 text-[9px] text-indigo-400">
+          <span className="h-1.5 w-1.5 rounded-full bg-indigo-400 animate-pulse" />
+          Interactive: Hover/Click Nodes
+        </div>
+      </div>
+
       {/* SVG Canvas for pipeline connections */}
-      <div className="relative h-[280px] w-full">
+      <div className="relative h-[255px] w-full">
         <svg className="absolute inset-0 h-full w-full" viewBox="0 0 520 320">
           <defs>
             <linearGradient id="grad-green-indigo" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -169,6 +183,17 @@ export function PipelineVisualizer() {
                 onClick={() => setActiveId(n.id)}
                 onMouseEnter={() => setActiveId(n.id)}
               >
+                {/* Soft constant pulsing outer ring indicating clickability */}
+                <circle
+                  cx={n.x}
+                  cy={n.y}
+                  r="30"
+                  fill="none"
+                  stroke={n.color.includes("emerald") ? "rgba(16, 185, 129, 0.15)" : n.color.includes("indigo") ? "rgba(99, 102, 241, 0.15)" : "rgba(245, 158, 11, 0.15)"}
+                  strokeWidth="1"
+                  className="animate-pulse"
+                />
+
                 {/* Active glow halo */}
                 {isActive && (
                   <circle
