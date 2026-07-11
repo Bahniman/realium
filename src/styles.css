@@ -1,0 +1,159 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+@import "@fontsource-variable/inter";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
+
+/* Light theme (default) */
+:root {
+  --radius: 0.625rem;
+  --background: #fafaf9;
+  --foreground: #0a0a0a;
+  --card: #ffffff;
+  --card-foreground: #0a0a0a;
+  --popover: #ffffff;
+  --popover-foreground: #0a0a0a;
+  --primary: #10B981;
+  --primary-foreground: #0a0a0a;
+  --secondary: #f4f4f5;
+  --secondary-foreground: #0a0a0a;
+  --muted: #f4f4f5;
+  --muted-foreground: #52525b;
+  --accent: #6366F1;
+  --accent-foreground: #ffffff;
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+  --border: rgba(10, 10, 10, 0.10);
+  --input: rgba(10, 10, 10, 0.15);
+  --ring: #10B981;
+
+  /* Custom scene tokens */
+  --scene-bg: #fafaf9;
+  --glass-bg: rgba(255, 255, 255, 0.60);
+  --glass-border: rgba(10, 10, 10, 0.08);
+  --grid-line: rgba(10, 10, 10, 0.06);
+  --blob-emerald: rgba(16, 185, 129, 0.18);
+  --blob-indigo: rgba(99, 102, 241, 0.18);
+}
+
+.dark {
+  --background: #050505;
+  --foreground: #ffffff;
+  --card: #0f0f10;
+  --card-foreground: #ffffff;
+  --popover: #0f0f10;
+  --popover-foreground: #ffffff;
+  --primary: #10B981;
+  --primary-foreground: #050505;
+  --secondary: #1a1a1c;
+  --secondary-foreground: #ffffff;
+  --muted: #1a1a1c;
+  --muted-foreground: #9CA3AF;
+  --accent: #6366F1;
+  --accent-foreground: #ffffff;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: rgba(255, 255, 255, 0.10);
+  --input: rgba(255, 255, 255, 0.15);
+  --ring: #10B981;
+
+  --scene-bg: #050505;
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.10);
+  --grid-line: rgba(255, 255, 255, 0.06);
+  --blob-emerald: rgba(16, 185, 129, 0.20);
+  --blob-indigo: rgba(99, 102, 241, 0.25);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+html, body {
+  background-color: var(--scene-bg);
+  color: var(--foreground);
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  body {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Consistent focus ring for interactive elements */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  [role="button"]:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+}
+
+@utility glass {
+  background-color: var(--glass-bg);
+  backdrop-filter: blur(20px) saturate(140%);
+  border: 1px solid var(--glass-border);
+}
+
+@utility grid-bg {
+  background-image:
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+@utility btn-press {
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+.btn-press:active { transform: scale(0.97); }
+
+@keyframes blob-float {
+  0%, 100% { transform: translate(0,0) scale(1); }
+  50% { transform: translate(-30px, 20px) scale(1.1); }
+}
+.animate-blob { animation: blob-float 18s ease-in-out infinite; }
+
+/* Better native scrollbar (dark-only tweak) */
+.dark ::-webkit-scrollbar { width: 10px; height: 10px; }
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.08);
+  border-radius: 8px;
+}
+.dark ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.15); }
