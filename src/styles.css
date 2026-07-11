@@ -152,57 +152,6 @@ html, body {
 }
 .dark ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.15); }
 
-/* Spotlight Glow Card styles */
-.glow-card {
-  position: relative;
-  background-color: var(--glass-bg);
-  backdrop-filter: blur(20px) saturate(140%);
-  border: 1px solid var(--glass-border);
-  z-index: 1;
-  overflow: hidden;
-}
-
-.glow-card::before {
-  content: "";
-  position: absolute;
-  inset: -1px;
-  border-radius: inherit;
-  background: radial-gradient(
-    600px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
-    rgba(16, 185, 129, 0.10),
-    transparent 45%
-  );
-  z-index: -1;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-
-.glow-card::after {
-  content: "";
-  position: absolute;
-  inset: 0px;
-  border-radius: inherit;
-  border: 1px solid transparent;
-  background: radial-gradient(
-    300px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
-    rgba(99, 102, 241, 0.25),
-    transparent 60%
-  );
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  z-index: 2;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-
-.glow-card:hover::before,
-.glow-card:hover::after {
-  opacity: 1;
-}
 
 /* Ambient Slow Blob Animations */
 @keyframes float-blob-1 {

@@ -129,10 +129,6 @@ function Nav() {
       <div className="mx-auto mt-4 max-w-7xl px-4">
         <div className="glass flex items-center justify-between rounded-2xl px-4 py-3 sm:px-6">
           <a href="#" className="flex items-center gap-2.5">
-            <span className="relative flex h-2.5 w-2.5">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />
-              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400 shadow-[0_0_12px_rgb(16,185,129,0.9)]" />
-            </span>
             <span className="text-base font-semibold tracking-tight text-foreground">
               Realium
             </span>
