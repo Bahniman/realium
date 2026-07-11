@@ -253,14 +253,14 @@ function Hero() {
             >
               <a
                 href="#architecture"
-                className="group btn-press inline-flex items-center justify-center gap-2 rounded-md bg-foreground px-6 py-3 font-semibold text-background shadow-lg shadow-foreground/20 transition-all hover:scale-105 hover:shadow-xl hover:shadow-emerald-500/20"
+                className="group btn-press inline-flex items-center justify-center gap-2 rounded-lg bg-foreground px-6 py-3 font-semibold text-background border border-foreground transition-all hover:-translate-x-[3px] hover:-translate-y-[3px] shadow-[2px_2px_0px_#10B981] hover:shadow-[5px_5px_0px_#10B981] active:translate-x-0 active:translate-y-0 active:shadow-none"
               >
                 See the architecture
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </a>
               <a
                 href="#redteam"
-                className="btn-press inline-flex items-center justify-center gap-2 rounded-md border border-foreground/20 px-6 py-3 text-foreground transition-colors hover:bg-foreground/10"
+                className="btn-press inline-flex items-center justify-center gap-2 rounded-lg border border-border bg-card px-6 py-3 font-semibold text-foreground transition-all hover:-translate-x-[3px] hover:-translate-y-[3px] shadow-[2px_2px_0px_var(--border)] hover:shadow-[5px_5px_0px_var(--border)] active:translate-x-0 active:translate-y-0 active:shadow-none"
               >
                 The uncomfortable question
               </a>

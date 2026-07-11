@@ -29,42 +29,34 @@ export function GlowCard({
       ref={cardRef}
       onMouseMove={handleMouseMove}
       className={cn(
-        "group/card relative overflow-hidden rounded-2xl border border-foreground/10 bg-foreground/[0.02] backdrop-blur p-6 transition-all duration-300 hover:-translate-y-1 hover:border-foreground/20 hover:shadow-[0_12px_24px_-10px_rgba(16,185,129,0.08)]",
+        "group/card relative overflow-hidden rounded-xl border border-border bg-card p-6 transition-all duration-300 hover:-translate-x-[3px] hover:-translate-y-[3px] shadow-[2px_2px_0px_var(--border)] hover:shadow-[6px_6px_0px_var(--border)]",
         className
       )}
       {...props}
     >
-      {/* Spotlight Background Glow (Emerald) */}
+      {/* Subtle border line accent */}
       <div
-        className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-300 group-hover/card:opacity-100 z-0"
+        className="pointer-events-none absolute -inset-px rounded-xl opacity-0 transition-opacity duration-300 group-hover/card:opacity-100 z-10"
         style={{
-          background: `radial-gradient(600px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(16, 185, 129, 0.08), transparent 45%)`,
-        }}
-      />
-      
-      {/* Spotlight Border Glow (Indigo) */}
-      <div
-        className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-300 group-hover/card:opacity-100 z-10"
-        style={{
-          background: `radial-gradient(300px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(99, 102, 241, 0.35), transparent 50%)`,
-          padding: "1.5px",
+          background: `radial-gradient(250px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(16, 185, 129, 0.20), transparent 60%)`,
+          padding: "1px",
           WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
           WebkitMaskComposite: "xor",
           maskComposite: "exclude",
         }}
       />
 
-      {/* Tech brackets for cybernetic aesthetic */}
+      {/* Tech brackets for cybernetic alignment crosshairs */}
       {showTechBrackets && (
         <>
-          <div className="tech-bracket-tl transition-all duration-300 opacity-25 group-hover/card:opacity-75 group-hover/card:scale-105 z-20" />
-          <div className="tech-bracket-tr transition-all duration-300 opacity-25 group-hover/card:opacity-75 group-hover/card:scale-105 z-20" />
-          <div className="tech-bracket-bl transition-all duration-300 opacity-25 group-hover/card:opacity-75 group-hover/card:scale-105 z-20" />
-          <div className="tech-bracket-br transition-all duration-300 opacity-25 group-hover/card:opacity-75 group-hover/card:scale-105 z-20" />
+          <div className="tech-bracket-tl transition-all duration-300 opacity-30 group-hover/card:opacity-95 z-20" />
+          <div className="tech-bracket-tr transition-all duration-300 opacity-30 group-hover/card:opacity-95 z-20" />
+          <div className="tech-bracket-bl transition-all duration-300 opacity-30 group-hover/card:opacity-95 z-20" />
+          <div className="tech-bracket-br transition-all duration-300 opacity-30 group-hover/card:opacity-95 z-20" />
         </>
       )}
 
-      {/* Content wrapper to stay on top of background spotlight */}
+      {/* Content wrapper */}
       <div className="relative z-10 h-full w-full">{children}</div>
     </div>
   );
