@@ -1408,9 +1408,16 @@ function LandingPage() {
           style={{ y: bgY, scale: bgScale, rotate: bgRotate }}
           className="absolute inset-0 h-[120%] w-[120%] -left-[10%] -top-[10%]"
         >
-          {/* Main Network Background Image */}
+          {/* Light mode: invert image (black bg→white, neon→dark) + multiply blend (white vanishes, dark lines show) */}
           <div 
-            className="h-full w-full bg-cover bg-center bg-no-repeat mix-blend-screen opacity-50 dark:opacity-75" 
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20 invert mix-blend-multiply dark:hidden" 
+            style={{
+              backgroundImage: `url('${import.meta.env.BASE_URL}bg-network.jpg')`
+            }} 
+          />
+          {/* Dark mode: screen blend (black vanishes, neon lines glow through) */}
+          <div 
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-60 mix-blend-screen hidden dark:block" 
             style={{
               backgroundImage: `url('${import.meta.env.BASE_URL}bg-network.jpg')`
             }} 
