@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { GlowCard } from "./glow-card";
 import {
   HardHat,
   Umbrella,
@@ -67,7 +68,7 @@ export function VerticalsSwitcher() {
   const Icon = cur.icon;
 
   return (
-    <div className="glass overflow-hidden rounded-2xl">
+    <GlowCard className="overflow-hidden p-0" showTechBrackets={false}>
       <div className="flex flex-wrap gap-1 border-b border-foreground/10 p-2">
         {verticals.map((v) => {
           const IconV = v.icon;
@@ -134,6 +135,6 @@ export function VerticalsSwitcher() {
           </div>
         </motion.div>
       </AnimatePresence>
-    </div>
+    </GlowCard>
   );
 }

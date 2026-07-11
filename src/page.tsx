@@ -20,6 +20,9 @@ import {
 import { DualKeyDemo } from "@/components/dual-key-demo";
 import { SuretyPlayground } from "@/components/surety-playground";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { LiquidityCalculator } from "@/components/liquidity-calculator";
+import { GlowCard } from "@/components/glow-card";
+import { PipelineVisualizer } from "@/components/pipeline-visualizer";
 
 
 const fadeUp = {
@@ -182,88 +185,104 @@ function Nav() {
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden pt-40 pb-24 sm:pt-48">
+    <section className="relative overflow-hidden pt-36 pb-20 sm:pt-40 lg:pt-44">
+      {/* Background blobs with new slow float animations */}
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="animate-blob absolute -top-40 right-[-10%] h-[520px] w-[520px] rounded-full bg-indigo-500/25 blur-[140px]" />
-        <div className="animate-blob absolute -bottom-40 left-[-10%] h-[520px] w-[520px] rounded-full bg-emerald-500/20 blur-[140px]" />
-        <div className="grid-bg absolute inset-0 opacity-60 [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_70%)]" />
+        <div className="animate-blob-1 absolute -top-40 right-[-10%] h-[520px] w-[520px] rounded-full bg-indigo-500/20 blur-[130px]" />
+        <div className="animate-blob-2 absolute -bottom-40 left-[-10%] h-[520px] w-[520px] rounded-full bg-emerald-500/15 blur-[130px]" />
+        <div className="grid-bg absolute inset-0 opacity-40 [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_70%)]" />
       </div>
 
-      <div className="mx-auto max-w-7xl px-4 text-center">
-        <motion.div {...fadeUp} className="flex justify-center">
-          <div className="inline-flex flex-wrap items-center justify-center gap-2 rounded-full border border-amber-400/30 bg-gradient-to-r from-amber-500/10 via-foreground/[0.03] to-emerald-500/10 px-4 py-1.5 text-xs text-foreground/80 shadow-[0_0_40px_-10px_rgb(245,158,11,0.35)] backdrop-blur">
-            <Trophy className="h-3.5 w-3.5 text-amber-400" />
-            <span className="font-semibold text-foreground">Top 3</span>
-            <span className="text-foreground/40">·</span>
-            <span>ReEnvision 5.0 — XLRI Digital Transformation Conclave</span>
-            <span className="text-foreground/40">·</span>
-            <span className="text-foreground/60">July 2026</span>
+      <div className="mx-auto max-w-7xl px-4">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-center">
+          {/* Left: Text copy */}
+          <div className="text-left lg:col-span-7 xl:col-span-6 space-y-6">
+            <motion.div {...fadeUp} className="flex justify-start">
+              <div className="inline-flex flex-wrap items-center gap-2 rounded-full border border-amber-400/20 bg-gradient-to-r from-amber-500/10 via-foreground/[0.03] to-emerald-500/10 px-4 py-1.5 text-xs text-foreground/80 shadow-[0_0_40px_-10px_rgb(245,158,11,0.25)] backdrop-blur">
+                <Trophy className="h-3.5 w-3.5 text-amber-400" />
+                <span className="font-semibold text-foreground">Top 3</span>
+                <span className="text-foreground/40">·</span>
+                <span>ReEnvision 5.0 — XLRI Conclave</span>
+                <span className="text-foreground/40">·</span>
+                <span className="text-foreground/60">July 2026</span>
+              </div>
+            </motion.div>
+
+            <motion.div
+              {...fadeUp}
+              transition={{ ...fadeUp.transition, delay: 0.04 }}
+              className="text-[11px] leading-relaxed text-muted-foreground sm:text-xs"
+            >
+              Presented to the conclave&apos;s panel of senior technology leaders — CIOs,
+              CTOs and CDIOs from leading firms across banking, logistics, and consumer sectors.
+            </motion.div>
+
+            <motion.div
+              {...fadeUp}
+              transition={{ ...fadeUp.transition, delay: 0.08 }}
+              className="flex justify-start"
+            >
+              <div className="inline-flex items-center gap-2 rounded-full border border-foreground/10 bg-foreground/5 px-3.5 py-1 text-[11px] text-foreground/60 backdrop-blur">
+                <Sparkles className="h-3 w-3 text-emerald-400" />
+                Built for ReEnvision 5.0
+                <span className="mx-1 h-1 w-1 rounded-full bg-foreground/30" />
+                Human-AI Synergy · XLRI · Group 10
+              </div>
+            </motion.div>
+
+            <motion.h1
+              {...fadeUp}
+              transition={{ ...fadeUp.transition, delay: 0.05 }}
+              className="text-4xl font-semibold tracking-tight sm:text-5xl lg:text-6xl xl:text-7xl leading-[1.1]"
+            >
+              <span className="bg-gradient-to-r from-emerald-400 via-foreground to-indigo-400 bg-clip-text text-transparent">
+                Money that moves at the speed of verified reality.
+              </span>
+            </motion.h1>
+
+            <motion.p
+              {...fadeUp}
+              transition={{ ...fadeUp.transition, delay: 0.1 }}
+              className="text-base text-muted-foreground sm:text-lg max-w-xl"
+            >
+              Realium is the settlement rail for public works. It turns
+              site-verified progress into a bank-grade, financeable instrument —
+              in days, not months — through one connected chain of Evidence,
+              Authority, and Liquidity.
+            </motion.p>
+
+            <motion.div
+              {...fadeUp}
+              transition={{ ...fadeUp.transition, delay: 0.15 }}
+              className="flex flex-col gap-3 sm:flex-row pt-4"
+            >
+              <a
+                href="#architecture"
+                className="group btn-press inline-flex items-center justify-center gap-2 rounded-md bg-foreground px-6 py-3 font-semibold text-background shadow-lg shadow-foreground/20 transition-all hover:scale-105 hover:shadow-xl hover:shadow-emerald-500/20"
+              >
+                See the architecture
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+              </a>
+              <a
+                href="#redteam"
+                className="btn-press inline-flex items-center justify-center gap-2 rounded-md border border-foreground/20 px-6 py-3 text-foreground transition-colors hover:bg-foreground/10"
+              >
+                The uncomfortable question
+              </a>
+            </motion.div>
           </div>
-        </motion.div>
 
-        <motion.div
-          {...fadeUp}
-          transition={{ ...fadeUp.transition, delay: 0.04 }}
-          className="mx-auto mt-3 max-w-3xl text-[11px] leading-relaxed text-muted-foreground sm:text-xs"
-        >
-          Presented to the conclave's panel of senior technology leaders — CIOs,
-          CTOs and digital officers from leading firms across banking,
-          technology, logistics and consumer sectors.
-        </motion.div>
-
-        <motion.div
-          {...fadeUp}
-          transition={{ ...fadeUp.transition, delay: 0.08 }}
-          className="mt-6 flex justify-center"
-        >
-          <div className="inline-flex items-center gap-2 rounded-full border border-foreground/10 bg-foreground/5 px-3.5 py-1 text-[11px] text-foreground/60 backdrop-blur">
-            <Sparkles className="h-3 w-3 text-emerald-400" />
-            Built for ReEnvision 5.0
-            <span className="mx-1 h-1 w-1 rounded-full bg-foreground/30" />
-            Human-AI Synergy · XLRI · Group 10
+          {/* Right: Pipeline Visualizer */}
+          <div className="lg:col-span-5 xl:col-span-6 w-full">
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <PipelineVisualizer />
+            </motion.div>
           </div>
-        </motion.div>
-
-        <motion.h1
-          {...fadeUp}
-          transition={{ ...fadeUp.transition, delay: 0.05 }}
-          className="mx-auto mt-8 max-w-5xl text-4xl font-semibold tracking-tight sm:text-6xl md:text-7xl"
-        >
-          <span className="bg-gradient-to-r from-emerald-500 via-foreground to-indigo-500 bg-clip-text text-transparent">
-            Money that moves at the speed of verified reality.
-          </span>
-        </motion.h1>
-
-        <motion.p
-          {...fadeUp}
-          transition={{ ...fadeUp.transition, delay: 0.1 }}
-          className="mx-auto mt-6 max-w-2xl text-base text-muted-foreground sm:text-lg"
-        >
-          Realium is the settlement rail for public works. It turns
-          site-verified progress into a bank-grade, financeable instrument —
-          in days, not months — through one connected chain of Evidence,
-          Authority, and Liquidity.
-        </motion.p>
-
-        <motion.div
-          {...fadeUp}
-          transition={{ ...fadeUp.transition, delay: 0.15 }}
-          className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row"
-        >
-          <a
-            href="#architecture"
-            className="group btn-press inline-flex items-center gap-2 rounded-md bg-foreground px-6 py-3 font-semibold text-background shadow-lg shadow-foreground/20 transition-all hover:scale-105 hover:shadow-xl hover:shadow-emerald-500/30"
-          >
-            See the architecture
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-          </a>
-          <a
-            href="#redteam"
-            className="btn-press inline-flex items-center gap-2 rounded-md border border-foreground/20 px-6 py-3 text-foreground transition-colors hover:bg-foreground/10"
-          >
-            The uncomfortable question
-          </a>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
@@ -321,17 +340,19 @@ function Problem() {
             key={i}
             {...fadeUp}
             transition={{ ...fadeUp.transition, delay: i * 0.06 }}
-            className="glass rounded-2xl p-6"
+            className="h-full"
           >
-            <div className="text-3xl font-semibold tracking-tight text-foreground tabular-nums sm:text-4xl">
-              <CountUpStat text={c.stat} />
-            </div>
-            <div className="mt-1 text-[11px] uppercase tracking-widest text-foreground/40">
-              {c.label} <span className="text-foreground/25">[{c.src}]</span>
-            </div>
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              {c.body}
-            </p>
+            <GlowCard className="h-full border-foreground/10" showTechBrackets={true}>
+              <div className="text-3xl font-semibold tracking-tight text-foreground tabular-nums sm:text-4xl text-neon-emerald">
+                <CountUpStat text={c.stat} />
+              </div>
+              <div className="mt-1 text-[11px] uppercase tracking-widest text-foreground/40">
+                {c.label} <span className="text-foreground/25">[{c.src}]</span>
+              </div>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                {c.body}
+              </p>
+            </GlowCard>
           </motion.div>
         ))}
       </div>
@@ -339,34 +360,36 @@ function Problem() {
       {/* Why digitisation alone failed */}
       <motion.div
         {...fadeUp}
-        className="mt-10 grid grid-cols-1 gap-6 rounded-2xl border border-amber-500/20 bg-amber-500/[0.04] p-8 lg:grid-cols-[1fr_1.3fr]"
+        className="mt-10"
       >
-        <div>
-          <div className="text-xs uppercase tracking-widest text-amber-400/90">
-            Why &quot;just digitise it&quot; failed
+        <GlowCard className="grid grid-cols-1 gap-6 border-amber-500/20 bg-amber-500/[0.04] p-8 lg:grid-cols-[1fr_1.3fr] rounded-2xl" showTechBrackets={false}>
+          <div>
+            <div className="text-xs uppercase tracking-widest text-amber-400/90">
+              Why &quot;just digitise it&quot; failed
+            </div>
+            <h3 className="mt-2 text-2xl font-semibold tracking-tight text-foreground">
+              CPWD&apos;s e-Measurement Book already exists.
+            </h3>
+            <div className="mt-3 font-mono text-sm text-foreground/60">
+              ~₹20,000 Cr/yr paid on it. Money is still slow.
+            </div>
           </div>
-          <h3 className="mt-2 text-2xl font-semibold tracking-tight text-foreground">
-            CPWD&apos;s e-Measurement Book already exists.
-          </h3>
-          <div className="mt-3 font-mono text-sm text-foreground/60">
-            ~₹20,000 Cr/yr paid on it. Money is still slow.
+          <div className="text-foreground/80">
+            <p>
+              A digital record is not a financial instrument. An e-MB entry sits
+              in a state IT system that no bank underwrites and no queue makes
+              attributable. The bottleneck was never the paper — it was that
+              (a) the record isn&apos;t bank-grade, and (b) when the file stalls,
+              no one can point to whose desk it&apos;s sitting on.
+            </p>
+            <p className="mt-3 text-sm text-foreground/60">
+              Realium closes both. Verified evidence becomes a signed
+              instrument, and every human touch on that instrument is a signed,
+              timestamped event in a tamper-evident chain.
+              <span className="text-foreground/30"> [4]</span>
+            </p>
           </div>
-        </div>
-        <div className="text-foreground/80">
-          <p>
-            A digital record is not a financial instrument. An e-MB entry sits
-            in a state IT system that no bank underwrites and no queue makes
-            attributable. The bottleneck was never the paper — it was that
-            (a) the record isn&apos;t bank-grade, and (b) when the file stalls,
-            no one can point to whose desk it&apos;s sitting on.
-          </p>
-          <p className="mt-3 text-sm text-foreground/60">
-            Realium closes both. Verified evidence becomes a signed
-            instrument, and every human touch on that instrument is a signed,
-            timestamped event in a tamper-evident chain.
-            <span className="text-foreground/30"> [4]</span>
-          </p>
-        </div>
+        </GlowCard>
       </motion.div>
     </section>
   );
@@ -641,7 +664,7 @@ function MoneyFlow() {
         </p>
       </motion.div>
 
-      <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1.2fr_1fr]">
+      <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_1.2fr]">
         {/* Timeline */}
         <div className="relative">
           <div className="absolute left-3 top-2 bottom-2 w-px bg-gradient-to-b from-emerald-500/60 via-foreground/10 to-indigo-500/60" />
@@ -672,87 +695,9 @@ function MoneyFlow() {
           </ol>
         </div>
 
-        {/* Waterfall + worked example */}
-        <motion.div {...fadeUp} className="space-y-6">
-          <div className="glass rounded-2xl p-6">
-            <div className="mb-4 flex items-center justify-between">
-              <div className="text-xs uppercase tracking-widest text-emerald-400">
-                Reliability-based advance curve
-              </div>
-              <div className="font-mono text-xs text-foreground/50">60/40</div>
-            </div>
-            {[
-              { tier: "Tier 1 · new contractor", val: 50 },
-              { tier: "Tier 2 · 6+ clean cycles", val: 72 },
-              { tier: "Tier 3 · established", val: 85 },
-            ].map((r, i) => (
-              <div key={i} className="mb-4 last:mb-0">
-                <div className="mb-1.5 flex items-center justify-between text-sm">
-                  <span className="text-foreground/70">{r.tier}</span>
-                  <span className="font-mono text-emerald-400">{r.val}%</span>
-                </div>
-                <div className="h-2 overflow-hidden rounded-full bg-foreground/5">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    whileInView={{ width: `${r.val}%` }}
-                    viewport={{ once: true }}
-                    transition={{
-                      duration: 1,
-                      delay: 0.15 * i,
-                      ease: "easeOut",
-                    }}
-                    className="h-full rounded-full bg-gradient-to-r from-emerald-500 to-emerald-300"
-                  />
-                </div>
-              </div>
-            ))}
-            <div className="mt-5 rounded-lg border border-foreground/10 bg-foreground/[0.03] p-3 font-mono text-xs text-foreground/60">
-              Holdback pool → 40% principal buffer · deductions absorbed first
-            </div>
-          </div>
-
-          <div className="glass rounded-2xl p-6">
-            <div className="mb-3 text-xs uppercase tracking-widest text-indigo-400">
-              Worked example · invoice #1863900
-            </div>
-            <dl className="space-y-1.5 font-mono text-sm">
-              {(
-                [
-                  ["Certified invoice", "₹18,63,900", false],
-                  ["T+1 advance (60%)", "₹11,18,340", false],
-                  ["Holdback pool (40%)", "₹7,45,560", false],
-                  ["Discount to bank (11% p.a., 148d)", "₹49,880", false],
-                  ["Platform fee (35 bps)", "₹6,524", false],
-                  ["Contractor take vs. status quo", "97% vs 91%", true],
-                  ["Days to first cash", "1 vs 148", true],
-                ] as const
-              ).map(([k, v, hi]) => (
-                <div
-                  key={k}
-                  className={`flex items-center justify-between gap-3 rounded-md border-b border-foreground/5 px-2 pb-1.5 pt-1 last:border-0 ${
-                    hi
-                      ? "border-b-0 border border-emerald-500/25 bg-emerald-500/[0.06] shadow-[inset_0_0_0_1px_rgb(16,185,129,0.05)]"
-                      : ""
-                  }`}
-                >
-                  <dt
-                    className={hi ? "text-emerald-300/90" : "text-foreground/50"}
-                  >
-                    {k}
-                  </dt>
-                  <dd
-                    className={
-                      hi
-                        ? "text-base font-semibold text-emerald-400 sm:text-lg"
-                        : "text-foreground/90"
-                    }
-                  >
-                    {v}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-          </div>
+        {/* Interactive Liquidity Waterfall & Calculator */}
+        <motion.div {...fadeUp} className="w-full">
+          <LiquidityCalculator />
         </motion.div>
       </div>
     </section>
@@ -822,21 +767,23 @@ function RedTeam() {
                 key={i}
                 {...fadeUp}
                 transition={{ ...fadeUp.transition, delay: i * 0.08 }}
-                className="glass relative overflow-hidden rounded-2xl p-7"
+                className="h-full"
               >
-                <div className="mb-5 inline-flex h-10 w-10 items-center justify-center rounded-lg border border-rose-500/30 bg-rose-500/10 text-rose-400">
-                  <Icon className="h-5 w-5" />
-                </div>
-                <div className="text-[11px] uppercase tracking-widest text-rose-400/80">
-                  {a.tag}
-                </div>
-                <h3
-                  className="mt-1 text-lg font-semibold text-foreground"
-                  dangerouslySetInnerHTML={{ __html: a.title }}
-                />
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                  {a.body}
-                </p>
+                <GlowCard className="h-full border-rose-500/25 bg-rose-500/[0.02]" showTechBrackets={true}>
+                  <div className="mb-5 inline-flex h-10 w-10 items-center justify-center rounded-lg border border-rose-500/35 bg-rose-500/10 text-rose-450 text-neon-indigo">
+                    <Icon className="h-5 w-5" />
+                  </div>
+                  <div className="text-[11px] uppercase tracking-widest text-rose-400/80">
+                    {a.tag}
+                  </div>
+                  <h3
+                    className="mt-1 text-lg font-semibold text-foreground"
+                    dangerouslySetInnerHTML={{ __html: a.title }}
+                  />
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                    {a.body}
+                  </p>
+                </GlowCard>
               </motion.div>
             );
           })}
@@ -871,31 +818,35 @@ function Synergy() {
       </motion.div>
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-        <motion.div {...fadeUp} className="glass rounded-2xl p-8">
-          <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-emerald-500/30 bg-emerald-500/10 text-emerald-400">
-            <Cpu className="h-5 w-5" />
-          </div>
-          <div className="text-[11px] uppercase tracking-widest text-emerald-400/90">
-            AI does what scales
-          </div>
-          <ul className="mt-3 space-y-2 text-foreground/85">
-            <li>· Observes sites continuously without fatigue</li>
-            <li>· Estimates quantities against the BOQ</li>
-            <li>· Enforces mandates on every action, deterministically</li>
-          </ul>
+        <motion.div {...fadeUp} className="h-full">
+          <GlowCard className="h-full border-emerald-500/20 bg-emerald-500/[0.02]" showTechBrackets={true}>
+            <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-emerald-500/30 bg-emerald-500/10 text-emerald-400">
+              <Cpu className="h-5 w-5" />
+            </div>
+            <div className="text-[11px] uppercase tracking-widest text-emerald-400/90">
+              AI does what scales
+            </div>
+            <ul className="mt-3 space-y-2 text-foreground/85">
+              <li>· Observes sites continuously without fatigue</li>
+              <li>· Estimates quantities against the BOQ</li>
+              <li>· Enforces mandates on every action, deterministically</li>
+            </ul>
+          </GlowCard>
         </motion.div>
-        <motion.div {...fadeUp} className="glass rounded-2xl p-8">
-          <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-indigo-500/30 bg-indigo-500/10 text-indigo-400">
-            <Fingerprint className="h-5 w-5" />
-          </div>
-          <div className="text-[11px] uppercase tracking-widest text-indigo-400/90">
-            Humans do what carries legal weight
-          </div>
-          <ul className="mt-3 space-y-2 text-foreground/85">
-            <li>· Attest that the measurement matches reality</li>
-            <li>· Hold and exercise scoped mandates</li>
-            <li>· Approve above thresholds, accountable in the chain</li>
-          </ul>
+        <motion.div {...fadeUp} className="h-full">
+          <GlowCard className="h-full border-indigo-500/20 bg-indigo-500/[0.02]" showTechBrackets={true}>
+            <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-indigo-500/30 bg-indigo-500/10 text-indigo-400">
+              <Fingerprint className="h-5 w-5" />
+            </div>
+            <div className="text-[11px] uppercase tracking-widest text-indigo-400/90">
+              Humans do what carries legal weight
+            </div>
+            <ul className="mt-3 space-y-2 text-foreground/85">
+              <li>· Attest that the measurement matches reality</li>
+              <li>· Hold and exercise scoped mandates</li>
+              <li>· Approve above thresholds, accountable in the chain</li>
+            </ul>
+          </GlowCard>
         </motion.div>
       </div>
       <div className="mt-6 text-center font-mono text-sm text-foreground/50">
@@ -947,47 +898,51 @@ function Value() {
             key={v.who}
             {...fadeUp}
             transition={{ ...fadeUp.transition, delay: i * 0.08 }}
-            className="glass rounded-2xl p-7"
+            className="h-full"
           >
-            <div
-              className={`text-[11px] uppercase tracking-widest ${
-                v.color === "emerald"
-                  ? "text-emerald-400/90"
-                  : v.color === "indigo"
-                    ? "text-indigo-400/90"
-                    : "text-amber-400/90"
-              }`}
-            >
-              {v.who}
-            </div>
-            <div className="mt-2 text-2xl font-semibold tracking-tight text-foreground">
-              {v.hi}
-            </div>
-            <p className="mt-3 text-sm text-muted-foreground">{v.lo}</p>
+            <GlowCard className="h-full border-foreground/10" showTechBrackets={true}>
+              <div
+                className={`text-[11px] uppercase tracking-widest ${
+                  v.color === "emerald"
+                    ? "text-emerald-400/90"
+                    : v.color === "indigo"
+                      ? "text-indigo-400/90"
+                      : "text-amber-400/90"
+                }`}
+              >
+                {v.who}
+              </div>
+              <div className="mt-2 text-2xl font-semibold tracking-tight text-foreground">
+                {v.hi}
+              </div>
+              <p className="mt-3 text-sm text-muted-foreground">{v.lo}</p>
+            </GlowCard>
           </motion.div>
         ))}
       </div>
 
       <motion.div
         {...fadeUp}
-        className="mt-8 glass rounded-2xl p-7 sm:p-8"
+        className="mt-8"
       >
-        <div className="flex items-start gap-4">
-          <div className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-emerald-500/30 bg-emerald-500/10 text-emerald-400">
-            <BadgeCheck className="h-5 w-5" />
-          </div>
-          <div>
-            <div className="text-xs uppercase tracking-widest text-emerald-400/90">
-              The flywheel
+        <GlowCard showTechBrackets={false} className="border-emerald-500/20 bg-emerald-500/[0.03] p-7 sm:p-8">
+          <div className="flex items-start gap-4">
+            <div className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-emerald-500/30 bg-emerald-500/10 text-emerald-400">
+              <BadgeCheck className="h-5 w-5" />
             </div>
-            <p className="mt-2 max-w-3xl text-foreground/85">
-              Every settled cycle mints proprietary data on payer and payee
-              behavior. That data steps the advance rate for the next cycle.
-              Competitors can copy the UI in a weekend; they cannot copy five
-              years of on-chain settlement history.
-            </p>
+            <div>
+              <div className="text-xs uppercase tracking-widest text-emerald-400/90">
+                The flywheel
+              </div>
+              <p className="mt-2 max-w-3xl text-foreground/85">
+                Every settled cycle mints proprietary data on payer and payee
+                behavior. That data steps the advance rate for the next cycle.
+                Competitors can copy the UI in a weekend; they cannot copy five
+                years of on-chain settlement history.
+              </p>
+            </div>
           </div>
-        </div>
+        </GlowCard>
       </motion.div>
     </section>
   );
@@ -1084,15 +1039,17 @@ function Validation() {
             key={v.tag}
             {...fadeUp}
             transition={{ ...fadeUp.transition, delay: i * 0.06 }}
-            className="glass rounded-2xl p-6"
+            className="h-full"
           >
-            <div className="text-[11px] uppercase tracking-widest text-emerald-400/80">
-              {v.tag}
-            </div>
-            <div className="mt-2 text-lg font-semibold text-foreground">
-              {v.title}
-            </div>
-            <p className="mt-2 text-sm text-muted-foreground">{v.body}</p>
+            <GlowCard className="h-full border-foreground/10" showTechBrackets={true}>
+              <div className="text-[11px] uppercase tracking-widest text-emerald-400/80">
+                {v.tag}
+              </div>
+              <div className="mt-2 text-lg font-semibold text-foreground">
+                {v.title}
+              </div>
+              <p className="mt-2 text-sm text-muted-foreground">{v.body}</p>
+            </GlowCard>
           </motion.div>
         ))}
       </div>
@@ -1154,43 +1111,45 @@ function Roadmap() {
             key={p.phase}
             {...fadeUp}
             transition={{ ...fadeUp.transition, delay: i * 0.08 }}
-            className="glass relative overflow-hidden rounded-2xl p-6"
+            className="h-full"
           >
-            <div className="mb-4 flex items-center justify-between">
-              <div className="font-mono text-[11px] uppercase tracking-widest text-foreground/40">
-                Phase {i + 1}
+            <GlowCard className="h-full border-foreground/10" showTechBrackets={true}>
+              <div className="mb-4 flex items-center justify-between">
+                <div className="font-mono text-[11px] uppercase tracking-widest text-foreground/40">
+                  Phase {i + 1}
+                </div>
+                <div
+                  className={`rounded-full border px-2 py-0.5 font-mono text-[10px] ${
+                    p.color === "emerald"
+                      ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-400"
+                      : p.color === "indigo"
+                        ? "border-indigo-500/30 bg-indigo-500/10 text-indigo-400"
+                        : "border-amber-500/30 bg-amber-500/10 text-amber-400"
+                  }`}
+                >
+                  {p.when}
+                </div>
               </div>
-              <div
-                className={`rounded-full border px-2 py-0.5 font-mono text-[10px] ${
-                  p.color === "emerald"
-                    ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-400"
-                    : p.color === "indigo"
-                      ? "border-indigo-500/30 bg-indigo-500/10 text-indigo-400"
-                      : "border-amber-500/30 bg-amber-500/10 text-amber-400"
-                }`}
-              >
-                {p.when}
-              </div>
-            </div>
-            <h3 className="text-2xl font-semibold tracking-tight text-foreground">
-              {p.phase}
-            </h3>
-            <ul className="mt-5 space-y-3">
-              {p.items.map((item, j) => (
-                <li key={j} className="flex gap-3 text-sm text-foreground/75">
-                  <Clock
-                    className={`mt-0.5 h-3.5 w-3.5 shrink-0 ${
-                      p.color === "emerald"
-                        ? "text-emerald-400"
-                        : p.color === "indigo"
-                          ? "text-indigo-400"
-                          : "text-amber-400"
-                    }`}
-                  />
-                  <span className="leading-relaxed">{item}</span>
-                </li>
-              ))}
-            </ul>
+              <h3 className="text-2xl font-semibold tracking-tight text-foreground">
+                {p.phase}
+              </h3>
+              <ul className="mt-5 space-y-3">
+                {p.items.map((item, j) => (
+                  <li key={j} className="flex gap-3 text-sm text-foreground/75">
+                    <Clock
+                      className={`mt-0.5 h-3.5 w-3.5 shrink-0 ${
+                        p.color === "emerald"
+                          ? "text-emerald-400"
+                          : p.color === "indigo"
+                            ? "text-indigo-400"
+                            : "text-amber-400"
+                      }`}
+                    />
+                    <span className="leading-relaxed">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </GlowCard>
           </motion.div>
         ))}
       </div>

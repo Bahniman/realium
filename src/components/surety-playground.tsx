@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ShieldCheck, ShieldAlert, ShieldX, Send } from "lucide-react";
+import { GlowCard } from "./glow-card";
 
 type Attempt = {
   id: number;
@@ -65,7 +66,7 @@ export function SuretyPlayground() {
   };
 
   return (
-    <div className="glass grid grid-cols-1 gap-6 overflow-hidden rounded-2xl p-6 lg:grid-cols-[1fr_1.2fr]">
+    <GlowCard className="grid grid-cols-1 gap-6 overflow-hidden lg:grid-cols-[1fr_1.2fr]">
       {/* controls */}
       <div>
         <div className="mb-1 text-xs uppercase tracking-widest text-indigo-400">
@@ -218,6 +219,6 @@ export function SuretyPlayground() {
           </AnimatePresence>
         </ul>
       </div>
-    </div>
+    </GlowCard>
   );
 }
