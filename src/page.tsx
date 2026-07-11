@@ -241,10 +241,9 @@ function Hero() {
               transition={{ ...fadeUp.transition, delay: 0.1 }}
               className="text-base text-muted-foreground sm:text-lg max-w-xl"
             >
-              Realium is the settlement rail for public works. It turns
-              site-verified progress into a bank-grade, financeable instrument —
-              in days, not months — through one connected chain of Evidence,
-              Authority, and Liquidity.
+              Realium is the settlement rail for public works. It turns physical,
+              site-verified progress into records a bank trusts enough to pay out
+              immediately — cutting contractor wait times from 148 days to 1.
             </motion.p>
 
             <motion.div
@@ -342,9 +341,9 @@ function Problem() {
           The largest working-capital sink in the Indian economy.
         </h2>
         <p className="mt-4 max-w-2xl text-muted-foreground">
-          Not a UI problem. A settlement problem. Between a bill being raised
-          and a contractor being paid, months disappear — and the money leaks
-          out of the real economy into arbitration and informal lending.
+          Imagine you build a road for the government. You finish the job. You send the bill.
+          And then... nothing. You wait months, sometimes years. Realium solves this gap:
+          the wait between finishing work and actually getting paid.
         </p>
       </motion.div>
 
@@ -418,13 +417,13 @@ const layers = [
     tag: "Evidence",
     icon: Camera,
     color: "emerald",
-    title: "Site truth becomes a bank-grade e-invoice.",
-    body: "Geo-fenced drone / handset capture. AI estimates quantities against the BOQ. The site engineer (SDE) attests with an Ed25519 signature scoped to that work item. Every step is hash-chained into a tamper-evident ledger.",
+    title: "Proof: Drones and phones record construction ground truth.",
+    body: "A drone and a phone record the finished work, and AI checks the measurements against the contract. The site engineer confirms it with a secure digital signature. Two locks on the same door: the machine's check and the human's sign-off.",
     bullets: [
-      "Geo-fenced capture · frames + SHA + GPS witness",
-      "AI quantity assessment vs. BOQ (variance surfaced, not hidden)",
-      "Dual-key certificate: machine evidence + accountable engineer signature",
-      "Output: a verified e-invoice a bank can price",
+      "Geo-locked capture: frames, hashes, and GPS location match the contract",
+      "AI quantity audit vs. BOQ: checks how much road was actually laid",
+      "Two locks on one door: machine evidence + site engineer digital signature",
+      "Result: proof of real work turned into a trusted digital record",
     ],
   },
   {
@@ -433,16 +432,14 @@ const layers = [
     tag: "Authority",
     icon: UserCheck,
     color: "indigo",
-    title: "Every human in the chain acts under a signed, scoped mandate.",
-    body: "Engineers get certification mandates — value caps, category caps, geography fence, auto-revocation on transfer. Approving officers get thresholds with escrow. Every approval — and every non-approval — is a signed, timestamped event on the chain. The approval clock is attributable.",
+    title: "Permission: Every approval is signed, named, and timestamped.",
+    body: "Everyone who approves the bill has a clearly defined role and a digital signature. Every 'yes', every 'no', and every silence is recorded with a name. 'The file is moving' stops being an excuse when the system shows whose desk it has sat on for 47 days.",
     bullets: [
-      "Certification mandates kill certifier fraud at source",
-      "Escrow-and-co-sign above threshold, not silent stalling",
-      "Auto-revocation on officer transfer — no stale keys",
-      "Non-approval is an event too — the queue is measurable",
+      "Fixed approval limits: limits who can approve what and where",
+      "Named and timestamped: every touch is recorded on a tamper-evident ledger",
+      "Active attribution: makes the approval queue fully visible to everyone",
+      "Non-approval is an event: files cannot be quietly ignored",
     ],
-    footnote:
-      "The same mandate layer later governs AI agents that prepare bills — same primitive, wider scope.",
   },
   {
     n: "03",
@@ -450,13 +447,13 @@ const layers = [
     tag: "Liquidity",
     icon: Banknote,
     color: "amber",
-    title: "The verified instrument is financed on day one.",
-    body: "A bank advances 60% at T+1 against the certified receivable, on a reliability-based advance curve that steps 50%→85% with clean history. A 40% holdback pool absorbs deductions first. When treasury pays, the balance is released minus itemised, on-chain charges.",
+    title: "Money: Payout is routed the very next day.",
+    body: "The moment proof is locked in, a bank pays the contractor 60% of the bill on Day 1. The remaining 40% settles behind a holdback buffer that absorbs deductions first. Months of waiting become days.",
     bullets: [
-      "T+1 advance · 60% base, curve 50→85% by reliability tier",
-      "40% holdback absorbs deductions before principal is touched",
-      "Bank yield: ~11% p.a. on holdback-buffered, near-sovereign paper (assumption)",
-      "Platform take: 35 bps + SaaS — flywheel data compounds",
+      "Day-1 Cash Advance: bank pays 60% of the bill immediately",
+      "40% Holdback Buffer: absorbs any government deductions first",
+      "Contractor nets ~97%: avoids high informal market interest rates",
+      "Bank gets a safe investment: backed by site proof and sovereign payout",
     ],
   },
 ];
