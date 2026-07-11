@@ -336,7 +336,7 @@ export function DualKeyDemo() {
                         <CheckCircle2 className="h-3.5 w-3.5" /> PAYOUT VERIFIED & ENQUEUED
                       </span>
                     </div>
-                    <div className="space-y-0.5 text-[10px] text-foreground/75 leading-tight">
+                    <div className="space-y-0.5 text-xs text-foreground/75 leading-tight">
                       <div>UTR: TX_982631892_PWD_INIT</div>
                       <div>CREDIT: ₹11,18,340 (60% advance T+1)</div>
                       <div>HOLDBACK: ₹7,45,560 (40% buffer)</div>
@@ -351,7 +351,7 @@ export function DualKeyDemo() {
                       <CheckCircle2 className="h-3.5 w-3.5" />
                       <span>LEDGER WRITTEN SUCCESSFUL</span>
                     </div>
-                    <p className="text-[10px] text-foreground/60 leading-normal">
+                    <p className="text-xs text-foreground/60 leading-normal">
                       Tamper-evident chain is locked. Attestation receipt is generated. Receiver bank discount enqueued.
                     </p>
                   </div>
@@ -359,7 +359,7 @@ export function DualKeyDemo() {
               </div>
 
               {/* Console footer */}
-              <div className="border-t border-foreground/10 pt-1 text-[8px] text-foreground/30 flex justify-between select-none">
+              <div className="border-t border-foreground/10 pt-1 text-[10px] text-foreground/30 flex justify-between select-none">
                 <span>SECURE ENCLAVE v1.02 // Ed25519</span>
                 <span>HASHCHAIN: OK</span>
               </div>

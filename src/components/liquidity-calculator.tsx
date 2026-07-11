@@ -165,7 +165,7 @@ export function LiquidityCalculator() {
               onChange={(e) => setInvoiceAmount(Number(e.target.value))}
               className="mt-2.5 w-full accent-emerald-500 cursor-pointer"
             />
-            <div className="mt-1 flex justify-between font-mono text-[10px] text-foreground/30">
+            <div className="mt-1 flex justify-between font-mono text-xs text-foreground/30">
               <span>₹5 Lakhs</span>
               <span>₹2.5 Crores</span>
             </div>
@@ -188,13 +188,13 @@ export function LiquidityCalculator() {
                   }`}
                 >
                   <span className="font-mono text-xs font-bold">{t.rate}%</span>
-                  <span className="mt-0.5 text-[9px] uppercase tracking-wider opacity-85 leading-none">
+                  <span className="mt-0.5 text-[11px] uppercase tracking-wider opacity-85 leading-none">
                     {t.label.split(":")[0]}
                   </span>
                 </button>
               ))}
             </div>
-            <p className="mt-1.5 text-[10px] text-muted-foreground leading-normal">
+            <p className="mt-1.5 text-xs text-muted-foreground leading-normal">
               {tiers.find((t) => t.id === selectedTier)?.desc}
             </p>
           </div>
@@ -216,7 +216,7 @@ export function LiquidityCalculator() {
               onChange={(e) => setDaysToSettle(Number(e.target.value))}
               className="mt-2.5 w-full accent-indigo-500 cursor-pointer"
             />
-            <div className="mt-1 flex justify-between font-mono text-[10px] text-foreground/30">
+            <div className="mt-1 flex justify-between font-mono text-xs text-foreground/30">
               <span>15 Days (Pilot target)</span>
               <span>240 Days (Historic high)</span>
             </div>
@@ -239,7 +239,7 @@ export function LiquidityCalculator() {
               onChange={(e) => setDeductionsPercent(Number(e.target.value))}
               className="mt-2.5 w-full accent-rose-500 cursor-pointer"
             />
-            <div className="mt-1 flex justify-between font-mono text-[10px] text-foreground/30">
+            <div className="mt-1 flex justify-between font-mono text-xs text-foreground/30">
               <span>0% (Clean work)</span>
               <span>15% (Heavy penalty)</span>
             </div>
@@ -250,11 +250,11 @@ export function LiquidityCalculator() {
         <div className="flex flex-col justify-between rounded-xl border border-foreground/10 bg-foreground/[0.01] p-5">
           <div>
             <div className="flex items-center justify-between border-b border-foreground/5 pb-3">
-              <div className="font-mono text-[10px] uppercase tracking-widest text-foreground/40">
+              <div className="font-mono text-xs uppercase tracking-widest text-foreground/40">
                 On-Chain Payout Waterfall
               </div>
-              <div className="flex items-center gap-1.5 rounded-full border border-emerald-500/20 bg-emerald-500/5 px-2 py-0.5 text-[10px] text-emerald-400">
-                <ShieldCheck className="h-3 w-3" /> Lock: 11% Bank Yield
+              <div className="flex items-center gap-1.5 rounded-full border border-emerald-500/20 bg-emerald-500/5 px-2.5 py-0.5 text-xs text-emerald-400">
+                <ShieldCheck className="h-3.5 w-3.5" /> Lock: 11% Bank Yield
               </div>
             </div>
 
@@ -373,33 +373,33 @@ export function LiquidityCalculator() {
 
           {/* Comparison Card */}
           <div className="mt-6 border-t border-foreground/10 pt-5">
-            <div className="mb-3 font-mono text-[10px] uppercase tracking-widest text-foreground/40">
+            <div className="mb-3 font-mono text-xs uppercase tracking-widest text-foreground/40">
               Net Capital Take-Home Comparison
             </div>
             
             <div className="grid grid-cols-2 gap-4">
               {/* Realium */}
               <div className="rounded-lg border border-emerald-500/25 bg-emerald-500/[0.04] p-3">
-                <div className="text-[10px] font-semibold uppercase tracking-wider text-emerald-400 flex items-center gap-1">
-                  <TrendingUp className="h-3 w-3" /> Realium (T+1 cash)
+                <div className="text-xs font-semibold uppercase tracking-wider text-emerald-400 flex items-center gap-1">
+                  <TrendingUp className="h-3.5 w-3.5" /> Realium (T+1 cash)
                 </div>
                 <div className="mt-1 font-mono text-2xl font-bold text-foreground">
                   {contractorNetTakePercent.toFixed(1)}%
                 </div>
-                <div className="mt-0.5 font-mono text-[11px] text-foreground/60">
+                <div className="mt-0.5 font-mono text-xs text-foreground/60">
                   ₹{contractorNetTake.toLocaleString("en-IN")}
                 </div>
               </div>
 
               {/* Traditional */}
               <div className="rounded-lg border border-foreground/10 bg-foreground/5 p-3">
-                <div className="text-[10px] font-semibold uppercase tracking-wider text-foreground/45 flex items-center gap-1">
-                  <Landmark className="h-3 w-3" /> Status Quo (T+{daysToSettle} wait)
+                <div className="text-xs font-semibold uppercase tracking-wider text-foreground/45 flex items-center gap-1">
+                  <Landmark className="h-3.5 w-3.5" /> Status Quo (T+{daysToSettle} wait)
                 </div>
                 <div className="mt-1 font-mono text-2xl font-bold text-foreground/75">
                   {traditionalNetTakePercent.toFixed(1)}%
                 </div>
-                <div className="mt-0.5 font-mono text-[11px] text-foreground/55">
+                <div className="mt-0.5 font-mono text-xs text-foreground/55">
                   ₹{traditionalNetTake.toLocaleString("en-IN")}
                 </div>
               </div>

@@ -227,17 +227,17 @@ export function PipelineVisualizer() {
                 {/* Node Text labels */}
                 <text
                   x={n.x}
-                  y={n.y - 34}
+                  y={n.y - 36}
                   textAnchor="middle"
-                  className={`font-mono text-[9px] uppercase tracking-wider ${isActive ? "fill-foreground font-semibold" : "fill-foreground/40"} transition-all duration-300`}
+                  className={`font-mono text-[11px] uppercase tracking-wider ${isActive ? "fill-foreground font-semibold" : "fill-foreground/45"} transition-all duration-300`}
                 >
                   {n.label}
                 </text>
                 <text
                   x={n.x}
-                  y={n.y + 36}
+                  y={n.y + 38}
                   textAnchor="middle"
-                  className={`text-[9px] ${isActive ? "fill-foreground/80" : "fill-foreground/30"} transition-all duration-300`}
+                  className={`text-[10px] ${isActive ? "fill-foreground/85" : "fill-foreground/40"} transition-all duration-300`}
                 >
                   {n.subLabel}
                 </text>
@@ -262,25 +262,25 @@ export function PipelineVisualizer() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -5 }}
             transition={{ duration: 0.2 }}
-            className="space-y-2.5 font-mono text-xs"
+            className="space-y-2.5 font-mono text-sm"
           >
             <div className="flex items-center justify-between border-b border-foreground/5 pb-2">
-              <span className="flex items-center gap-1.5 font-bold uppercase tracking-wider text-foreground">
+              <span className="flex items-center gap-1.5 font-bold uppercase tracking-wider text-foreground text-xs sm:text-sm">
                 <Icon className={`h-4.5 w-4.5 ${cur.color}`} />
                 {cur.details.title}
               </span>
-              <span className={`rounded-full border border-foreground/10 bg-foreground/5 px-2 py-0.5 text-[10px] ${cur.color}`}>
+              <span className={`rounded-full border border-foreground/10 bg-foreground/5 px-2 py-0.5 text-xs ${cur.color}`}>
                 {cur.details.metric}
               </span>
             </div>
             
-            <p className="text-foreground/65 leading-relaxed font-sans text-[11px] sm:text-xs">
+            <p className="text-foreground/75 leading-relaxed font-sans text-xs sm:text-sm">
               {cur.details.description}
             </p>
 
-            <div className="flex items-center gap-2 rounded border border-foreground/5 bg-black/40 p-2 text-[10px]">
+            <div className="flex items-center gap-2 rounded border border-foreground/5 bg-black/40 p-2 text-xs">
               <span className={`shrink-0 font-bold ${cur.color}`}>[{cur.details.logKey}]</span>
-              <span className="truncate text-foreground/55">{cur.details.logVal}</span>
+              <span className="truncate text-foreground/65">{cur.details.logVal}</span>
             </div>
           </motion.div>
         </AnimatePresence>
