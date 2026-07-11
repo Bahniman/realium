@@ -181,7 +181,7 @@ function Nav() {
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden pt-36 pb-20 sm:pt-40 lg:pt-44">
+    <section className="relative overflow-hidden pt-32 pb-8 sm:pt-36 lg:pt-40">
       {/* Background blobs with new slow float animations */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="animate-blob-1 absolute -top-40 right-[-10%] h-[520px] w-[520px] rounded-full bg-indigo-500/20 blur-[130px]" />
@@ -315,7 +315,7 @@ const problemStats = [
 
 function Problem() {
   return (
-    <section id="problem" className="mx-auto max-w-7xl px-4 pt-16 pb-24">
+    <section id="problem" className="mx-auto max-w-7xl px-4 pt-8 pb-16">
       <motion.div {...fadeUp} className="mb-12 max-w-3xl">
         <div className="text-xs uppercase tracking-[0.2em] text-rose-400/80">
           The problem
@@ -445,7 +445,7 @@ const layers = [
 
 function Architecture() {
   return (
-    <section id="architecture" className="mx-auto max-w-7xl px-4 py-24">
+    <section id="architecture" className="mx-auto max-w-7xl px-4 py-16">
       <motion.div {...fadeUp} className="mb-14 max-w-3xl">
         <div className="text-xs uppercase tracking-[0.2em] text-emerald-400/80">
           The solution · one platform, three layers
@@ -671,7 +671,7 @@ const flowSteps = [
 
 function MoneyFlow() {
   return (
-    <section id="flow" className="mx-auto max-w-7xl px-4 py-24">
+    <section id="flow" className="mx-auto max-w-7xl px-4 py-16">
       <motion.div {...fadeUp} className="mb-12 max-w-3xl">
         <div className="text-xs uppercase tracking-[0.2em] text-emerald-400/80">
           How money moves
@@ -751,7 +751,7 @@ const redteamAnswers = [
 
 function RedTeam() {
   return (
-    <section id="redteam" className="relative overflow-hidden py-24">
+    <section id="redteam" className="relative overflow-hidden py-16">
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute top-1/2 left-1/2 h-[500px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-rose-500/[0.08] blur-[140px]" />
       </div>
@@ -829,7 +829,7 @@ function RedTeam() {
 
 function Synergy() {
   return (
-    <section className="mx-auto max-w-7xl px-4 py-16">
+    <section className="mx-auto max-w-7xl px-4 py-10">
       <motion.div {...fadeUp} className="mb-10 max-w-3xl">
         <div className="text-xs uppercase tracking-[0.2em] text-foreground/60">
           Event theme · Human-AI Synergy
@@ -904,7 +904,7 @@ const valueCards = [
 
 function Value() {
   return (
-    <section className="mx-auto max-w-7xl px-4 py-24">
+    <section className="mx-auto max-w-7xl px-4 py-16">
       <motion.div {...fadeUp} className="mb-12 max-w-3xl">
         <div className="text-xs uppercase tracking-[0.2em] text-emerald-400/80">
           Value
@@ -1367,7 +1367,10 @@ function LandingPage() {
   const scale2 = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.85, 1.25]);
 
   return (
-    <main className="relative min-h-screen bg-background text-foreground overflow-hidden">
+    <main className="relative min-h-screen bg-transparent text-foreground overflow-hidden">
+      {/* Solid Background Color Base (Stacking index -100) */}
+      <div className="pointer-events-none fixed inset-0 -z-[100] bg-background" />
+
       {/* Shifting Ambient Background Blobs */}
       <div className="pointer-events-none fixed inset-0 -z-30 overflow-hidden select-none">
         {/* Blob 1 (Emerald) */}
