@@ -6,7 +6,7 @@ import {
   Loader2,
   CheckCircle2,
   Fingerprint,
-  Camera,
+  Eye,
   Cpu,
   Banknote,
   RefreshCw,
@@ -24,7 +24,7 @@ type Step = {
   actorTone: "emerald" | "indigo" | "sky" | "amber";
   label: string;
   detail: string;
-  icon: typeof Camera;
+  icon: typeof Eye;
   duration: number;
 };
 
@@ -35,9 +35,9 @@ const steps: Step[] = [
     day: "DAY 0 · 11:40",
     actor: "Contractor site team",
     actorTone: "amber",
-    label: "Site capture, geo-fenced",
-    detail: "Drone pass + handset video · geo:19.0760,72.8777 · 4,812 frames · SHA 0x9a…c1",
-    icon: Camera,
+    label: "eMB measurement entry, geo-tagged",
+    detail: "Site photos + digital measurements · geo:19.0760,72.8777 · 12 items logged · SHA 0x9a…c1",
+    icon: Eye,
     duration: 2600,
   },
   {
@@ -179,11 +179,11 @@ export function DualKeyDemo() {
         addLine("Click 'Run verification' to begin scanning.", 400);
       }
     } else if (active === 0) {
-      addLine("DRONE_TELEMETRY: CONNECTING TO SECURE CORE...", 100);
+      addLine("eMB_SYNC: CONNECTING TO MEASUREMENT PORTAL...", 100);
       addLine("GPS witness lock: OK (19.0760° N, 72.8777° E)", 500);
       addLine("Geo-fence check vs. sanctioned alignment: INSIDE", 1000);
-      addLine("Alt: 42.5m (BVLOS) · Speed: 4.8 m/s · S-Heading 182°", 1500);
-      addLine("Encrypting image hashes with Ed25519 signature...", 2000);
+      addLine("12 BOQ items measured · 6 site photos attached", 1500);
+      addLine("Encrypting measurement hashes with Ed25519 signature...", 2000);
     } else if (active === 1) {
       addLine("AI_ENGINE: INITIALIZING SEGMENTATION MODEL...", 100);
       addLine("Bituminous concrete surface layer detected", 600);

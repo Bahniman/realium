@@ -4,7 +4,7 @@ import {
   Sparkles,
   ArrowRight,
   Trophy,
-  Camera,
+
   Fingerprint,
   Banknote,
   Clock,
@@ -413,15 +413,15 @@ const layers = [
     n: "01",
     key: "evidence",
     tag: "Evidence",
-    icon: Camera,
+    icon: Eye,
     color: "emerald",
-    title: "Proof: Drones and phones record construction ground truth.",
-    body: "A drone and a phone record the finished work, and AI checks the measurements against the contract. The site engineer confirms it with a secure digital signature. Two locks on the same door: the machine's check and the human's sign-off.",
+    title: "Proof: Digital measurements replace paper registers.",
+    body: "Site engineers record finished work through geo-tagged photos and digital measurement entries in the eMB portal. AI cross-checks quantities against the BOQ. The engineer confirms with a secure digital signature — machine audit plus human sign-off.",
     bullets: [
-      "Geo-locked capture: frames, hashes, and GPS location match the contract",
-      "AI quantity audit vs. BOQ: checks how much road was actually laid",
-      "Two locks on one door: machine evidence + site engineer digital signature",
-      "Result: proof of real work turned into a trusted digital record",
+      "Geo-tagged evidence: timestamped photos and GPS coordinates match the contract site",
+      "AI quantity audit vs. BOQ: cross-checks actual measurements against sanctioned items",
+      "Two locks on one door: automated audit + site engineer digital signature",
+      "Result: verified work turned into a trusted, tamper-evident digital record",
     ],
   },
   {
@@ -478,23 +478,23 @@ function Architecture() {
           <Fragment key={l.key}>
             <div
               onClick={() => document.getElementById(l.key)?.scrollIntoView({ behavior: 'smooth' })}
-              className={`flex h-full min-h-[104px] flex-col justify-center rounded-xl border p-5 backdrop-blur transition-all hover:-translate-y-1 hover:scale-[1.01] hover:shadow-lg cursor-pointer active:scale-[0.99] ${
-                l.color === "emerald"
-                  ? "border-emerald-500/40 bg-emerald-500/[0.06] hover:border-emerald-400/60 hover:shadow-emerald-500/10"
-                  : l.color === "indigo"
-                    ? "border-indigo-500/40 bg-indigo-500/[0.06] hover:border-indigo-400/60 hover:shadow-indigo-500/10"
-                    : "border-amber-500/40 bg-amber-500/[0.06] hover:border-amber-400/60 hover:shadow-amber-500/10"
-              }`}
+              className="flex h-full min-h-[104px] flex-col justify-center rounded-xl border border-border bg-card p-5 transition-all hover:-translate-x-[2px] hover:-translate-y-[2px] cursor-pointer active:translate-x-0 active:translate-y-0 shadow-[2px_2px_0px_var(--border)] hover:shadow-[4px_4px_0px_var(--border)]"
             >
               <div className="flex items-center gap-2">
-                <span className="font-mono text-[11px] text-muted-foreground">
+                <span className="font-mono text-[10px] text-muted-foreground">
                   {l.n}
                 </span>
-                <span className="text-sm font-semibold text-foreground">
+                <span className={`text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-md ${
+                  l.color === "emerald"
+                    ? "bg-[#0BDB00] text-black"
+                    : l.color === "indigo"
+                      ? "bg-[#000DFF] text-white"
+                      : "bg-[#FF4D00] text-white"
+                }`}>
                   {l.tag}
                 </span>
               </div>
-              <div className="mt-1.5 text-xs text-muted-foreground">
+              <div className="mt-2 text-xs text-muted-foreground font-medium">
                 {l.key === "evidence"
                   ? "site → certified e-invoice"
                   : l.key === "authority"
@@ -505,21 +505,13 @@ function Architecture() {
             {i < layers.length - 1 && (
               <div className="flex items-center self-center px-2">
                 <span
-                  className={`h-px w-6 bg-gradient-to-r ${
-                    i === 0
-                      ? "from-emerald-500/60 to-indigo-500/60"
-                      : "from-indigo-500/60 to-amber-500/60"
-                  }`}
+                  className="h-px w-6 bg-[#d4d4d4]"
                 />
                 <span className="mx-1 flex h-8 w-8 items-center justify-center rounded-full border border-border bg-background shadow-sm">
                   <ArrowRight className="h-3.5 w-3.5 text-muted-foreground" />
                 </span>
                 <span
-                  className={`h-px w-6 bg-gradient-to-r ${
-                    i === 0
-                      ? "from-emerald-500/60 to-indigo-500/60"
-                      : "from-indigo-500/60 to-amber-500/60"
-                  }`}
+                  className="h-px w-6 bg-[#d4d4d4]"
                 />
               </div>
             )}
@@ -530,12 +522,6 @@ function Architecture() {
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
         {layers.map((l, i) => {
           const Icon = l.icon;
-          const accent =
-            l.color === "emerald"
-              ? "text-emerald-600 border-emerald-500/30 bg-emerald-500/10"
-              : l.color === "indigo"
-                ? "text-indigo-600 border-indigo-500/30 bg-indigo-500/10"
-                : "text-amber-600 border-amber-500/30 bg-amber-500/10";
           return (
             <Fragment key={l.key}>
               <motion.div
@@ -551,24 +537,28 @@ function Architecture() {
                 >
                   <div className="flex items-center justify-between">
                     <div
-                      className={`inline-flex h-11 w-11 items-center justify-center rounded-xl border ${accent}`}
+                      className={`inline-flex h-11 w-11 items-center justify-center rounded-xl border ${
+                        l.color === "emerald"
+                          ? "bg-[#0BDB00] text-black border-[#0BDB00]"
+                          : l.color === "indigo"
+                            ? "bg-[#000DFF] text-white border-[#000DFF]"
+                            : "bg-[#FF4D00] text-white border-[#FF4D00]"
+                      }`}
                     >
                       <Icon className="h-5 w-5" />
                     </div>
-                    <div className="font-mono text-xs text-muted-foreground">
-                      Layer {l.n}
+                    <div className={`font-mono text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md ${
+                      l.color === "emerald"
+                        ? "bg-[#0BDB00] text-black"
+                        : l.color === "indigo"
+                          ? "bg-[#000DFF] text-white"
+                          : "bg-[#FF4D00] text-white"
+                    }`}>
+                      {l.tag}
                     </div>
                   </div>
-                  <div
-                    className={`mt-5 text-[11px] uppercase tracking-widest font-semibold ${
-                      l.color === "emerald"
-                        ? "text-emerald-600"
-                        : l.color === "indigo"
-                          ? "text-indigo-600"
-                          : "text-amber-600"
-                    }`}
-                  >
-                    {l.tag}
+                  <div className="mt-5 font-mono text-[10px] text-muted-foreground uppercase tracking-widest">
+                    Pillar {l.n} / 03
                   </div>
                   <h3 className="mt-1 text-xl font-semibold tracking-tight text-foreground">
                     {l.title}
@@ -583,12 +573,12 @@ function Architecture() {
                         className="flex gap-2.5 text-sm text-foreground/90"
                       >
                         <span
-                          className={`mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full ${
+                          className={`mt-2 h-1.5 w-1.5 shrink-0 rounded-[2px] ${
                             l.color === "emerald"
-                              ? "bg-emerald-500"
+                              ? "bg-[#0BDB00]"
                               : l.color === "indigo"
-                                ? "bg-indigo-500"
-                                : "bg-amber-500"
+                                ? "bg-[#000DFF]"
+                                : "bg-[#FF4D00]"
                           }`}
                         />
                         <span>{b}</span>
@@ -606,10 +596,10 @@ function Architecture() {
                     <span className="flex items-center gap-1.5">
                       <span className={`h-1.5 w-1.5 rounded-full animate-pulse ${
                         l.color === "emerald"
-                          ? "bg-emerald-500"
+                          ? "bg-[#0BDB00]"
                           : l.color === "indigo"
-                            ? "bg-indigo-500"
-                            : "bg-amber-500"
+                            ? "bg-[#000DFF]"
+                            : "bg-[#FF4D00]"
                       }`} />
                       TEST LIVE ENGINE
                     </span>
@@ -657,8 +647,8 @@ function Architecture() {
 const flowSteps = [
   {
     day: "Day 0",
-    title: "Site capture + AI prefill",
-    body: "Drone pass + handset video. AI computes 1,240 m² of bituminous concrete against BOQ. Variance 0.4%.",
+    title: "eMB entry + AI audit",
+    body: "Site engineer logs measurements with geo-tagged photos. AI computes 1,240 m² of bituminous concrete against BOQ. Variance 0.4%.",
   },
   {
     day: "Day 0",

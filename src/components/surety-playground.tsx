@@ -69,14 +69,14 @@ export function SuretyPlayground() {
     <GlowCard className="grid grid-cols-1 gap-6 overflow-hidden lg:grid-cols-[1fr_1.2fr]">
       {/* controls */}
       <div>
-        <div className="mb-1 text-xs uppercase tracking-widest text-indigo-400">
+        <div className="mb-1 text-[10px] font-bold uppercase tracking-widest text-[#000DFF]">
           Certification mandate · Executive Engineer
         </div>
-        <div className="mb-6 font-mono text-[11px] text-foreground/40">
+        <div className="mb-6 font-mono text-[10px] text-muted-foreground">
           mandate:0x7a4c…e021 · Ed25519 · auto-revoke on transfer
         </div>
 
-        <label className="block text-xs text-foreground/60">
+        <label className="block text-xs font-semibold uppercase tracking-wider text-[10px] text-foreground/80">
           Single-certification cap
         </label>
         <div className="mt-2 flex items-center gap-3">
@@ -87,23 +87,24 @@ export function SuretyPlayground() {
             step={100000}
             value={cap}
             onChange={(e) => setCap(Number(e.target.value))}
-            className="w-full accent-indigo-500"
+            className="w-full accent-[#000DFF] cursor-pointer"
           />
-          <div className="w-28 shrink-0 rounded-md border border-foreground/10 bg-foreground/5 px-2 py-1 text-right font-mono text-sm text-foreground">
+          <div className="w-28 shrink-0 rounded-md border border-border bg-card px-2 py-1 text-right font-mono text-sm text-foreground shadow-[1px_1px_0px_var(--border)]">
             ₹{(cap / 100000).toFixed(1)}L
           </div>
         </div>
 
-        <label className="mt-6 block text-xs text-foreground/60">
+        <label className="mt-6 block text-xs font-semibold uppercase tracking-wider text-[10px] text-foreground/80">
           Category caps (allowlist)
         </label>
         <input
+          type="text"
           value={categories}
           onChange={(e) => setCategories(e.target.value)}
-          className="mt-2 w-full rounded-md border border-foreground/10 bg-foreground/5 px-3 py-2 font-mono text-xs text-foreground outline-none focus:border-indigo-400/60"
+          className="mt-2 w-full rounded-md border border-border bg-card px-3 py-2 font-mono text-xs text-foreground outline-none focus:border-[#000DFF] shadow-[1px_1px_0px_var(--border)]"
         />
 
-        <label className="mt-6 block text-xs text-foreground/60">
+        <label className="mt-6 block text-xs font-semibold uppercase tracking-wider text-[10px] text-foreground/80">
           Geography fence (state circle)
         </label>
         <div className="mt-2 flex gap-2">
@@ -111,10 +112,10 @@ export function SuretyPlayground() {
             <button
               key={g}
               onClick={() => setGeo(g)}
-              className={`flex-1 rounded-md border px-2 py-1.5 font-mono text-xs transition-colors ${
+              className={`flex-1 rounded-md border px-2 py-1.5 font-mono text-xs transition-colors cursor-pointer ${
                 geo === g
-                  ? "border-indigo-400/60 bg-indigo-500/10 text-indigo-300"
-                  : "border-foreground/10 bg-foreground/5 text-foreground/60 hover:text-foreground"
+                  ? "border-[#000DFF] bg-[#000DFF] text-white font-bold shadow-[2px_2px_0px_#161616]"
+                  : "border-border bg-card text-foreground hover:bg-muted"
               }`}
             >
               {g}
@@ -122,47 +123,46 @@ export function SuretyPlayground() {
           ))}
         </div>
 
-        <label className="mt-6 flex items-center gap-2 text-xs text-foreground/60">
+        <label className="mt-6 flex items-center gap-2 text-xs font-medium text-foreground/80 cursor-pointer">
           <input
             type="checkbox"
             checked={revoked}
             onChange={(e) => setRevoked(e.target.checked)}
-            className="accent-rose-500"
+            className="accent-[#FF4D00]"
           />
           Simulate officer transfer (auto-revoke)
         </label>
 
         <button
           onClick={trigger}
-          className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-md bg-indigo-500 px-4 py-2.5 text-sm font-semibold text-white transition-transform btn-press hover:scale-[1.02]"
+          className="group btn-press mt-6 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[#000DFF] border border-[#000DFF] px-4 py-2.5 text-sm font-semibold text-white transition-all hover:-translate-x-[2px] hover:-translate-y-[2px] shadow-[2px_2px_0px_#161616] hover:shadow-[4px_4px_0px_#161616] active:translate-x-0 active:translate-y-0 active:shadow-none cursor-pointer"
         >
           <Send className="h-4 w-4" /> Simulate certification attempt
         </button>
 
-        <div className="mt-4 grid grid-cols-3 gap-2 text-center text-[10px] uppercase tracking-widest text-foreground/40">
-          <div className="rounded-md border border-emerald-500/20 bg-emerald-500/5 py-1.5 text-emerald-400">
+        <div className="mt-4 grid grid-cols-3 gap-2 text-center text-[10px] font-bold uppercase tracking-wider">
+          <div className="rounded-md border border-[#0BDB00]/30 bg-[#0BDB00]/10 py-1.5 text-emerald-700">
             Allow
           </div>
-          <div className="rounded-md border border-amber-500/20 bg-amber-500/5 py-1.5 text-amber-400">
-            Escrow (co-sign)
+          <div className="rounded-md border border-[#FF4D00]/30 bg-[#FF4D00]/10 py-1.5 text-[#FF4D00]">
+            Escrow
           </div>
-          <div className="rounded-md border border-rose-500/20 bg-rose-500/5 py-1.5 text-rose-400">
+          <div className="rounded-md border border-[#161616]/30 bg-[#161616]/10 py-1.5 text-foreground">
             Block
           </div>
         </div>
       </div>
 
       {/* action log */}
-      <div className="rounded-xl border border-foreground/10 bg-foreground/[0.02] p-4 flex flex-col h-full min-h-[340px]">
-        <div className="mb-3 flex items-center justify-between font-mono text-[11px] uppercase tracking-widest text-foreground/40">
+      <div className="rounded-xl border border-border bg-card p-4 flex flex-col h-full min-h-[340px] shadow-[2px_2px_0px_var(--border)]">
+        <div className="mb-3 flex items-center justify-between font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
           <span>Signed approval chain</span>
-          <span>tamper-evident · hash-linked</span>
+          <span>tamper-evident · ledger</span>
         </div>
 
         {log.length === 0 && (
-          <div className="flex flex-1 items-center justify-center text-center text-sm text-foreground/40 min-h-[220px]">
-            Every approval, non-approval, and block is a signed, timestamped
-            event. Try a certification.
+          <div className="flex flex-1 items-center justify-center text-center text-xs text-muted-foreground min-h-[220px]">
+            Every approval, non-approval, and block is a signed, timestamped event. Try a certification.
           </div>
         )}
 
@@ -177,16 +177,16 @@ export function SuretyPlayground() {
                     : ShieldX;
               const toneText =
                 a.verdict === "allow"
-                  ? "text-emerald-400"
+                  ? "text-emerald-700"
                   : a.verdict === "escrow"
-                    ? "text-amber-400"
-                    : "text-rose-400";
+                    ? "text-[#FF4D00]"
+                    : "text-rose-600";
               const toneBorder =
                 a.verdict === "allow"
-                  ? "border-emerald-500/30 bg-emerald-500/5"
+                  ? "border-[#0BDB00]/20 bg-[#0BDB00]/5"
                   : a.verdict === "escrow"
-                    ? "border-amber-500/30 bg-amber-500/5"
-                    : "border-rose-500/30 bg-rose-500/5";
+                    ? "border-[#FF4D00]/20 bg-[#FF4D00]/5"
+                    : "border-rose-500/20 bg-rose-500/5";
               return (
                 <motion.li
                   key={a.id}
@@ -208,7 +208,7 @@ export function SuretyPlayground() {
                         {a.verdict}
                       </span>
                     </div>
-                    <div className="mt-1 text-[11px] text-foreground/50 whitespace-normal">
+                    <div className="mt-1 text-[11px] text-muted-foreground whitespace-normal">
                       {a.reason}
                     </div>
                   </div>
