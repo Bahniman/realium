@@ -27,7 +27,7 @@ Digitization alone did not fix this: CPWD's electronic Measurement Book already 
 
 ### The three layers
 
-1. **Evidence** — geo-fenced drone/handset capture, AI quantity assessment against the BOQ, and a dual-key certificate: machine evidence + an accountable engineer's Ed25519 signature, hash-chained into a tamper-evident ledger. Output: a verified e-invoice a bank can price.
+1. **Evidence** — geo-tagged handset site measurements and digital e-MB logs, AI quantity assessment against the BOQ, and a dual-key certificate: machine evidence + an accountable engineer's Ed25519 signature, hash-chained into a tamper-evident ledger. Output: a verified e-invoice a bank can price.
 2. **Authority** — every certifier and approver acts under a signed, scoped, revocable mandate (value caps, category caps, geography fences, auto-revocation on transfer). Every approval — and every non-approval — is a signed, timestamped event. The queue becomes attributable.
 3. **Liquidity** — a bank advances 60% at T+1 against the certified receivable, on a reliability-based curve that steps 50%→85% with clean history. A 40% holdback absorbs deductions first; treasury settles at its own pace; the balance is released minus itemized charges.
 
@@ -45,7 +45,7 @@ AI does what scales: observes sites continuously, estimates quantities determini
 
 - **Working engines:** 47 unit tests including Ed25519 verified against RFC 8032 test vectors — see [groundtruth](https://github.com/Bahniman/groundtruth) (financing waterfall + reliability flywheel, 22 tests) and [surety](https://github.com/Bahniman/surety) (mandate policy engine, 25 tests).
 - **Live interactive demos** on the site: the dual-key certification flow and the certification-mandate playground.
-- **Precedent stack:** UPI, GST e-invoicing, TReDS, CPWD e-MB (~₹20,000 Cr/yr digital), Drone Rules 2021 — everything Realium relies on already exists in India.
+- **Precedent stack:** UPI, GST e-invoicing, TReDS, CPWD e-MB (~₹20,000 Cr/yr digital), Digital Signatures (IT Act 2000) — everything Realium relies on already exists in India.
 - **Roadmap:** prototype done → one PWD division + one bank partner, 6 months, measurement-to-payment 90 → 15 days → multi-state expansion behind a published attestation standard, second vertical (insurance claims) on the same certificate primitive.
 
 ## This repository

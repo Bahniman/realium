@@ -27,7 +27,7 @@ const verticals = [
     blocker:
       "Physical claim inspection. Adjustment cost and fraud both scale with the delay.",
     unlock:
-      "Drone + dual-key attestation on damage extent. Settlement collapses from weeks to hours.",
+      "Geotagged handset media + dual-key attestation on damage extent. Settlement collapses from weeks to hours.",
     metric: { days: "22 → 1", tam: "$8B loss-adjustment spend" },
   },
   {
