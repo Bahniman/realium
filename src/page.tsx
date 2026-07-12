@@ -126,7 +126,7 @@ function Nav() {
         style={{ scaleX: progress }}
         className="absolute top-0 left-0 right-0 h-0.5 origin-left bg-gradient-to-r from-emerald-500 to-indigo-500"
       />
-      <div className="mx-auto mt-4 max-w-7xl px-4">
+      <div className="mx-auto mt-4 max-w-[1440px] px-4 sm:px-8 lg:px-12 xl:px-16">
         <div className="glass flex items-center justify-between rounded-2xl px-4 py-3 sm:px-6">
           <a href="#" className="flex items-center gap-2.5">
             <span className="text-base font-semibold tracking-tight text-foreground">
@@ -189,7 +189,7 @@ function Hero() {
         <div className="grid-bg absolute inset-0 opacity-40 [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_70%)]" />
       </div>
 
-      <div className="mx-auto max-w-7xl px-4">
+      <div className="mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-12 xl:px-16">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-center">
           {/* Left: Text copy */}
           <div className="text-left lg:col-span-7 xl:col-span-6 space-y-6">
@@ -332,7 +332,7 @@ const problemStats = [
 
 function Problem() {
   return (
-    <section id="problem" className="mx-auto max-w-7xl px-4 pt-8 pb-16">
+    <section id="problem" className="mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-12 xl:px-16 pt-8 pb-16">
       <motion.div {...fadeUp} className="mb-12 max-w-3xl">
         <div className="text-xs uppercase tracking-[0.2em] text-rose-400/80">
           The problem
@@ -462,7 +462,7 @@ const layers = [
 
 function Architecture() {
   return (
-    <section id="architecture" className="mx-auto max-w-7xl px-4 py-16">
+    <section id="architecture" className="mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-12 xl:px-16 py-16 sm:py-24 lg:py-32">
       <motion.div {...fadeUp} className="mb-14 max-w-3xl">
         <div className="text-xs uppercase tracking-[0.2em] text-emerald-600">
           The solution · one platform, three layers
@@ -678,7 +678,7 @@ const flowSteps = [
 
 function MoneyFlow() {
   return (
-    <section id="flow" className="mx-auto max-w-7xl px-4 py-16">
+    <section id="flow" className="mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-12 xl:px-16 py-16 sm:py-24 lg:py-32">
       <motion.div {...fadeUp} className="mb-12 max-w-3xl">
         <div className="text-xs uppercase tracking-[0.2em] text-emerald-600">
           How money moves
@@ -762,7 +762,7 @@ function RedTeam() {
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute top-1/2 left-1/2 h-[500px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-rose-500/[0.08] blur-[140px]" />
       </div>
-      <div className="mx-auto max-w-7xl px-4">
+      <div className="mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-12 xl:px-16">
         <motion.div {...fadeUp} className="mb-12 max-w-3xl">
           <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-rose-400">
             <AlertTriangle className="h-3.5 w-3.5" />
@@ -998,7 +998,7 @@ function Value() {
 
 function LiveDemo() {
   return (
-    <section id="try" className="mx-auto max-w-7xl px-4 py-20">
+    <section id="try" className="mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-12 xl:px-16 py-20 sm:py-28 lg:py-36">
       <motion.div {...fadeUp} className="mb-10 max-w-3xl">
         <div className="text-xs uppercase tracking-[0.2em] text-emerald-600">
           Live · the end-to-end flow · try it
@@ -1025,7 +1025,7 @@ function LiveDemo() {
 
 function MandateSection() {
   return (
-    <section id="mandate" className="mx-auto max-w-7xl px-4 py-20">
+    <section id="mandate" className="mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-12 xl:px-16 py-20 sm:py-28 lg:py-36">
       <motion.div {...fadeUp} className="mb-10 max-w-3xl">
         <div className="text-xs uppercase tracking-[0.2em] text-indigo-600">
           Live · Layer 2 · Approver mandate playground
@@ -1074,7 +1074,7 @@ const validation = [
 
 function Validation() {
   return (
-    <section id="validation" className="mx-auto max-w-7xl px-4 py-24">
+    <section id="validation" className="mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-12 xl:px-16 py-24 sm:py-32">
       <motion.div {...fadeUp} className="mb-12 max-w-3xl">
         <div className="text-xs uppercase tracking-[0.2em] text-emerald-600">
           Validation
@@ -1242,7 +1242,7 @@ const sources = [
 
 function Sources() {
   return (
-    <section id="sources" className="mx-auto max-w-7xl px-4 py-20">
+    <section id="sources" className="mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-12 xl:px-16 py-20">
       <motion.div {...fadeUp} className="mb-8 max-w-3xl">
         <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">
           <BookOpen className="h-3.5 w-3.5" /> Sources
