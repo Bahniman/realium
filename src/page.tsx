@@ -262,7 +262,7 @@ function Hero() {
                 href="#redteam"
                 className="btn-press inline-flex items-center justify-center gap-2 rounded-lg border border-border bg-card px-6 py-3 font-semibold text-foreground transition-all hover:-translate-x-[3px] hover:-translate-y-[3px] shadow-[2px_2px_0px_var(--border)] hover:shadow-[5px_5px_0px_var(--border)] active:translate-x-0 active:translate-y-0 active:shadow-none"
               >
-                The uncomfortable question
+                Addressing bottlenecks
               </a>
             </motion.div>
 
@@ -739,20 +739,20 @@ const redteamAnswers = [
   {
     icon: Eye,
     tag: "Attributable",
-    title: "&quot;The file is moving&quot; stops working as an excuse.",
-    body: "Every approval and every non-approval is a signed, timestamped event in a tamper-evident chain. When a bill has sat on a specific officer\u2019s desk for 47 days, the system says so. Sunlight on the queue is the disinfectant.",
+    title: "Every administrative step is fully tracked.",
+    body: "Every approval and every processing action is recorded as a signed, timestamped event in a tamper-evident chain. When a bill remains in a processing queue, the system clearly highlights the bottleneck location, driving operational accountability.",
   },
   {
     icon: Scale,
     tag: "Priced",
-    title: "The payer gets underwritten, not just the contractor.",
-    body: "Realium scores payment behavior per paying division, not just per contractor. Divisions that deliberately delay see their contractors offered worse advance terms — contractors price that into bids — those divisions\u2019 projects cost more. Delay stops being free.",
+    title: "The paying division is underwritten, not just the contractor.",
+    body: "Realium tracks transaction cycle times per paying division. Divisions with historically longer processing cycles are priced accordingly by underwriting systems, encouraging structural efficiency improvements across departments.",
   },
   {
     icon: Users,
     tag: "Beachhead",
-    title: "Launch where the money exists, avoid where it doesn\u2019t.",
-    body: "Start with centrally-funded scheme accounts where funds are allocated but the process is slow. The payer-score keeps the bank out of deliberately-slow queues on its own. That is underwriting discipline, not a limitation we hide.",
+    title: "Target pre-allocated budgets first.",
+    body: "Start with scheme accounts where funds are pre-allocated but administrative routing remains slow. Underwriting models focus capital on these secure queues first, ensuring deployment safety and reliability.",
   },
 ];
 
@@ -766,25 +766,20 @@ function RedTeam() {
         <motion.div {...fadeUp} className="mb-12 max-w-3xl">
           <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-rose-400">
             <AlertTriangle className="h-3.5 w-3.5" />
-            Red team · we&apos;ll ask it before you do
+            Red team · systemic challenges
           </div>
           <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-5xl">
-            The uncomfortable question:
+            The systemic challenge:
             <br />
             <span className="text-rose-400/90">
-              what if the delay is deliberate?
+              what if the bottlenecks are structural?
             </span>
           </h2>
           <p className="mt-5 max-w-3xl text-foreground/80">
-            In India, payments are sometimes deliberately delayed. Works
-            sanctioned beyond the budget so treasuries ration cash by queuing
-            bills. Fiscal-year-end games. A discretionary queue that invites
-            rent-seeking. Political deprioritisation of certain contractors or
-            regions. If we don&apos;t say this out loud, the judges will.
+            Infrastructure budgets can face complex administrative routing, leading to structural delays and cash-rationing bottlenecks in treasury queues. Standardizing verification alone does not clear these queues. Realium addresses this by introducing operational transparency and underwriting discipline.
           </p>
           <p className="mt-3 max-w-3xl text-muted-foreground">
-            Realium doesn&apos;t pretend to abolish this. It attacks it in
-            three ways.
+            Realium is designed to tackle these systemic bottlenecks in three ways.
           </p>
         </motion.div>
 

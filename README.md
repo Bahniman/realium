@@ -33,9 +33,9 @@ Digitization alone did not fix this: CPWD's electronic Measurement Book already 
 
 **Worked example** (₹18,63,900 invoice, treasury settles day 148): contractor receives ₹11,18,340 the next morning and nets **97%** of the invoice after all charges, vs ~91% today after months of informal bridge finance. Days to first cash: **1 vs 148**.
 
-### The uncomfortable question — what if the delay is deliberate?
+### Managing systemic bottlenecks and structural delays
 
-Sometimes it is. Realium attacks it three ways: **attributable** (a bill sitting on a specific officer's desk for 47 days is visible and provable), **priced** (paying divisions get underwritten too — habitual delayers see their contractors offered worse terms, so their projects cost more), and **beachhead** (launch where funds exist but process is slow; the payer-score keeps banks out of deliberately slow queues). Where non-payment is a funded political choice, no fintech fixes it — Realium detects and prices out those payers.
+Infrastructure projects can face complex administrative routing and cash-rationing bottlenecks in treasury queues. Realium addresses this structurally in three ways: **attributable** (processing steps and delays are logged with clear workflow accountability), **priced** (paying divisions are underwritten based on historical cycle times, encouraging structural department efficiency), and **pre-allocated budget targeting** (capital deployment focuses on accounts with secure, centrally-funded budgets).
 
 ### Human-AI synergy (the conclave theme, as architecture)
 
