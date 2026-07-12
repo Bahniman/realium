@@ -388,16 +388,28 @@ function Problem() {
                 ~₹20,000 Cr/yr paid on it. Money is still slow.
               </div>
             </div>
-            <div className="text-foreground/90">
+            <div className="text-foreground/90 space-y-4">
               <p>
                 A digital record is not a financial instrument. An e-MB entry sits
                 in a state IT system that no bank underwrites and no queue makes
-                attributable. The bottleneck was never the paper — it was that
-                (a) the record isn&apos;t bank-grade, and (b) when the file stalls,
-                no one can point to whose desk it&apos;s sitting on.
+                attributable. The bottleneck was never the paper — it was that:
               </p>
-              <p className="mt-3 text-sm text-muted-foreground">
-                Realium closes both. Verified evidence becomes a signed
+              <ul className="mt-3 space-y-3">
+                <li className="flex items-start gap-2.5 text-sm">
+                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-[2px] bg-[#FF4D00]" />
+                  <span>
+                    <strong className="text-foreground">The record isn&apos;t bank-grade:</strong> Financial systems cannot underwrite or lend against raw, unverified data inside state PWD networks.
+                  </span>
+                </li>
+                <li className="flex items-start gap-2.5 text-sm">
+                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-[2px] bg-[#FF4D00]" />
+                  <span>
+                    <strong className="text-foreground">Lack of process attribution:</strong> When processing delays occur, there is no structured system visibility into step-by-step ownership or timelines.
+                  </span>
+                </li>
+              </ul>
+              <p className="mt-4 text-sm text-muted-foreground">
+                Realium closes both bottlenecks. Verified evidence becomes a signed
                 instrument, and every human touch on that instrument is a signed,
                 timestamped event in a tamper-evident chain.
                 <span className="text-muted-foreground/60"> [4]</span>
