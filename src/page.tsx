@@ -1014,15 +1014,19 @@ function LiveDemo() {
     <section id="try" className="mx-auto max-w-7xl px-4 py-20">
       <motion.div {...fadeUp} className="mb-10 max-w-3xl">
         <div className="text-xs uppercase tracking-[0.2em] text-emerald-600 dark:text-emerald-400">
-          Live · Layer 1 · try it
+          Live · the end-to-end flow · try it
         </div>
         <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-5xl">
-          Sign a real work item. Watch the payout unlock.
+          Sign a real work item. Watch the money move.
         </h2>
         <p className="mt-4 max-w-2xl text-muted-foreground">
-          A PWD site engineer certifies an AI-prefilled Measurement Book entry
-          with an Ed25519 key. The certificate becomes a bank-financeable
-          receivable in the same session.
+          This is the exact lifecycle a work item follows in production,
+          compressed into two minutes. The contractor&apos;s team captures the
+          site, AI measures it against the BOQ, a PWD site engineer reviews and
+          signs on their device, the certified invoice is minted, a bank
+          advances 60% the next morning, the approval chain runs visibly, and
+          the treasury settles months later behind the holdback. Every step
+          shows who acts, and when.
         </p>
       </motion.div>
       <motion.div {...fadeUp}>
