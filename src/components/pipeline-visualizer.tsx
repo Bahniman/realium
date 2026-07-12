@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Camera, Cpu, Fingerprint, Banknote, ShieldCheck } from "lucide-react";
+import { Eye, Cpu, Fingerprint, Banknote, ShieldCheck } from "lucide-react";
 
 type Node = {
   id: number;
   label: string;
   subLabel: string;
-  icon: typeof Camera;
+  icon: typeof Eye;
   color: string;
   glowColor: string;
   x: number;
@@ -24,18 +24,18 @@ const nodes: Node[] = [
   {
     id: 0,
     label: "01 Evidence",
-    subLabel: "Drone Site Capture",
-    icon: Camera,
-    color: "text-emerald-400",
-    glowColor: "rgba(16, 185, 129, 0.45)",
+    subLabel: "e-MB Site Entry",
+    icon: Eye,
+    color: "text-[#0BDB00]",
+    glowColor: "rgba(11, 219, 0, 0.45)",
     x: 80,
     y: 80,
     details: {
-      title: "BVLOS Drone site capture",
-      description: "Continuous photogrammetry and handset scans capture construction ground truth. Frames hashed and geo-tagged instantly.",
-      logKey: "TELEMETRY",
-      logVal: "GPS 19.0760° N · 4,812 frames · SHA-256 secure",
-      metric: "T+0 site capture",
+      title: "e-MB Site measurement entry",
+      description: "Site engineers record digital measurement entries and attach geo-tagged photos to log finished public works.",
+      logKey: "e-MB_SYNC",
+      logVal: "GPS 19.0760° N · 12 items logged · 6 photos secure",
+      metric: "T+0 site entry",
     },
   },
   {
@@ -43,8 +43,8 @@ const nodes: Node[] = [
     label: "02 Audit",
     subLabel: "AI Quantity Check",
     icon: Cpu,
-    color: "text-emerald-400",
-    glowColor: "rgba(16, 185, 129, 0.45)",
+    color: "text-[#0BDB00]",
+    glowColor: "rgba(11, 219, 0, 0.45)",
     x: 260,
     y: 80,
     details: {
@@ -60,8 +60,8 @@ const nodes: Node[] = [
     label: "03 Authority",
     subLabel: "Cryptographic Mandate",
     icon: Fingerprint,
-    color: "text-indigo-400",
-    glowColor: "rgba(99, 102, 241, 0.45)",
+    color: "text-[#000DFF]",
+    glowColor: "rgba(0, 13, 255, 0.45)",
     x: 260,
     y: 240,
     details: {
@@ -77,8 +77,8 @@ const nodes: Node[] = [
     label: "04 Liquidity",
     subLabel: "T+1 Payout & Settlement",
     icon: Banknote,
-    color: "text-amber-400",
-    glowColor: "rgba(245, 158, 11, 0.45)",
+    color: "text-[#FF4D00]",
+    glowColor: "rgba(255, 77, 0, 0.45)",
     x: 440,
     y: 240,
     details: {
@@ -106,12 +106,12 @@ export function PipelineVisualizer() {
   const Icon = cur.icon;
 
   return (
-    <div className="relative overflow-hidden rounded-2xl border border-foreground/10 bg-[#040405] p-6 font-sans">
+    <div className="relative overflow-hidden rounded-2xl border border-zinc-800 bg-[#040405] p-6 font-sans">
       {/* Grid pattern background */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
 
       {/* Header bar indicating interactivity */}
-      <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-4 select-none">
+      <div className="flex items-center justify-between border-b border-zinc-800 pb-4 mb-4 select-none">
         <div className="flex items-center gap-2">
           <span className="font-mono text-[10px] text-zinc-400 uppercase tracking-wider">
             Realium ledger map
@@ -181,13 +181,13 @@ export function PipelineVisualizer() {
                 onClick={() => setActiveId(n.id)}
                 onMouseEnter={() => setActiveId(n.id)}
               >
-                {/* Soft constant pulsing outer ring indicating clickability */}
+                {/* Soft pulsed outer ring indicating clickability */}
                 <circle
                   cx={n.x}
                   cy={n.y}
                   r="30"
                   fill="none"
-                  stroke={n.color.includes("emerald") ? "rgba(16, 185, 129, 0.15)" : n.color.includes("indigo") ? "rgba(99, 102, 241, 0.15)" : "rgba(245, 158, 11, 0.15)"}
+                  stroke={n.color.includes("0BDB00") ? "rgba(11, 219, 0, 0.15)" : n.color.includes("000DFF") ? "rgba(0, 13, 255, 0.15)" : "rgba(255, 77, 0, 0.15)"}
                   strokeWidth="1"
                   className="animate-pulse"
                 />
@@ -199,7 +199,7 @@ export function PipelineVisualizer() {
                     cy={n.y}
                     r="32"
                     fill="none"
-                    stroke={n.color.includes("emerald") ? "#10B981" : n.color.includes("indigo") ? "#6366F1" : "#F59E0B"}
+                    stroke={n.color.includes("0BDB00") ? "#0BDB00" : n.color.includes("000DFF") ? "#000DFF" : "#FF4D00"}
                     strokeWidth="1.5"
                     className="animate-ping opacity-25"
                     style={{ animationDuration: "3s" }}
@@ -212,7 +212,7 @@ export function PipelineVisualizer() {
                   cy={n.y}
                   r="24"
                   fill="#0c0c0e"
-                  stroke={isActive ? (n.color.includes("emerald") ? "#10B981" : n.color.includes("indigo") ? "#6366F1" : "#F59E0B") : "rgba(255,255,255,0.15)"}
+                  stroke={isActive ? (n.color.includes("0BDB00") ? "#0BDB00" : n.color.includes("000DFF") ? "#000DFF" : "#FF4D00") : "rgba(255,255,255,0.15)"}
                   strokeWidth={isActive ? "2" : "1.5"}
                   className="transition-all duration-300 group-hover:stroke-white/40"
                 />
@@ -229,7 +229,7 @@ export function PipelineVisualizer() {
                   x={n.x}
                   y={n.y - 36}
                   textAnchor="middle"
-                  className={`font-mono text-[11px] uppercase tracking-wider ${isActive ? "fill-white font-semibold" : "fill-zinc-400"} transition-all duration-300`}
+                  className={`font-mono text-[11px] uppercase tracking-wider ${isActive ? "fill-white font-bold" : "fill-zinc-300"} transition-all duration-300`}
                 >
                   {n.label}
                 </text>
@@ -237,7 +237,7 @@ export function PipelineVisualizer() {
                   x={n.x}
                   y={n.y + 38}
                   textAnchor="middle"
-                  className={`text-[10px] ${isActive ? "fill-zinc-300" : "fill-zinc-500"} transition-all duration-300`}
+                  className={`text-[10px] ${isActive ? "fill-zinc-100 font-semibold" : "fill-zinc-400"} transition-all duration-300`}
                 >
                   {n.subLabel}
                 </text>
@@ -248,12 +248,12 @@ export function PipelineVisualizer() {
       </div>
 
       {/* Detail HUD Display panel */}
-      <div className="mt-4 rounded-xl border border-foreground/10 bg-foreground/[0.02] p-4 relative">
+      <div className="mt-4 rounded-xl border border-zinc-800/80 bg-zinc-950 p-4 relative">
         {/* Tech corners */}
-        <div className="absolute top-2 left-2 w-4 h-1 border-t border-l border-foreground/10" />
-        <div className="absolute top-2 right-2 w-4 h-1 border-t border-r border-foreground/10" />
-        <div className="absolute bottom-2 left-2 w-4 h-1 border-b border-l border-foreground/10" />
-        <div className="absolute bottom-2 right-2 w-4 h-1 border-b border-r border-foreground/10" />
+        <div className="absolute top-2 left-2 w-4 h-1 border-t border-l border-zinc-800" />
+        <div className="absolute top-2 right-2 w-4 h-1 border-t border-r border-zinc-800" />
+        <div className="absolute bottom-2 left-2 w-4 h-1 border-b border-l border-zinc-800" />
+        <div className="absolute bottom-2 right-2 w-4 h-1 border-b border-r border-zinc-800" />
 
         <AnimatePresence mode="wait">
           <motion.div
@@ -264,23 +264,23 @@ export function PipelineVisualizer() {
             transition={{ duration: 0.2 }}
             className="space-y-2.5 font-mono text-sm"
           >
-            <div className="flex items-center justify-between border-b border-foreground/5 pb-2">
-              <span className="flex items-center gap-1.5 font-bold uppercase tracking-wider text-foreground text-xs sm:text-sm">
+            <div className="flex items-center justify-between border-b border-zinc-800 pb-2">
+              <span className="flex items-center gap-1.5 font-bold uppercase tracking-wider text-white text-xs sm:text-sm">
                 <Icon className={`h-4.5 w-4.5 ${cur.color}`} />
                 {cur.details.title}
               </span>
-              <span className={`rounded-full border border-foreground/10 bg-foreground/5 px-2 py-0.5 text-xs ${cur.color}`}>
+              <span className={`rounded-full border border-zinc-800 bg-zinc-900 px-2 py-0.5 text-xs font-semibold ${cur.color}`}>
                 {cur.details.metric}
               </span>
             </div>
             
-            <p className="text-foreground/75 leading-relaxed font-sans text-xs sm:text-sm">
+            <p className="text-zinc-300 leading-relaxed font-sans text-xs sm:text-sm">
               {cur.details.description}
             </p>
 
-            <div className="flex items-center gap-2 rounded border border-foreground/5 bg-black/40 p-2 text-xs">
+            <div className="flex items-center gap-2 rounded border border-zinc-800 bg-black/60 p-2 text-xs">
               <span className={`shrink-0 font-bold ${cur.color}`}>[{cur.details.logKey}]</span>
-              <span className="truncate text-foreground/65">{cur.details.logVal}</span>
+              <span className="truncate text-zinc-300">{cur.details.logVal}</span>
             </div>
           </motion.div>
         </AnimatePresence>
