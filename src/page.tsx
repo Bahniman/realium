@@ -1388,6 +1388,21 @@ function LandingPage() {
   const x2 = useTransform(scrollYProgress, [0, 1], ["10%", "-15%"]);
   const scale2 = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.85, 1.25]);
 
+  // Dynamic Scroll Progress percentage text for widescreen rails
+  const progressPercent = useTransform(scrollYProgress, (v) => `${Math.round(v * 100)}%`);
+
+  // Active section name tracking
+  const sectionIds = ["problem", "architecture", "flow", "redteam", "validation"];
+  const active = useActiveSection(sectionIds);
+  const labelMap: Record<string, string> = {
+    problem: "PROBLEM",
+    architecture: "PLATFORM",
+    flow: "MONEY FLOW",
+    redteam: "THE HARD QUESTION",
+    validation: "VALIDATION",
+  };
+  const activeLabel = active && labelMap[active] ? labelMap[active] : "INTRO";
+
   return (
     <main className="relative min-h-screen bg-transparent text-foreground overflow-hidden">
       {/* Base solid background color */}
@@ -1421,6 +1436,35 @@ function LandingPage() {
           style={{ y: y2, x: x2, scale: scale2 }}
           className="absolute bottom-[-10%] right-[-15%] h-[650px] w-[650px] rounded-full bg-indigo-500/8 blur-[150px]" 
         />
+      </div>
+
+      {/* Structural layout rails on left and right margins to fill the widescreen gaps */}
+      <div className="pointer-events-none fixed inset-y-0 left-1/2 -z-10 h-full w-full max-w-[1440px] -translate-x-1/2 border-x border-border/10 hidden 2xl:block">
+        {/* Left rail vertical details */}
+        <div className="absolute top-48 -left-14 flex flex-col gap-10 font-mono text-[9px] text-muted-foreground/45 tracking-[0.2em] select-none">
+          <div className="flex items-center gap-3 [writing-mode:vertical-lr] rotate-180">
+            <span className="text-foreground/70 font-semibold uppercase">Realium Protocol</span>
+            <span className="h-10 w-px bg-border/20" />
+            <span className="text-[8px] opacity-80">SYS_LOC: LAT 19.0760° N</span>
+          </div>
+          <div className="flex items-center gap-3 [writing-mode:vertical-lr] rotate-180">
+            <span className="uppercase text-emerald-500/80 font-bold">Ledger: SECURE</span>
+            <span className="h-10 w-px bg-border/20" />
+            <span className="text-[8px] opacity-80">MANDATE_V1.02</span>
+          </div>
+        </div>
+
+        {/* Right rail vertical details */}
+        <div className="absolute top-48 -right-14 flex flex-col items-center gap-10 font-mono text-[9px] text-muted-foreground/45 tracking-[0.2em] select-none">
+          <div className="flex items-center gap-3 [writing-mode:vertical-lr]">
+            <span className="text-foreground/70 font-semibold uppercase">Scroll Progress</span>
+            <span className="h-10 w-px bg-border/20" />
+            <motion.span className="tabular-nums text-indigo-500 font-bold">{progressPercent}</motion.span>
+          </div>
+          <div className="flex items-center gap-3 [writing-mode:vertical-lr]">
+            <span className="text-[8px] uppercase">Active: {activeLabel}</span>
+          </div>
+        </div>
       </div>
 
       <Nav />
