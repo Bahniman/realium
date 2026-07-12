@@ -2,8 +2,7 @@
 @source "../src";
 @import "tw-animate-css";
 @import "@fontsource-variable/inter";
-
-
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --font-sans: "Plus Jakarta Sans", "Inter Variable", ui-sans-serif, system-ui, sans-serif;
@@ -72,6 +71,39 @@
   --wl-blue: #000DFF;
   --wl-green: #0BDB00;
 }
+
+.dark {
+  --background: #0A0A0A;
+  --foreground: #EDEDED;
+  --card: #161616;
+  --card-foreground: #EDEDED;
+  --popover: #161616;
+  --popover-foreground: #EDEDED;
+  --primary: #5566FF;
+  --primary-foreground: #FFFFFF;
+  --secondary: #222222;
+  --secondary-foreground: #EDEDED;
+  --muted: #222222;
+  --muted-foreground: #888888;
+  --accent: #FF4D00;
+  --accent-foreground: #FFFFFF;
+  --destructive: #ef4444;
+  --destructive-foreground: #FFFFFF;
+  --border: #2D2D2D;
+  --input: #2D2D2D;
+  --ring: #5566FF;
+
+  /* Custom scene tokens */
+  --scene-bg: #0A0A0A;
+  --scene-bg-gradient: #121212;
+  --glass-bg: rgba(22, 22, 22, 0.80);
+  --glass-border: #2D2D2D;
+  --grid-line: rgba(255, 255, 255, 0.04);
+  --grid-dot: rgba(255, 255, 255, 0.08);
+  --blob-emerald: rgba(11, 219, 0, 0.08);
+  --blob-indigo: rgba(85, 102, 255, 0.08);
+}
+
 
 html {
   scroll-behavior: smooth;

@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import { DualKeyDemo } from "@/components/dual-key-demo";
 import { SuretyPlayground } from "@/components/surety-playground";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { LiquidityCalculator } from "@/components/liquidity-calculator";
 import { GlowCard } from "@/components/glow-card";
 import { PipelineVisualizer } from "@/components/pipeline-visualizer";
@@ -162,6 +163,7 @@ function Nav() {
             })}
           </nav>
           <div className="flex items-center gap-2">
+            <ThemeToggle />
             <a
               href="#try"
               className="btn-press rounded-lg bg-[#000DFF] px-4 py-2 text-sm font-semibold text-white border border-[#000DFF] transition-all hover:-translate-x-[2px] hover:-translate-y-[2px] shadow-[2px_2px_0px_#161616] hover:shadow-[4px_4px_0px_#161616]"
@@ -373,32 +375,34 @@ function Problem() {
         {...fadeUp}
         className="mt-10"
       >
-        <GlowCard className="grid grid-cols-1 gap-6 border-amber-500/20 bg-amber-500/[0.04] p-8 lg:grid-cols-[1fr_1.3fr] rounded-2xl" showTechBrackets={false}>
-          <div>
-            <div className="text-xs uppercase tracking-widest text-amber-700">
-              Why &quot;just digitise it&quot; failed
+        <GlowCard className="border-amber-500/20 bg-amber-500/[0.04] p-8 rounded-2xl" showTechBrackets={false}>
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_1.3fr]">
+            <div>
+              <div className="text-xs uppercase tracking-widest text-amber-700">
+                Why &quot;just digitise it&quot; failed
+              </div>
+              <h3 className="mt-2 text-2xl font-semibold tracking-tight text-foreground">
+                CPWD&apos;s e-Measurement Book already exists.
+              </h3>
+              <div className="mt-3 font-mono text-sm text-amber-800">
+                ~₹20,000 Cr/yr paid on it. Money is still slow.
+              </div>
             </div>
-            <h3 className="mt-2 text-2xl font-semibold tracking-tight text-foreground">
-              CPWD&apos;s e-Measurement Book already exists.
-            </h3>
-            <div className="mt-3 font-mono text-sm text-amber-800">
-              ~₹20,000 Cr/yr paid on it. Money is still slow.
+            <div className="text-foreground/90">
+              <p>
+                A digital record is not a financial instrument. An e-MB entry sits
+                in a state IT system that no bank underwrites and no queue makes
+                attributable. The bottleneck was never the paper — it was that
+                (a) the record isn&apos;t bank-grade, and (b) when the file stalls,
+                no one can point to whose desk it&apos;s sitting on.
+              </p>
+              <p className="mt-3 text-sm text-muted-foreground">
+                Realium closes both. Verified evidence becomes a signed
+                instrument, and every human touch on that instrument is a signed,
+                timestamped event in a tamper-evident chain.
+                <span className="text-muted-foreground/60"> [4]</span>
+              </p>
             </div>
-          </div>
-          <div className="text-foreground/90">
-            <p>
-              A digital record is not a financial instrument. An e-MB entry sits
-              in a state IT system that no bank underwrites and no queue makes
-              attributable. The bottleneck was never the paper — it was that
-              (a) the record isn&apos;t bank-grade, and (b) when the file stalls,
-              no one can point to whose desk it&apos;s sitting on.
-            </p>
-            <p className="mt-3 text-sm text-muted-foreground">
-              Realium closes both. Verified evidence becomes a signed
-              instrument, and every human touch on that instrument is a signed,
-              timestamped event in a tamper-evident chain.
-              <span className="text-muted-foreground/60"> [4]</span>
-            </p>
           </div>
         </GlowCard>
       </motion.div>
@@ -1214,7 +1218,7 @@ const sources = [
   {
     n: 1,
     label: "Maharashtra ₹96,000 Cr contractor dues (2025 strike coverage)",
-    href: "https://www.constructionworld.in/policy-updates-and-economic-news/maharashtra-contractors-threaten-strike/51383",
+    href: "https://www.hindustantimes.com/cities/mumbai-news/contractors-flag-96k-cr-dues-give-state-govt-apr-7-deadline-101775243698708.html",
   },
   {
     n: 2,
