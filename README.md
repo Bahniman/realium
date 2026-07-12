@@ -4,7 +4,7 @@
 
 🏆 **Top 3 — ReEnvision 5.0**, XLRI's Digital Transformation Conclave (Human-AI Synergy), July 2026. Presented to the conclave's panel of senior technology leaders.
 
-**Live site:** https://bahniman.github.io/realium/ · (mirror: https://realium-core.lovable.app)
+**Live site:** https://bahniman.github.io/realium/
 
 ---
 
