@@ -113,10 +113,10 @@ const steps: Step[] = [
 ];
 
 const toneChip: Record<Step["actorTone"], string> = {
-  emerald: "border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400",
-  indigo: "border-indigo-500/30 bg-indigo-500/10 text-indigo-600 dark:text-indigo-400",
-  sky: "border-sky-500/30 bg-sky-500/10 text-sky-600 dark:text-sky-400",
-  amber: "border-amber-500/30 bg-amber-500/10 text-amber-600 dark:text-amber-400",
+  emerald: "border-emerald-500/30 bg-emerald-500/10 text-emerald-600",
+  indigo: "border-indigo-500/30 bg-indigo-500/10 text-indigo-600",
+  sky: "border-sky-500/30 bg-sky-500/10 text-sky-600",
+  amber: "border-amber-500/30 bg-amber-500/10 text-amber-600",
 };
 
 export function DualKeyDemo() {
@@ -511,7 +511,7 @@ export function DualKeyDemo() {
                       highlight ? "rounded-md border border-emerald-500/25 bg-emerald-500/[0.06] px-2 pt-1" : ""
                     }`}
                   >
-                    <span className={highlight ? "text-emerald-600 dark:text-emerald-300/90" : "text-foreground/40"}>
+                    <span className={highlight ? "text-emerald-600" : "text-foreground/40"}>
                       {k}
                     </span>
                     <span
@@ -519,9 +519,9 @@ export function DualKeyDemo() {
                         !lit
                           ? "text-foreground/40"
                           : highlight
-                            ? "font-semibold text-emerald-500 dark:text-emerald-400"
+                            ? "font-semibold text-emerald-500"
                             : gate >= 5
-                              ? "text-sky-600 dark:text-sky-300"
+                              ? "text-sky-600"
                               : "text-foreground/85"
                       }
                     >
@@ -537,7 +537,7 @@ export function DualKeyDemo() {
                 <motion.div
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="mt-4 rounded-lg border border-emerald-500/30 bg-emerald-500/10 p-3 text-xs text-emerald-700 dark:text-emerald-300"
+                  className="mt-4 rounded-lg border border-emerald-500/30 bg-emerald-500/10 p-3 text-xs text-emerald-700"
                 >
                   Full lifecycle complete: work measured on Day 0, contractor liquid on
                   Day 1, treasury settled on its own clock behind the holdback. Days to

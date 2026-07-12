@@ -19,7 +19,6 @@ import {
 } from "lucide-react";
 import { DualKeyDemo } from "@/components/dual-key-demo";
 import { SuretyPlayground } from "@/components/surety-playground";
-import { ThemeToggle } from "@/components/theme-toggle";
 import { LiquidityCalculator } from "@/components/liquidity-calculator";
 import { GlowCard } from "@/components/glow-card";
 import { PipelineVisualizer } from "@/components/pipeline-visualizer";
@@ -163,10 +162,9 @@ function Nav() {
             })}
           </nav>
           <div className="flex items-center gap-2">
-            <ThemeToggle />
             <a
               href="#try"
-              className="btn-press rounded-lg border border-foreground/10 bg-foreground/5 px-4 py-2 text-sm font-medium text-foreground transition-all hover:border-emerald-400/50 hover:bg-emerald-500/10 hover:shadow-[0_0_20px_rgb(16,185,129,0.35)]"
+              className="btn-press rounded-lg bg-[#000DFF] px-4 py-2 text-sm font-semibold text-white border border-[#000DFF] transition-all hover:-translate-x-[2px] hover:-translate-y-[2px] shadow-[2px_2px_0px_#161616] hover:shadow-[4px_4px_0px_#161616]"
             >
               Try the demo
             </a>
@@ -377,13 +375,13 @@ function Problem() {
       >
         <GlowCard className="grid grid-cols-1 gap-6 border-amber-500/20 bg-amber-500/[0.04] p-8 lg:grid-cols-[1fr_1.3fr] rounded-2xl" showTechBrackets={false}>
           <div>
-            <div className="text-xs uppercase tracking-widest text-amber-700 dark:text-amber-400">
+            <div className="text-xs uppercase tracking-widest text-amber-700">
               Why &quot;just digitise it&quot; failed
             </div>
             <h3 className="mt-2 text-2xl font-semibold tracking-tight text-foreground">
               CPWD&apos;s e-Measurement Book already exists.
             </h3>
-            <div className="mt-3 font-mono text-sm text-amber-800 dark:text-amber-300">
+            <div className="mt-3 font-mono text-sm text-amber-800">
               ~₹20,000 Cr/yr paid on it. Money is still slow.
             </div>
           </div>
@@ -462,7 +460,7 @@ function Architecture() {
   return (
     <section id="architecture" className="mx-auto max-w-7xl px-4 py-16">
       <motion.div {...fadeUp} className="mb-14 max-w-3xl">
-        <div className="text-xs uppercase tracking-[0.2em] text-emerald-600 dark:text-emerald-400">
+        <div className="text-xs uppercase tracking-[0.2em] text-emerald-600">
           The solution · one platform, three layers
         </div>
         <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-5xl">
@@ -534,10 +532,10 @@ function Architecture() {
           const Icon = l.icon;
           const accent =
             l.color === "emerald"
-              ? "text-emerald-600 dark:text-emerald-400 border-emerald-500/30 bg-emerald-500/10"
+              ? "text-emerald-600 border-emerald-500/30 bg-emerald-500/10"
               : l.color === "indigo"
-                ? "text-indigo-600 dark:text-indigo-400 border-indigo-500/30 bg-indigo-500/10"
-                : "text-amber-600 dark:text-amber-400 border-amber-500/30 bg-amber-500/10";
+                ? "text-indigo-600 border-indigo-500/30 bg-indigo-500/10"
+                : "text-amber-600 border-amber-500/30 bg-amber-500/10";
           return (
             <Fragment key={l.key}>
               <motion.div
@@ -564,10 +562,10 @@ function Architecture() {
                   <div
                     className={`mt-5 text-[11px] uppercase tracking-widest font-semibold ${
                       l.color === "emerald"
-                        ? "text-emerald-600 dark:text-emerald-400"
+                        ? "text-emerald-600"
                         : l.color === "indigo"
-                          ? "text-indigo-600 dark:text-indigo-400"
-                          : "text-amber-600 dark:text-amber-400"
+                          ? "text-indigo-600"
+                          : "text-amber-600"
                     }`}
                   >
                     {l.tag}
@@ -688,7 +686,7 @@ function MoneyFlow() {
   return (
     <section id="flow" className="mx-auto max-w-7xl px-4 py-16">
       <motion.div {...fadeUp} className="mb-12 max-w-3xl">
-        <div className="text-xs uppercase tracking-[0.2em] text-emerald-600 dark:text-emerald-400">
+        <div className="text-xs uppercase tracking-[0.2em] text-emerald-600">
           How money moves
         </div>
         <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-5xl">
@@ -857,10 +855,10 @@ function Synergy() {
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         <motion.div {...fadeUp} className="h-full">
           <GlowCard className="h-full border-emerald-500/20 bg-emerald-500/[0.02]" showTechBrackets={true}>
-            <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
+            <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-emerald-500/30 bg-emerald-500/10 text-emerald-600">
               <Cpu className="h-5 w-5" />
             </div>
-            <div className="text-[11px] uppercase tracking-widest font-semibold text-emerald-600 dark:text-emerald-400">
+            <div className="text-[11px] uppercase tracking-widest font-semibold text-emerald-600">
               AI does what scales
             </div>
             <ul className="mt-3 space-y-2 text-foreground/85">
@@ -872,10 +870,10 @@ function Synergy() {
         </motion.div>
         <motion.div {...fadeUp} className="h-full">
           <GlowCard className="h-full border-indigo-500/20 bg-indigo-500/[0.02]" showTechBrackets={true}>
-            <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-indigo-500/30 bg-indigo-500/10 text-indigo-600 dark:text-indigo-400">
+            <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-indigo-500/30 bg-indigo-500/10 text-indigo-600">
               <Fingerprint className="h-5 w-5" />
             </div>
-            <div className="text-[11px] uppercase tracking-widest font-semibold text-indigo-600 dark:text-indigo-400">
+            <div className="text-[11px] uppercase tracking-widest font-semibold text-indigo-600">
               Humans do what carries legal weight
             </div>
             <ul className="mt-3 space-y-2 text-foreground/85">
@@ -921,7 +919,7 @@ function Value() {
   return (
     <section className="mx-auto max-w-7xl px-4 py-16">
       <motion.div {...fadeUp} className="mb-12 max-w-3xl">
-        <div className="text-xs uppercase tracking-[0.2em] text-emerald-600 dark:text-emerald-400">
+        <div className="text-xs uppercase tracking-[0.2em] text-emerald-600">
           Value
         </div>
         <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-5xl">
@@ -945,10 +943,10 @@ function Value() {
               <div
                 className={`text-[11px] uppercase tracking-widest font-semibold ${
                   v.color === "emerald"
-                    ? "text-emerald-600 dark:text-emerald-400"
+                    ? "text-emerald-600"
                     : v.color === "indigo"
-                      ? "text-indigo-600 dark:text-indigo-400"
-                      : "text-amber-600 dark:text-amber-400"
+                      ? "text-indigo-600"
+                      : "text-amber-600"
                 }`}
               >
                 {v.who}
@@ -986,11 +984,11 @@ function Value() {
       >
         <GlowCard showTechBrackets={false} className="border-emerald-500/20 bg-emerald-500/[0.03] p-7 sm:p-8">
           <div className="flex items-start gap-4">
-            <div className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
+            <div className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-emerald-500/30 bg-emerald-500/10 text-emerald-600">
               <BadgeCheck className="h-5 w-5" />
             </div>
             <div>
-              <div className="text-xs uppercase tracking-widest font-semibold text-emerald-600 dark:text-emerald-400">
+              <div className="text-xs uppercase tracking-widest font-semibold text-emerald-600">
                 The flywheel
               </div>
               <p className="mt-2 max-w-3xl text-foreground/90">
@@ -1013,7 +1011,7 @@ function LiveDemo() {
   return (
     <section id="try" className="mx-auto max-w-7xl px-4 py-20">
       <motion.div {...fadeUp} className="mb-10 max-w-3xl">
-        <div className="text-xs uppercase tracking-[0.2em] text-emerald-600 dark:text-emerald-400">
+        <div className="text-xs uppercase tracking-[0.2em] text-emerald-600">
           Live · the end-to-end flow · try it
         </div>
         <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-5xl">
@@ -1040,7 +1038,7 @@ function MandateSection() {
   return (
     <section id="mandate" className="mx-auto max-w-7xl px-4 py-20">
       <motion.div {...fadeUp} className="mb-10 max-w-3xl">
-        <div className="text-xs uppercase tracking-[0.2em] text-indigo-600 dark:text-indigo-400">
+        <div className="text-xs uppercase tracking-[0.2em] text-indigo-600">
           Live · Layer 2 · Approver mandate playground
         </div>
         <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-5xl">
@@ -1089,7 +1087,7 @@ function Validation() {
   return (
     <section id="validation" className="mx-auto max-w-7xl px-4 py-24">
       <motion.div {...fadeUp} className="mb-12 max-w-3xl">
-        <div className="text-xs uppercase tracking-[0.2em] text-emerald-600 dark:text-emerald-400">
+        <div className="text-xs uppercase tracking-[0.2em] text-emerald-600">
           Validation
         </div>
         <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-5xl">
@@ -1105,7 +1103,7 @@ function Validation() {
             className="h-full"
           >
             <GlowCard className="h-full border-foreground/10" showTechBrackets={true}>
-              <div className="text-[11px] uppercase tracking-widest font-semibold text-emerald-600 dark:text-emerald-400">
+              <div className="text-[11px] uppercase tracking-widest font-semibold text-emerald-600">
                 {v.tag}
               </div>
               <div className="mt-2 text-lg font-semibold text-foreground">
@@ -1184,10 +1182,10 @@ function Roadmap() {
                 <div
                   className={`rounded-full border px-2 py-0.5 font-mono text-[10px] ${
                     p.color === "emerald"
-                      ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
+                      ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-600"
                       : p.color === "indigo"
-                        ? "border-indigo-500/30 bg-indigo-500/10 text-indigo-600 dark:text-indigo-400"
-                        : "border-amber-500/30 bg-amber-500/10 text-amber-600 dark:text-amber-400"
+                        ? "border-indigo-500/30 bg-indigo-500/10 text-indigo-600"
+                        : "border-amber-500/30 bg-amber-500/10 text-amber-600"
                   }`}
                 >
                   {p.when}
@@ -1202,10 +1200,10 @@ function Roadmap() {
                     <Clock
                       className={`mt-0.5 h-3.5 w-3.5 shrink-0 ${
                         p.color === "emerald"
-                          ? "text-emerald-600 dark:text-emerald-400"
+                          ? "text-emerald-600"
                           : p.color === "indigo"
-                            ? "text-indigo-600 dark:text-indigo-400"
-                            : "text-amber-600 dark:text-amber-400"
+                            ? "text-indigo-600"
+                            : "text-amber-600"
                       }`}
                     />
                     <span className="leading-relaxed">{item}</span>
@@ -1226,7 +1224,7 @@ const sources = [
   {
     n: 1,
     label: "Maharashtra ₹96,000 Cr contractor dues (2025 strike coverage)",
-    href: "https://whalesbook.com/news/maharashtra-contractors-strike",
+    href: "https://www.constructionworld.in/policy-updates-and-economic-news/maharashtra-contractors-threaten-strike/51383",
   },
   {
     n: 2,
@@ -1274,7 +1272,7 @@ function Sources() {
               href={n.href}
               target="_blank"
               rel="noreferrer"
-              className="hover:text-emerald-600 dark:hover:text-emerald-400 hover:underline"
+              className="hover:text-emerald-600 hover:underline"
             >
               {n.label}
             </a>
@@ -1412,23 +1410,15 @@ function LandingPage() {
           style={{ y: bgY, scale: bgScale, rotate: bgRotate }}
           className="absolute inset-0 h-[120%] w-[120%] -left-[10%] -top-[10%]"
         >
-          {/* Light Mode: Inverted watermark map (renders as soft dark lines) */}
           <div
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-[0.10] invert dark:hidden"
-            style={{
-              backgroundImage: `url('${import.meta.env.BASE_URL}bg-network.jpg')`,
-            }}
-          />
-          {/* Dark Mode: Standard watermark map (renders as soft glowing lines) */}
-          <div
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-[0.10] hidden dark:block"
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-[0.06]"
             style={{
               backgroundImage: `url('${import.meta.env.BASE_URL}bg-network.jpg')`,
             }}
           />
           {/* Ambient Glows */}
-          <div className="absolute -top-[10%] -left-[5%] h-[700px] w-[700px] rounded-full bg-emerald-500/5 dark:bg-emerald-500/[0.04] blur-[120px]" />
-          <div className="absolute -bottom-[10%] -right-[5%] h-[600px] w-[600px] rounded-full bg-indigo-500/5 dark:bg-indigo-500/[0.04] blur-[120px]" />
+          <div className="absolute -top-[10%] -left-[5%] h-[700px] w-[700px] rounded-full bg-emerald-500/5 blur-[120px]" />
+          <div className="absolute -bottom-[10%] -right-[5%] h-[600px] w-[600px] rounded-full bg-indigo-500/5 blur-[120px]" />
         </motion.div>
       </div>
 
@@ -1436,11 +1426,11 @@ function LandingPage() {
       <div className="pointer-events-none fixed inset-0 -z-30 overflow-hidden select-none">
         <motion.div 
           style={{ y: y1, x: x1, scale: scale1 }}
-          className="absolute -top-20 left-[-15%] h-[650px] w-[650px] rounded-full bg-emerald-500/8 dark:bg-emerald-500/[0.04] blur-[150px]" 
+          className="absolute -top-20 left-[-15%] h-[650px] w-[650px] rounded-full bg-emerald-500/8 blur-[150px]" 
         />
         <motion.div 
           style={{ y: y2, x: x2, scale: scale2 }}
-          className="absolute bottom-[-10%] right-[-15%] h-[650px] w-[650px] rounded-full bg-indigo-500/8 dark:bg-indigo-500/[0.04] blur-[150px]" 
+          className="absolute bottom-[-10%] right-[-15%] h-[650px] w-[650px] rounded-full bg-indigo-500/8 blur-[150px]" 
         />
       </div>
 

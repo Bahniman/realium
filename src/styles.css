@@ -3,7 +3,7 @@
 @import "tw-animate-css";
 @import "@fontsource-variable/inter";
 
-@custom-variant dark (&:is(.dark *));
+
 
 @theme inline {
   --font-sans: "Plus Jakarta Sans", "Inter Variable", ui-sans-serif, system-ui, sans-serif;
@@ -33,69 +33,44 @@
   --color-ring: var(--ring);
 }
 
-/* Light theme (default) */
+/* Work Louder light theme */
 :root {
   --radius: 0.625rem;
-  --background: #fafaf9;
-  --foreground: #0a0a0a;
-  --card: #ffffff;
-  --card-foreground: #0a0a0a;
-  --popover: #ffffff;
-  --popover-foreground: #0a0a0a;
-  --primary: #10B981;
-  --primary-foreground: #0a0a0a;
-  --secondary: #f4f4f5;
-  --secondary-foreground: #0a0a0a;
-  --muted: #f4f4f5;
-  --muted-foreground: #52525b;
-  --accent: #6366F1;
-  --accent-foreground: #ffffff;
+  --background: #FFFFFF;
+  --foreground: #161616;
+  --card: #FFFFFF;
+  --card-foreground: #161616;
+  --popover: #FFFFFF;
+  --popover-foreground: #161616;
+  --primary: #000DFF;
+  --primary-foreground: #FFFFFF;
+  --secondary: #f5f5f5;
+  --secondary-foreground: #161616;
+  --muted: #f5f5f5;
+  --muted-foreground: #707070;
+  --accent: #FF4D00;
+  --accent-foreground: #FFFFFF;
   --destructive: #dc2626;
-  --destructive-foreground: #ffffff;
-  --border: rgba(10, 10, 10, 0.10);
-  --input: rgba(10, 10, 10, 0.15);
-  --ring: #10B981;
+  --destructive-foreground: #FFFFFF;
+  --border: #d4d4d4;
+  --input: #d4d4d4;
+  --ring: #000DFF;
 
   /* Custom scene tokens */
-  --scene-bg: #fafaf9;
-  --scene-bg-gradient: #eaebee;
-  --glass-bg: rgba(255, 255, 255, 0.60);
-  --glass-border: rgba(10, 10, 10, 0.08);
-  --grid-line: rgba(10, 10, 10, 0.12);
-  --grid-dot: rgba(10, 10, 10, 0.22);
-  --blob-emerald: rgba(16, 185, 129, 0.18);
-  --blob-indigo: rgba(99, 102, 241, 0.18);
-}
+  --scene-bg: #FFFFFF;
+  --scene-bg-gradient: #f5f5f5;
+  --glass-bg: rgba(255, 255, 255, 0.80);
+  --glass-border: #d4d4d4;
+  --grid-line: rgba(0, 0, 0, 0.06);
+  --grid-dot: rgba(0, 0, 0, 0.10);
+  --blob-emerald: rgba(11, 219, 0, 0.12);
+  --blob-indigo: rgba(0, 13, 255, 0.10);
 
-.dark {
-  --background: #050505;
-  --foreground: #ffffff;
-  --card: #0f0f10;
-  --card-foreground: #ffffff;
-  --popover: #0f0f10;
-  --popover-foreground: #ffffff;
-  --primary: #10B981;
-  --primary-foreground: #050505;
-  --secondary: #1a1a1c;
-  --secondary-foreground: #ffffff;
-  --muted: #1a1a1c;
-  --muted-foreground: #9CA3AF;
-  --accent: #6366F1;
-  --accent-foreground: #ffffff;
-  --destructive: #ef4444;
-  --destructive-foreground: #ffffff;
-  --border: rgba(255, 255, 255, 0.10);
-  --input: rgba(255, 255, 255, 0.15);
-  --ring: #10B981;
-
-  --scene-bg: #050505;
-  --scene-bg-gradient: #020204;
-  --glass-bg: rgba(255, 255, 255, 0.05);
-  --glass-border: rgba(255, 255, 255, 0.10);
-  --grid-line: rgba(255, 255, 255, 0.12);
-  --grid-dot: rgba(255, 255, 255, 0.22);
-  --blob-emerald: rgba(16, 185, 129, 0.20);
-  --blob-indigo: rgba(99, 102, 241, 0.25);
+  /* Work Louder accent colors */
+  --wl-yellow: #EDFF00;
+  --wl-orange: #FF4D00;
+  --wl-blue: #000DFF;
+  --wl-green: #0BDB00;
 }
 
 html {
@@ -155,13 +130,7 @@ body {
 }
 .btn-press:active { transform: scale(0.97); }
 
-/* Better native scrollbar (dark-only tweak) */
-.dark ::-webkit-scrollbar { width: 10px; height: 10px; }
-.dark ::-webkit-scrollbar-thumb {
-  background: rgba(255,255,255,0.08);
-  border-radius: 8px;
-}
-.dark ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.15); }
+
 
 
 /* Ambient Slow Blob Animations */
