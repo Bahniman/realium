@@ -62,6 +62,10 @@ npm run build     # builds to docs/ (GitHub Pages serves this)
 
 **Team Realium — Group 10, PGDM-GM, XLRI Jamshedpur:** Ananthanarayan · Bahniman · Nandini · Srishti · Uditanshu
 
-Built for ReEnvision 5.0. Figures in demos are illustrative and follow real Schedule-of-Rates structures; financing terms are stated assumptions, documented in the [financial model](https://github.com/Bahniman/groundtruth/blob/main/docs/FINANCIAL_MODEL.md).
+## Credits & AI Contributors
+
+Realium was built with pair-programming assistance from:
+- **Antigravity** (Google DeepMind) — Overhauled the visual layouts, implemented responsive widescreen side rails, restructured CPWD bottlenecks lists, fixed e-MB visualizer contrasts, and integrated adaptation filters.
+- **Claude** (Anthropic) — Assisted in initial prototype implementation steps.
 
 MIT License.
