@@ -1448,12 +1448,14 @@ function LandingPage() {
       <div className="pointer-events-none fixed inset-0 -z-30 overflow-hidden select-none">
         <motion.div 
           style={{ y: y1, x: x1, scale: scale1 }}
-          className="absolute -top-20 left-[-15%] h-[650px] w-[650px] rounded-full bg-emerald-500/8 blur-[150px]" 
+          className="absolute -top-20 left-[-15%] h-[800px] w-[800px] rounded-full bg-emerald-500/18 dark:bg-emerald-500/12 blur-[140px] opacity-90" 
         />
         <motion.div 
           style={{ y: y2, x: x2, scale: scale2 }}
-          className="absolute bottom-[-10%] right-[-15%] h-[650px] w-[650px] rounded-full bg-indigo-500/8 blur-[150px]" 
+          className="absolute bottom-[-10%] right-[-15%] h-[800px] w-[800px] rounded-full bg-indigo-600/18 dark:bg-indigo-600/12 blur-[140px] opacity-90" 
         />
+        <div className="animate-blob-1 absolute top-[25%] left-[30%] h-[600px] w-[600px] rounded-full bg-rose-500/16 dark:bg-rose-500/12 blur-[130px] opacity-90" />
+        <div className="animate-blob-2 absolute bottom-[25%] left-[-10%] h-[500px] w-[500px] rounded-full bg-amber-500/16 dark:bg-amber-500/10 blur-[130px] opacity-90" />
       </div>
 
       {/* Structural layout rails on left and right margins to fill the widescreen gaps */}
