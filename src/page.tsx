@@ -163,6 +163,12 @@ function Nav() {
             })}
           </nav>
           <div className="flex items-center gap-2">
+            <a
+              href="https://bahniman.github.io"
+              className="text-xs sm:text-sm font-medium text-foreground/75 hover:text-foreground transition-colors mr-2"
+            >
+              ← Back to Portal
+            </a>
             <ThemeToggle />
             <a
               href="#try"
