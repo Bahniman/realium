@@ -259,14 +259,14 @@ function Hero() {
             >
               <a
                 href="#architecture"
-                className="group btn-press inline-flex items-center justify-center gap-2 rounded-lg bg-foreground px-6 py-3 font-semibold text-background border border-foreground transition-all hover:-translate-x-[3px] hover:-translate-y-[3px] shadow-[2px_2px_0px_#10B981] hover:shadow-[5px_5px_0px_#10B981] active:translate-x-0 active:translate-y-0 active:shadow-none"
+                className="group inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 font-semibold text-on-primary hover:bg-primary/90 transition-colors"
               >
                 See the architecture
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </a>
               <a
                 href="#redteam"
-                className="btn-press inline-flex items-center justify-center gap-2 rounded-lg border border-border bg-card px-6 py-3 font-semibold text-foreground transition-all hover:-translate-x-[3px] hover:-translate-y-[3px] shadow-[2px_2px_0px_var(--border)] hover:shadow-[5px_5px_0px_var(--border)] active:translate-x-0 active:translate-y-0 active:shadow-none"
+                className="inline-flex items-center justify-center gap-2 rounded-lg border border-outline bg-surface-container px-6 py-3 font-semibold text-on-surface hover:bg-on-surface/8 transition-colors"
               >
                 Addressing bottlenecks
               </a>
@@ -381,16 +381,16 @@ function Problem() {
         {...fadeUp}
         className="mt-10"
       >
-        <GlowCard className="border-amber-500/20 bg-amber-500/[0.04] p-8 rounded-2xl" showTechBrackets={false}>
+        <GlowCard className="border-outline bg-surface-container-low p-8 rounded-lg" showTechBrackets={false}>
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_1.3fr]">
             <div>
-              <div className="text-xs uppercase tracking-widest text-amber-700">
+              <div className="text-xs uppercase tracking-widest text-primary">
                 Why &quot;just digitise it&quot; failed
               </div>
               <h3 className="mt-2 text-2xl font-semibold tracking-tight text-foreground">
                 CPWD&apos;s e-Measurement Book already exists.
               </h3>
-              <div className="mt-3 font-mono text-sm text-amber-800">
+              <div className="mt-3 font-mono text-sm text-primary font-bold">
                 ~₹20,000 Cr/yr paid on it. Money is still slow.
               </div>
             </div>
@@ -500,23 +500,23 @@ function Architecture() {
           <Fragment key={l.key}>
             <div
               onClick={() => document.getElementById(l.key)?.scrollIntoView({ behavior: 'smooth' })}
-              className="flex h-full min-h-[104px] flex-col justify-center rounded-xl border border-border bg-card p-5 transition-all hover:-translate-x-[2px] hover:-translate-y-[2px] cursor-pointer active:translate-x-0 active:translate-y-0 shadow-[2px_2px_0px_var(--border)] hover:shadow-[4px_4px_0px_var(--border)]"
+              className="flex h-full min-h-[104px] flex-col justify-center rounded-lg border border-outline-variant bg-surface-container p-5 hover:bg-surface-container-high transition-colors cursor-pointer"
             >
               <div className="flex items-center gap-2">
-                <span className="font-mono text-[10px] text-muted-foreground">
+                <span className="font-mono text-[10px] text-on-surface-variant">
                   {l.n}
                 </span>
                 <span className={`text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-md ${
                   l.color === "emerald"
-                    ? "bg-[#0BDB00] text-black"
+                    ? "bg-primary-container text-on-primary-container"
                     : l.color === "indigo"
-                      ? "bg-[#000DFF] text-white"
-                      : "bg-[#FF4D00] text-white"
+                      ? "bg-secondary-container text-on-secondary-container"
+                      : "bg-tertiary-container text-on-tertiary-container"
                 }`}>
                   {l.tag}
                 </span>
               </div>
-              <div className="mt-2 text-xs text-muted-foreground font-medium">
+              <div className="mt-2 text-xs text-on-surface-variant font-medium">
                 {l.key === "evidence"
                   ? "site → certified e-invoice"
                   : l.key === "authority"
@@ -559,22 +559,22 @@ function Architecture() {
                 >
                   <div className="flex items-center justify-between">
                     <div
-                      className={`inline-flex h-11 w-11 items-center justify-center rounded-xl border ${
+                      className={`inline-flex h-11 w-11 items-center justify-center rounded-lg border ${
                         l.color === "emerald"
-                          ? "bg-[#0BDB00] text-black border-[#0BDB00]"
+                          ? "bg-primary text-on-primary border-primary"
                           : l.color === "indigo"
-                            ? "bg-[#000DFF] text-white border-[#000DFF]"
-                            : "bg-[#FF4D00] text-white border-[#FF4D00]"
+                            ? "bg-secondary text-on-secondary border-secondary"
+                            : "bg-tertiary text-on-tertiary border-tertiary"
                       }`}
                     >
                       <Icon className="h-5 w-5" />
                     </div>
                     <div className={`font-mono text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md ${
                       l.color === "emerald"
-                        ? "bg-[#0BDB00] text-black"
+                        ? "bg-primary-container text-on-primary-container"
                         : l.color === "indigo"
-                          ? "bg-[#000DFF] text-white"
-                          : "bg-[#FF4D00] text-white"
+                          ? "bg-secondary-container text-on-secondary-container"
+                          : "bg-tertiary-container text-on-tertiary-container"
                     }`}>
                       {l.tag}
                     </div>
@@ -597,10 +597,10 @@ function Architecture() {
                         <span
                           className={`mt-2 h-1.5 w-1.5 shrink-0 rounded-[2px] ${
                             l.color === "emerald"
-                              ? "bg-[#0BDB00]"
+                              ? "bg-primary"
                               : l.color === "indigo"
-                                ? "bg-[#000DFF]"
-                                : "bg-[#FF4D00]"
+                                ? "bg-secondary"
+                                : "bg-tertiary"
                           }`}
                         />
                         <span>{b}</span>
@@ -608,20 +608,20 @@ function Architecture() {
                     ))}
                   </ul>
                   {l.footnote && (
-                    <div className="mt-5 rounded-md border border-border bg-foreground/[0.03] p-3 text-[11px] text-muted-foreground">
+                    <div className="mt-5 rounded-md border border-outline-variant bg-surface-container p-3 text-[11px] text-on-surface-variant">
                       {l.footnote}
                     </div>
                   )}
 
                   {/* Interactivity prompt */}
-                  <div className="mt-auto pt-6 flex items-center justify-between border-t border-border font-mono text-[9px] text-muted-foreground group-hover:text-foreground transition-colors">
+                  <div className="mt-auto pt-6 flex items-center justify-between border-t border-outline-variant font-mono text-[9px] text-on-surface-variant group-hover:text-on-surface transition-colors">
                     <span className="flex items-center gap-1.5">
                       <span className={`h-1.5 w-1.5 rounded-full animate-pulse ${
                         l.color === "emerald"
-                          ? "bg-[#0BDB00]"
+                          ? "bg-primary"
                           : l.color === "indigo"
-                            ? "bg-[#000DFF]"
-                            : "bg-[#FF4D00]"
+                            ? "bg-secondary"
+                            : "bg-tertiary"
                       }`} />
                       TEST LIVE ENGINE
                     </span>
@@ -861,14 +861,14 @@ function Synergy() {
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         <motion.div {...fadeUp} className="h-full">
-          <GlowCard className="h-full border-emerald-500/20 bg-emerald-500/[0.02]" showTechBrackets={true}>
-            <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-emerald-500/30 bg-emerald-500/10 text-emerald-600">
+          <GlowCard className="h-full border-outline bg-surface-container-low" showTechBrackets={false}>
+            <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-lg border border-primary/25 bg-primary-container text-primary">
               <Cpu className="h-5 w-5" />
             </div>
-            <div className="text-[11px] uppercase tracking-widest font-semibold text-emerald-600">
+            <div className="text-[11px] uppercase tracking-widest font-semibold text-primary">
               AI does what scales
             </div>
-            <ul className="mt-3 space-y-2 text-foreground/85">
+            <ul className="mt-3 space-y-2 text-on-surface-variant">
               <li>· Observes sites continuously without fatigue</li>
               <li>· Estimates quantities against the BOQ</li>
               <li>· Enforces mandates on every action, deterministically</li>
@@ -876,14 +876,14 @@ function Synergy() {
           </GlowCard>
         </motion.div>
         <motion.div {...fadeUp} className="h-full">
-          <GlowCard className="h-full border-indigo-500/20 bg-indigo-500/[0.02]" showTechBrackets={true}>
-            <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-indigo-500/30 bg-indigo-500/10 text-indigo-600">
+          <GlowCard className="h-full border-outline bg-surface-container-low" showTechBrackets={false}>
+            <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-lg border border-secondary/25 bg-secondary-container text-secondary">
               <Fingerprint className="h-5 w-5" />
             </div>
-            <div className="text-[11px] uppercase tracking-widest font-semibold text-indigo-600">
+            <div className="text-[11px] uppercase tracking-widest font-semibold text-secondary">
               Humans do what carries legal weight
             </div>
-            <ul className="mt-3 space-y-2 text-foreground/85">
+            <ul className="mt-3 space-y-2 text-on-surface-variant">
               <li>· Attest that the measurement matches reality</li>
               <li>· Hold and exercise scoped mandates</li>
               <li>· Approve above thresholds, accountable in the chain</li>
@@ -989,13 +989,13 @@ function Value() {
         {...fadeUp}
         className="mt-8"
       >
-        <GlowCard showTechBrackets={false} className="border-emerald-500/20 bg-emerald-500/[0.03] p-7 sm:p-8">
+        <GlowCard showTechBrackets={false} className="border-outline bg-surface-container-low p-7 sm:p-8">
           <div className="flex items-start gap-4">
-            <div className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-emerald-500/30 bg-emerald-500/10 text-emerald-600">
+            <div className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-primary/25 bg-primary-container text-primary">
               <BadgeCheck className="h-5 w-5" />
             </div>
             <div>
-              <div className="text-xs uppercase tracking-widest font-semibold text-emerald-600">
+              <div className="text-xs uppercase tracking-widest font-semibold text-primary">
                 The flywheel
               </div>
               <p className="mt-2 max-w-3xl text-foreground/90">
@@ -1189,10 +1189,10 @@ function Roadmap() {
                 <div
                   className={`rounded-full border px-2 py-0.5 font-mono text-[10px] ${
                     p.color === "emerald"
-                      ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-600"
+                      ? "border-primary/30 bg-primary-container text-primary"
                       : p.color === "indigo"
-                        ? "border-indigo-500/30 bg-indigo-500/10 text-indigo-600"
-                        : "border-amber-500/30 bg-amber-500/10 text-amber-600"
+                        ? "border-secondary/30 bg-secondary-container text-secondary"
+                        : "border-tertiary/30 bg-tertiary-container text-tertiary"
                   }`}
                 >
                   {p.when}
@@ -1207,10 +1207,10 @@ function Roadmap() {
                     <Clock
                       className={`mt-0.5 h-3.5 w-3.5 shrink-0 ${
                         p.color === "emerald"
-                          ? "text-emerald-600"
+                          ? "text-primary"
                           : p.color === "indigo"
-                            ? "text-indigo-600"
-                            : "text-amber-600"
+                            ? "text-secondary"
+                            : "text-tertiary"
                       }`}
                     />
                     <span className="leading-relaxed">{item}</span>

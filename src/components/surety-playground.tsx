@@ -66,14 +66,14 @@ export function SuretyPlayground() {
   };
 
   return (
-    <GlowCard showTechBrackets={true}>
+    <GlowCard showTechBrackets={false}>
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_1.2fr]">
         {/* controls */}
         <div>
-          <div className="mb-1 text-[10px] font-bold uppercase tracking-widest text-[#000DFF]">
+          <div className="mb-1 text-[10px] font-bold uppercase tracking-widest text-primary">
             Certification mandate · Executive Engineer
           </div>
-          <div className="mb-6 font-mono text-[10px] text-muted-foreground">
+          <div className="mb-6 font-mono text-[10px] text-on-surface-variant">
             mandate:0x7a4c…e021 · Ed25519 · auto-revoke on transfer
           </div>
 
@@ -88,9 +88,9 @@ export function SuretyPlayground() {
               step={100000}
               value={cap}
               onChange={(e) => setCap(Number(e.target.value))}
-              className="w-full accent-[#000DFF] cursor-pointer"
+              className="w-full accent-primary cursor-pointer"
             />
-            <div className="w-28 shrink-0 rounded-md border border-border bg-card px-2 py-1 text-right font-mono text-sm text-foreground shadow-[1px_1px_0px_var(--border)]">
+            <div className="w-28 shrink-0 rounded-lg border border-outline-variant bg-surface-container-low px-2 py-1 text-right font-mono text-sm text-foreground">
               ₹{(cap / 100000).toFixed(1)}L
             </div>
           </div>
@@ -102,7 +102,7 @@ export function SuretyPlayground() {
             type="text"
             value={categories}
             onChange={(e) => setCategories(e.target.value)}
-            className="mt-2 w-full rounded-md border border-border bg-card px-3 py-2 font-mono text-xs text-foreground outline-none focus:border-[#000DFF] shadow-[1px_1px_0px_var(--border)]"
+            className="mt-2 w-full rounded-lg border border-outline bg-surface-container-low px-3 py-2 font-mono text-xs text-foreground outline-none focus:border-primary"
           />
 
           <label className="mt-6 block text-xs font-semibold uppercase tracking-wider text-[10px] text-foreground/80">
@@ -113,10 +113,10 @@ export function SuretyPlayground() {
               <button
                 key={g}
                 onClick={() => setGeo(g)}
-                className={`flex-1 rounded-md border px-2 py-1.5 font-mono text-xs transition-colors cursor-pointer ${
+                className={`flex-1 rounded-lg border px-2 py-1.5 font-mono text-xs transition-colors cursor-pointer ${
                   geo === g
-                    ? "border-[#000DFF] bg-[#000DFF] text-white font-bold shadow-[2px_2px_0px_#161616]"
-                    : "border-border bg-card text-foreground hover:bg-muted"
+                    ? "border-primary bg-primary-container text-on-primary-container font-bold"
+                    : "border-outline-variant bg-surface-container-low text-on-surface hover:bg-on-surface/8"
                 }`}
               >
                 {g}
@@ -129,40 +129,40 @@ export function SuretyPlayground() {
               type="checkbox"
               checked={revoked}
               onChange={(e) => setRevoked(e.target.checked)}
-              className="accent-[#FF4D00]"
+              className="accent-primary"
             />
             Simulate officer transfer (auto-revoke)
           </label>
 
           <button
             onClick={trigger}
-            className="group btn-press mt-6 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[#000DFF] border border-[#000DFF] px-4 py-2.5 text-sm font-semibold text-white transition-all hover:-translate-x-[2px] hover:-translate-y-[2px] shadow-[2px_2px_0px_#161616] hover:shadow-[4px_4px_0px_#161616] active:translate-x-0 active:translate-y-0 active:shadow-none cursor-pointer"
+            className="group mt-6 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-primary text-on-primary px-4 py-2.5 text-sm font-semibold hover:bg-primary/90 active:bg-primary/80 transition-colors cursor-pointer"
           >
             <Send className="h-4 w-4" /> Simulate certification attempt
           </button>
 
           <div className="mt-4 grid grid-cols-3 gap-2 text-center text-[10px] font-bold uppercase tracking-wider">
-            <div className="rounded-md border border-[#0BDB00]/30 bg-[#0BDB00]/10 py-1.5 text-emerald-700">
+            <div className="rounded-lg border border-primary/30 bg-primary-container/20 py-1.5 text-primary">
               Allow
             </div>
-            <div className="rounded-md border border-[#FF4D00]/30 bg-[#FF4D00]/10 py-1.5 text-[#FF4D00]">
+            <div className="rounded-lg border border-tertiary/30 bg-tertiary-container/20 py-1.5 text-tertiary">
               Escrow
             </div>
-            <div className="rounded-md border border-[#161616]/30 bg-[#161616]/10 py-1.5 text-foreground">
+            <div className="rounded-lg border border-outline-variant bg-surface-container py-1.5 text-on-surface-variant">
               Block
             </div>
           </div>
         </div>
 
         {/* action log */}
-        <div className="rounded-xl border border-border bg-card p-4 flex flex-col h-full min-h-[340px] shadow-[2px_2px_0px_var(--border)]">
-          <div className="mb-3 flex items-center justify-between font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+        <div className="rounded-lg border border-outline-variant bg-surface-container-high p-4 flex flex-col h-full min-h-[340px]">
+          <div className="mb-3 flex items-center justify-between font-mono text-[10px] uppercase tracking-widest text-on-surface-variant">
             <span>Signed approval chain</span>
             <span>tamper-evident · ledger</span>
           </div>
 
           {log.length === 0 && (
-            <div className="flex flex-1 items-center justify-center text-center text-xs text-muted-foreground min-h-[220px]">
+            <div className="flex flex-1 items-center justify-center text-center text-xs text-on-surface-variant min-h-[220px]">
               Every approval, non-approval, and block is a signed, timestamped event. Try a certification.
             </div>
           )}
@@ -178,16 +178,16 @@ export function SuretyPlayground() {
                       : ShieldX;
                 const toneText =
                   a.verdict === "allow"
-                    ? "text-emerald-700"
+                    ? "text-primary font-semibold"
                     : a.verdict === "escrow"
-                      ? "text-[#FF4D00]"
-                      : "text-rose-600";
+                      ? "text-tertiary font-semibold"
+                      : "text-error font-semibold";
                 const toneBorder =
                   a.verdict === "allow"
-                    ? "border-[#0BDB00]/20 bg-[#0BDB00]/5"
+                    ? "border-primary/20 bg-primary/5"
                     : a.verdict === "escrow"
-                      ? "border-[#FF4D00]/20 bg-[#FF4D00]/5"
-                      : "border-rose-500/20 bg-rose-500/5";
+                      ? "border-tertiary/20 bg-tertiary/5"
+                      : "border-error/20 bg-error/5";
                 return (
                   <motion.li
                     key={a.id}

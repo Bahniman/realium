@@ -113,10 +113,10 @@ const steps: Step[] = [
 ];
 
 const toneChip: Record<Step["actorTone"], string> = {
-  emerald: "border-emerald-500/30 bg-emerald-500/10 text-emerald-600",
-  indigo: "border-indigo-500/30 bg-indigo-500/10 text-indigo-600",
-  sky: "border-sky-500/30 bg-sky-500/10 text-sky-600",
-  amber: "border-amber-500/30 bg-amber-500/10 text-amber-600",
+  emerald: "border-primary/20 bg-primary/5 text-primary",
+  indigo: "border-secondary/20 bg-secondary/5 text-secondary",
+  sky: "border-tertiary/20 bg-tertiary/5 text-tertiary",
+  amber: "border-error/20 bg-error/5 text-error",
 };
 
 export function DualKeyDemo() {
@@ -278,7 +278,7 @@ export function DualKeyDemo() {
           {active === -1 && !done && (
             <button
               onClick={run}
-              className="inline-flex items-center gap-1.5 rounded-md bg-emerald-500 px-3 py-1.5 text-xs font-semibold text-background transition-transform btn-press hover:scale-105 cursor-pointer"
+              className="inline-flex items-center gap-1.5 rounded-lg bg-primary px-3 py-1.5 text-xs font-semibold text-on-primary transition-all hover:bg-primary/90 active:bg-primary/80 cursor-pointer"
             >
               <Play className="h-3 w-3" /> Run verification
             </button>
@@ -286,7 +286,7 @@ export function DualKeyDemo() {
           {(active >= 0 || done) && (
             <button
               onClick={reset}
-              className="inline-flex items-center gap-1.5 rounded-md border border-foreground/15 bg-foreground/5 px-3 py-1.5 text-xs text-foreground/70 hover:bg-foreground/10 cursor-pointer"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-outline bg-surface-container px-3 py-1.5 text-xs text-on-surface hover:bg-on-surface/8 cursor-pointer transition-colors"
             >
               <RefreshCw className="h-3 w-3" /> Reset
             </button>
@@ -316,23 +316,23 @@ export function DualKeyDemo() {
                   key={s.key}
                   className={`flex items-start gap-3 rounded-lg border p-2.5 transition-all ${
                     state === "idle"
-                      ? "border-foreground/5 opacity-45"
+                      ? "border-outline-variant/40 opacity-45"
                       : state === "run"
-                        ? "border-emerald-500/30 bg-emerald-500/5 shadow-[0_0_12px_rgba(16,185,129,0.05)]"
+                        ? "border-primary/30 bg-primary-container/20"
                         : state === "await"
-                          ? "border-indigo-500/40 bg-indigo-500/10 shadow-[0_0_12px_rgba(99,102,241,0.05)]"
-                          : "border-foreground/10 bg-foreground/[0.02]"
+                          ? "border-secondary/40 bg-secondary-container/20"
+                          : "border-outline-variant bg-surface-container-low"
                   }`}
                 >
                   <div
                     className={`mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-md ${
                       state === "done"
-                        ? "bg-emerald-500/15 text-emerald-400"
+                        ? "bg-primary-container text-primary"
                         : state === "await"
-                          ? "bg-indigo-500/15 text-indigo-400 animate-pulse"
+                          ? "bg-secondary-container text-secondary animate-pulse"
                           : state === "run"
-                            ? "bg-foreground/10 text-foreground"
-                            : "bg-foreground/5 text-foreground/50"
+                            ? "bg-surface-container text-on-surface"
+                            : "bg-surface-container-low text-on-surface-variant/55"
                     }`}
                   >
                     {state === "run" ? (
@@ -361,7 +361,7 @@ export function DualKeyDemo() {
                       {state === "await" && (
                         <button
                           onClick={sign}
-                          className="shrink-0 rounded-md bg-indigo-500 px-2.5 py-1 text-[11px] font-semibold text-white transition-transform btn-press hover:scale-105 cursor-pointer shadow-lg shadow-indigo-500/20"
+                          className="shrink-0 rounded-lg bg-secondary px-2.5 py-1 text-[11px] font-semibold text-on-secondary hover:bg-secondary/90 cursor-pointer transition-colors"
                         >
                           Sign with SDE key
                         </button>
@@ -380,7 +380,7 @@ export function DualKeyDemo() {
         {/* Console & settlement receipt */}
         <div className="flex flex-col justify-between p-6">
           {/* Real-time telemetry console */}
-          <div className="relative mb-5 min-h-[175px] rounded-xl border border-white/10 bg-[#040405] p-4 font-mono text-xs text-zinc-300 overflow-hidden">
+          <div className="relative mb-5 min-h-[175px] rounded-lg border border-outline-variant bg-surface-container-high p-4 font-mono text-xs text-on-surface overflow-hidden">
             <div className="absolute inset-0 -z-0 opacity-40 bg-[linear-gradient(rgba(16,185,129,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(16,185,129,0.04)_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none" />
 
             <div className="relative z-10 flex h-full flex-col justify-between gap-3">
@@ -426,14 +426,14 @@ export function DualKeyDemo() {
                       key={idx}
                       className={`leading-relaxed text-[11px] font-mono transition-opacity duration-200 ${
                         isSuccess
-                          ? "text-emerald-400 font-semibold"
+                          ? "text-primary font-semibold"
                           : isMoney
-                            ? "text-sky-300 font-semibold"
+                            ? "text-tertiary font-semibold"
                             : isWarning
-                              ? "text-amber-400 font-semibold"
+                              ? "text-error font-semibold"
                               : isIndigo
-                                ? "text-indigo-400"
-                                : "text-zinc-300"
+                                ? "text-secondary"
+                                : "text-on-surface"
                       }`}
                     >
                       {line}
@@ -442,7 +442,7 @@ export function DualKeyDemo() {
                 })}
 
                 {active === 0 && consoleLines.length >= 3 && (
-                  <div className="mt-2 pt-2 border-t border-emerald-500/10 text-[11px] font-semibold text-emerald-400 flex items-center justify-between">
+                  <div className="mt-2 pt-2 border-t border-outline-variant/30 text-[11px] font-semibold text-primary flex items-center justify-between">
                     <span>SCAN RATE: 120 fps</span>
                     <span className="font-mono tabular-nums">FRAMES: {frameCount} / 4812</span>
                   </div>
@@ -450,12 +450,12 @@ export function DualKeyDemo() {
 
                 {active === 1 && consoleLines.length >= 2 && (
                   <div className="mt-1 space-y-1">
-                    <div className="relative h-6 w-full rounded border border-emerald-500/20 bg-emerald-500/5 overflow-hidden flex select-none">
-                      <div className="h-full bg-emerald-500/15 border-r border-emerald-500/20 flex items-center justify-center text-[7px] text-emerald-400/80 font-bold" style={{ width: "30%" }}>SUB-BASE</div>
-                      <div className="h-full bg-emerald-500/25 border-r border-emerald-500/20 flex items-center justify-center text-[7px] text-emerald-400/80 font-bold" style={{ width: "40%" }}>BASE</div>
-                      <div className="h-full bg-emerald-500/40 flex items-center justify-center text-[7px] text-emerald-400/80 font-bold" style={{ width: "30%" }}>BITUMINOUS</div>
+                    <div className="relative h-6 w-full rounded border border-outline-variant/40 bg-surface-container overflow-hidden flex select-none">
+                      <div className="h-full bg-primary/10 border-r border-outline-variant/40 flex items-center justify-center text-[7px] text-primary/80 font-bold" style={{ width: "30%" }}>SUB-BASE</div>
+                      <div className="h-full bg-primary/20 border-r border-outline-variant/40 flex items-center justify-center text-[7px] text-primary/80 font-bold" style={{ width: "40%" }}>BASE</div>
+                      <div className="h-full bg-primary/30 flex items-center justify-center text-[7px] text-primary/80 font-bold" style={{ width: "30%" }}>BITUMINOUS</div>
                       <motion.div
-                        className="absolute top-0 bottom-0 w-0.5 bg-emerald-400 shadow-[0_0_8px_rgb(52,211,153)]"
+                        className="absolute top-0 bottom-0 w-0.5 bg-primary"
                         animate={{ left: ["0%", "100%", "0%"] }}
                         transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
                       />
@@ -464,10 +464,10 @@ export function DualKeyDemo() {
                 )}
 
                 {active === 3 && consoleLines.length >= 4 && (
-                  <div className="mt-2 flex items-center gap-2 rounded border border-indigo-500/25 bg-indigo-500/5 p-1.5 text-[10px] text-indigo-400 animate-pulse">
+                  <div className="mt-2 flex items-center gap-2 rounded border border-secondary/30 bg-secondary-container/10 p-1.5 text-[10px] text-secondary animate-pulse">
                     <span className="relative flex h-2 w-2">
-                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-indigo-400 opacity-75" />
-                      <span className="relative inline-flex h-2 w-2 rounded-full bg-indigo-500" />
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-secondary opacity-75" />
+                      <span className="relative inline-flex h-2 w-2 rounded-full bg-secondary" />
                     </span>
                     <span>Action required: co-sign with SDE key on the left panel.</span>
                   </div>

@@ -69,7 +69,7 @@ export function VerticalsSwitcher() {
 
   return (
     <GlowCard className="overflow-hidden p-0" showTechBrackets={false}>
-      <div className="flex flex-wrap gap-1 border-b border-foreground/10 p-2">
+      <div className="flex flex-wrap gap-1 border-b border-outline-variant p-2">
         {verticals.map((v) => {
           const IconV = v.icon;
           const on = v.key === active;
@@ -79,8 +79,8 @@ export function VerticalsSwitcher() {
               onClick={() => setActive(v.key)}
               className={`inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm transition-all ${
                 on
-                  ? "bg-foreground text-background"
-                  : "text-foreground/60 hover:bg-foreground/5 hover:text-foreground"
+                  ? "bg-primary text-on-primary font-medium"
+                  : "text-on-surface-variant hover:bg-on-surface/8 hover:text-on-surface"
               }`}
             >
               <IconV className="h-4 w-4" />
@@ -100,35 +100,35 @@ export function VerticalsSwitcher() {
           className="grid grid-cols-1 gap-6 p-8 md:grid-cols-2"
         >
           <div>
-            <div className="mb-3 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-emerald-500/30 bg-emerald-500/10">
-              <Icon className="h-5 w-5 text-emerald-400" />
+            <div className="mb-3 inline-flex h-11 w-11 items-center justify-center rounded-lg border border-primary/30 bg-primary-container">
+              <Icon className="h-5 w-5 text-primary" />
             </div>
-            <div className="text-xs uppercase tracking-widest text-rose-400/80">
+            <div className="text-xs uppercase tracking-widest text-error">
               Where verification blocks the money
             </div>
-            <p className="mt-2 text-foreground/85">{cur.blocker}</p>
+            <p className="mt-2 text-on-surface-variant">{cur.blocker}</p>
 
-            <div className="mt-6 text-xs uppercase tracking-widest text-emerald-400/80">
+            <div className="mt-6 text-xs uppercase tracking-widest text-primary">
               What GroundTruth unlocks
             </div>
-            <p className="mt-2 text-foreground/85">{cur.unlock}</p>
+            <p className="mt-2 text-on-surface-variant">{cur.unlock}</p>
           </div>
           <div className="grid grid-cols-2 gap-3 self-start">
-            <div className="rounded-xl border border-foreground/10 bg-foreground/[0.02] p-5">
-              <div className="text-xs uppercase tracking-widest text-foreground/40">
+            <div className="rounded-lg border border-outline-variant bg-surface-container-low p-5">
+              <div className="text-xs uppercase tracking-widest text-on-surface-variant/70">
                 Days to settle
               </div>
-              <div className="mt-2 font-mono text-2xl text-emerald-400">
+              <div className="mt-2 font-mono text-2xl text-primary">
                 {cur.metric.days}
               </div>
             </div>
-            <div className="rounded-xl border border-foreground/10 bg-foreground/[0.02] p-5">
-              <div className="text-xs uppercase tracking-widest text-foreground/40">
+            <div className="rounded-lg border border-outline-variant bg-surface-container-low p-5">
+              <div className="text-xs uppercase tracking-widest text-on-surface-variant/70">
                 Addressable
               </div>
-              <div className="mt-2 text-sm text-foreground/85">{cur.metric.tam}</div>
+              <div className="mt-2 text-sm text-on-surface-variant">{cur.metric.tam}</div>
             </div>
-            <div className="col-span-2 rounded-xl border border-foreground/10 bg-foreground/40 p-4 font-mono text-[11px] text-foreground/50">
+            <div className="col-span-2 rounded-lg border border-outline-variant bg-surface-container-high p-4 font-mono text-[11px] text-on-surface-variant">
               expansion order: public works → insurance → agri → trade →
               carbon
             </div>

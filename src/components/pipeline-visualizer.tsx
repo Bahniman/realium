@@ -26,8 +26,8 @@ const nodes: Node[] = [
     label: "01 Evidence",
     subLabel: "e-MB Site Entry",
     icon: Eye,
-    color: "text-[#0BDB00]",
-    glowColor: "rgba(11, 219, 0, 0.45)",
+    color: "text-primary",
+    glowColor: "var(--color-primary)",
     x: 80,
     y: 80,
     details: {
@@ -43,8 +43,8 @@ const nodes: Node[] = [
     label: "02 Audit",
     subLabel: "AI Quantity Check",
     icon: Cpu,
-    color: "text-[#0BDB00]",
-    glowColor: "rgba(11, 219, 0, 0.45)",
+    color: "text-primary",
+    glowColor: "var(--color-primary)",
     x: 260,
     y: 80,
     details: {
@@ -60,8 +60,8 @@ const nodes: Node[] = [
     label: "03 Authority",
     subLabel: "Cryptographic Mandate",
     icon: Fingerprint,
-    color: "text-[#000DFF]",
-    glowColor: "rgba(0, 13, 255, 0.45)",
+    color: "text-secondary",
+    glowColor: "var(--color-secondary)",
     x: 260,
     y: 240,
     details: {
@@ -77,8 +77,8 @@ const nodes: Node[] = [
     label: "04 Liquidity",
     subLabel: "T+1 Payout & Settlement",
     icon: Banknote,
-    color: "text-[#FF4D00]",
-    glowColor: "rgba(255, 77, 0, 0.45)",
+    color: "text-tertiary",
+    glowColor: "var(--color-tertiary)",
     x: 440,
     y: 240,
     details: {
@@ -106,18 +106,18 @@ export function PipelineVisualizer() {
   const Icon = cur.icon;
 
   return (
-    <div className="relative overflow-hidden rounded-2xl border border-zinc-800 bg-[#040405] p-6 font-sans">
+    <div className="relative overflow-hidden rounded-[16px] border border-outline-variant bg-surface-container p-6 font-sans">
       {/* Grid pattern background */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none opacity-20" />
 
       {/* Header bar indicating interactivity */}
-      <div className="flex items-center justify-between border-b border-zinc-800 pb-4 mb-4 select-none">
+      <div className="flex items-center justify-between border-b border-outline-variant pb-4 mb-4 select-none">
         <div className="flex items-center gap-2">
-          <span className="font-mono text-[10px] text-zinc-400 uppercase tracking-wider">
+          <span className="font-mono text-[10px] text-on-surface-variant uppercase tracking-wider">
             Realium ledger map
           </span>
         </div>
-        <div className="flex items-center gap-1.5 rounded-full border border-indigo-500/20 bg-indigo-500/5 px-2.5 py-0.5 text-[9px] text-indigo-400">
+        <div className="flex items-center gap-1.5 rounded-full border border-secondary/20 bg-secondary-container/10 px-2.5 py-0.5 text-[9px] text-secondary">
           Interactive: Hover/Click Nodes
         </div>
       </div>
@@ -138,28 +138,28 @@ export function PipelineVisualizer() {
 
           {/* Connection Lines (Glow & Base) */}
           {/* Path 1: Node 0 -> Node 1 */}
-          <line x1="80" y1="80" x2="260" y2="80" stroke="rgba(16,185,129,0.15)" strokeWidth="4" />
+          <line x1="80" y1="80" x2="260" y2="80" stroke="var(--color-primary)" strokeWidth="4" opacity="0.1" />
           <line 
             x1="80" y1="80" x2="260" y2="80" 
-            stroke="#10B981" strokeWidth="2" 
+            stroke="var(--color-primary)" strokeWidth="2" 
             strokeDasharray="6 8" 
             style={{ animation: "scroll-dash 2s linear infinite" }} 
           />
 
           {/* Path 2: Node 1 -> Node 2 */}
-          <line x1="260" y1="80" x2="260" y2="240" stroke="url(#grad-green-indigo)" strokeWidth="3" opacity="0.4" />
+          <line x1="260" y1="80" x2="260" y2="240" stroke="url(#grad-green-indigo)" strokeWidth="3" opacity="0.2" />
           <line 
             x1="260" y1="80" x2="260" y2="240" 
-            stroke="#6366F1" strokeWidth="2" 
+            stroke="var(--color-secondary)" strokeWidth="2" 
             strokeDasharray="6 8" 
             style={{ animation: "scroll-dash 2s linear infinite" }} 
           />
 
           {/* Path 3: Node 2 -> Node 3 */}
-          <line x1="260" y1="240" x2="440" y2="240" stroke="url(#grad-indigo-amber)" strokeWidth="3" opacity="0.4" />
+          <line x1="260" y1="240" x2="440" y2="240" stroke="url(#grad-indigo-amber)" strokeWidth="3" opacity="0.2" />
           <line 
             x1="260" y1="240" x2="440" y2="240" 
-            stroke="#F59E0B" strokeWidth="2" 
+            stroke="var(--color-tertiary)" strokeWidth="2" 
             strokeDasharray="6 8" 
             style={{ animation: "scroll-dash 2s linear infinite" }} 
           />
@@ -187,7 +187,8 @@ export function PipelineVisualizer() {
                   cy={n.y}
                   r="30"
                   fill="none"
-                  stroke={n.color.includes("0BDB00") ? "rgba(11, 219, 0, 0.15)" : n.color.includes("000DFF") ? "rgba(0, 13, 255, 0.15)" : "rgba(255, 77, 0, 0.15)"}
+                  stroke={n.glowColor}
+                  strokeOpacity="0.15"
                   strokeWidth="1"
                   className="animate-pulse"
                 />
@@ -199,7 +200,7 @@ export function PipelineVisualizer() {
                     cy={n.y}
                     r="32"
                     fill="none"
-                    stroke={n.color.includes("0BDB00") ? "#0BDB00" : n.color.includes("000DFF") ? "#000DFF" : "#FF4D00"}
+                    stroke={n.glowColor}
                     strokeWidth="1.5"
                     className="animate-ping opacity-25"
                     style={{ animationDuration: "3s" }}
@@ -211,8 +212,8 @@ export function PipelineVisualizer() {
                   cx={n.x}
                   cy={n.y}
                   r="24"
-                  fill="#0c0c0e"
-                  stroke={isActive ? (n.color.includes("0BDB00") ? "#0BDB00" : n.color.includes("000DFF") ? "#000DFF" : "#FF4D00") : "rgba(255,255,255,0.15)"}
+                  fill="var(--color-surface-container-low)"
+                  stroke={isActive ? n.glowColor : "var(--color-outline-variant)"}
                   strokeWidth={isActive ? "2" : "1.5"}
                   className="transition-all duration-300 group-hover:stroke-white/40"
                 />
@@ -248,13 +249,7 @@ export function PipelineVisualizer() {
       </div>
 
       {/* Detail HUD Display panel */}
-      <div className="mt-4 rounded-xl border border-zinc-800/80 bg-zinc-950 p-4 relative">
-        {/* Tech corners */}
-        <div className="absolute top-2 left-2 w-4 h-1 border-t border-l border-zinc-800" />
-        <div className="absolute top-2 right-2 w-4 h-1 border-t border-r border-zinc-800" />
-        <div className="absolute bottom-2 left-2 w-4 h-1 border-b border-l border-zinc-800" />
-        <div className="absolute bottom-2 right-2 w-4 h-1 border-b border-r border-zinc-800" />
-
+      <div className="mt-4 rounded-lg border border-outline-variant bg-surface-container-high p-4 relative">
         <AnimatePresence mode="wait">
           <motion.div
             key={cur.id}
@@ -264,23 +259,23 @@ export function PipelineVisualizer() {
             transition={{ duration: 0.2 }}
             className="space-y-2.5 font-mono text-sm"
           >
-            <div className="flex items-center justify-between border-b border-zinc-800 pb-2">
-              <span className="flex items-center gap-1.5 font-bold uppercase tracking-wider text-white text-xs sm:text-sm">
+            <div className="flex items-center justify-between border-b border-outline-variant pb-2">
+              <span className="flex items-center gap-1.5 font-bold uppercase tracking-wider text-on-surface text-xs sm:text-sm">
                 <Icon className={`h-4.5 w-4.5 ${cur.color}`} />
                 {cur.details.title}
               </span>
-              <span className={`rounded-full border border-zinc-800 bg-zinc-900 px-2 py-0.5 text-xs font-semibold ${cur.color}`}>
+              <span className={`rounded-full border border-outline-variant bg-surface-container-low px-2 py-0.5 text-xs font-semibold ${cur.color}`}>
                 {cur.details.metric}
               </span>
             </div>
             
-            <p className="text-zinc-300 leading-relaxed font-sans text-xs sm:text-sm">
+            <p className="text-on-surface-variant leading-relaxed font-sans text-xs sm:text-sm">
               {cur.details.description}
             </p>
 
-            <div className="flex items-center gap-2 rounded border border-zinc-800 bg-black/60 p-2 text-xs">
+            <div className="flex items-center gap-2 rounded border border-outline-variant bg-surface-container p-2 text-xs">
               <span className={`shrink-0 font-bold ${cur.color}`}>[{cur.details.logKey}]</span>
-              <span className="truncate text-zinc-300">{cur.details.logVal}</span>
+              <span className="truncate text-on-surface-variant">{cur.details.logVal}</span>
             </div>
           </motion.div>
         </AnimatePresence>

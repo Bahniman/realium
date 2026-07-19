@@ -7,77 +7,103 @@
 @theme inline {
   --font-sans: "Plus Jakarta Sans", "Inter Variable", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
   
-  /* Map Tailwind classes to legacy vars (which are mapped to M3) */
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 28px;
+  
+  /* M3 Tonal Palette Colors */
+  --color-primary: var(--md-sys-color-primary);
+  --color-on-primary: var(--md-sys-color-on-primary);
+  --color-primary-container: var(--md-sys-color-primary-container);
+  --color-on-primary-container: var(--md-sys-color-on-primary-container);
+  --color-secondary: var(--md-sys-color-secondary);
+  --color-on-secondary: var(--md-sys-color-on-secondary);
+  --color-secondary-container: var(--md-sys-color-secondary-container);
+  --color-on-secondary-container: var(--md-sys-color-on-secondary-container);
+  --color-tertiary: var(--md-sys-color-tertiary);
+  --color-on-tertiary: var(--md-sys-color-on-tertiary);
+  --color-tertiary-container: var(--md-sys-color-tertiary-container);
+  --color-on-tertiary-container: var(--md-sys-color-on-tertiary-container);
+  --color-error: var(--md-sys-color-error);
+  --color-on-error: var(--md-sys-color-on-error);
+  --color-error-container: var(--md-sys-color-error-container);
+  --color-on-error-container: var(--md-sys-color-on-error-container);
+  --color-outline: var(--md-sys-color-outline);
+  --color-outline-variant: var(--md-sys-color-outline-variant);
+  
+  --color-surface: var(--md-sys-color-surface);
+  --color-on-surface: var(--md-sys-color-on-surface);
+  --color-surface-variant: var(--md-sys-color-surface-variant);
+  --color-on-surface-variant: var(--md-sys-color-on-surface-variant);
+  
+  --color-surface-container-lowest: var(--md-sys-color-surface-container-lowest);
+  --color-surface-container-low: var(--md-sys-color-surface-container-low);
+  --color-surface-container: var(--md-sys-color-surface-container);
+  --color-surface-container-high: var(--md-sys-color-surface-container-high);
+  --color-surface-container-highest: var(--md-sys-color-surface-container-highest);
+
+  /* Legacy Mappings to prevent breakages */
+  --color-background: var(--md-sys-color-surface);
+  --color-foreground: var(--md-sys-color-on-surface);
+  --color-card: var(--md-sys-color-surface-container);
+  --color-card-foreground: var(--md-sys-color-on-surface);
+  --color-border: var(--md-sys-color-outline-variant);
+  --color-input: var(--md-sys-color-outline);
+  --color-ring: var(--md-sys-color-primary);
+  --color-muted: var(--md-sys-color-surface-variant);
+  --color-muted-foreground: var(--md-sys-color-on-surface-variant);
+  --color-accent: var(--md-sys-color-tertiary);
+  --color-accent-foreground: var(--md-sys-color-on-tertiary);
+
+  /* Map M3 Typography */
+  --text-display-lg: 57px;
+  --text-display-md: 45px;
+  --text-headline-lg: 32px;
+  --text-headline-md: 28px;
+  --text-title-lg: 22px;
+  --text-body-lg: 16px;
+  --text-body-md: 14px;
+  --text-label-lg: 14px;
 }
 
 :root {
   /* Realium Custom M3 Green Light */
-  --md-sys-color-primary: #198639; 
-  --md-sys-color-on-primary: #FFFFFF;
-  --md-sys-color-secondary: #516353;
-  --md-sys-color-on-secondary: #ffffff;
-  --md-sys-color-tertiary: #39656e;
-  --md-sys-color-on-tertiary: #ffffff;
+  --md-sys-color-primary: #006d33;
+  --md-sys-color-on-primary: #ffffff;
+  --md-sys-color-primary-container: #92f7b0;
+  --md-sys-color-on-primary-container: #00210b;
   
-  --md-sys-color-surface: #f7fbf3;
-  --md-sys-color-on-surface: #181d18;
-  --md-sys-color-surface-variant: #e0e4dd;
-  --md-sys-color-on-surface-variant: #424943;
+  --md-sys-color-secondary: #4f6354;
+  --md-sys-color-on-secondary: #ffffff;
+  --md-sys-color-secondary-container: #d2e8d5;
+  --md-sys-color-on-secondary-container: #0c1f13;
+  
+  --md-sys-color-tertiary: #3a656f;
+  --md-sys-color-on-tertiary: #ffffff;
+  --md-sys-color-tertiary-container: #beeaf6;
+  --md-sys-color-on-tertiary-container: #001f26;
+  
+  --md-sys-color-error: #ba1a1a;
+  --md-sys-color-on-error: #ffffff;
+  --md-sys-color-error-container: #ffdad6;
+  --md-sys-color-on-error-container: #410002;
+  
+  --md-sys-color-surface: #f6fbf4; 
+  --md-sys-color-on-surface: #191c19;
+  --md-sys-color-surface-variant: #dce5dc;
+  --md-sys-color-on-surface-variant: #414942;
   
   --md-sys-color-surface-container-lowest: #ffffff;
-  --md-sys-color-surface-container-low: #f1f5ee;
-  --md-sys-color-surface-container: #ebeff8;
-  --md-sys-color-surface-container-high: #e6e9e3;
-  --md-sys-color-surface-container-highest: #e0e4dd;
+  --md-sys-color-surface-container-low: #f0f5ee;
+  --md-sys-color-surface-container: #eaebe8;
+  --md-sys-color-surface-container-high: #e4e9e2;
+  --md-sys-color-surface-container-highest: #dee3dc;
   
-  --md-sys-color-outline: #727972;
-  --md-sys-color-outline-variant: #c2c9c2;
-  
-  /* Legacy Mappings to M3 */
-  --radius: 0.75rem;
-  --background: var(--md-sys-color-surface);
-  --foreground: var(--md-sys-color-on-surface);
-  --card: var(--md-sys-color-surface-container);
-  --card-foreground: var(--md-sys-color-on-surface);
-  --popover: var(--md-sys-color-surface-container-high);
-  --popover-foreground: var(--md-sys-color-on-surface);
-  --primary: var(--md-sys-color-primary);
-  --primary-foreground: var(--md-sys-color-on-primary);
-  --secondary: var(--md-sys-color-secondary);
-  --secondary-foreground: var(--md-sys-color-on-secondary);
-  --muted: var(--md-sys-color-surface-variant);
-  --muted-foreground: var(--md-sys-color-on-surface-variant);
-  --accent: var(--md-sys-color-tertiary);
-  --accent-foreground: var(--md-sys-color-on-tertiary);
-  --destructive: #ba1a1a;
-  --destructive-foreground: #ffffff;
-  --border: var(--md-sys-color-outline-variant);
-  --input: var(--md-sys-color-outline);
-  --ring: var(--md-sys-color-primary);
+  --md-sys-color-outline: #717972;
+  --md-sys-color-outline-variant: #c0c9c0;
 
   --scene-bg: var(--md-sys-color-surface);
   --scene-bg-gradient: var(--md-sys-color-surface);
@@ -85,47 +111,39 @@
 
 .dark {
   /* Realium Custom M3 Green Dark */
-  --md-sys-color-primary: #4ade80;
-  --md-sys-color-on-primary: #003912;
-  --md-sys-color-secondary: #b8ccb8;
-  --md-sys-color-on-secondary: #243426;
-  --md-sys-color-tertiary: #a1d1dc;
-  --md-sys-color-on-tertiary: #00363f;
+  --md-sys-color-primary: #77da96;
+  --md-sys-color-on-primary: #003917;
+  --md-sys-color-primary-container: #005224;
+  --md-sys-color-on-primary-container: #92f7b0;
   
-  --md-sys-color-surface: #101410;
-  --md-sys-color-on-surface: #e0e4dd;
-  --md-sys-color-surface-variant: #424943;
-  --md-sys-color-on-surface-variant: #c2c9c2;
+  --md-sys-color-secondary: #b6ccb9;
+  --md-sys-color-on-secondary: #213527;
+  --md-sys-color-secondary-container: #374b3d;
+  --md-sys-color-on-secondary-container: #d2e8d5;
   
-  --md-sys-color-surface-container-lowest: #0b0f0b;
-  --md-sys-color-surface-container-low: #181d18;
-  --md-sys-color-surface-container: #1c211c;
-  --md-sys-color-surface-container-high: #272c26;
-  --md-sys-color-surface-container-highest: #323731;
+  --md-sys-color-tertiary: #a2ced9;
+  --md-sys-color-on-tertiary: #00363e;
+  --md-sys-color-tertiary-container: #204d56;
+  --md-sys-color-on-tertiary-container: #beeaf6;
   
-  --md-sys-color-outline: #8c938c;
-  --md-sys-color-outline-variant: #424943;
+  --md-sys-color-error: #ffb4ab;
+  --md-sys-color-on-error: #690005;
+  --md-sys-color-error-container: #93000a;
+  --md-sys-color-on-error-container: #ffdad6;
   
-  /* Legacy Mappings to M3 */
-  --background: var(--md-sys-color-surface);
-  --foreground: var(--md-sys-color-on-surface);
-  --card: var(--md-sys-color-surface-container);
-  --card-foreground: var(--md-sys-color-on-surface);
-  --popover: var(--md-sys-color-surface-container-high);
-  --popover-foreground: var(--md-sys-color-on-surface);
-  --primary: var(--md-sys-color-primary);
-  --primary-foreground: var(--md-sys-color-on-primary);
-  --secondary: var(--md-sys-color-secondary);
-  --secondary-foreground: var(--md-sys-color-on-secondary);
-  --muted: var(--md-sys-color-surface-variant);
-  --muted-foreground: var(--md-sys-color-on-surface-variant);
-  --accent: var(--md-sys-color-tertiary);
-  --accent-foreground: var(--md-sys-color-on-tertiary);
-  --destructive: #ffb4ab;
-  --destructive-foreground: #690005;
-  --border: var(--md-sys-color-outline-variant);
-  --input: var(--md-sys-color-outline);
-  --ring: var(--md-sys-color-primary);
+  --md-sys-color-surface: #111411;
+  --md-sys-color-on-surface: #dee3dc;
+  --md-sys-color-surface-variant: #414942;
+  --md-sys-color-on-surface-variant: #c0c9c0;
+  
+  --md-sys-color-surface-container-lowest: #0b0f0c;
+  --md-sys-color-surface-container-low: #191c19;
+  --md-sys-color-surface-container: #1d201d;
+  --md-sys-color-surface-container-high: #272b27;
+  --md-sys-color-surface-container-highest: #323632;
+  
+  --md-sys-color-outline: #8a938b;
+  --md-sys-color-outline-variant: #414942;
 
   --scene-bg: var(--md-sys-color-surface);
   --scene-bg-gradient: var(--md-sys-color-surface);
@@ -142,7 +160,7 @@
   }
 }
 
-/* Override Glass and Blobs to force M3 Tonal Surfaces */
+/* Force standard M3 surfaces, disable old custom glass/blobs */
 .glass {
   background-color: var(--md-sys-color-surface-container) !important;
   backdrop-filter: none !important;
@@ -160,7 +178,7 @@
   background-color: var(--md-sys-color-surface) !important;
 }
 
-/* Force specific colors in page components */
+/* Override neon tags and shadow texts */
 .text-neon-emerald, .text-neon-accent {
   text-shadow: none !important;
   color: var(--md-sys-color-primary) !important;
