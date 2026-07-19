@@ -180,14 +180,7 @@
   box-shadow: none !important;
 }
 
-.animate-blob-1, .animate-blob-2, .pointer-events-none.absolute.inset-0.-z-10 > div:not(.grid-bg) {
-  display: none !important;
-}
 
-.grid-bg {
-  background-image: none !important;
-  background-color: var(--md-sys-color-surface) !important;
-}
 
 /* Override neon tags and shadow texts */
 .text-neon-emerald, .text-neon-accent {

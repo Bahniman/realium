@@ -165,14 +165,15 @@ function Nav() {
           <div className="flex items-center gap-2">
             <a
               href="https://bahniman.github.io"
-              className="text-xs sm:text-sm font-medium text-foreground/75 hover:text-foreground transition-colors mr-2"
+              className="text-xs sm:text-sm font-medium text-foreground/75 hover:text-foreground transition-colors mr-2 whitespace-nowrap"
             >
-              ← Back to Portal
+              <span className="hidden sm:inline">← Back to Portal</span>
+              <span className="sm:hidden">← Portal</span>
             </a>
             <ThemeToggle />
             <a
               href="#try"
-              className="btn-press rounded-lg bg-[#000DFF] px-4 py-2 text-sm font-medium text-white border border-[#000DFF] transition-all hover:-translate-x-[2px] hover:-translate-y-[2px] shadow-[2px_2px_0px_#161616] hover:shadow-[4px_4px_0px_#161616]"
+              className="hidden sm:inline-flex items-center justify-center rounded-lg bg-primary hover:bg-primary/90 px-4 py-2 text-sm font-medium text-on-primary transition-colors"
             >
               Try the demo
             </a>
@@ -188,12 +189,7 @@ function Nav() {
 function Hero() {
   return (
     <section className="relative overflow-hidden pt-32 pb-8 sm:pt-36 lg:pt-40">
-      {/* Background blobs with new slow float animations */}
-      <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="animate-blob-1 absolute -top-40 right-[-10%] h-[520px] w-[520px] rounded-full bg-indigo-500/20 blur-[130px]" />
-        <div className="animate-blob-2 absolute -bottom-40 left-[-10%] h-[520px] w-[520px] rounded-full bg-emerald-500/15 blur-[130px]" />
-        <div className="grid-bg absolute inset-0 opacity-40 [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_70%)]" />
-      </div>
+
 
       <div className="mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-12 xl:px-16">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-center">
@@ -1392,20 +1388,6 @@ function SectionDivider() {
 function LandingPage() {
   const { scrollYProgress } = useScroll();
 
-  // Parallax transforms for the interactive background image
-  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "-10%"]);
-  const bgScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.1, 1.3, 1.15]);
-  const bgRotate = useTransform(scrollYProgress, [0, 1], ["0deg", "4deg"]);
-
-  // Transform scroll progress into shifting positions and scales for background color blobs
-  const y1 = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-  const x1 = useTransform(scrollYProgress, [0, 1], ["-10%", "15%"]);
-  const scale1 = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.25, 0.85]);
-
-  const y2 = useTransform(scrollYProgress, [0, 1], ["0%", "-40%"]);
-  const x2 = useTransform(scrollYProgress, [0, 1], ["10%", "-15%"]);
-  const scale2 = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.85, 1.25]);
-
   // Dynamic Scroll Progress percentage text for widescreen rails
   const progressPercent = useTransform(scrollYProgress, (v) => `${Math.round(v * 100)}%`);
 
@@ -1426,37 +1408,7 @@ function LandingPage() {
       {/* Base solid background color */}
       <div className="pointer-events-none fixed inset-0 -z-[100] bg-background" />
 
-      {/* Clean Interactive Parallax Tech Network Watermark — no dot matrix grids */}
-      <div className="pointer-events-none fixed inset-0 -z-[90] overflow-hidden select-none">
-        <motion.div
-          style={{ y: bgY, scale: bgScale, rotate: bgRotate }}
-          className="absolute inset-0 h-[120%] w-[120%] -left-[10%] -top-[10%]"
-        >
-          <div
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-[0.06]"
-            style={{
-              backgroundImage: `url('${import.meta.env.BASE_URL}bg-network.jpg')`,
-            }}
-          />
-          {/* Ambient Glows */}
-          <div className="absolute -top-[10%] -left-[5%] h-[700px] w-[700px] rounded-full bg-emerald-500/5 blur-[120px]" />
-          <div className="absolute -bottom-[10%] -right-[5%] h-[600px] w-[600px] rounded-full bg-indigo-500/5 blur-[120px]" />
-        </motion.div>
-      </div>
 
-      {/* Shifting Ambient Background Blobs */}
-      <div className="pointer-events-none fixed inset-0 -z-30 overflow-hidden select-none">
-        <motion.div 
-          style={{ y: y1, x: x1, scale: scale1 }}
-          className="absolute -top-20 left-[-15%] h-[800px] w-[800px] rounded-full bg-emerald-500/18 dark:bg-emerald-500/12 blur-[140px] opacity-90" 
-        />
-        <motion.div 
-          style={{ y: y2, x: x2, scale: scale2 }}
-          className="absolute bottom-[-10%] right-[-15%] h-[800px] w-[800px] rounded-full bg-indigo-600/18 dark:bg-indigo-600/12 blur-[140px] opacity-90" 
-        />
-        <div className="animate-blob-1 absolute top-[25%] left-[30%] h-[600px] w-[600px] rounded-full bg-rose-500/16 dark:bg-rose-500/12 blur-[130px] opacity-90" />
-        <div className="animate-blob-2 absolute bottom-[25%] left-[-10%] h-[500px] w-[500px] rounded-full bg-amber-500/16 dark:bg-amber-500/10 blur-[130px] opacity-90" />
-      </div>
 
       {/* Structural layout rails on left and right margins to fill the widescreen gaps */}
       <div className="pointer-events-none fixed inset-y-0 left-1/2 -z-10 h-full w-full max-w-[1440px] -translate-x-1/2 border-x border-border/10 hidden 2xl:block">
