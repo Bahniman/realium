@@ -238,7 +238,7 @@ export function PipelineVisualizer() {
                   x={n.x}
                   y={n.y + 38}
                   textAnchor="middle"
-                  className={`text-[10px] ${isActive ? "fill-zinc-100 font-semibold" : "fill-zinc-400"} transition-all duration-300`}
+                  className={`text-[10px] ${isActive ? "fill-zinc-100 font-medium" : "fill-zinc-400"} transition-all duration-300`}
                 >
                   {n.subLabel}
                 </text>
@@ -264,7 +264,7 @@ export function PipelineVisualizer() {
                 <Icon className={`h-4.5 w-4.5 ${cur.color}`} />
                 {cur.details.title}
               </span>
-              <span className={`rounded-full border border-outline-variant bg-surface-container-low px-2 py-0.5 text-xs font-semibold ${cur.color}`}>
+              <span className={`rounded-full border border-outline-variant bg-surface-container-low px-2 py-0.5 text-xs font-medium ${cur.color}`}>
                 {cur.details.metric}
               </span>
             </div>

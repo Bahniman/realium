@@ -77,7 +77,7 @@ export function SuretyPlayground() {
             mandate:0x7a4c…e021 · Ed25519 · auto-revoke on transfer
           </div>
 
-          <label className="block text-xs font-semibold uppercase tracking-wider text-[10px] text-foreground/80">
+          <label className="block text-xs font-medium uppercase tracking-wider text-[10px] text-foreground/80">
             Single-certification cap
           </label>
           <div className="mt-2 flex items-center gap-3">
@@ -95,7 +95,7 @@ export function SuretyPlayground() {
             </div>
           </div>
 
-          <label className="mt-6 block text-xs font-semibold uppercase tracking-wider text-[10px] text-foreground/80">
+          <label className="mt-6 block text-xs font-medium uppercase tracking-wider text-[10px] text-foreground/80">
             Category caps (allowlist)
           </label>
           <input
@@ -105,7 +105,7 @@ export function SuretyPlayground() {
             className="mt-2 w-full rounded-lg border border-outline bg-surface-container-low px-3 py-2 font-mono text-xs text-foreground outline-none focus:border-primary"
           />
 
-          <label className="mt-6 block text-xs font-semibold uppercase tracking-wider text-[10px] text-foreground/80">
+          <label className="mt-6 block text-xs font-medium uppercase tracking-wider text-[10px] text-foreground/80">
             Geography fence (state circle)
           </label>
           <div className="mt-2 flex gap-2">
@@ -136,7 +136,7 @@ export function SuretyPlayground() {
 
           <button
             onClick={trigger}
-            className="group mt-6 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-primary text-on-primary px-4 py-2.5 text-sm font-semibold hover:bg-primary/90 active:bg-primary/80 transition-colors cursor-pointer"
+            className="group mt-6 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-primary text-on-primary px-4 py-2.5 text-sm font-medium hover:bg-primary/90 active:bg-primary/80 transition-colors cursor-pointer"
           >
             <Send className="h-4 w-4" /> Simulate certification attempt
           </button>
@@ -178,10 +178,10 @@ export function SuretyPlayground() {
                       : ShieldX;
                 const toneText =
                   a.verdict === "allow"
-                    ? "text-primary font-semibold"
+                    ? "text-primary font-medium"
                     : a.verdict === "escrow"
-                      ? "text-tertiary font-semibold"
-                      : "text-error font-semibold";
+                      ? "text-tertiary font-medium"
+                      : "text-error font-medium";
                 const toneBorder =
                   a.verdict === "allow"
                     ? "border-primary/20 bg-primary/5"
@@ -200,7 +200,7 @@ export function SuretyPlayground() {
                     <Icon className={`mt-0.5 h-4 w-4 shrink-0 ${toneText}`} />
                     <div className="min-w-0 flex-1">
                       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 sm:gap-2 font-mono text-xs text-foreground/80">
-                        <span className="break-all whitespace-normal font-semibold">
+                        <span className="break-all whitespace-normal font-medium">
                           certify({a.workId}, {a.category}, ₹{a.amount.toLocaleString("en-IN")})
                         </span>
                         <span

@@ -129,7 +129,7 @@ function Nav() {
       <div className="mx-auto mt-4 max-w-[1440px] px-4 sm:px-8 lg:px-12 xl:px-16">
         <div className="glass flex items-center justify-between rounded-2xl px-4 py-3 sm:px-6">
           <a href="#" className="flex items-center gap-2.5">
-            <span className="text-base font-semibold tracking-tight text-foreground">
+            <span className="text-base font-medium text-foreground">
               Realium
             </span>
           </a>
@@ -172,7 +172,7 @@ function Nav() {
             <ThemeToggle />
             <a
               href="#try"
-              className="btn-press rounded-lg bg-[#000DFF] px-4 py-2 text-sm font-semibold text-white border border-[#000DFF] transition-all hover:-translate-x-[2px] hover:-translate-y-[2px] shadow-[2px_2px_0px_#161616] hover:shadow-[4px_4px_0px_#161616]"
+              className="btn-press rounded-lg bg-[#000DFF] px-4 py-2 text-sm font-medium text-white border border-[#000DFF] transition-all hover:-translate-x-[2px] hover:-translate-y-[2px] shadow-[2px_2px_0px_#161616] hover:shadow-[4px_4px_0px_#161616]"
             >
               Try the demo
             </a>
@@ -202,7 +202,7 @@ function Hero() {
             <motion.div {...fadeUp} className="flex justify-start">
               <div className="inline-flex flex-wrap items-center gap-2 rounded-full border border-amber-400/20 bg-gradient-to-r from-amber-500/10 via-foreground/[0.03] to-emerald-500/10 px-4 py-1.5 text-xs text-foreground/80 shadow-[0_0_40px_-10px_rgb(245,158,11,0.25)] backdrop-blur">
                 <Trophy className="h-3.5 w-3.5 text-amber-400" />
-                <span className="font-semibold text-foreground">Top 3</span>
+                <span className="font-medium text-foreground">Top 3</span>
                 <span className="text-foreground/40">·</span>
                 <span>ReEnvision 5.0 — XLRI Conclave</span>
                 <span className="text-foreground/40">·</span>
@@ -235,7 +235,7 @@ function Hero() {
             <motion.h1
               {...fadeUp}
               transition={{ ...fadeUp.transition, delay: 0.05 }}
-              className="text-4xl font-semibold tracking-tight sm:text-5xl lg:text-6xl xl:text-7xl leading-[1.1]"
+              className="text-4xl font-medium sm:text-5xl lg:text-6xl xl:text-7xl leading-[1.1]"
             >
               <span className="bg-gradient-to-r from-emerald-400 via-foreground to-indigo-400 bg-clip-text text-transparent">
                 Money that moves at the speed of verified reality.
@@ -259,14 +259,14 @@ function Hero() {
             >
               <a
                 href="#architecture"
-                className="group inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 font-semibold text-on-primary hover:bg-primary/90 transition-colors"
+                className="group inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 font-medium text-on-primary hover:bg-primary/90 transition-colors"
               >
                 See the architecture
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </a>
               <a
                 href="#redteam"
-                className="inline-flex items-center justify-center gap-2 rounded-lg border border-outline bg-surface-container px-6 py-3 font-semibold text-on-surface hover:bg-on-surface/8 transition-colors"
+                className="inline-flex items-center justify-center gap-2 rounded-lg border border-outline bg-surface-container px-6 py-3 font-medium text-on-surface hover:bg-on-surface/8 transition-colors"
               >
                 Addressing bottlenecks
               </a>
@@ -343,7 +343,7 @@ function Problem() {
         <div className="text-xs uppercase tracking-[0.2em] text-rose-400/80">
           The problem
         </div>
-        <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-5xl">
+        <h2 className="mt-3 text-3xl font-medium text-foreground sm:text-5xl">
           The largest working-capital sink in the Indian economy.
         </h2>
         <p className="mt-4 max-w-2xl text-muted-foreground">
@@ -362,7 +362,7 @@ function Problem() {
             className="h-full"
           >
             <GlowCard className="h-full border-foreground/10" showTechBrackets={true}>
-              <div className="text-3xl font-semibold tracking-tight text-foreground tabular-nums sm:text-4xl text-neon-emerald">
+              <div className="text-3xl font-medium text-foreground tabular-nums sm:text-4xl text-neon-emerald">
                 <CountUpStat text={c.stat} />
               </div>
               <div className="mt-1 text-[11px] uppercase tracking-widest text-muted-foreground">
@@ -387,7 +387,7 @@ function Problem() {
               <div className="text-xs uppercase tracking-widest text-primary">
                 Why &quot;just digitise it&quot; failed
               </div>
-              <h3 className="mt-2 text-2xl font-semibold tracking-tight text-foreground">
+              <h3 className="mt-2 text-2xl font-medium text-foreground">
                 CPWD&apos;s e-Measurement Book already exists.
               </h3>
               <div className="mt-3 font-mono text-sm text-primary font-bold">
@@ -485,7 +485,7 @@ function Architecture() {
         <div className="text-xs uppercase tracking-[0.2em] text-emerald-600">
           The solution · one platform, three layers
         </div>
-        <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-5xl">
+        <h2 className="mt-3 text-3xl font-medium text-foreground sm:text-5xl">
           Evidence &rarr; Authority &rarr; Liquidity.
         </h2>
         <p className="mt-4 max-w-2xl text-muted-foreground">
@@ -582,7 +582,7 @@ function Architecture() {
                   <div className="mt-5 font-mono text-[10px] text-muted-foreground uppercase tracking-widest">
                     Pillar {l.n} / 03
                   </div>
-                  <h3 className="mt-1 text-xl font-semibold tracking-tight text-foreground">
+                  <h3 className="mt-1 text-xl font-medium text-foreground">
                     {l.title}
                   </h3>
                   <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
@@ -701,7 +701,7 @@ function MoneyFlow() {
         <div className="text-xs uppercase tracking-[0.2em] text-emerald-600">
           How money moves
         </div>
-        <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-5xl">
+        <h2 className="mt-3 text-3xl font-medium text-foreground sm:text-5xl">
           From site to bank account.
         </h2>
         <p className="mt-4 max-w-2xl text-muted-foreground">
@@ -726,7 +726,7 @@ function MoneyFlow() {
                 <span className="absolute left-1.5 top-3 h-3 w-3 rounded-full bg-emerald-500 ring-4 ring-background" />
                 <div className="glass rounded-xl p-4">
                   <div className="flex items-center justify-between gap-3">
-                    <div className="text-sm font-semibold text-foreground">
+                    <div className="text-sm font-medium text-foreground">
                       {s.title}
                     </div>
                     <div className="rounded-md border border-foreground/10 bg-foreground/5 px-2 py-0.5 font-mono text-[10px] text-foreground/60">
@@ -786,7 +786,7 @@ function RedTeam() {
             <AlertTriangle className="h-3.5 w-3.5" />
             Red team · systemic challenges
           </div>
-          <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-5xl">
+          <h2 className="mt-3 text-3xl font-medium text-foreground sm:text-5xl">
             The systemic challenge:
             <br />
             <span className="text-rose-400/90">
@@ -819,7 +819,7 @@ function RedTeam() {
                     {a.tag}
                   </div>
                   <h3
-                    className="mt-1 text-lg font-semibold text-foreground"
+                    className="mt-1 text-lg font-medium text-foreground"
                     dangerouslySetInnerHTML={{ __html: a.title }}
                   />
                   <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
@@ -854,7 +854,7 @@ function Synergy() {
         <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
           Event theme · Human-AI Synergy
         </div>
-        <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+        <h2 className="mt-3 text-3xl font-medium text-foreground sm:text-4xl">
           Divide the work by what only each side can do.
         </h2>
       </motion.div>
@@ -865,7 +865,7 @@ function Synergy() {
             <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-lg border border-primary/25 bg-primary-container text-primary">
               <Cpu className="h-5 w-5" />
             </div>
-            <div className="text-[11px] uppercase tracking-widest font-semibold text-primary">
+            <div className="text-[11px] uppercase tracking-widest font-medium text-primary">
               AI does what scales
             </div>
             <ul className="mt-3 space-y-2 text-on-surface-variant">
@@ -880,7 +880,7 @@ function Synergy() {
             <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-lg border border-secondary/25 bg-secondary-container text-secondary">
               <Fingerprint className="h-5 w-5" />
             </div>
-            <div className="text-[11px] uppercase tracking-widest font-semibold text-secondary">
+            <div className="text-[11px] uppercase tracking-widest font-medium text-secondary">
               Humans do what carries legal weight
             </div>
             <ul className="mt-3 space-y-2 text-on-surface-variant">
@@ -929,7 +929,7 @@ function Value() {
         <div className="text-xs uppercase tracking-[0.2em] text-emerald-600">
           Value
         </div>
-        <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-5xl">
+        <h2 className="mt-3 text-3xl font-medium text-foreground sm:text-5xl">
           Every side of the table is better off. That&apos;s why it moves.
         </h2>
       </motion.div>
@@ -948,7 +948,7 @@ function Value() {
               onClick={() => document.getElementById('flow')?.scrollIntoView({ behavior: 'smooth' })}
             >
               <div
-                className={`text-[11px] uppercase tracking-widest font-semibold ${
+                className={`text-[11px] uppercase tracking-widest font-medium ${
                   v.color === "emerald"
                     ? "text-emerald-600"
                     : v.color === "indigo"
@@ -958,7 +958,7 @@ function Value() {
               >
                 {v.who}
               </div>
-              <div className="mt-2 text-2xl font-semibold tracking-tight text-foreground">
+              <div className="mt-2 text-2xl font-medium text-foreground">
                 {v.hi}
               </div>
               <p className="mt-3 text-sm text-muted-foreground mb-6">{v.lo}</p>
@@ -995,7 +995,7 @@ function Value() {
               <BadgeCheck className="h-5 w-5" />
             </div>
             <div>
-              <div className="text-xs uppercase tracking-widest font-semibold text-primary">
+              <div className="text-xs uppercase tracking-widest font-medium text-primary">
                 The flywheel
               </div>
               <p className="mt-2 max-w-3xl text-foreground/90">
@@ -1021,7 +1021,7 @@ function LiveDemo() {
         <div className="text-xs uppercase tracking-[0.2em] text-emerald-600">
           Live · the end-to-end flow · try it
         </div>
-        <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-5xl">
+        <h2 className="mt-3 text-3xl font-medium text-foreground sm:text-5xl">
           Sign a real work item. Watch the money move.
         </h2>
         <p className="mt-4 max-w-2xl text-muted-foreground">
@@ -1048,7 +1048,7 @@ function MandateSection() {
         <div className="text-xs uppercase tracking-[0.2em] text-indigo-600">
           Live · Layer 2 · Approver mandate playground
         </div>
-        <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-5xl">
+        <h2 className="mt-3 text-3xl font-medium text-foreground sm:text-5xl">
           Change the mandate. Watch what an engineer can and can&apos;t
           certify.
         </h2>
@@ -1097,7 +1097,7 @@ function Validation() {
         <div className="text-xs uppercase tracking-[0.2em] text-emerald-600">
           Validation
         </div>
-        <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-5xl">
+        <h2 className="mt-3 text-3xl font-medium text-foreground sm:text-5xl">
           Not a deck. A working system with precedent.
         </h2>
       </motion.div>
@@ -1110,10 +1110,10 @@ function Validation() {
             className="h-full"
           >
             <GlowCard className="h-full border-foreground/10" showTechBrackets={true}>
-              <div className="text-[11px] uppercase tracking-widest font-semibold text-emerald-600">
+              <div className="text-[11px] uppercase tracking-widest font-medium text-emerald-600">
                 {v.tag}
               </div>
-              <div className="mt-2 text-lg font-semibold text-foreground">
+              <div className="mt-2 text-lg font-medium text-foreground">
                 {v.title}
               </div>
               <p className="mt-2 text-sm text-muted-foreground">{v.body}</p>
@@ -1169,7 +1169,7 @@ function Roadmap() {
         <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
           Roadmap
         </div>
-        <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-5xl">
+        <h2 className="mt-3 text-3xl font-medium text-foreground sm:text-5xl">
           Prototype done. Pilot next. Scale on a published standard.
         </h2>
       </motion.div>
@@ -1198,7 +1198,7 @@ function Roadmap() {
                   {p.when}
                 </div>
               </div>
-              <h3 className="text-2xl font-semibold tracking-tight text-foreground">
+              <h3 className="text-2xl font-medium text-foreground">
                 {p.phase}
               </h3>
               <ul className="mt-5 space-y-3">
@@ -1265,7 +1265,7 @@ function Sources() {
         <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">
           <BookOpen className="h-3.5 w-3.5" /> Sources
         </div>
-        <h2 className="mt-3 text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+        <h2 className="mt-3 text-2xl font-medium text-foreground sm:text-3xl">
           Every number above traces back to a public source.
         </h2>
       </motion.div>
@@ -1307,7 +1307,7 @@ function CTA() {
       >
         <div className="pointer-events-none absolute -top-40 left-1/2 h-80 w-[600px] -translate-x-1/2 rounded-full bg-emerald-500/15 blur-3xl" />
         <div className="pointer-events-none absolute -bottom-40 left-1/2 h-80 w-[600px] -translate-x-1/2 rounded-full bg-indigo-500/15 blur-3xl" />
-        <h3 className="mx-auto max-w-3xl text-3xl font-semibold tracking-tight text-foreground sm:text-5xl">
+        <h3 className="mx-auto max-w-3xl text-3xl font-medium text-foreground sm:text-5xl">
           One division. One quarter. 90 days to 15.
         </h3>
         <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
@@ -1318,7 +1318,7 @@ function CTA() {
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <a
             href="#try"
-            className="btn-press inline-flex items-center gap-2 rounded-md bg-foreground px-6 py-3 font-semibold text-background transition-all hover:scale-105"
+            className="btn-press inline-flex items-center gap-2 rounded-md bg-foreground px-6 py-3 font-medium text-background transition-all hover:scale-105"
           >
             Try the live demo <ArrowRight className="h-4 w-4" />
           </a>
@@ -1355,7 +1355,7 @@ function Footer() {
         </div>
         <div className="flex flex-col items-center justify-between gap-3 text-sm text-muted-foreground sm:flex-row w-full">
           <div className="flex items-center gap-2">
-            <span className="font-semibold text-foreground">Realium</span>
+            <span className="font-medium text-foreground">Realium</span>
             <span className="mx-2 text-border">|</span>
             <span>
               Top 3 · ReEnvision 5.0 · XLRI Digital Transformation Conclave · July 2026
@@ -1463,7 +1463,7 @@ function LandingPage() {
         {/* Left rail vertical details */}
         <div className="absolute top-48 -left-14 flex flex-col gap-10 font-mono text-[9px] text-muted-foreground/45 tracking-[0.2em] select-none">
           <div className="flex items-center gap-3 [writing-mode:vertical-lr] rotate-180">
-            <span className="text-foreground/70 font-semibold uppercase">Realium Protocol</span>
+            <span className="text-foreground/70 font-medium uppercase">Realium Protocol</span>
             <span className="h-10 w-px bg-border/20" />
             <span className="text-[8px] opacity-80">SYS_LOC: LAT 19.0760° N</span>
           </div>
@@ -1477,7 +1477,7 @@ function LandingPage() {
         {/* Right rail vertical details */}
         <div className="absolute top-48 -right-14 flex flex-col items-center gap-10 font-mono text-[9px] text-muted-foreground/45 tracking-[0.2em] select-none">
           <div className="flex items-center gap-3 [writing-mode:vertical-lr]">
-            <span className="text-foreground/70 font-semibold uppercase">Scroll Progress</span>
+            <span className="text-foreground/70 font-medium uppercase">Scroll Progress</span>
             <span className="h-10 w-px bg-border/20" />
             <motion.span className="tabular-nums text-indigo-500 font-bold">{progressPercent}</motion.span>
           </div>

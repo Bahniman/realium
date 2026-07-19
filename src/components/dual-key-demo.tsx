@@ -278,7 +278,7 @@ export function DualKeyDemo() {
           {active === -1 && !done && (
             <button
               onClick={run}
-              className="inline-flex items-center gap-1.5 rounded-lg bg-primary px-3 py-1.5 text-xs font-semibold text-on-primary transition-all hover:bg-primary/90 active:bg-primary/80 cursor-pointer"
+              className="inline-flex items-center gap-1.5 rounded-lg bg-primary px-3 py-1.5 text-xs font-medium text-on-primary transition-all hover:bg-primary/90 active:bg-primary/80 cursor-pointer"
             >
               <Play className="h-3 w-3" /> Run verification
             </button>
@@ -349,7 +349,7 @@ export function DualKeyDemo() {
                         {s.day}
                       </span>
                       <span
-                        className={`rounded-full border px-1.5 py-px text-[9px] font-semibold uppercase tracking-wide ${toneChip[s.actorTone]}`}
+                        className={`rounded-full border px-1.5 py-px text-[9px] font-medium uppercase tracking-wide ${toneChip[s.actorTone]}`}
                       >
                         {s.actor}
                       </span>
@@ -361,7 +361,7 @@ export function DualKeyDemo() {
                       {state === "await" && (
                         <button
                           onClick={sign}
-                          className="shrink-0 rounded-lg bg-secondary px-2.5 py-1 text-[11px] font-semibold text-on-secondary hover:bg-secondary/90 cursor-pointer transition-colors"
+                          className="shrink-0 rounded-lg bg-secondary px-2.5 py-1 text-[11px] font-medium text-on-secondary hover:bg-secondary/90 cursor-pointer transition-colors"
                         >
                           Sign with SDE key
                         </button>
@@ -426,11 +426,11 @@ export function DualKeyDemo() {
                       key={idx}
                       className={`leading-relaxed text-[11px] font-mono transition-opacity duration-200 ${
                         isSuccess
-                          ? "text-primary font-semibold"
+                          ? "text-primary font-medium"
                           : isMoney
-                            ? "text-tertiary font-semibold"
+                            ? "text-tertiary font-medium"
                             : isWarning
-                              ? "text-error font-semibold"
+                              ? "text-error font-medium"
                               : isIndigo
                                 ? "text-secondary"
                                 : "text-on-surface"
@@ -442,7 +442,7 @@ export function DualKeyDemo() {
                 })}
 
                 {active === 0 && consoleLines.length >= 3 && (
-                  <div className="mt-2 pt-2 border-t border-outline-variant/30 text-[11px] font-semibold text-primary flex items-center justify-between">
+                  <div className="mt-2 pt-2 border-t border-outline-variant/30 text-[11px] font-medium text-primary flex items-center justify-between">
                     <span>SCAN RATE: 120 fps</span>
                     <span className="font-mono tabular-nums">FRAMES: {frameCount} / 4812</span>
                   </div>
@@ -519,7 +519,7 @@ export function DualKeyDemo() {
                         !lit
                           ? "text-foreground/40"
                           : highlight
-                            ? "font-semibold text-emerald-500"
+                            ? "font-medium text-emerald-500"
                             : gate >= 5
                               ? "text-sky-600"
                               : "text-foreground/85"

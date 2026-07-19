@@ -5,8 +5,8 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-sans: "Plus Jakarta Sans", "Inter Variable", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-sans: "Roboto", "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Roboto Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   
   --radius-xs: 4px;
   --radius-sm: 8px;
@@ -57,6 +57,9 @@
   --color-muted-foreground: var(--md-sys-color-on-surface-variant);
   --color-accent: var(--md-sys-color-tertiary);
   --color-accent-foreground: var(--md-sys-color-on-tertiary);
+  --color-inverse-surface: var(--md-sys-color-inverse-surface);
+  --color-inverse-on-surface: var(--md-sys-color-inverse-on-surface);
+  --color-inverse-primary: var(--md-sys-color-inverse-primary);
 
   /* Map M3 Typography */
   --text-display-lg: 57px;
@@ -105,6 +108,10 @@
   --md-sys-color-outline: #717972;
   --md-sys-color-outline-variant: #c0c9c0;
 
+  --md-sys-color-inverse-surface: #2e312e;
+  --md-sys-color-inverse-on-surface: #eff2ec;
+  --md-sys-color-inverse-primary: #77da96;
+
   --scene-bg: var(--md-sys-color-surface);
   --scene-bg-gradient: var(--md-sys-color-surface);
 }
@@ -145,6 +152,10 @@
   --md-sys-color-outline: #8a938b;
   --md-sys-color-outline-variant: #414942;
 
+  --md-sys-color-inverse-surface: #dee3dc;
+  --md-sys-color-inverse-on-surface: #2e312e;
+  --md-sys-color-inverse-primary: #006d33;
+
   --scene-bg: var(--md-sys-color-surface);
   --scene-bg-gradient: var(--md-sys-color-surface);
 }
@@ -183,3 +194,58 @@
   text-shadow: none !important;
   color: var(--md-sys-color-primary) !important;
 }
+
+/* ================================================================
+   Legacy raw-palette utilities -> M3 tonal roles (global overrides)
+   emerald -> primary (brand green) · indigo -> tertiary (teal)
+   amber -> harmonized gold · rose -> error · zinc -> neutrals
+   ================================================================ */
+:root {
+  --realium-gold: #7a5900;
+  --realium-gold-container: #ffdea6;
+}
+.dark {
+  --realium-gold: #ecc148;
+  --realium-gold-container: #5b4300;
+}
+
+/* gradient text -> solid on-surface (M3 flat) */
+.bg-clip-text.text-transparent {
+  background-image: none !important;
+  color: var(--md-sys-color-on-surface) !important;
+}
+/* decorative glow shadows and blur chips */
+[class*="shadow-["] { box-shadow: none !important; }
+[class*="backdrop-blur"] { backdrop-filter: none !important; }
+/* flatten decorative gradients */
+[class*="bg-gradient-to-"]:not(.bg-clip-text) {
+  background-image: none !important;
+  background-color: color-mix(in srgb, var(--md-sys-color-on-surface) 6%, transparent) !important;
+}
+
+/* text roles */
+[class*="text-emerald"] { color: var(--md-sys-color-primary) !important; }
+[class*="text-indigo"]  { color: var(--md-sys-color-tertiary) !important; }
+[class*="text-amber"]   { color: var(--realium-gold) !important; }
+[class*="text-rose"]    { color: var(--md-sys-color-error) !important; }
+[class*="text-sky"]     { color: var(--md-sys-color-tertiary) !important; }
+[class*="text-zinc-1"], [class*="text-zinc-3"] { color: var(--md-sys-color-on-surface) !important; }
+[class*="text-zinc-4"], [class*="text-zinc-5"], [class*="text-zinc-6"] { color: var(--md-sys-color-on-surface-variant) !important; }
+
+/* solid fills */
+.bg-emerald-400, .bg-emerald-500, .bg-emerald-600 { background-color: var(--md-sys-color-primary) !important; }
+.bg-indigo-400, .bg-indigo-500, .bg-indigo-600 { background-color: var(--md-sys-color-tertiary) !important; }
+.bg-amber-400, .bg-amber-500 { background-color: var(--realium-gold) !important; }
+.bg-rose-400, .bg-rose-500 { background-color: var(--md-sys-color-error) !important; }
+
+/* translucent fills (opacity-suffixed) */
+[class*="bg-emerald-500/"], [class*="bg-emerald-400/"], [class*="bg-emerald-950/"] { background-color: color-mix(in srgb, var(--md-sys-color-primary) 12%, transparent) !important; }
+[class*="bg-indigo-500/"], [class*="bg-indigo-400/"] { background-color: color-mix(in srgb, var(--md-sys-color-tertiary) 12%, transparent) !important; }
+[class*="bg-amber-500/"], [class*="bg-amber-400/"] { background-color: color-mix(in srgb, var(--realium-gold) 14%, transparent) !important; }
+[class*="bg-rose-500/"], [class*="bg-rose-400/"] { background-color: color-mix(in srgb, var(--md-sys-color-error) 12%, transparent) !important; }
+
+/* borders */
+[class*="border-emerald"] { border-color: color-mix(in srgb, var(--md-sys-color-primary) 45%, transparent) !important; }
+[class*="border-indigo"]  { border-color: color-mix(in srgb, var(--md-sys-color-tertiary) 45%, transparent) !important; }
+[class*="border-amber"]   { border-color: color-mix(in srgb, var(--realium-gold) 45%, transparent) !important; }
+[class*="border-rose"]    { border-color: color-mix(in srgb, var(--md-sys-color-error) 45%, transparent) !important; }

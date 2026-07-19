@@ -124,7 +124,7 @@ export function LiquidityCalculator() {
       {/* Title / Description */}
       <div className="mb-6 flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
         <div>
-          <h3 className="text-xl font-bold tracking-tight text-foreground">
+          <h3 className="text-xl font-bold text-foreground">
             Liquidity & Cost Simulator
           </h3>
           <p className="mt-1 text-xs text-on-surface-variant">
@@ -137,7 +137,7 @@ export function LiquidityCalculator() {
             <button
               key={p.label}
               onClick={() => loadPreset(p)}
-              className="rounded-lg border border-outline bg-surface-container-low px-3 py-1.5 text-[11px] font-semibold text-on-surface hover:bg-on-surface/8 transition-colors cursor-pointer"
+              className="rounded-lg border border-outline bg-surface-container-low px-3 py-1.5 text-[11px] font-medium text-on-surface hover:bg-on-surface/8 transition-colors cursor-pointer"
             >
               {p.label.split(" (")[0]}
             </button>
@@ -151,7 +151,7 @@ export function LiquidityCalculator() {
           {/* Invoice Amount */}
           <div>
             <div className="flex justify-between text-xs text-foreground/80">
-              <label className="font-semibold uppercase tracking-wider text-[10px]">Certified Invoice Value</label>
+              <label className="font-medium uppercase tracking-wider text-[10px]">Certified Invoice Value</label>
               <span className="font-mono text-primary font-bold text-sm">
                 ₹{invoiceAmount.toLocaleString("en-IN")}
               </span>
@@ -173,7 +173,7 @@ export function LiquidityCalculator() {
 
           {/* Reliability Tiers */}
           <div>
-            <label className="block text-xs font-semibold uppercase tracking-wider text-[10px] text-foreground/80">
+            <label className="block text-xs font-medium uppercase tracking-wider text-[10px] text-foreground/80">
               Contractor Reliability Tier (Advance Rate)
             </label>
             <div className="mt-2.5 grid grid-cols-2 gap-2 sm:grid-cols-4">
@@ -202,7 +202,7 @@ export function LiquidityCalculator() {
           {/* Days to Settle */}
           <div>
             <div className="flex justify-between text-xs text-foreground/80">
-              <label className="font-semibold uppercase tracking-wider text-[10px]">Treasury Settlement Delay</label>
+              <label className="font-medium uppercase tracking-wider text-[10px]">Treasury Settlement Delay</label>
               <span className="font-mono text-tertiary font-bold text-sm">
                 {daysToSettle} Days
               </span>
@@ -225,7 +225,7 @@ export function LiquidityCalculator() {
           {/* Deductions */}
           <div>
             <div className="flex justify-between text-xs text-foreground/80">
-              <label className="font-semibold uppercase tracking-wider text-[10px]">Govt Deductions & Penalties</label>
+              <label className="font-medium uppercase tracking-wider text-[10px]">Govt Deductions & Penalties</label>
               <span className="font-mono text-error font-bold text-sm">
                 {deductionsPercent}% (₹{deductionsAmount.toLocaleString("en-IN")})
               </span>
@@ -262,7 +262,7 @@ export function LiquidityCalculator() {
             <div className="mt-5">
               <div className="mb-2 flex items-center justify-between text-xs font-mono">
                 <span className="text-on-surface-variant">Total Invoice (100%)</span>
-                <span className="text-foreground font-semibold">₹{invoiceAmount.toLocaleString("en-IN")}</span>
+                <span className="text-foreground font-medium">₹{invoiceAmount.toLocaleString("en-IN")}</span>
               </div>
               
               {/* Stacked Progress Bar */}
@@ -363,7 +363,7 @@ export function LiquidityCalculator() {
                   <div className="rounded-lg border border-error/35 bg-error-container p-3 text-xs text-on-error-container flex items-start gap-2">
                     <AlertTriangle className="h-4 w-4 shrink-0 mt-0.5" />
                     <div>
-                      <span className="font-semibold">Bank Principal Exposed!</span> Deductions exceed the holdback buffer by <span className="font-mono font-bold">₹{deficitAmount.toLocaleString("en-IN")}</span>. Realium will auto-downgrade this contractor&apos;s reliability tier, reducing future advance caps to prevent default.
+                      <span className="font-medium">Bank Principal Exposed!</span> Deductions exceed the holdback buffer by <span className="font-mono font-bold">₹{deficitAmount.toLocaleString("en-IN")}</span>. Realium will auto-downgrade this contractor&apos;s reliability tier, reducing future advance caps to prevent default.
                     </div>
                   </div>
                 </motion.div>
