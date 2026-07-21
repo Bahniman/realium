@@ -339,3 +339,47 @@ footer {
   main > div > section:nth-of-type(n+4), main > section:nth-of-type(n+4) { animation-delay: .20s; }
 }
 @keyframes sectionIn { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+
+/* ================================================================
+   Material 3 Design Kit conformance
+   Values read from the kit itself:
+     Buttons  (57994:2227) — S 40dp: padding 16/10, icon 20, Label Large
+                             M 56dp: padding 24/16, icon 24, Title Medium
+                             corner 100px, all sizes
+     Cards    (52347:27854) — corner 12dp; outlined = surface + outline-variant
+     Chips    — 32dp tall, 8dp corner
+   ================================================================ */
+
+/* pill actions -> kit button geometry */
+a[class*="rounded-full"][class*="px-6"],
+button[class*="rounded-full"][class*="px-6"] {
+  height: 40px;
+  padding: 10px 16px !important;
+  gap: 8px;
+  border-radius: 100px;
+  font-size: 14px; line-height: 20px; font-weight: 500; letter-spacing: .1px;
+}
+/* the hero pair reads as Medium */
+section:first-of-type a[class*="rounded-full"][class*="px-6"] {
+  height: 56px;
+  padding: 16px 24px !important;
+  font-size: 16px; line-height: 24px; letter-spacing: .15px;
+}
+
+/* cards -> 12dp corner */
+[class*="rounded-[16px]"], [class*="rounded-[20px]"], [class*="rounded-2xl"] { border-radius: 12px !important; }
+[class*="rounded-[12px]"] { border-radius: 12px !important; }
+[class*="rounded-xl"] { border-radius: 12px !important; }
+
+/* chips -> 32dp / 8dp */
+span[class*="rounded-full"][class*="px-4"],
+div[class*="rounded-lg"][class*="px-4"][class*="text-label-lg"] {
+  min-height: 32px; border-radius: 8px; padding: 6px 16px;
+  font-size: 14px; line-height: 20px; font-weight: 500; letter-spacing: .1px;
+}
+
+/* icon buttons -> 40dp container, 24dp glyph */
+header a[class*="rounded-full"][class*="p-2"],
+header button[class*="rounded-full"] {
+  width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center;
+}
