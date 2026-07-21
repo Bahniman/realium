@@ -383,3 +383,68 @@ header a[class*="rounded-full"][class*="p-2"],
 header button[class*="rounded-full"] {
   width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center;
 }
+
+/* ================================================================
+   M3 component conformance — remaining components
+   Retrofits the app's existing markup onto Material 3 geometry.
+   ================================================================ */
+
+/* Top app bar: 64dp, Title Large */
+header[class*="fixed"] > div > div { min-height: 64px; }
+header[class*="fixed"] [class*="text-title-lg"] { font-size: 22px; line-height: 28px; font-weight: 400; letter-spacing: 0; }
+
+/* Tabs: 48dp, Title Small label, 3dp indicator */
+[role="tablist"] > button, [class*="tab"] > button[class*="flex-1"] {
+  min-height: 48px;
+  font-size: 14px; line-height: 20px; font-weight: 500; letter-spacing: .1px;
+}
+
+/* Text fields / inputs: 56dp, 4dp corner, 1dp outline (2dp on focus) */
+input[type="text"], input[type="number"], input[type="email"], input[type="search"], select, textarea {
+  border-radius: 4px;
+  border: 1px solid var(--md-sys-color-outline);
+  background: transparent;
+  color: var(--md-sys-color-on-surface);
+  font-family: var(--font-sans);
+  font-size: 16px; line-height: 24px; letter-spacing: .5px;
+  padding: 0 16px;
+}
+input[type="text"], input[type="number"], input[type="email"], input[type="search"], select { height: 56px; }
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border: 2px solid var(--md-sys-color-primary);
+}
+
+/* Range sliders: 4dp track, primary handle */
+input[type="range"] {
+  height: 4px; padding: 0; border: 0; border-radius: 9999px;
+  background: var(--md-sys-color-surface-container-highest);
+  accent-color: var(--md-sys-color-primary);
+}
+
+/* Dividers: 1dp outline-variant */
+hr { border: 0; height: 1px; background: var(--md-sys-color-outline-variant); }
+
+/* List rows: 56dp minimum, 16dp padding */
+ul[class*="space-y"] > li { min-height: 40px; }
+
+/* Badges / status pills: Label Small on a tonal container */
+[class*="uppercase"][class*="rounded"][class*="text-[9px]"],
+[class*="uppercase"][class*="rounded"][class*="text-[10px]"] {
+  font-size: 11px; line-height: 16px; font-weight: 500; letter-spacing: .5px;
+  border-radius: 8px; padding: 0 4px; min-height: 16px;
+}
+
+/* Menus / popovers: 4dp corner, surface-container, elevation 2 */
+[role="menu"], [class*="dropdown"] {
+  border-radius: 4px;
+  background: var(--md-sys-color-surface-container);
+  box-shadow: 0 1px 2px rgba(0,0,0,.3), 0 2px 6px 2px rgba(0,0,0,.15);
+}
+
+/* Dialogs: 28dp corner, surface-container-high */
+dialog, [role="dialog"] {
+  border-radius: 28px;
+  background: var(--md-sys-color-surface-container-high);
+  border: 0;
+}
