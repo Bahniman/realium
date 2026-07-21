@@ -167,7 +167,7 @@ function Nav() {
               href="https://bahniman.github.io"
               className="text-xs sm:text-sm font-medium text-foreground/75 hover:text-foreground transition-colors mr-2 whitespace-nowrap"
             >
-              <span className="hidden sm:inline">← Back to Portal</span>
+              <span className="hidden sm:inline">← Back to portfolio</span>
               <span className="sm:hidden">← Portal</span>
             </a>
             <ThemeToggle />

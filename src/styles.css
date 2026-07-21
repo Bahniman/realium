@@ -5,8 +5,8 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-sans: "Roboto", "Inter Variable", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "Roboto Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-sans: "Archivo", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Martian Mono", ui-monospace, monospace;
   
   --radius-xs: 4px;
   --radius-sm: 8px;
@@ -73,88 +73,87 @@
 }
 
 :root {
-  /* Realium Custom M3 Green Light */
-  --md-sys-color-primary: #006d33;
-  --md-sys-color-on-primary: #ffffff;
-  --md-sys-color-primary-container: #92f7b0;
-  --md-sys-color-on-primary-container: #00210b;
-  
-  --md-sys-color-secondary: #4f6354;
-  --md-sys-color-on-secondary: #ffffff;
-  --md-sys-color-secondary-container: #d2e8d5;
-  --md-sys-color-on-secondary-container: #0c1f13;
-  
-  --md-sys-color-tertiary: #3a656f;
-  --md-sys-color-on-tertiary: #ffffff;
-  --md-sys-color-tertiary-container: #beeaf6;
-  --md-sys-color-on-tertiary-container: #001f26;
-  
-  --md-sys-color-error: #ba1a1a;
-  --md-sys-color-on-error: #ffffff;
-  --md-sys-color-error-container: #ffdad6;
-  --md-sys-color-on-error-container: #410002;
-  
-  --md-sys-color-surface: #f6fbf4; 
-  --md-sys-color-on-surface: #191c19;
-  --md-sys-color-surface-variant: #dce5dc;
-  --md-sys-color-on-surface-variant: #414942;
-  
-  --md-sys-color-surface-container-lowest: #ffffff;
-  --md-sys-color-surface-container-low: #f0f5ee;
-  --md-sys-color-surface-container: #eaebe8;
-  --md-sys-color-surface-container-high: #e4e9e2;
-  --md-sys-color-surface-container-highest: #dee3dc;
-  
-  --md-sys-color-outline: #717972;
-  --md-sys-color-outline-variant: #c0c9c0;
+  /* shared with the portfolio so the whole set reads as one document */
+  --md-sys-color-primary: #0B6B34;
+  --md-sys-color-on-primary: #FFFFFF;
+  --md-sys-color-primary-container: #C9EBD5;
+  --md-sys-color-on-primary-container: #04240F;
 
-  --md-sys-color-inverse-surface: #2e312e;
-  --md-sys-color-inverse-on-surface: #eff2ec;
-  --md-sys-color-inverse-primary: #77da96;
+  --md-sys-color-secondary: #4A4A4A;
+  --md-sys-color-on-secondary: #FFFFFF;
+  --md-sys-color-secondary-container: #E8E8E7;
+  --md-sys-color-on-secondary-container: #121212;
+
+  --md-sys-color-tertiary: #0B6B34;
+  --md-sys-color-on-tertiary: #FFFFFF;
+  --md-sys-color-tertiary-container: #C9EBD5;
+  --md-sys-color-on-tertiary-container: #04240F;
+
+  --md-sys-color-error: #CF2A0E;
+  --md-sys-color-on-error: #FFFFFF;
+  --md-sys-color-error-container: #FBDAD4;
+  --md-sys-color-on-error-container: #3F0800;
+
+  --md-sys-color-surface: #F1F1F1;
+  --md-sys-color-on-surface: #121212;
+  --md-sys-color-surface-variant: #E8E8E7;
+  --md-sys-color-on-surface-variant: #4A4A4A;
+
+  --md-sys-color-surface-container-lowest: #FFFFFF;
+  --md-sys-color-surface-container-low: #F7F7F7;
+  --md-sys-color-surface-container: #EDEDED;
+  --md-sys-color-surface-container-high: #E6E6E6;
+  --md-sys-color-surface-container-highest: #DEDEDE;
+
+  --md-sys-color-outline: #8A8A88;
+  --md-sys-color-outline-variant: #D4D4D3;
+
+  --md-sys-color-inverse-surface: #121212;
+  --md-sys-color-inverse-on-surface: #F1F1F1;
+  --md-sys-color-inverse-primary: #4FD07E;
 
   --scene-bg: var(--md-sys-color-surface);
   --scene-bg-gradient: var(--md-sys-color-surface);
 }
 
 .dark {
-  /* Realium Custom M3 Green Dark */
-  --md-sys-color-primary: #77da96;
-  --md-sys-color-on-primary: #003917;
-  --md-sys-color-primary-container: #005224;
-  --md-sys-color-on-primary-container: #92f7b0;
-  
-  --md-sys-color-secondary: #b6ccb9;
-  --md-sys-color-on-secondary: #213527;
-  --md-sys-color-secondary-container: #374b3d;
-  --md-sys-color-on-secondary-container: #d2e8d5;
-  
-  --md-sys-color-tertiary: #a2ced9;
-  --md-sys-color-on-tertiary: #00363e;
-  --md-sys-color-tertiary-container: #204d56;
-  --md-sys-color-on-tertiary-container: #beeaf6;
-  
-  --md-sys-color-error: #ffb4ab;
-  --md-sys-color-on-error: #690005;
-  --md-sys-color-error-container: #93000a;
-  --md-sys-color-on-error-container: #ffdad6;
-  
-  --md-sys-color-surface: #111411;
-  --md-sys-color-on-surface: #dee3dc;
-  --md-sys-color-surface-variant: #414942;
-  --md-sys-color-on-surface-variant: #c0c9c0;
-  
-  --md-sys-color-surface-container-lowest: #0b0f0c;
-  --md-sys-color-surface-container-low: #191c19;
-  --md-sys-color-surface-container: #1d201d;
-  --md-sys-color-surface-container-high: #272b27;
-  --md-sys-color-surface-container-highest: #323632;
-  
-  --md-sys-color-outline: #8a938b;
-  --md-sys-color-outline-variant: #414942;
+  --md-sys-color-primary: #4FD07E;
+  --md-sys-color-on-primary: #101010;
+  --md-sys-color-primary-container: #0E3D22;
+  --md-sys-color-on-primary-container: #C9EBD5;
 
-  --md-sys-color-inverse-surface: #dee3dc;
-  --md-sys-color-inverse-on-surface: #2e312e;
-  --md-sys-color-inverse-primary: #006d33;
+  --md-sys-color-secondary: #A6A6A3;
+  --md-sys-color-on-secondary: #101010;
+  --md-sys-color-secondary-container: #262625;
+  --md-sys-color-on-secondary-container: #EDEDEB;
+
+  --md-sys-color-tertiary: #4FD07E;
+  --md-sys-color-on-tertiary: #101010;
+  --md-sys-color-tertiary-container: #0E3D22;
+  --md-sys-color-on-tertiary-container: #C9EBD5;
+
+  --md-sys-color-error: #FF5233;
+  --md-sys-color-on-error: #1A0500;
+  --md-sys-color-error-container: #4A1206;
+  --md-sys-color-on-error-container: #FFD9D0;
+
+  --md-sys-color-surface: #101010;
+  --md-sys-color-on-surface: #EDEDEB;
+  --md-sys-color-surface-variant: #202020;
+  --md-sys-color-on-surface-variant: #A6A6A3;
+
+  --md-sys-color-surface-container-lowest: #0A0A0A;
+  --md-sys-color-surface-container-low: #151515;
+  --md-sys-color-surface-container: #171716;
+  --md-sys-color-surface-container-high: #1E1E1D;
+  --md-sys-color-surface-container-highest: #262625;
+
+  --md-sys-color-outline: #6E6E6C;
+  --md-sys-color-outline-variant: #2A2A29;
+
+  --md-sys-color-inverse-surface: #EDEDEB;
+  --md-sys-color-inverse-on-surface: #101010;
+  --md-sys-color-inverse-primary: #0B6B34;
 
   --scene-bg: var(--md-sys-color-surface);
   --scene-bg-gradient: var(--md-sys-color-surface);
@@ -243,208 +242,94 @@
 [class*="border-amber"]   { border-color: color-mix(in srgb, var(--realium-gold) 45%, transparent) !important; }
 [class*="border-rose"]    { border-color: color-mix(in srgb, var(--md-sys-color-error) 45%, transparent) !important; }
 
-/* ================================================================
-   M3 Expressive polish — motion, focus, selection, scrollbars
-   ================================================================ */
-html { scroll-behavior: smooth; }
-::selection { background: var(--md-sys-color-primary); color: var(--md-sys-color-on-primary); }
 
-/* visible, on-brand focus ring (accessibility) */
-:where(a, button, [role="button"], input, select, textarea):focus-visible {
-  outline: 3px solid var(--md-sys-color-primary);
-  outline-offset: 2px;
-  border-radius: 8px;
-}
+/* ==================================================================
+   Portfolio design system — shared with bahniman.github.io
+   Square edges, hairline rules, Archivo + Martian Mono, one signal red.
+   ================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Martian+Mono:wght@300..600&display=swap');
 
-/* headings: emphasized weight + optical tracking per M3 Expressive */
-h1, h2 { font-weight: 500; letter-spacing: 0; }
-h3, h4 { font-weight: 500; letter-spacing: 0; }
+:root { --sig: #CF2A0E; }
+.dark { --sig: #FF5233; }
 
-/* M3 state layer on pill actions */
-a[class*="rounded-full"][class*="bg-primary"],
-button[class*="rounded-full"][class*="bg-primary"] {
-  transition: background-color .2s cubic-bezier(0.2,0,0,1),
-              box-shadow .3s cubic-bezier(0.2,0,0,1),
-              border-radius .45s cubic-bezier(0.34,1.42,0.64,1),
-              transform .45s cubic-bezier(0.34,1.42,0.64,1);
-}
-a[class*="rounded-full"][class*="bg-primary"]:hover,
-button[class*="rounded-full"][class*="bg-primary"]:hover {
-  border-radius: 14px;
-  box-shadow: 0 1px 2px rgba(0,0,0,.3), 0 2px 6px 2px rgba(0,0,0,.15);
-}
-a[class*="rounded-full"]:active, button[class*="rounded-full"]:active { transform: scale(.96); }
-
-/* tonal scrollbars */
-* { scrollbar-width: thin; scrollbar-color: var(--md-sys-color-outline) transparent; }
-*::-webkit-scrollbar { width: 10px; height: 10px; }
-*::-webkit-scrollbar-track { background: transparent; }
-*::-webkit-scrollbar-thumb {
-  background: var(--md-sys-color-outline-variant);
-  border-radius: 9999px;
-  border: 3px solid transparent;
-  background-clip: content-box;
-}
-*::-webkit-scrollbar-thumb:hover { background: var(--md-sys-color-outline); background-clip: content-box; }
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
-  html { scroll-behavior: auto; }
-}
-
-/* ================================================================
-   Interaction correction + portal-parity enhancement layer
-   Hover = state layer + elevation (shape stays put).
-   Shape morph happens on PRESS only, which is the M3 Expressive rule.
-   ================================================================ */
-a[class*="rounded-full"][class*="bg-primary"]:hover,
-button[class*="rounded-full"][class*="bg-primary"]:hover {
-  border-radius: 9999px;                 /* cancel the earlier hover morph */
-  filter: brightness(1.06);
-  box-shadow: 0 1px 2px rgba(0,0,0,.3), 0 2px 6px 2px rgba(0,0,0,.15);
-}
-a[class*="rounded-full"]:active,
-button[class*="rounded-full"]:active {
-  border-radius: 14px;                   /* morph on press */
-  transform: scale(.96);
-}
-
-/* section headings carry the same accent bar as the portal */
-main h2::before {
-  content: '';
-  display: block;
-  width: 28px; height: 3px;
-  border-radius: 2px;
-  background: var(--md-sys-color-primary);
-  margin-bottom: 16px;
-}
-
-/* softer section rules */
-main .border-t { border-top-color: var(--md-sys-color-outline-variant) !important; }
-
-/* footer to match the portal */
-footer {
-  background: var(--md-sys-color-surface-container-low) !important;
-  border-top: 1px solid var(--md-sys-color-outline-variant);
-}
-
-/* first paint: gentle rise, staggered by section */
-@media (prefers-reduced-motion: no-preference) {
-  main > div > section, main > section {
-    animation: sectionIn .65s cubic-bezier(0.05, 0.7, 0.1, 1) both;
-  }
-  main > div > section:nth-of-type(1), main > section:nth-of-type(1) { animation-delay: .02s; }
-  main > div > section:nth-of-type(2), main > section:nth-of-type(2) { animation-delay: .10s; }
-  main > div > section:nth-of-type(3), main > section:nth-of-type(3) { animation-delay: .16s; }
-  main > div > section:nth-of-type(n+4), main > section:nth-of-type(n+4) { animation-delay: .20s; }
-}
-@keyframes sectionIn { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
-
-/* ================================================================
-   Material 3 Design Kit conformance
-   Values read from the kit itself:
-     Buttons  (57994:2227) — S 40dp: padding 16/10, icon 20, Label Large
-                             M 56dp: padding 24/16, icon 24, Title Medium
-                             corner 100px, all sizes
-     Cards    (52347:27854) — corner 12dp; outlined = surface + outline-variant
-     Chips    — 32dp tall, 8dp corner
-   ================================================================ */
-
-/* pill actions -> kit button geometry */
-a[class*="rounded-full"][class*="px-6"],
-button[class*="rounded-full"][class*="px-6"] {
-  height: 40px;
-  padding: 10px 16px !important;
-  gap: 8px;
-  border-radius: 100px;
-  font-size: 14px; line-height: 20px; font-weight: 500; letter-spacing: .1px;
-}
-/* the hero pair reads as Medium */
-section:first-of-type a[class*="rounded-full"][class*="px-6"] {
-  height: 56px;
-  padding: 16px 24px !important;
-  font-size: 16px; line-height: 24px; letter-spacing: .15px;
-}
-
-/* cards -> 12dp corner */
-[class*="rounded-[16px]"], [class*="rounded-[20px]"], [class*="rounded-2xl"] { border-radius: 12px !important; }
-[class*="rounded-[12px]"] { border-radius: 12px !important; }
-[class*="rounded-xl"] { border-radius: 12px !important; }
-
-/* chips -> 32dp / 8dp */
-span[class*="rounded-full"][class*="px-4"],
-div[class*="rounded-lg"][class*="px-4"][class*="text-label-lg"] {
-  min-height: 32px; border-radius: 8px; padding: 6px 16px;
-  font-size: 14px; line-height: 20px; font-weight: 500; letter-spacing: .1px;
-}
-
-/* icon buttons -> 40dp container, 24dp glyph */
-header a[class*="rounded-full"][class*="p-2"],
-header button[class*="rounded-full"] {
-  width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center;
-}
-
-/* ================================================================
-   M3 component conformance — remaining components
-   Retrofits the app's existing markup onto Material 3 geometry.
-   ================================================================ */
-
-/* Top app bar: 64dp, Title Large */
-header[class*="fixed"] > div > div { min-height: 64px; }
-header[class*="fixed"] [class*="text-title-lg"] { font-size: 22px; line-height: 28px; font-weight: 400; letter-spacing: 0; }
-
-/* Tabs: 48dp, Title Small label, 3dp indicator */
-[role="tablist"] > button, [class*="tab"] > button[class*="flex-1"] {
-  min-height: 48px;
-  font-size: 14px; line-height: 20px; font-weight: 500; letter-spacing: .1px;
-}
-
-/* Text fields / inputs: 56dp, 4dp corner, 1dp outline (2dp on focus) */
-input[type="text"], input[type="number"], input[type="email"], input[type="search"], select, textarea {
-  border-radius: 4px;
-  border: 1px solid var(--md-sys-color-outline);
-  background: transparent;
-  color: var(--md-sys-color-on-surface);
+body {
   font-family: var(--font-sans);
-  font-size: 16px; line-height: 24px; letter-spacing: .5px;
-  padding: 0 16px;
+  font-variation-settings: "wdth" 100;
+  -webkit-font-smoothing: antialiased;
 }
-input[type="text"], input[type="number"], input[type="email"], input[type="search"], select { height: 56px; }
+::selection { background: var(--sig); color: #fff; }
+
+/* Type: expanded grotesque for headings, tabular mono for data */
+h1, h2, h3, h4 {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  font-variation-settings: "wdth" 110;
+}
+h1 { font-weight: 800; line-height: 0.96; }
+.font-mono, code, pre, kbd, samp {
+  font-family: var(--font-mono) !important;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+
+/* Square the whole surface language: this set has no rounded corners */
+[class*="rounded"] { border-radius: 2px !important; }
+[class*="shadow"], [class*="drop-shadow"] { box-shadow: none !important; }
+
+/* Borders are hairlines, never tinted panels pretending to be cards */
+[class*="border"] { border-color: var(--md-sys-color-outline-variant) !important; }
+
+/* Actions: square, ink-filled, colour on hover. Matches the portfolio .btn */
+a[class*="rounded"][class*="bg-primary"],
+button[class*="rounded"][class*="bg-primary"] {
+  background: var(--md-sys-color-on-surface) !important;
+  color: var(--md-sys-color-surface) !important;
+  border-radius: 2px !important;
+  font-weight: 600;
+  transition: background-color .2s cubic-bezier(0.22,1,0.36,1), color .2s;
+}
+a[class*="rounded"][class*="bg-primary"]:hover,
+button[class*="rounded"][class*="bg-primary"]:hover {
+  background: var(--sig) !important;
+  color: #fff !important;
+}
+
+/* Back-to-portfolio and header links read as document metadata */
+header a[href*="bahniman.github.io"] {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Focus is visible and on-brand */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--sig);
+  outline-offset: 3px;
+}
+
+/* Inputs: square, hairline, 2px signal on focus */
+input, select, textarea {
+  border-radius: 2px !important;
+  border: 1px solid var(--md-sys-color-outline) !important;
+  background: transparent;
+  font-family: var(--font-sans);
+}
 input:focus, select:focus, textarea:focus {
   outline: none;
-  border: 2px solid var(--md-sys-color-primary);
+  border: 2px solid var(--sig) !important;
 }
+input[type="range"] { border: 0 !important; accent-color: var(--md-sys-color-primary); }
 
-/* Range sliders: 4dp track, primary handle */
-input[type="range"] {
-  height: 4px; padding: 0; border: 0; border-radius: 9999px;
-  background: var(--md-sys-color-surface-container-highest);
-  accent-color: var(--md-sys-color-primary);
-}
-
-/* Dividers: 1dp outline-variant */
 hr { border: 0; height: 1px; background: var(--md-sys-color-outline-variant); }
 
-/* List rows: 56dp minimum, 16dp padding */
-ul[class*="space-y"] > li { min-height: 40px; }
+/* Tonal scrollbars */
+* { scrollbar-width: thin; scrollbar-color: var(--md-sys-color-outline-variant) transparent; }
+*::-webkit-scrollbar { width: 9px; height: 9px; }
+*::-webkit-scrollbar-track { background: transparent; }
+*::-webkit-scrollbar-thumb { background: var(--md-sys-color-outline-variant); }
 
-/* Badges / status pills: Label Small on a tonal container */
-[class*="uppercase"][class*="rounded"][class*="text-[9px]"],
-[class*="uppercase"][class*="rounded"][class*="text-[10px]"] {
-  font-size: 11px; line-height: 16px; font-weight: 500; letter-spacing: .5px;
-  border-radius: 8px; padding: 0 4px; min-height: 16px;
-}
-
-/* Menus / popovers: 4dp corner, surface-container, elevation 2 */
-[role="menu"], [class*="dropdown"] {
-  border-radius: 4px;
-  background: var(--md-sys-color-surface-container);
-  box-shadow: 0 1px 2px rgba(0,0,0,.3), 0 2px 6px 2px rgba(0,0,0,.15);
-}
-
-/* Dialogs: 28dp corner, surface-container-high */
-dialog, [role="dialog"] {
-  border-radius: 28px;
-  background: var(--md-sys-color-surface-container-high);
-  border: 0;
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
 }
