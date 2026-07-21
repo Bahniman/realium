@@ -242,3 +242,52 @@
 [class*="border-indigo"]  { border-color: color-mix(in srgb, var(--md-sys-color-tertiary) 45%, transparent) !important; }
 [class*="border-amber"]   { border-color: color-mix(in srgb, var(--realium-gold) 45%, transparent) !important; }
 [class*="border-rose"]    { border-color: color-mix(in srgb, var(--md-sys-color-error) 45%, transparent) !important; }
+
+/* ================================================================
+   M3 Expressive polish — motion, focus, selection, scrollbars
+   ================================================================ */
+html { scroll-behavior: smooth; }
+::selection { background: var(--md-sys-color-primary); color: var(--md-sys-color-on-primary); }
+
+/* visible, on-brand focus ring (accessibility) */
+:where(a, button, [role="button"], input, select, textarea):focus-visible {
+  outline: 3px solid var(--md-sys-color-primary);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+/* headings: emphasized weight + optical tracking per M3 Expressive */
+h1, h2 { font-weight: 500; letter-spacing: -0.5px; }
+h3, h4 { font-weight: 500; letter-spacing: -0.2px; }
+
+/* M3 state layer on pill actions */
+a[class*="rounded-full"][class*="bg-primary"],
+button[class*="rounded-full"][class*="bg-primary"] {
+  transition: background-color .2s cubic-bezier(0.2,0,0,1),
+              box-shadow .3s cubic-bezier(0.2,0,0,1),
+              border-radius .45s cubic-bezier(0.34,1.42,0.64,1),
+              transform .45s cubic-bezier(0.34,1.42,0.64,1);
+}
+a[class*="rounded-full"][class*="bg-primary"]:hover,
+button[class*="rounded-full"][class*="bg-primary"]:hover {
+  border-radius: 14px;
+  box-shadow: 0 1px 2px rgba(0,0,0,.3), 0 2px 6px 2px rgba(0,0,0,.15);
+}
+a[class*="rounded-full"]:active, button[class*="rounded-full"]:active { transform: scale(.96); }
+
+/* tonal scrollbars */
+* { scrollbar-width: thin; scrollbar-color: var(--md-sys-color-outline) transparent; }
+*::-webkit-scrollbar { width: 10px; height: 10px; }
+*::-webkit-scrollbar-track { background: transparent; }
+*::-webkit-scrollbar-thumb {
+  background: var(--md-sys-color-outline-variant);
+  border-radius: 9999px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+*::-webkit-scrollbar-thumb:hover { background: var(--md-sys-color-outline); background-clip: content-box; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+  html { scroll-behavior: auto; }
+}
