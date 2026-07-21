@@ -257,8 +257,8 @@ html { scroll-behavior: smooth; }
 }
 
 /* headings: emphasized weight + optical tracking per M3 Expressive */
-h1, h2 { font-weight: 500; letter-spacing: -0.5px; }
-h3, h4 { font-weight: 500; letter-spacing: -0.2px; }
+h1, h2 { font-weight: 500; letter-spacing: 0; }
+h3, h4 { font-weight: 500; letter-spacing: 0; }
 
 /* M3 state layer on pill actions */
 a[class*="rounded-full"][class*="bg-primary"],
