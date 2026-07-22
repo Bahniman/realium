@@ -333,3 +333,57 @@ hr { border: 0; height: 1px; background: var(--md-sys-color-outline-variant); }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
 }
+
+
+/* ==================================================================
+   Consistency layer — make Realium wear the same clothes as the
+   portfolio and the other three project pages.
+   Its structure already matches (problem, mechanism, red team,
+   validation, sources); this flattens the surface treatment.
+   ================================================================== */
+
+/* The floating rounded nav pill becomes a flat ruled masthead */
+header > div:first-child,
+header nav {
+  border-radius: 0 !important;
+}
+header [class*="rounded-full"], header [class*="rounded-2xl"], header [class*="rounded-xl"] {
+  border-radius: 2px !important;
+}
+
+/* GlowCard and every panel: hairline box, no glow, no fill gradient */
+[class*="glow"], [class*="Glow"] {
+  border-radius: 2px !important;
+  box-shadow: none !important;
+  background-image: none !important;
+}
+
+/* Panels sit on the page, not on tinted plates */
+section [class*="rounded"] {
+  border-radius: 2px !important;
+}
+
+/* Headings use the shared expanded grotesque scale */
+h1 { font-size: clamp(2.6rem, 7.4vw, 5.25rem) !important; line-height: 0.94 !important; font-weight: 800 !important; font-variation-settings: "wdth" 112 !important; letter-spacing: -0.035em !important; }
+h2 { font-size: clamp(1.6rem, 3.4vw, 2.5rem) !important; line-height: 1.05 !important; font-weight: 700 !important; font-variation-settings: "wdth" 108 !important; letter-spacing: -0.025em !important; }
+h3 { font-weight: 700 !important; letter-spacing: -0.02em !important; }
+
+/* Section rules instead of floating cards */
+section + section { border-top: 1px solid var(--md-sys-color-outline-variant); }
+
+/* Kill the remaining decorative motion surfaces */
+[class*="blur-"], [class*="backdrop-blur"] { backdrop-filter: none !important; }
+[class*="bg-gradient"] { background-image: none !important; }
+
+/* Masthead: flat, full-width, hairline bottom — same as the other pages */
+header { background: color-mix(in srgb, var(--md-sys-color-surface) 88%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--md-sys-color-outline-variant); }
+header > div { margin-top: 0 !important; max-width: 1280px !important; }
+header .glass {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  padding-left: 0 !important; padding-right: 0 !important;
+  min-height: 64px;
+}
+/* scroll-progress bar keeps its job, in the project's own colour */
+header .origin-left { background: var(--md-sys-color-primary) !important; }
