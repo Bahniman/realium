@@ -1,7 +1,6 @@
 import { Fragment, useEffect, useRef, useState } from "react";
-import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import {
-  Sparkles,
   ArrowRight,
   Trophy,
 
@@ -19,7 +18,8 @@ import {
 } from "lucide-react";
 import { DualKeyDemo } from "@/components/dual-key-demo";
 import { SuretyPlayground } from "@/components/surety-playground";
-import { ThemeToggle } from "@/components/theme-toggle";
+import { SuiteHeader } from "@/components/suite-header";
+import { BASE_FINANCE_SCENARIO } from "@/lib/finance-scenario";
 import { LiquidityCalculator } from "@/components/liquidity-calculator";
 import { GlowCard } from "@/components/glow-card";
 import { PipelineVisualizer } from "@/components/pipeline-visualizer";
@@ -29,8 +29,8 @@ const fadeUp = {
   initial: { opacity: 0, y: 15 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true, margin: "-80px" },
-  transition: { duration: 0.5, ease: "easeOut" },
-};
+  transition: { duration: 0.5, ease: "easeOut" as const },
+} as const;
 
 /* ============================ HOOKS / HELPERS ============================ */
 
@@ -103,100 +103,19 @@ function CountUpStat({ text }: { text: string }) {
   );
 }
 
-/* ============================ NAV ============================ */
-
-function Nav() {
-  const links = [
-    { label: "Problem", id: "problem" },
-    { label: "Platform", id: "architecture" },
-    { label: "Money flow", id: "flow" },
-    { label: "The hard question", id: "redteam" },
-    { label: "Validation", id: "validation" },
-  ];
-  const active = useActiveSection(links.map((l) => l.id));
-  const { scrollYProgress } = useScroll();
-  const progress = useSpring(scrollYProgress, {
-    stiffness: 120,
-    damping: 30,
-    mass: 0.2,
-  });
-  return (
-    <header className="fixed top-0 left-0 right-0 z-50">
-      <motion.div
-        style={{ scaleX: progress }}
-        className="absolute top-0 left-0 right-0 h-0.5 origin-left bg-gradient-to-r from-emerald-500 to-indigo-500"
-      />
-      <div className="mx-auto mt-4 max-w-[1440px] px-4 sm:px-8 lg:px-12 xl:px-16">
-        <div className="glass flex items-center justify-between rounded-2xl px-4 py-3 sm:px-6">
-          <a href="#" className="flex items-center gap-2.5">
-            <span className="text-base font-medium text-foreground">
-              Realium
-            </span>
-          </a>
-          <nav className="hidden items-center gap-1 md:flex">
-            {links.map((l) => {
-              const isActive = active === l.id;
-              return (
-                <a
-                  key={l.id}
-                  href={`#${l.id}`}
-                  className={`relative rounded-md px-3 py-1.5 text-sm transition-colors ${
-                    isActive
-                      ? "text-foreground"
-                      : "text-foreground/55 hover:text-foreground"
-                  }`}
-                >
-                  {isActive && (
-                    <motion.span
-                      layoutId="nav-active"
-                      className="absolute inset-0 -z-10 rounded-md bg-foreground/8 ring-1 ring-inset ring-foreground/10"
-                      transition={{
-                        type: "spring",
-                        stiffness: 380,
-                        damping: 30,
-                      }}
-                    />
-                  )}
-                  {l.label}
-                </a>
-              );
-            })}
-          </nav>
-          <div className="flex items-center gap-2">
-            <a
-              href="https://bahniman.github.io"
-              className="text-xs sm:text-sm font-medium text-foreground/75 hover:text-foreground transition-colors mr-2 whitespace-nowrap"
-            >
-              <span className="hidden sm:inline">← Back to portfolio</span>
-              <span className="sm:hidden">← Portal</span>
-            </a>
-            <ThemeToggle />
-            <a
-              href="#try"
-              className="hidden sm:inline-flex items-center justify-center rounded-lg bg-primary hover:bg-primary/90 px-4 py-2 text-sm font-medium text-on-primary transition-colors"
-            >
-              Try the demo
-            </a>
-          </div>
-        </div>
-      </div>
-    </header>
-  );
-}
-
 /* ============================ HERO ============================ */
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden pt-32 pb-8 sm:pt-36 lg:pt-40">
+    <section className="riso-hero relative overflow-hidden pt-32 pb-8 sm:pt-36 lg:pt-40">
 
 
       <div className="mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-12 xl:px-16">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-center">
           {/* Left: Text copy */}
           <div className="text-left lg:col-span-7 xl:col-span-6 space-y-6">
-            <motion.div {...fadeUp} className="flex justify-start">
-              <div className="inline-flex flex-wrap items-center gap-2 rounded-full border border-amber-400/20 bg-gradient-to-r from-amber-500/10 via-foreground/[0.03] to-emerald-500/10 px-4 py-1.5 text-xs text-foreground/80 shadow-[0_0_40px_-10px_rgb(245,158,11,0.25)] backdrop-blur">
+            <div  className="flex justify-start">
+              <div className="riso-proof inline-flex flex-wrap items-center gap-2 rounded-lg border px-4 py-2 text-xs text-foreground/80">
                 <Trophy className="h-3.5 w-3.5 text-amber-400" />
                 <span className="font-medium text-foreground">Top 3</span>
                 <span className="text-foreground/40">·</span>
@@ -204,53 +123,30 @@ function Hero() {
                 <span className="text-foreground/40">·</span>
                 <span className="text-foreground/60">July 2026</span>
               </div>
-            </motion.div>
+            </div>
 
-            <motion.div
-              {...fadeUp}
-              transition={{ ...fadeUp.transition, delay: 0.04 }}
+            <div
               className="text-[11px] leading-relaxed text-muted-foreground sm:text-xs"
             >
               Presented to the conclave&apos;s panel of senior technology leaders — CIOs,
               CTOs and CDIOs from leading firms across banking, logistics, and consumer sectors.
-            </motion.div>
+            </div>
 
-            <motion.div
-              {...fadeUp}
-              transition={{ ...fadeUp.transition, delay: 0.08 }}
-              className="flex justify-start"
-            >
-              <div className="inline-flex items-center gap-2 rounded-full border border-foreground/10 bg-foreground/5 px-3.5 py-1 text-[11px] text-foreground/60 backdrop-blur">
-                <Sparkles className="h-3 w-3 text-emerald-400" />
-                Built for ReEnvision 5.0
-                <span className="mx-1 h-1 w-1 rounded-full bg-foreground/30" />
-                Human-AI Synergy · XLRI · Group 10
-              </div>
-            </motion.div>
-
-            <motion.h1
-              {...fadeUp}
-              transition={{ ...fadeUp.transition, delay: 0.05 }}
+            <h1
               className="text-4xl font-medium sm:text-5xl lg:text-6xl xl:text-7xl leading-[1.1]"
             >
-              <span className="bg-gradient-to-r from-emerald-400 via-foreground to-indigo-400 bg-clip-text text-transparent">
-                Money that moves at the speed of verified reality.
-              </span>
-            </motion.h1>
+              Verified work, <em>earlier liquidity.</em>
+            </h1>
 
-            <motion.p
-              {...fadeUp}
-              transition={{ ...fadeUp.transition, delay: 0.1 }}
+            <p
               className="text-base text-muted-foreground sm:text-lg max-w-xl"
             >
-              Realium is the settlement rail for public works. It turns physical,
-              site-verified progress into records a bank trusts enough to pay out
-              immediately — cutting contractor wait times from 148 days to 1.
-            </motion.p>
+              Realium proposes a settlement rail for public works. Its worked
+              example models a next-day advance against a 148-day treasury
+              settlement; the financing terms and timing remain unvalidated.
+            </p>
 
-            <motion.div
-              {...fadeUp}
-              transition={{ ...fadeUp.transition, delay: 0.15 }}
+            <div
               className="flex flex-col gap-3 sm:flex-row pt-4"
             >
               <a
@@ -266,36 +162,29 @@ function Hero() {
               >
                 Addressing bottlenecks
               </a>
-            </motion.div>
+            </div>
 
             {/* Scroll indicator prompt urging users to scroll down */}
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1.2, duration: 1 }}
-              onClick={() => document.getElementById('problem')?.scrollIntoView({ behavior: 'smooth' })}
-              className="mt-14 inline-flex items-center gap-3 text-[10px] sm:text-xs uppercase tracking-[0.25em] text-muted-foreground select-none cursor-pointer hover:text-foreground transition-colors"
+            <a
+              href="#problem"
+              aria-label="Explore the public works payment problem"
+              className="mt-14 inline-flex items-center gap-3 text-[10px] sm:text-xs uppercase tracking-[0.25em] text-muted-foreground select-none hover:text-foreground transition-colors"
             >
               <span>Scroll to explore</span>
-              <motion.div
-                animate={{ y: [0, 6, 0] }}
-                transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+              <div
                 className="flex h-7 w-4 items-start justify-center rounded-full border border-foreground/30 p-1"
               >
                 <div className="h-1.5 w-1 rounded-full bg-emerald-500" />
-              </motion.div>
-            </motion.div>
+              </div>
+            </a>
           </div>
 
           {/* Right: Pipeline Visualizer */}
           <div className="lg:col-span-5 xl:col-span-6 w-full">
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            <div
             >
               <PipelineVisualizer />
-            </motion.div>
+            </div>
           </div>
         </div>
       </div>
@@ -309,26 +198,20 @@ const problemStats = [
   {
     stat: "₹96,000 Cr",
     label: "Maharashtra alone",
-    body: "Contractor dues that triggered the 2025 statewide work stoppage. One state. One department.",
+    body: "An April 2026 report cited unpaid contractor dues in Maharashtra.",
     src: "1",
   },
   {
-    stat: "₹1–3 Lakh Cr",
-    label: "National range",
-    body: "Estimated capital stuck in delayed public-works payments across India — NITI Aayog member estimate to industry high.",
-    src: "2",
+    stat: "Dispute risk",
+    label: "Pilot question",
+    body: "A pilot would need to evaluate disputed bills, ownership of claims, and the time to resolution.",
+    src: "scenario",
   },
   {
-    stat: "7–8 Years",
-    label: "Arbitration",
-    body: "Average duration of Indian construction arbitrations. ~85% of claims remain pending.",
-    src: "3",
-  },
-  {
-    stat: "18–24% p.a.",
-    label: "Bridge finance",
-    body: "What contractors pay in the informal market to survive the wait. It gets priced into every bid.",
-    src: "—",
+    stat: "18% p.a.",
+    label: "Scenario input",
+    body: "The local comparison uses an 18% annual-rate assumption. It is not a survey of informal-credit pricing.",
+    src: "scenario",
   },
 ];
 
@@ -340,12 +223,13 @@ function Problem() {
           The problem
         </div>
         <h2 className="mt-3 text-3xl font-medium text-foreground sm:text-5xl">
-          The largest working-capital sink in the Indian economy.
+          A significant working-capital challenge.
         </h2>
         <p className="mt-4 max-w-2xl text-muted-foreground">
-          Imagine you build a road for the government. You finish the job. You send the bill.
-          And then... nothing. You wait months, sometimes years. Realium solves this gap:
-          the wait between finishing work and actually getting paid.
+          In public-works contracting, completed work can precede payment by months as
+          measurements, approvals and treasury settlement progress. Contractors may face a
+          working-capital gap during that period. Realium proposes a way to make the evidence
+          and financing assumptions easier to inspect.
         </p>
       </motion.div>
 
@@ -372,7 +256,7 @@ function Problem() {
         ))}
       </div>
 
-      {/* Why digitisation alone failed */}
+      {/* Why digitisation alone may not be enough */}
       <motion.div
         {...fadeUp}
         className="mt-10"
@@ -381,40 +265,39 @@ function Problem() {
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_1.3fr]">
             <div>
               <div className="text-xs uppercase tracking-widest text-primary">
-                Why &quot;just digitise it&quot; failed
+                Why digitisation alone may not be enough
               </div>
               <h3 className="mt-2 text-2xl font-medium text-foreground">
-                CPWD&apos;s e-Measurement Book already exists.
+                CPWD&apos;s e-Measurement Book already exists. [2]
               </h3>
               <div className="mt-3 font-mono text-sm text-primary font-bold">
-                ~₹20,000 Cr/yr paid on it. Money is still slow.
+                Digital measurement records do not set settlement timing.
               </div>
             </div>
             <div className="text-foreground/90 space-y-4">
               <p>
-                A digital record is not a financial instrument. An e-MB entry sits
-                in a state IT system that no bank underwrites and no queue makes
-                attributable. The bottleneck was never the paper — it was that:
+              A digital measurement record does not automatically become a
+                financeable receivable. Lenders still need dependable evidence,
+                accountable approvals, and a way to understand payment timing:
               </p>
               <ul className="mt-3 space-y-3">
                 <li className="flex items-start gap-2.5 text-sm">
                   <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-[2px] bg-[#FF4D00]" />
                   <span>
-                    <strong className="text-foreground">The record isn&apos;t bank-grade:</strong> Financial systems cannot underwrite or lend against raw, unverified data inside state PWD networks.
+                    <strong className="text-foreground">Evidence needs a lender-ready form:</strong> Digitized measurements alone may not give a lender enough structured evidence to price an advance.
                   </span>
                 </li>
                 <li className="flex items-start gap-2.5 text-sm">
                   <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-[2px] bg-[#FF4D00]" />
                   <span>
-                    <strong className="text-foreground">Lack of process attribution:</strong> When processing delays occur, there is no structured system visibility into step-by-step ownership or timelines.
+                    <strong className="text-foreground">Approval timing is hard to price:</strong> A lender may not have a consistent view of where a bill is in a department&apos;s approval process.
                   </span>
                 </li>
               </ul>
               <p className="mt-4 text-sm text-muted-foreground">
-                Realium closes both bottlenecks. Verified evidence becomes a signed
-                instrument, and every human touch on that instrument is a signed,
-                timestamped event in a tamper-evident chain.
-                <span className="text-muted-foreground/60"> [4]</span>
+                Realium proposes a chain from site evidence to an engineer&apos;s
+                certification and a financeable record. A future implementation
+                would also log approvals and processing events for auditability.
               </p>
             </div>
           </div>
@@ -434,13 +317,14 @@ const layers = [
     icon: Eye,
     color: "emerald",
     title: "Proof: Digital measurements replace paper registers.",
-    body: "Site engineers record finished work through geo-tagged photos and digital measurement entries in the eMB portal. AI cross-checks quantities against the BOQ. The engineer confirms with a secure digital signature — machine audit plus human sign-off.",
+    body: "The proposed flow pairs geo-tagged site evidence and digital measurement entries with a quantity check against the BOQ. An authorized engineer would review and certify the result.",
     bullets: [
-      "Geo-tagged evidence: timestamped photos and GPS coordinates match the contract site",
-      "AI quantity audit vs. BOQ: cross-checks actual measurements against sanctioned items",
-      "Two locks on one door: automated audit + site engineer digital signature",
-      "Result: verified work turned into a trusted, tamper-evident digital record",
+      "Geo-tagged evidence: photos and measurements are tied to the contract site",
+      "Quantity check: compare measurements with sanctioned BOQ items",
+      "Two-key review: automated checks plus an authorized engineer certification",
+      "Proposed output: a record a lender can inspect and evaluate",
     ],
+    footnote: "These controls are proposed system behavior; this page does not connect to live work records or a lender.",
   },
   {
     n: "02",
@@ -448,14 +332,15 @@ const layers = [
     tag: "Authority",
     icon: UserCheck,
     color: "indigo",
-    title: "Permission: Every approval is signed, named, and timestamped.",
-    body: "Everyone who approves the bill has a clearly defined role and a digital signature. Every 'yes', every 'no', and every silence is recorded with a name. 'The file is moving' stops being an excuse when the system shows whose desk it has sat on for 47 days.",
+    title: "Authority: Make approval ownership visible.",
+    body: "The proposal assigns approvers clear roles and records approval events with names and timestamps. An audit trail could show which step is waiting and how long it has been there.",
     bullets: [
       "Fixed approval limits: limits who can approve what and where",
-      "Named and timestamped: every touch is recorded on a tamper-evident ledger",
-      "Active attribution: makes the approval queue fully visible to everyone",
-      "Non-approval is an event: files cannot be quietly ignored",
+      "Named and timestamped: record key approval actions",
+      "Visible queue: make the current workflow step easier to inspect",
+      "Aging items: flag delays for follow-up rather than infer intent",
     ],
+    footnote: "Event signing and audit storage remain implementation requirements, not features of this prototype.",
   },
   {
     n: "03",
@@ -463,16 +348,17 @@ const layers = [
     tag: "Liquidity",
     icon: Banknote,
     color: "amber",
-    title: "Money: Payout is routed the very next day.",
-    body: "The moment proof is locked in, a bank pays the contractor 60% of the bill on Day 1. The remaining 40% settles behind a holdback buffer that absorbs deductions first. Months of waiting become days.",
+    title: "Liquidity: Model an advance against a certified bill.",
+    body: "The example assumes a partner bank advances 60% on Day 1, with 40% held back until treasury settlement. The advance rate, pricing, and timing are pilot hypotheses, not a committed bank offer.",
     bullets: [
-      "Day-1 Cash Advance: bank pays 60% of the bill immediately",
-      "40% Holdback Buffer: absorbs any government deductions first",
-      "Contractor nets ~97%: avoids high informal market interest rates",
-      "Bank gets a safe investment: backed by site proof and sovereign payout",
+      "Worked example: a 60% Day-1 advance assumption",
+      "Holdback: reserve 40% for later deductions and settlement",
+      "Net proceeds: compare modeled charges with an informal-finance scenario",
+      "Risk still to validate: lender terms, deductions, and treasury timing",
     ],
+    footnote: "Illustrative scenario only; financing is not committed and no payment cycle has been run.",
   },
-];
+ ] satisfies Array<{ n: string; key: string; tag: string; icon: typeof Eye; color: string; title: string; body: string; bullets: string[]; footnote: string }>;
 
 function Architecture() {
   return (
@@ -486,7 +372,7 @@ function Architecture() {
         </h2>
         <p className="mt-4 max-w-2xl text-muted-foreground">
           Realium is one connected chain of custody. Each layer produces the
-          input the next layer needs. Nothing moves money alone.
+          input a later review step may need. The proposed flow keeps evidence and approval distinct.
         </p>
       </motion.div>
 
@@ -494,8 +380,8 @@ function Architecture() {
       <div className="mb-14 hidden lg:grid grid-cols-[1fr_auto_1fr_auto_1fr] items-stretch gap-0 select-none">
         {layers.map((l, i) => (
           <Fragment key={l.key}>
-            <div
-              onClick={() => document.getElementById(l.key)?.scrollIntoView({ behavior: 'smooth' })}
+            <a
+              href={l.key === "evidence" ? "#try" : l.key === "authority" ? "#mandate" : "#flow"}
               className="flex h-full min-h-[104px] flex-col justify-center rounded-lg border border-outline-variant bg-surface-container p-5 hover:bg-surface-container-high transition-colors cursor-pointer"
             >
               <div className="flex items-center gap-2">
@@ -519,7 +405,7 @@ function Architecture() {
                     ? "signed mandate → signed action"
                     : "instrument → advance → settle"}
               </div>
-            </div>
+            </a>
             {i < layers.length - 1 && (
               <div className="flex items-center self-center px-2">
                 <span
@@ -551,7 +437,16 @@ function Architecture() {
                   className="flex flex-col h-full cursor-pointer group" 
                   showTechBrackets={true} 
                   id={l.key} 
-                  onClick={() => document.getElementById(l.key === 'evidence' ? 'try' : l.key === 'authority' ? 'mandate' : 'flow')?.scrollIntoView({ behavior: 'smooth' })}
+                  role="link"
+                  tabIndex={0}
+                  aria-label={`Explore ${l.title}`}
+                  onClick={() => document.getElementById(l.key === 'evidence' ? 'try' : l.key === 'authority' ? 'mandate' : 'flow')?.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 'auto' : 'smooth' })}
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter" || event.key === " ") {
+                      event.preventDefault();
+                      document.getElementById(l.key === 'evidence' ? 'try' : l.key === 'authority' ? 'mandate' : 'flow')?.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 'auto' : 'smooth' });
+                    }
+                  }}
                 >
                   <div className="flex items-center justify-between">
                     <div
@@ -619,7 +514,7 @@ function Architecture() {
                             ? "bg-secondary"
                             : "bg-tertiary"
                       }`} />
-                      TEST LIVE ENGINE
+                      EXPLORE THE MODEL
                     </span>
                     <span className="flex items-center gap-1">
                       <span>Go to Sandbox</span>
@@ -666,27 +561,27 @@ const flowSteps = [
   {
     day: "Day 0",
     title: "eMB entry + AI audit",
-    body: "Site engineer logs measurements with geo-tagged photos. AI computes 1,240 m² of bituminous concrete against BOQ. Variance 0.4%.",
+    body: "Illustrative input: a site engineer records measurements with location-tagged photos. A proposed audit model compares 1,240 m² of bituminous concrete against the bill of quantities; the 0.4% variance is a scenario assumption.",
   },
   {
     day: "Day 0",
     title: "Dual-key certification",
-    body: "SDE reviews on-device, signs with Ed25519 key scoped to work_id PWD-MH-1863900. Certificate hashed into ledger.",
+    body: "Proposed control: an authorised engineer reviews the evidence and approves it against a work-scoped mandate. Cryptographic signing and audit storage remain implementation requirements, not features of this prototype.",
   },
   {
     day: "Day 1",
     title: "Bank advance",
-    body: "60% of ₹18,63,900 = ₹11,18,340 advanced to contractor at ~11% p.a. Holdback pool funded with 40%.",
+    body: "Illustrative assumption: a partner bank advances 60% of ₹18,63,900 (₹11,18,340) at an assumed ~11% annual rate, with 40% held back. No financing partner or offer is committed.",
   },
   {
     day: "Day 2 → 90",
     title: "Approval chain runs — visibly",
-    body: "Each approver acts under a signed mandate. Every touch is timestamped. No touch, no invisible delay.",
+    body: "In the proposal, approvers act under scoped mandates and key processing actions are timestamped. A pilot would test whether this gives teams a useful view of delays.",
   },
   {
     day: "T+N",
     title: "Treasury settles",
-    body: "Deductions are absorbed by the holdback first. Balance released minus itemised charges. Reliability score updates.",
+    body: "Illustrative settlement logic: apply modeled deductions to the holdback, then calculate the remaining balance. A reliability score is a proposed input, not a measured outcome.",
   },
 ];
 
@@ -701,9 +596,9 @@ function MoneyFlow() {
           From site to bank account.
         </h2>
         <p className="mt-4 max-w-2xl text-muted-foreground">
-          A worked ₹18,63,900 road-works bill. Traditional path: 148 days.
-          Realium path: 60% cash on Day 1, treasury settles behind a
-          holdback buffer.
+          An illustrative ₹18,63,900 road-works bill. The 148-day baseline and
+          modeled 60% Day 1 advance are scenario inputs to test; no live
+          settlement or financing offer has been validated.
         </p>
       </motion.div>
 
@@ -753,20 +648,20 @@ const redteamAnswers = [
   {
     icon: Eye,
     tag: "Attributable",
-    title: "Every administrative step is fully tracked.",
-    body: "Every approval and every processing action is recorded as a signed, timestamped event in a tamper-evident chain. When a bill remains in a processing queue, the system clearly highlights the bottleneck location, driving operational accountability.",
+    title: "Make administrative steps attributable.",
+    body: "The proposal records approvals and processing actions as signed, timestamped events in a tamper-evident chain. A future implementation could identify where a bill is waiting and give teams a clear owner for the delay.",
   },
   {
     icon: Scale,
     tag: "Priced",
     title: "The paying division is underwritten, not just the contractor.",
-    body: "Realium tracks transaction cycle times per paying division. Divisions with historically longer processing cycles are priced accordingly by underwriting systems, encouraging structural efficiency improvements across departments.",
+    body: "The proposed underwriting model would use historical transaction cycle times by paying division when pricing receivables. Whether that changes department behavior remains to be tested.",
   },
   {
     icon: Users,
     tag: "Beachhead",
     title: "Target pre-allocated budgets first.",
-    body: "Start with scheme accounts where funds are pre-allocated but administrative routing remains slow. Underwriting models focus capital on these secure queues first, ensuring deployment safety and reliability.",
+    body: "The proposed pilot would start with scheme accounts that have pre-allocated funds. This is a targeting hypothesis; payment reliability and pilot eligibility need validation with a PWD and bank.",
   },
 ];
 
@@ -774,7 +669,6 @@ function RedTeam() {
   return (
     <section id="redteam" className="relative overflow-hidden py-16">
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute top-1/2 left-1/2 h-[500px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-rose-500/[0.08] blur-[140px]" />
       </div>
       <div className="mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-12 xl:px-16">
         <motion.div {...fadeUp} className="mb-12 max-w-3xl">
@@ -831,10 +725,8 @@ function RedTeam() {
           {...fadeUp}
           className="mx-auto mt-12 max-w-4xl rounded-2xl border-l-2 border-rose-400/60 bg-foreground/[0.03] py-6 pl-6 pr-8 text-lg italic text-foreground/85 sm:text-xl"
         >
-          &ldquo;Where non-payment is a funded political choice, no fintech
-          fixes it. Realium&apos;s job is to detect those payers and price
-          them out. That is underwriting discipline, not a limitation we
-          hide.&rdquo;
+          Financing cannot remove payment risk. A pilot would need to test
+          which payment conditions lenders could support and how timing varies.
         </motion.blockquote>
       </div>
     </section>
@@ -865,9 +757,9 @@ function Synergy() {
               AI does what scales
             </div>
             <ul className="mt-3 space-y-2 text-on-surface-variant">
-              <li>· Observes sites continuously without fatigue</li>
-              <li>· Estimates quantities against the BOQ</li>
-              <li>· Enforces mandates on every action, deterministically</li>
+              <li>· Could organize site evidence for later review</li>
+              <li>· Could compare quantities with the bill of quantities</li>
+              <li>· Could flag sample actions against a proposed mandate</li>
             </ul>
           </GlowCard>
         </motion.div>
@@ -888,8 +780,8 @@ function Synergy() {
         </motion.div>
       </div>
       <div className="mt-6 text-center font-mono text-sm text-muted-foreground">
-        Neither side moves money alone. Dual-key, enforced in code at every
-        layer.
+        The proposed sequence separates supporting evidence from accountable
+        approval; the prototype does not trigger payments.
       </div>
     </section>
   );
@@ -900,20 +792,20 @@ function Synergy() {
 const valueCards = [
   {
     who: "Contractor",
-    hi: "97% take-home with day-1 liquidity",
-    lo: "vs ~91% today after informal 18–24% p.a. bridge finance",
+    hi: `Modeled ${BASE_FINANCE_SCENARIO.contractorNetTakePercent.toFixed(1)}% take-home with day-one liquidity`,
+    lo: `Compared with a modeled ${BASE_FINANCE_SCENARIO.traditionalNetTakePercent.toFixed(1)}% informal-finance scenario; actual costs vary.`,
     color: "emerald",
   },
   {
     who: "Bank",
-    hi: "~11% p.a. on holdback-buffered paper",
-    lo: "near-sovereign risk profile, 40% principal buffer, itemised deductions",
+    hi: "Illustrative ~11% annual rate on a modeled receivable",
+    lo: "A 40% holdback and itemized deductions are assumptions, not a risk rating.",
     color: "indigo",
   },
   {
     who: "Platform",
-    hi: "35 bps + SaaS + the reliability data layer",
-    lo: "the flywheel: clean settlement history raises advance rates 50→85%; competitors can\u2019t replicate the data",
+    hi: "Potential fee, software, and data-service revenue",
+    lo: "A repeat-settlement data advantage is a hypothesis to validate; no rate lift or competitive edge is established.",
     color: "amber",
   },
 ];
@@ -926,7 +818,7 @@ function Value() {
           Value
         </div>
         <h2 className="mt-3 text-3xl font-medium text-foreground sm:text-5xl">
-          Every side of the table is better off. That&apos;s why it moves.
+          The proposal depends on aligned incentives.
         </h2>
       </motion.div>
 
@@ -941,7 +833,7 @@ function Value() {
             <GlowCard 
               className="flex flex-col h-full border-foreground/10 cursor-pointer group" 
               showTechBrackets={true}
-              onClick={() => document.getElementById('flow')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() => document.getElementById('flow')?.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 'auto' : 'smooth' })}
             >
               <div
                 className={`text-[11px] uppercase tracking-widest font-medium ${
@@ -995,10 +887,9 @@ function Value() {
                 The flywheel
               </div>
               <p className="mt-2 max-w-3xl text-foreground/90">
-                Every settled cycle mints proprietary data on payer and payee
-                behavior. That data steps the advance rate for the next cycle.
-                Competitors can copy the UI in a weekend; they cannot copy five
-                years of on-chain settlement history.
+                If a pilot can capture reliable payment timing and dispute data,
+                that history may help improve underwriting over time. This is a
+                defensibility hypothesis; Realium has no settlement history yet.
               </p>
             </div>
           </div>
@@ -1014,20 +905,17 @@ function LiveDemo() {
   return (
     <section id="try" className="mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-12 xl:px-16 py-20 sm:py-28 lg:py-36">
       <motion.div {...fadeUp} className="mb-10 max-w-3xl">
-        <div className="text-xs uppercase tracking-[0.2em] text-emerald-600">
-          Live · the end-to-end flow · try it
+          <div className="text-xs uppercase tracking-[0.2em] text-emerald-600">
+          Illustrative model · sample scenario
         </div>
         <h2 className="mt-3 text-3xl font-medium text-foreground sm:text-5xl">
-          Sign a real work item. Watch the money move.
+          Follow a proposed work item from evidence to settlement.
         </h2>
         <p className="mt-4 max-w-2xl text-muted-foreground">
-          This is the exact lifecycle a work item follows in production,
-          compressed into two minutes. The contractor&apos;s team captures the
-          site, AI measures it against the BOQ, a PWD site engineer reviews and
-          signs on their device, the certified invoice is minted, a bank
-          advances 60% the next morning, the approval chain runs visibly, and
-          the treasury settles months later behind the holdback. Every step
-          shows who acts, and when.
+          This local scenario uses illustrative records and timing to explain
+          the proposed flow. It does not connect to a PWD, bank, payment rail,
+          ledger, or production AI system. The one-day advance and 148-day
+          settlement are model assumptions, not measured results.
         </p>
       </motion.div>
       <motion.div {...fadeUp}>
@@ -1042,16 +930,16 @@ function MandateSection() {
     <section id="mandate" className="mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-12 xl:px-16 py-20 sm:py-28 lg:py-36">
       <motion.div {...fadeUp} className="mb-10 max-w-3xl">
         <div className="text-xs uppercase tracking-[0.2em] text-indigo-600">
-          Live · Layer 2 · Approver mandate playground
+          Local model · Layer 2 · Approver mandate
         </div>
         <h2 className="mt-3 text-3xl font-medium text-foreground sm:text-5xl">
           Change the mandate. Watch what an engineer can and can&apos;t
           certify.
         </h2>
         <p className="mt-4 max-w-2xl text-muted-foreground">
-          Move the value cap, edit the category allowlist, change the state
-          circle, or simulate a transfer. Every attempt — allowed, escrowed,
-          or blocked — becomes a signed event on the chain.
+          Change the value cap, category allowlist, or state circle to see how
+          the proposed policy would classify an attempt. This playground is a
+          local simulation; it does not sign or write events to a live chain.
         </p>
       </motion.div>
       <motion.div {...fadeUp}>
@@ -1065,24 +953,24 @@ function MandateSection() {
 
 const validation = [
   {
-    tag: "Working code",
+    tag: "Related code",
     title: "47 unit tests, including Ed25519 vs RFC 8032 vectors",
-    body: "Signature engine verified against the RFC test vectors. Financial waterfall and mandate policy have their own test suites (22 + 18).",
+    body: "The related GroundTruth and Surety repositories contain financial and mandate engines with tests; those engines are not connected to the page simulations.",
   },
   {
-    tag: "Live demos",
-    title: "Two interactive demos on this page",
-    body: "Dual-key certification flow and the mandate playground — both driven by the same policy code, no mocks.",
+    tag: "Interactive models",
+    title: "Two local scenarios on this page",
+    body: "The certification flow and mandate playground illustrate the proposed interactions with sample data. No PWD or bank services are connected.",
   },
   {
     tag: "Precedent stack",
-    title: "Everything Realium relies on already exists in India",
-    body: "UPI (real-time rails), GST e-invoicing (bank-grade digital instruments), TReDS (bill-discounting exchanges), CPWD e-MB (~₹20,000 Cr/yr digital), Drone Rules 2021 (BVLOS site capture).",
+    title: "Precedents informing the proposal",
+    body: "UPI (real-time payment rails), GST e-invoicing (structured invoice records), TReDS (bill-discounting exchanges), CPWD e-MB (digital measurement records), and Drone Rules 2021 provide adjacent examples; they do not validate this proposal.",
   },
   {
     tag: "Demand proof",
-    title: "Powerplay does $10M ARR financing the private side",
-    body: "A pure-private-sector analogue is already at scale. The public-works side is 30x larger and has no incumbent settlement rail. [5]",
+    title: "Adjacent financing models offer questions to test",
+    body: "Private-sector construction finance can inform research into underwriting, repayment, and project evidence. It does not establish the public-works market size or prove the same approach will work with government receivables.",
   },
 ];
 
@@ -1094,7 +982,7 @@ function Validation() {
           Validation
         </div>
         <h2 className="mt-3 text-3xl font-medium text-foreground sm:text-5xl">
-          Not a deck. A working system with precedent.
+          A prototype proposal informed by adjacent precedents.
         </h2>
       </motion.div>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -1131,8 +1019,8 @@ const roadmap = [
     items: [
       "Ed25519 dual-key certificate engine · 47 tests pass · RFC 8032 vectors",
       "60/40 settlement waterfall + reliability curve · 22 tests",
-      "Approver mandate policy engine · 18 tests · demoed on this page",
-      "SQLite persistence, tamper-evident hash-chained ledger",
+      "Approver mandate policy engine · 25 tests in the related Surety repository",
+      "Persistence and a hash-chained ledger in related prototype code",
     ],
   },
   {
@@ -1166,7 +1054,7 @@ function Roadmap() {
           Roadmap
         </div>
         <h2 className="mt-3 text-3xl font-medium text-foreground sm:text-5xl">
-          Prototype done. Pilot next. Scale on a published standard.
+          Prototype available. Pilot validation proposed. Shared standards are a longer-term goal.
         </h2>
       </motion.div>
       <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
@@ -1226,31 +1114,14 @@ function Roadmap() {
 const sources = [
   {
     n: 1,
-    label: "Maharashtra ₹96,000 Cr contractor dues (2025 strike coverage)",
+    label: "Maharashtra contractor dues: April 2026 coverage",
     href: "https://www.hindustantimes.com/cities/mumbai-news/contractors-flag-96k-cr-dues-give-state-govt-apr-7-deadline-101775243698708.html",
   },
   {
     n: 2,
     label:
-      "National delayed-payments range: NITI Aayog member estimate (₹1 lakh Cr) to industry analyses (up to ₹3 lakh Cr)",
-    href: "https://www.niti.gov.in/",
-  },
-  {
-    n: 3,
-    label:
-      "Construction arbitration duration & pendency — Global Arbitration Review, India construction chapter",
-    href: "https://globalarbitrationreview.com/insight/know-how/construction-arbitration/report/india",
-  },
-  {
-    n: 4,
-    label:
-      "CPWD e-Measurement Book — PIB release ID 1786064; Business Standard coverage",
-    href: "https://pib.gov.in/PressReleasePage.aspx?PRID=1786064",
-  },
-  {
-    n: 5,
-    label: "Powerplay $10M ARR — EPC World",
-    href: "https://www.epcworld.in/",
+      "CPWD e-Measurement Book launch — PIB, 13 April 2018",
+    href: "https://www.pib.gov.in/newsite/PrintRelease.aspx?lang=2&reg=48&relid=178664",
   },
 ];
 
@@ -1262,7 +1133,7 @@ function Sources() {
           <BookOpen className="h-3.5 w-3.5" /> Sources
         </div>
         <h2 className="mt-3 text-2xl font-medium text-foreground sm:text-3xl">
-          Every number above traces back to a public source.
+          Source notes for the cited public figures and related examples.
         </h2>
       </motion.div>
       <ol className="glass space-y-3 rounded-2xl p-6 text-sm text-foreground/90">
@@ -1301,22 +1172,20 @@ function CTA() {
         {...fadeUp}
         className="glass relative overflow-hidden rounded-3xl p-10 text-center sm:p-16"
       >
-        <div className="pointer-events-none absolute -top-40 left-1/2 h-80 w-[600px] -translate-x-1/2 rounded-full bg-emerald-500/15 blur-3xl" />
-        <div className="pointer-events-none absolute -bottom-40 left-1/2 h-80 w-[600px] -translate-x-1/2 rounded-full bg-indigo-500/15 blur-3xl" />
         <h3 className="mx-auto max-w-3xl text-3xl font-medium text-foreground sm:text-5xl">
-          One division. One quarter. 90 days to 15.
+          Test the 90-to-15-day hypothesis.
         </h3>
         <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
-          We&apos;re looking for one PWD division and one bank partner to run
-          the first live cycle. The code is written; the receivables are
-          waiting.
+          The proposed pilot would test a faster path to first cash with one
+          PWD division and a bank partner. The prototype has not run a live
+          payment cycle; its timing targets still need validation.
         </p>
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <a
             href="#try"
             className="btn-press inline-flex items-center gap-2 rounded-md bg-foreground px-6 py-3 font-medium text-background transition-all hover:scale-105"
           >
-            Try the live demo <ArrowRight className="h-4 w-4" />
+            Try the illustrative model <ArrowRight className="h-4 w-4" />
           </a>
           <a
             href="https://github.com/Bahniman/realium"
@@ -1404,7 +1273,7 @@ function LandingPage() {
   const activeLabel = active && labelMap[active] ? labelMap[active] : "INTRO";
 
   return (
-    <main className="relative min-h-screen bg-transparent text-foreground overflow-hidden">
+    <main id="main" className="relative min-h-screen bg-transparent text-foreground overflow-hidden">
       {/* Base solid background color */}
       <div className="pointer-events-none fixed inset-0 -z-[100] bg-background" />
 
@@ -1420,7 +1289,7 @@ function LandingPage() {
             <span className="text-[8px] opacity-80">SYS_LOC: LAT 19.0760° N</span>
           </div>
           <div className="flex items-center gap-3 [writing-mode:vertical-lr] rotate-180">
-            <span className="uppercase text-emerald-500/80 font-bold">Ledger: SECURE</span>
+            <span className="uppercase text-emerald-500/80 font-bold">Ledger: proposed</span>
             <span className="h-10 w-px bg-border/20" />
             <span className="text-[8px] opacity-80">MANDATE_V1.02</span>
           </div>
@@ -1439,7 +1308,13 @@ function LandingPage() {
         </div>
       </div>
 
-      <Nav />
+      <SuiteHeader name="Realium" sections={[
+        { label: "Problem", href: "#problem" },
+        { label: "Platform", href: "#architecture" },
+        { label: "Money flow", href: "#flow" },
+        { label: "Try the model", href: "#try" },
+        { label: "Validation", href: "#validation" },
+      ]} />
       <Hero />
       <Problem />
       <Architecture />

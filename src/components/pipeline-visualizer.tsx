@@ -1,285 +1,100 @@
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Eye, Cpu, Fingerprint, Banknote, ShieldCheck } from "lucide-react";
+import { useState } from "react";
+import { Eye, Cpu, Fingerprint, Banknote } from "lucide-react";
 
-type Node = {
-  id: number;
-  label: string;
-  subLabel: string;
-  icon: typeof Eye;
-  color: string;
-  glowColor: string;
-  x: number;
-  y: number;
-  details: {
-    title: string;
-    description: string;
-    logKey: string;
-    logVal: string;
-    metric: string;
-  };
-};
-
-const nodes: Node[] = [
+const steps = [
   {
-    id: 0,
-    label: "01 Evidence",
-    subLabel: "e-MB Site Entry",
+    label: "Evidence",
+    subLabel: "e-MB site entry",
     icon: Eye,
-    color: "text-primary",
-    glowColor: "var(--color-primary)",
-    x: 80,
-    y: 80,
-    details: {
-      title: "e-MB Site measurement entry",
-      description: "Site engineers record digital measurement entries and attach geo-tagged photos to log finished public works.",
-      logKey: "e-MB_SYNC",
-      logVal: "GPS 19.0760° N · 12 items logged · 6 photos secure",
-      metric: "T+0 site entry",
-    },
+    title: "e-MB site measurement entry",
+    description: "Site engineers record digital measurement entries and attach geo-tagged photos to log finished public works.",
+    logKey: "e-MB_SYNC",
+    logVal: "Sample location · 12 items · 6 example photos",
+    metric: "Example input",
   },
   {
-    id: 1,
-    label: "02 Audit",
-    subLabel: "AI Quantity Check",
+    label: "Audit",
+    subLabel: "AI quantity check",
     icon: Cpu,
-    color: "text-primary",
-    glowColor: "var(--color-primary)",
-    x: 260,
-    y: 80,
-    details: {
-      title: "AI quantity audit vs. BOQ",
-      description: "Vision AI calculates material volume (Bituminous concrete layers) and flags variances against the Bill of Quantities.",
-      logKey: "AI_AUDIT",
-      logVal: "1,240 m² segment · variance +0.4% (in tolerance)",
-      metric: "98.2% AI confidence",
-    },
+    title: "AI quantity audit vs. BOQ",
+    description: "Vision AI is proposed to compare measured material quantities with the Bill of Quantities. The value shown is illustrative.",
+    logKey: "AI_AUDIT",
+    logVal: "Sample 1,240 m² segment · assumed variance +0.4%",
+    metric: "Illustrative output",
   },
   {
-    id: 2,
-    label: "03 Authority",
-    subLabel: "Cryptographic Mandate",
+    label: "Authority",
+    subLabel: "Proposed approval",
     icon: Fingerprint,
-    color: "text-secondary",
-    glowColor: "var(--color-secondary)",
-    x: 260,
-    y: 240,
-    details: {
-      title: "Accountable Ed25519 signing",
-      description: "SDE reviews on-device, signs with key scoped to work_id. Threshold mandates enforce budgets and circle boundaries in code.",
-      logKey: "MANDATE",
-      logVal: "SDE key 0xF4B9 · scope: PWD-MH-1863900 · single-cap OK",
-      metric: "RFC 8032 verified",
-    },
+    title: "Work-scoped approval",
+    description: "The proposal gives approvals a defined work scope and accountable owner. Cryptographic signing and mandate enforcement remain implementation requirements.",
+    logKey: "EXAMPLE_SCOPE",
+    logVal: "PWD-MH-1863900 · sample approval",
+    metric: "Proposed control",
   },
   {
-    id: 3,
-    label: "04 Liquidity",
-    subLabel: "T+1 Payout & Settlement",
+    label: "Liquidity",
+    subLabel: "Modeled payout",
     icon: Banknote,
-    color: "text-tertiary",
-    glowColor: "var(--color-tertiary)",
-    x: 440,
-    y: 240,
-    details: {
-      title: "Reliability-based liquidity waterfall",
-      description: "Receivable discounts at T+1. Bank advances 60%, holding 40% buffer. Treasury settles, release released minus charges.",
-      logKey: "WATERFALL",
-      logVal: "T+1 advance: ₹11,18,340 · holdback: ₹7,45,560 · 11% p.a.",
-      metric: "1 day vs 148 days",
-    },
+    title: "Illustrative liquidity waterfall",
+    description: "A scenario models a 60% advance, 40% holdback, and later settlement. No bank offer or payment cycle has been validated.",
+    logKey: "MODEL_INPUTS",
+    logVal: "₹11,18,340 advance · ₹7,45,560 holdback · assumed 11% p.a.",
+    metric: "Scenario only",
   },
 ];
 
 export function PipelineVisualizer() {
-  const [activeId, setActiveId] = useState<number>(0);
-
-  // Auto-cycle nodes when idle
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setActiveId((id) => (id + 1) % nodes.length);
-    }, 4500);
-    return () => clearInterval(timer);
-  }, []);
-
-  const cur = nodes[activeId]!;
-  const Icon = cur.icon;
+  const [activeIndex, setActiveIndex] = useState(0);
+  const current = steps[activeIndex]!;
+  const Icon = current.icon;
 
   return (
-    <div className="relative overflow-hidden rounded-[16px] border border-outline-variant bg-surface-container p-6 font-sans">
-      {/* Grid pattern background */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none opacity-20" />
+    <section aria-label="Illustrative Realium process" className="rounded-[16px] border border-outline-variant bg-surface-container p-5 sm:p-6">
+      <div className="mb-4 flex items-center justify-between gap-3 border-b border-outline-variant pb-3">
+        <h3 className="font-mono text-[11px] font-bold uppercase tracking-wider text-on-surface">Illustrative process</h3>
+        <span className="font-mono text-[10px] text-on-surface-variant">Select a step</span>
+      </div>
 
-      {/* Header bar indicating interactivity */}
-      <div className="flex items-center justify-between border-b border-outline-variant pb-4 mb-4 select-none">
-        <div className="flex items-center gap-2">
-          <span className="font-mono text-[10px] text-on-surface-variant uppercase tracking-wider">
-            Realium ledger map
+      <div className="grid grid-cols-2 gap-2 sm:grid-cols-4" role="group" aria-label="Select a process step">
+        {steps.map((step, index) => {
+          const StepIcon = step.icon;
+          const isActive = index === activeIndex;
+          return (
+            <button
+              key={step.label}
+              type="button"
+              aria-pressed={isActive}
+              onClick={() => setActiveIndex(index)}
+              className="pipeline-step flex min-h-[72px] flex-col items-start justify-center gap-1 rounded px-3 py-2 text-left"
+              data-active={isActive}
+            >
+              <span className="flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wide">
+                <StepIcon aria-hidden="true" className="h-4 w-4" />
+                <span>0{index + 1} {step.label}</span>
+              </span>
+              <span className="pipeline-step-note pl-6 text-[11px] leading-snug">{step.subLabel}</span>
+            </button>
+          );
+        })}
+      </div>
+
+      <div aria-live="polite" aria-atomic="true" className="pipeline-details mt-4 min-h-[272px] rounded border-2 border-foreground bg-card p-4">
+        <div className="flex flex-wrap items-start justify-between gap-3 border-b border-outline-variant pb-3">
+          <h4 className="flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wide text-foreground">
+            <Icon aria-hidden="true" className="pipeline-icon h-4 w-4" />
+            {current.title}
+          </h4>
+          <span className="rounded border border-outline bg-background px-2 py-1 font-mono text-[10px] font-bold text-foreground">
+            {current.metric}
           </span>
         </div>
-        <div className="flex items-center gap-1.5 rounded-full border border-secondary/20 bg-secondary-container/10 px-2.5 py-0.5 text-[9px] text-secondary">
-          Interactive: Hover/Click Nodes
+        <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{current.description}</p>
+        <div className="mt-3 flex flex-wrap gap-x-2 gap-y-1 border-t border-outline-variant pt-3 font-mono text-xs">
+          <span className="pipeline-key font-bold">[{current.logKey}]</span>
+          <span className="text-muted-foreground">{current.logVal}</span>
         </div>
       </div>
-
-      {/* SVG Canvas for pipeline connections */}
-      <div className="relative w-full aspect-[520/320] max-h-[255px] sm:max-h-none">
-        <svg className="absolute inset-0 h-full w-full" viewBox="0 0 520 320">
-          <defs>
-            <linearGradient id="grad-green-indigo" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#10B981" stopOpacity="0.6" />
-              <stop offset="100%" stopColor="#6366F1" stopOpacity="0.6" />
-            </linearGradient>
-            <linearGradient id="grad-indigo-amber" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#6366F1" stopOpacity="0.6" />
-              <stop offset="100%" stopColor="#F59E0B" stopOpacity="0.6" />
-            </linearGradient>
-          </defs>
-
-          {/* Connection Lines (Glow & Base) */}
-          {/* Path 1: Node 0 -> Node 1 */}
-          <line x1="80" y1="80" x2="260" y2="80" stroke="var(--color-primary)" strokeWidth="4" opacity="0.1" />
-          <line 
-            x1="80" y1="80" x2="260" y2="80" 
-            stroke="var(--color-primary)" strokeWidth="2" 
-            strokeDasharray="6 8" 
-            style={{ animation: "scroll-dash 2s linear infinite" }} 
-          />
-
-          {/* Path 2: Node 1 -> Node 2 */}
-          <line x1="260" y1="80" x2="260" y2="240" stroke="url(#grad-green-indigo)" strokeWidth="3" opacity="0.2" />
-          <line 
-            x1="260" y1="80" x2="260" y2="240" 
-            stroke="var(--color-secondary)" strokeWidth="2" 
-            strokeDasharray="6 8" 
-            style={{ animation: "scroll-dash 2s linear infinite" }} 
-          />
-
-          {/* Path 3: Node 2 -> Node 3 */}
-          <line x1="260" y1="240" x2="440" y2="240" stroke="url(#grad-indigo-amber)" strokeWidth="3" opacity="0.2" />
-          <line 
-            x1="260" y1="240" x2="440" y2="240" 
-            stroke="var(--color-tertiary)" strokeWidth="2" 
-            strokeDasharray="6 8" 
-            style={{ animation: "scroll-dash 2s linear infinite" }} 
-          />
-
-          <style>{`
-            @keyframes scroll-dash {
-              to { stroke-dashoffset: -20; }
-            }
-          `}</style>
-
-          {/* Render Interactive Nodes */}
-          {nodes.map((n) => {
-            const NodeIcon = n.icon;
-            const isActive = n.id === activeId;
-            return (
-              <g 
-                key={n.id} 
-                className="cursor-pointer group" 
-                onClick={() => setActiveId(n.id)}
-                onMouseEnter={() => setActiveId(n.id)}
-              >
-                {/* Soft pulsed outer ring indicating clickability */}
-                <circle
-                  cx={n.x}
-                  cy={n.y}
-                  r="30"
-                  fill="none"
-                  stroke={n.glowColor}
-                  strokeOpacity="0.15"
-                  strokeWidth="1"
-                  className="animate-pulse"
-                />
-
-                {/* Active glow halo */}
-                {isActive && (
-                  <circle
-                    cx={n.x}
-                    cy={n.y}
-                    r="32"
-                    fill="none"
-                    stroke={n.glowColor}
-                    strokeWidth="1.5"
-                    className="animate-ping opacity-25"
-                    style={{ animationDuration: "3s" }}
-                  />
-                )}
-                
-                {/* Node Outer Circle */}
-                <circle
-                  cx={n.x}
-                  cy={n.y}
-                  r="24"
-                  fill="var(--color-surface-container-low)"
-                  stroke={isActive ? n.glowColor : "var(--color-outline-variant)"}
-                  strokeWidth={isActive ? "2" : "1.5"}
-                  className="transition-all duration-300 group-hover:stroke-white/40"
-                />
-
-                {/* Icon wrapper inside SVG */}
-                <foreignObject x={n.x - 10} y={n.y - 10} width="20" height="20">
-                  <div className={`flex h-full w-full items-center justify-center ${isActive ? n.color : "text-zinc-500 group-hover:text-zinc-300"} transition-colors duration-300`}>
-                    <NodeIcon className="h-4.5 w-4.5" />
-                  </div>
-                </foreignObject>
-
-                {/* Node Text labels */}
-                <text
-                  x={n.x}
-                  y={n.y - 36}
-                  textAnchor="middle"
-                  className={`font-mono text-[11px] uppercase tracking-wider ${isActive ? "fill-white font-bold" : "fill-zinc-300"} transition-all duration-300`}
-                >
-                  {n.label}
-                </text>
-                <text
-                  x={n.x}
-                  y={n.y + 38}
-                  textAnchor="middle"
-                  className={`text-[10px] ${isActive ? "fill-zinc-100 font-medium" : "fill-zinc-400"} transition-all duration-300`}
-                >
-                  {n.subLabel}
-                </text>
-              </g>
-            );
-          })}
-        </svg>
-      </div>
-
-      {/* Detail HUD Display panel */}
-      <div className="mt-4 rounded-lg border border-outline-variant bg-surface-container-high p-4 relative">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={cur.id}
-            initial={{ opacity: 0, y: 5 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -5 }}
-            transition={{ duration: 0.2 }}
-            className="space-y-2.5 font-mono text-sm"
-          >
-            <div className="flex items-center justify-between border-b border-outline-variant pb-2">
-              <span className="flex items-center gap-1.5 font-bold uppercase tracking-wider text-on-surface text-xs sm:text-sm">
-                <Icon className={`h-4.5 w-4.5 ${cur.color}`} />
-                {cur.details.title}
-              </span>
-              <span className={`rounded-full border border-outline-variant bg-surface-container-low px-2 py-0.5 text-xs font-medium ${cur.color}`}>
-                {cur.details.metric}
-              </span>
-            </div>
-            
-            <p className="text-on-surface-variant leading-relaxed font-sans text-xs sm:text-sm">
-              {cur.details.description}
-            </p>
-
-            <div className="flex items-center gap-2 rounded border border-outline-variant bg-surface-container p-2 text-xs">
-              <span className={`shrink-0 font-bold ${cur.color}`}>[{cur.details.logKey}]</span>
-              <span className="truncate text-on-surface-variant">{cur.details.logVal}</span>
-            </div>
-          </motion.div>
-        </AnimatePresence>
-      </div>
-    </div>
+    </section>
   );
 }

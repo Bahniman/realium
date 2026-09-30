@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { GlowCard } from "./glow-card";
 import {
@@ -16,6 +16,9 @@ import {
   Stamp,
   ClipboardList,
 } from "lucide-react";
+import { BASE_FINANCE_INPUT, BASE_FINANCE_SCENARIO } from "@/lib/finance-scenario";
+
+const formatINR = (amount: number) => `₹${amount.toLocaleString("en-IN")}`;
 
 type Step = {
   key: string;
@@ -28,35 +31,35 @@ type Step = {
   duration: number;
 };
 
-// The exact lifecycle a work item follows in production, compressed.
+// One illustrative scenario for explaining the proposed lifecycle.
 const steps: Step[] = [
   {
     key: "capture",
     day: "DAY 0 · 11:40",
     actor: "Contractor site team",
     actorTone: "amber",
-    label: "eMB measurement entry, geo-tagged",
-    detail: "Site photos + digital measurements · geo:19.0760,72.8777 · 12 items logged · SHA 0x9a…c1",
+    label: "Example measurement record",
+    detail: "Sample site photos and measurements · example location · 12 items",
     icon: Eye,
     duration: 2600,
   },
   {
     key: "assess",
     day: "DAY 0 · 11:43",
-    actor: "Realium vision engine",
+    actor: "Illustrative quantity model",
     actorTone: "emerald",
-    label: "AI quantity assessment vs. BOQ",
-    detail: "Bituminous concrete · 1,240 m² ±0.8% · confidence 0.982 · variance 0.4%",
+    label: "Modeled quantity assessment",
+    detail: "Bituminous concrete · assumed 1,240 m² · illustrative variance 0.4%",
     icon: Cpu,
     duration: 2800,
   },
   {
     key: "prefill",
     day: "DAY 0 · 11:45",
-    actor: "Realium → dept. system",
+    actor: "Proposed department connector",
     actorTone: "emerald",
-    label: "Measurement Book prefilled",
-    detail: "Item 3.2 · Ch. 12+400 to 13+640 · linked to tamper-evident ledger",
+    label: "Proposed measurement record",
+    detail: "Item 3.2 · Ch. 12+400 to 13+640 · ledger connection not implemented",
     icon: ClipboardList,
     duration: 2400,
   },
@@ -65,18 +68,18 @@ const steps: Step[] = [
     day: "DAY 0 · 17:10",
     actor: "Site Engineer (SDE, PWD)",
     actorTone: "indigo",
-    label: "Dual-key certification — human signs",
-    detail: "Reviews evidence on device · Ed25519 key scoped to work_id/PWD-MH-1863900",
+    label: "Proposed engineer review",
+    detail: "A future engineer would review sample evidence against a work-scoped approval",
     icon: Fingerprint,
     duration: 0,
   },
   {
     key: "mint",
     day: "DAY 0 · 17:12",
-    actor: "Realium ledger",
+    actor: "Proposed audit record",
     actorTone: "emerald",
-    label: "Bank-grade e-invoice minted",
-    detail: "Certified receivable · payer: State PWD Division IV · reliability score attached",
+    label: "Illustrative receivable record",
+    detail: "Example payer and reliability fields · no instrument or score is issued",
     icon: FileCheck2,
     duration: 2200,
   },
@@ -85,8 +88,8 @@ const steps: Step[] = [
     day: "DAY 1 · 09:00",
     actor: "Partner bank",
     actorTone: "sky",
-    label: "60% advanced to contractor",
-    detail: "₹11,18,340 credited via NEFT · 40% holdback pool funded (₹7,45,560)",
+    label: "Modeled 60% advance",
+    detail: "₹11,18,340 assumed advance · 40% holdback assumption (₹7,45,560)",
     icon: Banknote,
     duration: 2600,
   },
@@ -95,8 +98,8 @@ const steps: Step[] = [
     day: "DAY 2 → 90",
     actor: "Dept. approvers, under mandate",
     actorTone: "indigo",
-    label: "Approval chain runs — visibly",
-    detail: "AE → EE → accounts · every touch signed + timestamped · queue attributable",
+    label: "Proposed approval timeline",
+    detail: "AE → EE → accounts · example timestamps and owners for discussion",
     icon: Stamp,
     duration: 2600,
   },
@@ -105,8 +108,8 @@ const steps: Step[] = [
     day: "~DAY 148",
     actor: "State treasury → bank",
     actorTone: "sky",
-    label: "Treasury settles, holdback releases",
-    detail: "₹18,63,900 to bank · balance minus itemized charges → contractor · score updates",
+    label: "Modeled treasury settlement",
+    detail: "₹18,63,900 assumed settlement · modeled charges and remaining holdback",
     icon: Landmark,
     duration: 3000,
   },
@@ -120,6 +123,7 @@ const toneChip: Record<Step["actorTone"], string> = {
 };
 
 export function DualKeyDemo() {
+  const runToken = useRef(0);
   const [active, setActive] = useState<number>(-1);
   const [reached, setReached] = useState<number>(-1); // highest step completed
   const [signed, setSigned] = useState(false);
@@ -131,6 +135,10 @@ export function DualKeyDemo() {
 
   useEffect(() => {
     if (active === 0) {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        setFrameCount(4812);
+        return;
+      }
       setFrameCount(0);
       const startTime = performance.now();
       const duration = 2400;
@@ -167,88 +175,98 @@ export function DualKeyDemo() {
 
     if (active === -1) {
       if (done) {
-        addLine("✔ LIFECYCLE COMPLETE — measurement to settled money", 100);
-        addLine("Day 1: ₹11,18,340 advanced (60% tier) · T+1 09:00 IST", 500);
-        addLine("Day 148: treasury settled ₹18,63,900 to bank", 900);
-        addLine("Charges: ₹49,880 interest (11% p.a. × 148d) + ₹6,524 fee", 1300);
-        addLine("Holdback released: ₹6,89,156 → contractor", 1700);
-        addLine("✔ CONTRACTOR TOTAL: ₹18,07,496 (97.0% of invoice)", 2100),
-        addLine("Reliability 0.91 → 0.92 · next advance tier improves", 2500);
+        addLine("✔ ILLUSTRATIVE SCENARIO COMPLETE", 100);
+        addLine("Modeled Day 1 advance: ₹11,18,340 (assumed 60%)", 500);
+        addLine("Modeled Day 148 settlement: ₹18,63,900", 900);
+        addLine(`Modeled charges: ${formatINR(BASE_FINANCE_SCENARIO.bankDiscount)} interest + ${formatINR(BASE_FINANCE_SCENARIO.platformFee)} fee + ${formatINR(BASE_FINANCE_SCENARIO.deductionsAmount)} deductions`, 1300);
+        addLine(`Modeled holdback release: ${formatINR(BASE_FINANCE_SCENARIO.remainingHoldback)}`, 1700);
+        addLine(`✔ Modeled contractor proceeds: ${formatINR(BASE_FINANCE_SCENARIO.contractorNetTake)} (${BASE_FINANCE_SCENARIO.contractorNetTakePercent.toFixed(1)}%)`, 2100);
+        addLine("Illustrative assumptions only · no payment or reliability data", 2500);
       } else {
         addLine("AWAITING SYSTEM VERIFICATION PASS...", 100);
-        addLine("Click 'Run verification' to begin scanning.", 400);
+        addLine("Choose 'Play scenario' to step through the sample flow.", 400);
       }
     } else if (active === 0) {
-      addLine("eMB_SYNC: CONNECTING TO MEASUREMENT PORTAL...", 100);
-      addLine("GPS witness lock: OK (19.0760° N, 72.8777° E)", 500);
-      addLine("Geo-fence check vs. sanctioned alignment: INSIDE", 1000);
-      addLine("12 BOQ items measured · 6 site photos attached", 1500);
-      addLine("Encrypting measurement hashes with Ed25519 signature...", 2000);
+        addLine("SCENARIO: SAMPLE MEASUREMENT RECORD", 100);
+      addLine("Example location: 19.0760° N, 72.8777° E", 500);
+      addLine("Proposed geo-boundary check: sample point inside", 1000);
+      addLine("Sample record: 12 BOQ items · 6 example photos", 1500);
+      addLine("No measurement hash or cryptographic signature is created", 2000);
     } else if (active === 1) {
-      addLine("AI_ENGINE: INITIALIZING SEGMENTATION MODEL...", 100);
+      addLine("ILLUSTRATIVE QUANTITY MODEL: SAMPLE RUN...", 100);
       addLine("Bituminous concrete surface layer detected", 600);
       addLine("Computing area against BOQ item 3.2...", 1200);
       addLine("Measured: 1,240 m² (variance +0.4%, in tolerance)", 1800);
-      addLine("Model confidence: 98.2% · PASS", 2300);
+      addLine("Illustrative model score: 98.2% · not independently validated", 2300);
     } else if (active === 2) {
       addLine("e-MB PREFILL: WRITING MEASUREMENT ENTRY...", 100);
       addLine("Item 3.2 (Bituminous Concrete) · Ch. 12+400 → 13+640", 600);
-      addLine("Human hasn't touched a register — entry is machine-drafted", 1200);
-      addLine("Linked to tamper-evident ledger block: hash_block_1982", 1700);
-      addLine("Ready for accountable human review: PASSED", 2100);
+      addLine("Example measurement entry drafted from sample inputs for review", 1200);
+      addLine("Proposed next step: associate the entry with an audit record", 1700);
+      addLine("Example is ready for a human review step", 2100);
     } else if (active === 3) {
       addLine("AWAITING ACCOUNTABLE HUMAN SIGNATURE...", 100);
-      addLine("In real life: the SDE reviews evidence on their phone", 500);
-      addLine("Mandate check (value cap ₹50.0L vs. ₹18.6L): OK", 1000);
-      addLine("Category + geography fence: roads.bituminous · MH: OK", 1500);
-      addLine("Authorized SDE cryptographic key required.", 2000);
+      addLine("Proposed human step: the SDE reviews evidence on a device", 500);
+      addLine("Sample policy: ₹50.0L cap vs. ₹18.6L amount", 1000);
+      addLine("Sample category + geography: roads.bituminous · MH", 1500);
+      addLine("Approval policy is modeled locally; no key is checked", 2000);
     } else if (active === 4) {
-      addLine("MINTING BANK-GRADE E-INVOICE #1863900...", 100);
-      addLine("Instrument: certified receivable · payer: State PWD Div IV", 600);
-      addLine("Evidence hashes sealed inside the signature — tamper-proof", 1100);
-      addLine("Listed to partner bank credit desk · reliability 0.91", 1700);
+        addLine("SCENARIO: ILLUSTRATIVE RECEIVABLE RECORD", 100);
+      addLine("Example payer: State PWD Div IV · no instrument is issued", 600);
+      addLine("Sample event: evidence hashes associated with the signature", 1100);
+      addLine("A partner-bank review is a proposed next step · no score measured", 1700);
     } else if (active === 5) {
-      addLine("PARTNER BANK: validating instrument offline...", 100);
-      addLine("Signature chain OK · sanction match OK · geo-fence OK", 600);
-      addLine("Advance approved per standing facility · 60% tier", 1200);
-      addLine("NEFT ₹11,18,340 → M/s Borah Constructions · T+1 09:00", 1800);
-      addLine("Holdback pool funded: ₹7,45,560 (bank's buffer)", 2300);
+      addLine("Illustrative partner-bank review step", 100);
+      addLine("Sample checks shown for discussion · no live validation", 600);
+      addLine("Modeled advance input: 60% · no facility or approval", 1200);
+      addLine("Assumed advance: ₹11,18,340 · timing not validated", 1800);
+      addLine("Assumed holdback: ₹7,45,560", 2300);
     } else if (active === 6) {
       addLine("APPROVAL CHAIN: AE → EE → division accounts", 100);
-      addLine("Contractor already has cash — chain runs at govt pace", 700);
+      addLine("Illustrative sequence separates proposed funding from approvals", 700);
       addLine("Day 34: EE co-signs · Day 61: accounts passed", 1400);
-      addLine("Every touch signed + timestamped · no invisible delay", 2100);
+      addLine("Proposed event log: approval actions carry signer and time", 2100);
     } else if (active === 7) {
-      addLine("DAY 148: TREASURY SETTLEMENT ₹18,63,900 RECEIVED", 100);
-      addLine("Charges: ₹49,880 interest (11% p.a. × 148d) + ₹6,524 fee", 700);
-      addLine("Holdback released: ₹6,89,156 → contractor", 1400);
-      addLine("Contractor total: ₹18,07,496 · 97.0% of invoice", 2000);
-      addLine("Reliability score: 0.91 → 0.92 · next cycle improves", 2600);
+      addLine("MODELED DAY 148 SETTLEMENT: ₹18,63,900", 100);
+      addLine(`Modeled charges: ${formatINR(BASE_FINANCE_SCENARIO.bankDiscount)} interest + ${formatINR(BASE_FINANCE_SCENARIO.platformFee)} fee + ${formatINR(BASE_FINANCE_SCENARIO.deductionsAmount)} deductions`, 700);
+      addLine(`Modeled holdback release: ${formatINR(BASE_FINANCE_SCENARIO.remainingHoldback)}`, 1400);
+      addLine(`Modeled contractor proceeds: ${formatINR(BASE_FINANCE_SCENARIO.contractorNetTake)} (${BASE_FINANCE_SCENARIO.contractorNetTakePercent.toFixed(1)}%)`, 2000);
+      addLine("Scenario assumptions only · no reliability score measured", 2600);
     }
 
     return () => timers.forEach(clearTimeout);
   }, [active, done]);
 
+  const wait = (ms: number) => window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ? Promise.resolve()
+    : new Promise<void>((resolve) => window.setTimeout(resolve, ms));
+
+  useEffect(() => () => { runToken.current += 1; }, []);
+
   const run = async () => {
+    const token = ++runToken.current;
     setDone(false);
     setSigned(false);
     setReached(-1);
     // Run steps 0-2 (machine side)
     for (let i = 0; i < 3; i++) {
       setActive(i);
-      await new Promise((r) => setTimeout(r, steps[i].duration));
+      await wait(steps[i].duration);
+      if (token !== runToken.current) return;
       setReached(i);
     }
     setActive(3); // waiting for human signature
   };
 
   const sign = async () => {
+    const token = ++runToken.current;
     setSigned(true);
     setReached(3);
     // Run steps 4-7 (money side)
     for (let i = 4; i < steps.length; i++) {
       setActive(i);
-      await new Promise((r) => setTimeout(r, steps[i].duration));
+      await wait(steps[i].duration);
+      if (token !== runToken.current) return;
       setReached(i);
     }
     setDone(true);
@@ -256,6 +274,7 @@ export function DualKeyDemo() {
   };
 
   const reset = () => {
+    runToken.current += 1;
     setActive(-1);
     setReached(-1);
     setSigned(false);
@@ -271,20 +290,22 @@ export function DualKeyDemo() {
       <div className="flex items-center justify-between border-b border-foreground/10 px-6 py-4">
         <div className="flex items-center gap-3">
           <span className="font-mono text-xs text-foreground/60">
-            work_id · PWD-MH-1863900 · Ch. 12+400 → 13+640
+            Sample work item · PWD-MH-1863900 · Ch. 12+400 → 13+640
           </span>
         </div>
         <div className="flex items-center gap-2">
           {active === -1 && !done && (
             <button
+              type="button"
               onClick={run}
               className="inline-flex items-center gap-1.5 rounded-lg bg-primary px-3 py-1.5 text-xs font-medium text-on-primary transition-all hover:bg-primary/90 active:bg-primary/80 cursor-pointer"
             >
-              <Play className="h-3 w-3" /> Run verification
+              <Play className="h-3 w-3" /> Play scenario
             </button>
           )}
           {(active >= 0 || done) && (
             <button
+              type="button"
               onClick={reset}
               className="inline-flex items-center gap-1.5 rounded-lg border border-outline bg-surface-container px-3 py-1.5 text-xs text-on-surface hover:bg-on-surface/8 cursor-pointer transition-colors"
             >
@@ -298,7 +319,7 @@ export function DualKeyDemo() {
         {/* steps — the real-life lifecycle */}
         <div className="border-foreground/10 p-6 lg:border-r">
           <div className="mb-3 font-mono text-[11px] uppercase tracking-widest text-foreground/40">
-            The lifecycle · who does what, and when
+            Proposed sequence · roles and timing
           </div>
           <ol className="space-y-2.5">
             {steps.map((s, i) => {
@@ -316,7 +337,7 @@ export function DualKeyDemo() {
                   key={s.key}
                   className={`flex items-start gap-3 rounded-lg border p-2.5 transition-all ${
                     state === "idle"
-                      ? "border-outline-variant/40 opacity-45"
+                      ? "border-outline-variant/40"
                       : state === "run"
                         ? "border-primary/30 bg-primary-container/20"
                         : state === "await"
@@ -360,10 +381,11 @@ export function DualKeyDemo() {
                       </div>
                       {state === "await" && (
                         <button
+                          type="button"
                           onClick={sign}
                           className="shrink-0 rounded-lg bg-secondary px-2.5 py-1 text-[11px] font-medium text-on-secondary hover:bg-secondary/90 cursor-pointer transition-colors"
                         >
-                          Sign with SDE key
+                          Simulate engineer sign-off
                         </button>
                       )}
                     </div>
@@ -399,7 +421,7 @@ export function DualKeyDemo() {
                 {consoleLines.length === 0 && (
                   <div className="text-center text-zinc-500 py-8 font-mono">
                     <p className="animate-pulse">AWAITING SYSTEM VERIFICATION PASS...</p>
-                    <p className="mt-1 text-[10px]">Click &quot;Run verification&quot; to begin scanning.</p>
+                    <p className="mt-1 text-[10px]">Choose &quot;Play scenario&quot; to begin.</p>
                   </div>
                 )}
                 {consoleLines.map((line, idx) => {
@@ -475,8 +497,8 @@ export function DualKeyDemo() {
               </div>
 
               <div className="border-t border-white/10 pt-1 text-[10px] text-zinc-600 flex justify-between select-none">
-                <span>SECURE ENCLAVE v1.02 // Ed25519</span>
-                <span>HASHCHAIN: OK</span>
+                <span>Illustrative data · no system connection</span>
+                <span>Sample values</span>
               </div>
             </div>
           </div>
@@ -484,26 +506,26 @@ export function DualKeyDemo() {
           {/* Settlement receipt — fills in as the lifecycle progresses */}
           <div>
             <div className="mb-3 font-mono text-[11px] uppercase tracking-widest text-foreground/40">
-              Instrument &amp; settlement
+              Sample inputs &amp; modeled settlement
             </div>
             <div className="space-y-2 font-mono text-xs">
               {(
                 [
-                  ["certified invoice", "₹18,63,900", 2],
-                  ["ai_witness", "gt-vision-v3", 1],
-                  ["human_signer", signed ? "SDE · 0xF4…9C" : "pending", 3],
-                  ["cert_hash", stage >= 4 ? "0x8b…d21f" : "—", 4],
-                  ["advance (60%, Day 1)", stage >= 5 ? "₹11,18,340" : "—", 5],
-                  ["holdback pool (40%)", stage >= 5 ? "₹7,45,560" : "—", 5],
-                  ["treasury settles", stage >= 7 ? "Day 148 · ₹18,63,900" : "—", 7],
-                  ["charges (interest + fee)", stage >= 7 ? "₹56,404" : "—", 7],
-                  ["holdback released", stage >= 7 ? "₹6,89,156" : "—", 7],
-                  ["contractor total", done ? "₹18,07,496 · 97.0%" : "—", 8],
+                  ["sample invoice input", formatINR(BASE_FINANCE_INPUT.invoiceAmount), 2],
+                  ["quantity model", "illustrative", 1],
+                  ["engineer review (sample)", signed ? "simulated" : "pending", 3],
+                  ["audit record", stage >= 4 ? "proposed · not created" : "—", 4],
+                  ["assumed advance (60%)", stage >= 5 ? formatINR(BASE_FINANCE_SCENARIO.advanceAmount) : "—", 5],
+                  ["assumed holdback (40%)", stage >= 5 ? formatINR(BASE_FINANCE_SCENARIO.holdbackAmount) : "—", 5],
+                  ["modeled settlement", stage >= 7 ? `Day ${BASE_FINANCE_INPUT.daysToSettle} · ${formatINR(BASE_FINANCE_INPUT.invoiceAmount)}` : "—", 7],
+                  ["charges + modeled deductions", stage >= 7 ? formatINR(BASE_FINANCE_SCENARIO.bankDiscount + BASE_FINANCE_SCENARIO.platformFee + BASE_FINANCE_SCENARIO.deductionsAmount) : "—", 7],
+                  ["modeled holdback release", stage >= 7 ? formatINR(BASE_FINANCE_SCENARIO.remainingHoldback) : "—", 7],
+                  ["modeled contractor proceeds", done ? `${formatINR(BASE_FINANCE_SCENARIO.contractorNetTake)} (${BASE_FINANCE_SCENARIO.contractorNetTakePercent.toFixed(1)}%)` : "—", 8],
                 ] as const
               ).map(([k, v, gate]) => {
                 const lit = v !== "—" && v !== "pending";
                 const highlight =
-                  done && (k === "contractor total" || k === "advance (60%, Day 1)");
+                  done && (k === "modeled contractor proceeds" || k === "assumed advance (60%)");
                 return (
                   <div
                     key={k}
@@ -532,6 +554,7 @@ export function DualKeyDemo() {
               })}
             </div>
 
+            <div className="mt-4 min-h-[88px]" aria-live="polite" aria-atomic="true">
             <AnimatePresence>
               {done && (
                 <motion.div
@@ -539,12 +562,14 @@ export function DualKeyDemo() {
                   animate={{ opacity: 1, y: 0 }}
                   className="mt-4 rounded-lg border border-emerald-500/30 bg-emerald-500/10 p-3 text-xs text-emerald-700"
                 >
-                  Full lifecycle complete: work measured on Day 0, contractor liquid on
-                  Day 1, treasury settled on its own clock behind the holdback. Days to
-                  first cash: <b>1 vs 148</b>.
+                  Model outcome: the proposed flow shows first cash on Day 1; the example
+                  treasury settlement is Day 148. These are assumptions, not measured
+                  results.
                 </motion.div>
               )}
             </AnimatePresence>
+            {!done && <p className="mt-4 text-xs text-muted-foreground">Play the scenario to reveal the modeled example.</p>}
+            </div>
           </div>
         </div>
       </div>

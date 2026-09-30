@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ShieldCheck, AlertTriangle, TrendingUp, Landmark } from "lucide-react";
+import { BASE_FINANCE_INPUT, calculateFinanceScenario } from "@/lib/finance-scenario";
 
 type Preset = {
   label: string;
@@ -42,76 +43,25 @@ const tiers = [
 ];
 
 export function LiquidityCalculator() {
-  const [invoiceAmount, setInvoiceAmount] = useState<number>(1863900);
-  const [daysToSettle, setDaysToSettle] = useState<number>(148);
+  const [invoiceAmount, setInvoiceAmount] = useState<number>(BASE_FINANCE_INPUT.invoiceAmount);
+  const [daysToSettle, setDaysToSettle] = useState<number>(BASE_FINANCE_INPUT.daysToSettle);
   const [selectedTier, setSelectedTier] = useState<number>(2); // Default to Standard (60%)
-  const [deductionsPercent, setDeductionsPercent] = useState<number>(2);
+  const [deductionsPercent, setDeductionsPercent] = useState<number>(BASE_FINANCE_INPUT.deductionsPercent);
 
   const advanceRate = useMemo(() => {
     const tierObj = tiers.find((t) => t.id === selectedTier);
     return tierObj ? tierObj.rate : 60;
   }, [selectedTier]);
 
-  // Calculations
-  const advanceAmount = useMemo(() => {
-    return Math.round(invoiceAmount * (advanceRate / 100));
-  }, [invoiceAmount, advanceRate]);
-
-  const holdbackAmount = useMemo(() => {
-    return invoiceAmount - advanceAmount;
-  }, [invoiceAmount, advanceAmount]);
-
-  const bankInterestRate = 0.11; // 11% p.a.
-  const platformFeeRate = 0.0035; // 35 bps
-
-  const bankDiscount = useMemo(() => {
-    return Math.round(advanceAmount * bankInterestRate * (daysToSettle / 365));
-  }, [advanceAmount, daysToSettle]);
-
-  const platformFee = useMemo(() => {
-    return Math.round(invoiceAmount * platformFeeRate);
-  }, [invoiceAmount]);
-
-  const deductionsAmount = useMemo(() => {
-    return Math.round(invoiceAmount * (deductionsPercent / 100));
-  }, [invoiceAmount, deductionsPercent]);
-
-  // Realium Net release from holdback
-  const remainingHoldback = useMemo(() => {
-    return Math.max(0, holdbackAmount - bankDiscount - platformFee - deductionsAmount);
-  }, [holdbackAmount, bankDiscount, platformFee, deductionsAmount]);
-
-  const contractorNetTake = useMemo(() => {
-    return advanceAmount + remainingHoldback;
-  }, [advanceAmount, remainingHoldback]);
-
-  const contractorNetTakePercent = useMemo(() => {
-    return (contractorNetTake / invoiceAmount) * 100;
-  }, [contractorNetTake, invoiceAmount]);
-
-  // Traditional scenario: Contractor borrows 100% of required capital in informal market at 18% p.a.
-  const traditionalInterestRate = 0.18;
-  const traditionalInterest = useMemo(() => {
-    return Math.round(invoiceAmount * traditionalInterestRate * (daysToSettle / 365));
-  }, [invoiceAmount, daysToSettle]);
-
-  const traditionalNetTake = useMemo(() => {
-    return Math.max(0, invoiceAmount - traditionalInterest - deductionsAmount);
-  }, [invoiceAmount, traditionalInterest, deductionsAmount]);
-
-  const traditionalNetTakePercent = useMemo(() => {
-    return (traditionalNetTake / invoiceAmount) * 100;
-  }, [traditionalNetTake, invoiceAmount]);
-
-  const principalExposed = useMemo(() => {
-    return (bankDiscount + platformFee + deductionsAmount) > holdbackAmount;
-  }, [bankDiscount, platformFee, deductionsAmount, holdbackAmount]);
-
-  const deficitAmount = useMemo(() => {
-    if (!principalExposed) return 0;
-    return (bankDiscount + platformFee + deductionsAmount) - holdbackAmount;
-  }, [principalExposed, bankDiscount, platformFee, deductionsAmount, holdbackAmount]);
-
+  const {
+    advanceAmount, holdbackAmount, bankDiscount, platformFee, deductionsAmount,
+    remainingHoldback, contractorNetTake, contractorNetTakePercent,
+    traditionalInterest, traditionalNetTake, traditionalNetTakePercent,
+    principalExposed, deficitAmount,
+  } = useMemo(
+    () => calculateFinanceScenario({ invoiceAmount, daysToSettle, advanceRate, deductionsPercent }),
+    [invoiceAmount, daysToSettle, advanceRate, deductionsPercent],
+  );
   const loadPreset = (p: Preset) => {
     setInvoiceAmount(p.amount);
     setDaysToSettle(p.days);
@@ -125,10 +75,10 @@ export function LiquidityCalculator() {
       <div className="mb-6 flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
         <div>
           <h3 className="text-xl font-bold text-foreground">
-            Liquidity & Cost Simulator
+            Liquidity scenario model
           </h3>
           <p className="mt-1 text-xs text-on-surface-variant">
-            Adjust the parameters to see how Realium T+1 advances compare to traditional informal bridge financing.
+            Adjust the assumptions to compare a proposed advance with an informal-finance scenario. No payment or bank service is connected.
           </p>
         </div>
         {/* Presets */}
@@ -136,6 +86,7 @@ export function LiquidityCalculator() {
           {presets.map((p) => (
             <button
               key={p.label}
+              type="button"
               onClick={() => loadPreset(p)}
               className="rounded-lg border border-outline bg-surface-container-low px-3 py-1.5 text-[11px] font-medium text-on-surface hover:bg-on-surface/8 transition-colors cursor-pointer"
             >
@@ -151,16 +102,17 @@ export function LiquidityCalculator() {
           {/* Invoice Amount */}
           <div>
             <div className="flex justify-between text-xs text-foreground/80">
-              <label className="font-medium uppercase tracking-wider text-[10px]">Certified Invoice Value</label>
+              <label htmlFor="scenario-invoice" className="font-medium uppercase tracking-wider text-[10px]">Invoice amount (scenario input)</label>
               <span className="font-mono text-primary font-bold text-sm">
                 ₹{invoiceAmount.toLocaleString("en-IN")}
               </span>
             </div>
             <input
+              id="scenario-invoice"
               type="range"
               min={500000}
               max={25000000}
-              step={100000}
+              step={100}
               value={invoiceAmount}
               onChange={(e) => setInvoiceAmount(Number(e.target.value))}
               className="mt-2.5 w-full accent-primary cursor-pointer"
@@ -173,13 +125,15 @@ export function LiquidityCalculator() {
 
           {/* Reliability Tiers */}
           <div>
-            <label className="block text-xs font-medium uppercase tracking-wider text-[10px] text-foreground/80">
+            <span className="block text-xs font-medium uppercase tracking-wider text-[10px] text-foreground/80">
               Contractor Reliability Tier (Advance Rate)
-            </label>
+            </span>
             <div className="mt-2.5 grid grid-cols-2 gap-2 sm:grid-cols-4">
               {tiers.map((t) => (
                 <button
                   key={t.id}
+                  type="button"
+                  aria-pressed={selectedTier === t.id}
                   onClick={() => setSelectedTier(t.id)}
                   className={`flex flex-col items-center justify-center rounded-lg border p-2 text-center transition-all cursor-pointer ${
                     selectedTier === t.id
@@ -202,12 +156,13 @@ export function LiquidityCalculator() {
           {/* Days to Settle */}
           <div>
             <div className="flex justify-between text-xs text-foreground/80">
-              <label className="font-medium uppercase tracking-wider text-[10px]">Treasury Settlement Delay</label>
+              <label htmlFor="scenario-delay" className="font-medium uppercase tracking-wider text-[10px]">Assumed settlement delay</label>
               <span className="font-mono text-tertiary font-bold text-sm">
                 {daysToSettle} Days
               </span>
             </div>
             <input
+              id="scenario-delay"
               type="range"
               min={15}
               max={240}
@@ -225,12 +180,13 @@ export function LiquidityCalculator() {
           {/* Deductions */}
           <div>
             <div className="flex justify-between text-xs text-foreground/80">
-              <label className="font-medium uppercase tracking-wider text-[10px]">Govt Deductions & Penalties</label>
+              <label htmlFor="scenario-deductions" className="font-medium uppercase tracking-wider text-[10px]">Modeled deductions</label>
               <span className="font-mono text-error font-bold text-sm">
                 {deductionsPercent}% (₹{deductionsAmount.toLocaleString("en-IN")})
               </span>
             </div>
             <input
+              id="scenario-deductions"
               type="range"
               min={0}
               max={15}
@@ -251,7 +207,7 @@ export function LiquidityCalculator() {
           <div>
             <div className="flex items-center justify-between border-b border-outline-variant pb-3">
               <div className="font-mono text-[10px] uppercase tracking-widest text-on-surface-variant">
-                On-Chain Payout Waterfall
+                Illustrative payout waterfall
               </div>
               <div className="flex items-center gap-1.5 rounded-full border border-outline bg-primary-container px-2.5 py-0.5 text-[10px] font-bold text-on-primary-container uppercase">
                 <ShieldCheck className="h-3.5 w-3.5" /> Lock: 11% Bank Yield
@@ -271,11 +227,11 @@ export function LiquidityCalculator() {
                 <motion.div
                   layout
                   className="h-full bg-primary relative flex items-center justify-center"
-                  style={{ width: `${advanceRate}%` }}
+                  style={{ width: `${(Math.max(0, advanceAmount - deficitAmount) / invoiceAmount) * 100}%` }}
                   transition={{ type: "spring", stiffness: 100, damping: 20 }}
                 >
                   <span className="font-mono text-[10px] font-bold text-on-primary select-none">
-                    {advanceRate}%
+                    {principalExposed ? `${((Math.max(0, advanceAmount - deficitAmount) / invoiceAmount) * 100).toFixed(1)}% net` : `${advanceRate}%`}
                   </span>
                 </motion.div>
 
@@ -315,7 +271,7 @@ export function LiquidityCalculator() {
                 <div className="flex items-center justify-between border-b border-outline-variant pb-2">
                   <div className="flex items-center gap-2">
                     <span className="h-2.5 w-2.5 shrink-0 rounded bg-primary" />
-                    <span className="text-on-surface-variant">T+1 Cash Advance</span>
+              <span className="text-on-surface-variant">Modeled T+1 cash advance</span>
                   </div>
                   <span className="font-mono font-bold text-foreground">
                     ₹{advanceAmount.toLocaleString("en-IN")}
@@ -352,6 +308,7 @@ export function LiquidityCalculator() {
             </div>
 
             {/* Principal Exposure Alert */}
+            <div className="mt-4 min-h-[84px]" aria-live="polite" aria-atomic="true">
             <AnimatePresence>
               {principalExposed && (
                 <motion.div
@@ -363,25 +320,26 @@ export function LiquidityCalculator() {
                   <div className="rounded-lg border border-error/35 bg-error-container p-3 text-xs text-on-error-container flex items-start gap-2">
                     <AlertTriangle className="h-4 w-4 shrink-0 mt-0.5" />
                     <div>
-                      <span className="font-medium">Bank Principal Exposed!</span> Deductions exceed the holdback buffer by <span className="font-mono font-bold">₹{deficitAmount.toLocaleString("en-IN")}</span>. Realium will auto-downgrade this contractor&apos;s reliability tier, reducing future advance caps to prevent default.
+                      <span className="font-medium">Modeled shortfall:</span> Fees and deductions exceed the holdback by <span className="font-mono font-bold">₹{deficitAmount.toLocaleString("en-IN")}</span>. Net proceeds below assume recovery of this amount from the advance. An actual agreement would need to define recovery and loss allocation.
                     </div>
                   </div>
                 </motion.div>
               )}
             </AnimatePresence>
+            </div>
           </div>
 
           {/* Comparison Card */}
           <div className="mt-6 border-t border-outline-variant pt-5">
             <div className="mb-3 font-mono text-[10px] uppercase tracking-widest text-on-surface-variant">
-              Net Capital Take-Home Comparison
+              Modeled net proceeds after charges
             </div>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {/* Realium */}
               <div className="rounded-lg border border-primary bg-primary-container p-3">
                 <div className="text-[10px] font-bold uppercase tracking-wider text-primary flex items-center gap-1">
-                  <TrendingUp className="h-3.5 w-3.5" /> Realium (T+1 cash)
+                  <TrendingUp className="h-3.5 w-3.5" /> Realium scenario
                 </div>
                 <div className="mt-1 font-mono text-2xl font-bold text-primary">
                   {contractorNetTakePercent.toFixed(1)}%

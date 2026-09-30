@@ -1,0 +1,29 @@
+/* Shared across the four portfolio project sites. Riso Poster v1. */
+.suite-header{position:fixed;inset:0 0 auto;z-index:60;background:var(--paper);color:var(--ink);border-bottom:2.5px solid var(--ink)}
+.suite-header-inner{max-width:1240px;height:72px;margin:auto;padding:0 clamp(16px,4vw,40px);display:flex;align-items:center;gap:24px}
+.suite-brand{display:inline-flex;align-items:center;gap:10px;min-height:44px;font-weight:800;font-size:20px;text-decoration:none;color:var(--ink);white-space:nowrap}
+.suite-brand>span{display:grid;place-items:center;width:32px;height:32px;border:2px solid var(--ink);border-radius:50%;background:var(--blue-fill);color:#fffaf1;font-family:var(--serif);font-style:italic;font-weight:400}
+.suite-sections{display:flex;gap:6px;margin-left:auto}
+.suite-sections a,.suite-portfolio{display:inline-flex;align-items:center;min-height:44px;padding:6px 10px;font-family:var(--mono);font-size:12px;color:var(--ink);text-decoration:none;border-radius:99px}
+.suite-sections a:hover,.suite-portfolio:hover{background:var(--yellow);color:#1d1a16}
+.suite-actions{display:flex;align-items:center;gap:12px;margin-left:auto}
+.suite-menu{position:relative;font-family:var(--mono);font-size:12px}
+.suite-menu summary{cursor:pointer;display:flex;align-items:center;gap:14px;min-height:44px;list-style:none;padding:0 14px;background:var(--card);border:2px solid var(--ink);border-radius:99px}
+.suite-menu summary::-webkit-details-marker{display:none}
+.suite-menu[open] summary{background:var(--yellow);color:#1d1a16}
+.suite-menu-panel{position:absolute;right:0;top:calc(100% + 12px);display:grid;gap:4px;padding:14px;width:min(300px,calc(100vw - 32px));max-height:calc(100dvh - 110px);overflow:auto;background:var(--card);border:2.5px solid var(--ink);border-radius:6px;box-shadow:6px 6px 0 var(--shc)}
+.suite-menu-panel p{font:11px var(--mono);color:var(--sec);margin:8px 6px;text-transform:uppercase}
+.suite-menu-panel a{display:flex;align-items:center;justify-content:space-between;min-height:44px;padding:8px 10px;color:var(--ink);text-decoration:none;border-radius:4px}
+.suite-menu-panel a:hover,.suite-menu-panel a[aria-current=page]{background:var(--yellow);color:#1d1a16}
+.suite-mobile-sections{display:none}
+.suite-theme{display:grid;place-items:center;position:relative;flex:none;width:44px;height:44px;padding:0;border:2.5px solid var(--ink);border-radius:50%;background:var(--card);color:var(--ink);cursor:pointer;box-shadow:2px 2px 0 var(--shc)}
+.suite-skip{position:fixed;z-index:100;left:12px;top:-100px;background:var(--yellow);color:#1d1a16;padding:12px;border:2px solid #1d1a16}
+.suite-skip:focus{top:12px}
+html{scroll-padding-top:96px;scroll-behavior:smooth;overflow-y:scroll;scrollbar-gutter:stable;scrollbar-width:auto;scrollbar-color:auto}
+section[id],main[id]{scroll-margin-top:0}
+:focus-visible{outline:3px solid var(--blue);outline-offset:4px}
+::selection{background:var(--yellow);color:#1d1a16}
+input,textarea{caret-color:var(--tan)}
+@media(max-width:1080px){.suite-sections{display:none}.suite-mobile-sections{display:grid}}
+@media(max-width:600px){.suite-header-inner{height:64px;gap:8px}.suite-brand{font-size:17px;gap:7px}.suite-actions{gap:8px}.suite-portfolio{display:none}.suite-menu summary{padding:0 12px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}

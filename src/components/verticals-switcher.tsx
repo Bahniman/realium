@@ -14,51 +14,41 @@ const verticals = [
     key: "public-works",
     label: "Public works",
     icon: HardHat,
-    blocker:
-      "Hand-measured work. ₹1–3 lakh crore stuck in delayed payments; arbitration averages 7–8 years.",
-    unlock:
-      "Certified measurement → bank-financeable receivable. Contractors paid in days, not months.",
-    metric: { days: "148 → 2", tam: "₹20,000 Cr/yr already digital in CPWD" },
+    blocker: "Public-works payment timelines can constrain contractor cash flow; local baselines vary.",
+    unlock: "Test whether reviewable evidence and approval records can help lenders assess eligible bills.",
+    metric: { days: "Baseline TBD", tam: "Pilot and buyer research" },
   },
   {
     key: "insurance",
     label: "Insurance",
     icon: Umbrella,
-    blocker:
-      "Physical claim inspection. Adjustment cost and fraud both scale with the delay.",
-    unlock:
-      "Geotagged handset media + dual-key attestation on damage extent. Settlement collapses from weeks to hours.",
-    metric: { days: "22 → 1", tam: "$8B loss-adjustment spend" },
+    blocker: "Physical claims may rely on inspection and supporting documents; insurer processes vary.",
+    unlock: "Explore whether a structured evidence record could make parts of claim review easier to inspect.",
+    metric: { days: "Baseline TBD", tam: "Insurer interviews" },
   },
   {
     key: "trade",
     label: "Trade & banking",
     icon: Ship,
-    blocker:
-      "Paper bills of lading and collateral audits. Global trade-finance gap is measured in trillions.",
-    unlock:
-      "Portable, tamper-evident warehouse attestations. Instant collateral release across banks.",
-    metric: { days: "35 → 3", tam: "$2.5T trade-finance gap" },
+    blocker: "Trade-finance reviews can involve documents and collateral checks across organizations.",
+    unlock: "Test whether portable, sourced attestations can support collateral review between counterparties.",
+    metric: { days: "Baseline TBD", tam: "Lender research" },
   },
   {
     key: "carbon",
     label: "Carbon & ESG",
     icon: Leaf,
-    blocker:
-      "Verification scandals are the market's central crisis. Buyer trust has collapsed.",
-    unlock:
-      "Every credit backed by geo-tagged, human-signed evidence. Ratings priced off the log.",
-    metric: { days: "180 → 14", tam: "$2B voluntary carbon" },
+    blocker: "Carbon claims rely on evidence and review processes that differ across methodologies.",
+    unlock: "Explore whether a clearer evidence trail helps reviewers assess a project claim.",
+    metric: { days: "Baseline TBD", tam: "Methodology research" },
   },
   {
     key: "agri",
     label: "Agriculture",
     icon: Wheat,
-    blocker:
-      "Crop-loss assessment and warehouse receipts gate all downstream lending.",
-    unlock:
-      "Field-level attestations flow into pre-approved crop loans and insurance payouts.",
-    metric: { days: "60 → 4", tam: "$50B agri credit demand" },
+    blocker: "Crop-loss reviews and warehouse records can affect lending and insurance decisions.",
+    unlock: "Study whether field evidence can be packaged for clearer review by lenders or insurers.",
+    metric: { days: "Baseline TBD", tam: "Buyer research" },
   },
 ];
 
@@ -76,6 +66,8 @@ export function VerticalsSwitcher() {
           return (
             <button
               key={v.key}
+              type="button"
+              aria-pressed={on}
               onClick={() => setActive(v.key)}
               className={`inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm transition-all ${
                 on
@@ -89,6 +81,10 @@ export function VerticalsSwitcher() {
           );
         })}
       </div>
+
+      <p className="px-4 pt-3 text-xs text-on-surface-variant">
+        These are adjacent use-case hypotheses. No sector-specific pilot or settlement-time reduction is validated.
+      </p>
 
       <AnimatePresence mode="wait">
         <motion.div
@@ -109,14 +105,14 @@ export function VerticalsSwitcher() {
             <p className="mt-2 text-on-surface-variant">{cur.blocker}</p>
 
             <div className="mt-6 text-xs uppercase tracking-widest text-primary">
-              What GroundTruth unlocks
+              What this proposal could test
             </div>
             <p className="mt-2 text-on-surface-variant">{cur.unlock}</p>
           </div>
           <div className="grid grid-cols-2 gap-3 self-start">
             <div className="rounded-lg border border-outline-variant bg-surface-container-low p-5">
               <div className="text-xs uppercase tracking-widest text-on-surface-variant/70">
-                Days to settle
+                Research status
               </div>
               <div className="mt-2 font-mono text-2xl text-primary">
                 {cur.metric.days}
@@ -124,7 +120,7 @@ export function VerticalsSwitcher() {
             </div>
             <div className="rounded-lg border border-outline-variant bg-surface-container-low p-5">
               <div className="text-xs uppercase tracking-widest text-on-surface-variant/70">
-                Addressable
+                Next evidence
               </div>
               <div className="mt-2 text-sm text-on-surface-variant">{cur.metric.tam}</div>
             </div>

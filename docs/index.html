@@ -3,24 +3,31 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Realium — Money at the speed of verified reality</title>
+    <title>Realium — Modeling finance around verified public-works progress</title>
     <meta
       name="description"
-      content="Realium turns physical public-works progress into bank-grade, financeable receivables. Evidence, Authority, and Liquidity — one platform, one chain of custody. Top 3 at ReEnvision 5.0, XLRI Digital Transformation Conclave."
+      content="Realium is a concept and prototype exploring how public-works evidence, approvals, and contractor-financing scenarios could connect. No live payment cycle has been run."
     />
     <meta property="og:title" content="Realium" />
     <meta
       property="og:description"
-      content="Money that moves at the speed of verified reality. Realium is the settlement rail for public works."
+      content="Realium is a concept and prototype exploring how verified public-works progress could support contractor financing."
     />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
-    <!-- Preconnect and load premium typography -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Martian+Mono:wght@300..600&display=swap" rel="stylesheet" />
-    <script type="module" crossorigin src="/realium/assets/index-Wi9DZvWs.js"></script>
-    <link rel="stylesheet" crossorigin href="/realium/assets/index-Bq7cIj-_.css">
+    <script>
+      (() => {
+        let saved = null;
+        try { saved = localStorage.getItem("theme"); } catch {}
+        const theme = saved === "light" || saved === "dark" ? saved : (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+        const root = document.documentElement;
+        root.dataset.theme = theme;
+        root.classList.toggle("dark", theme === "dark");
+        root.style.colorScheme = theme;
+      })();
+    </script>
+    <script type="module" crossorigin src="/realium/assets/index-CVDetc4H.js"></script>
+    <link rel="stylesheet" crossorigin href="/realium/assets/index-BsoBLhml.css">
   </head>
   <body>
     <div id="root"></div>

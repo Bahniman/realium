@@ -12,7 +12,7 @@ type Attempt = {
   reason: string;
 };
 
-// Executive Engineer's certification mandate — realistic PWD scenarios.
+// Illustrative PWD-style mandate scenarios for local interaction only.
 const scenarios = [
   { category: "roads.bituminous", workId: "PWD-MH-1863900", amount: 1863900 },
   { category: "roads.bituminous", workId: "PWD-MH-2140050", amount: 6240000 },
@@ -43,12 +43,12 @@ export function SuretyPlayground() {
   const trigger = () => {
     const s = scenarios[next % scenarios.length];
     let verdict: Attempt["verdict"] = "allow";
-    let reason = "In scope · signed & logged to chain";
+    let reason = "Within the example policy · outcome shown locally";
     const catOk = allowedCats.includes(s.category);
     const geoOk = s.workId.startsWith(`PWD-${geo}-`);
     if (revoked) {
       verdict = "block";
-      reason = "Mandate revoked (officer transferred) — cannot certify";
+      reason = "Departure scenario selected · sample policy blocks this attempt";
     } else if (!geoOk) {
       verdict = "block";
       reason = `Outside geography fence · mandate scoped to ${geo} circle`;
@@ -71,17 +71,18 @@ export function SuretyPlayground() {
         {/* controls */}
         <div>
           <div className="mb-1 text-[10px] font-bold uppercase tracking-widest text-primary">
-            Certification mandate · Executive Engineer
+            Sample mandate · Executive Engineer
           </div>
           <div className="mb-6 font-mono text-[10px] text-on-surface-variant">
-            mandate:0x7a4c…e021 · Ed25519 · auto-revoke on transfer
+            Illustrative values · no cryptographic keys or external policy service
           </div>
 
-          <label className="block text-xs font-medium uppercase tracking-wider text-[10px] text-foreground/80">
+          <label htmlFor="sample-cap" className="block text-xs font-medium uppercase tracking-wider text-[10px] text-foreground/80">
             Single-certification cap
           </label>
           <div className="mt-2 flex items-center gap-3">
             <input
+              id="sample-cap"
               type="range"
               min={500000}
               max={10000000}
@@ -95,23 +96,26 @@ export function SuretyPlayground() {
             </div>
           </div>
 
-          <label className="mt-6 block text-xs font-medium uppercase tracking-wider text-[10px] text-foreground/80">
-            Category caps (allowlist)
+          <label htmlFor="sample-categories" className="mt-6 block text-xs font-medium uppercase tracking-wider text-[10px] text-foreground/80">
+            Categories permitted in this example
           </label>
           <input
+            id="sample-categories"
             type="text"
             value={categories}
             onChange={(e) => setCategories(e.target.value)}
             className="mt-2 w-full rounded-lg border border-outline bg-surface-container-low px-3 py-2 font-mono text-xs text-foreground outline-none focus:border-primary"
           />
 
-          <label className="mt-6 block text-xs font-medium uppercase tracking-wider text-[10px] text-foreground/80">
+          <span className="mt-6 block text-xs font-medium uppercase tracking-wider text-[10px] text-foreground/80">
             Geography fence (state circle)
-          </label>
-          <div className="mt-2 flex gap-2">
+          </span>
+          <div className="mt-2 flex gap-2" role="group" aria-label="Example state circle">
             {["MH", "KA", "TN", "GJ"].map((g) => (
               <button
                 key={g}
+                type="button"
+                aria-pressed={geo === g}
                 onClick={() => setGeo(g)}
                 className={`flex-1 rounded-lg border px-2 py-1.5 font-mono text-xs transition-colors cursor-pointer ${
                   geo === g
@@ -131,10 +135,11 @@ export function SuretyPlayground() {
               onChange={(e) => setRevoked(e.target.checked)}
               className="accent-primary"
             />
-            Simulate officer transfer (auto-revoke)
+              Simulate role departure in the example
           </label>
 
           <button
+            type="button"
             onClick={trigger}
             className="group mt-6 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-primary text-on-primary px-4 py-2.5 text-sm font-medium hover:bg-primary/90 active:bg-primary/80 transition-colors cursor-pointer"
           >
@@ -157,13 +162,13 @@ export function SuretyPlayground() {
         {/* action log */}
         <div className="rounded-lg border border-outline-variant bg-surface-container-high p-4 flex flex-col h-full min-h-[340px]">
           <div className="mb-3 flex items-center justify-between font-mono text-[10px] uppercase tracking-widest text-on-surface-variant">
-            <span>Signed approval chain</span>
-            <span>tamper-evident · ledger</span>
+            <span>Sample policy outcomes</span>
+            <span>Local simulation</span>
           </div>
 
           {log.length === 0 && (
             <div className="flex flex-1 items-center justify-center text-center text-xs text-on-surface-variant min-h-[220px]">
-              Every approval, non-approval, and block is a signed, timestamped event. Try a certification.
+              The example classifies attempts as allow, escrow, or block. It does not sign or write a ledger event.
             </div>
           )}
 
