@@ -107,85 +107,42 @@ function CountUpStat({ text }: { text: string }) {
 
 function Hero() {
   return (
-    <section className="riso-hero relative overflow-hidden pt-32 pb-8 sm:pt-36 lg:pt-40">
-
-
-      <div className="mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-12 xl:px-16">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-center">
-          {/* Left: Text copy */}
-          <div className="text-left lg:col-span-7 xl:col-span-6 space-y-6">
-            <div  className="flex justify-start">
-              <div className="riso-proof inline-flex flex-wrap items-center gap-2 rounded-lg border px-4 py-2 text-xs text-foreground/80">
-                <Trophy className="h-3.5 w-3.5 text-amber-400" />
-                <span className="font-medium text-foreground">Top 3</span>
-                <span className="text-foreground/40">·</span>
-                <span>ReEnvision 5.0 — XLRI Conclave</span>
-                <span className="text-foreground/40">·</span>
-                <span className="text-foreground/60">July 2026</span>
-              </div>
-            </div>
-
-            <div
-              className="text-[11px] leading-relaxed text-muted-foreground sm:text-xs"
-            >
-              Presented to the conclave&apos;s panel of senior technology leaders — CIOs,
-              CTOs and CDIOs from leading firms across banking, logistics, and consumer sectors.
-            </div>
-
-            <h1
-              className="text-4xl font-medium sm:text-5xl lg:text-6xl xl:text-7xl leading-[1.1]"
-            >
-              Verified work, <em>earlier liquidity.</em>
-            </h1>
-
-            <p
-              className="text-base text-muted-foreground sm:text-lg max-w-xl"
-            >
-              Realium proposes a settlement rail for public works. Its worked
-              example models a next-day advance against a 148-day treasury
-              settlement; the financing terms and timing remain unvalidated.
-            </p>
-
-            <div
-              className="flex flex-col gap-3 sm:flex-row pt-4"
-            >
-              <a
-                href="#architecture"
-                className="group inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 font-medium text-on-primary hover:bg-primary/90 transition-colors"
-              >
-                See the architecture
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-              </a>
-              <a
-                href="#redteam"
-                className="inline-flex items-center justify-center gap-2 rounded-lg border border-outline bg-surface-container px-6 py-3 font-medium text-on-surface hover:bg-on-surface/8 transition-colors"
-              >
-                Addressing bottlenecks
-              </a>
-            </div>
-
-            {/* Scroll indicator prompt urging users to scroll down */}
-            <a
-              href="#problem"
-              aria-label="Explore the public works payment problem"
-              className="mt-14 inline-flex items-center gap-3 text-[10px] sm:text-xs uppercase tracking-[0.25em] text-muted-foreground select-none hover:text-foreground transition-colors"
-            >
-              <span>Scroll to explore</span>
-              <div
-                className="flex h-7 w-4 items-start justify-center rounded-full border border-foreground/30 p-1"
-              >
-                <div className="h-1.5 w-1 rounded-full bg-emerald-500" />
-              </div>
+    <section className="riso-hero realium-hero">
+      <div className="realium-hero-layout">
+        <div className="realium-hero-copy">
+          <p className="realium-edition">A public-works settlement proposal</p>
+          <h1 className="realium-display" aria-label="Measure work. Model liquidity.">
+            <span className="realium-overprint" data-print="Measure work." aria-hidden="true">
+              <span>Measure work.</span><span>Measure work.</span>
+            </span>
+            <em>Model liquidity.</em>
+          </h1>
+          <p className="realium-lede">
+            Realium proposes a settlement rail for public works. Its worked example models a next-day
+            advance against a 148-day treasury settlement; the financing terms and timing remain unvalidated.
+          </p>
+          <div className="realium-actions">
+            <a href="#architecture" className="realium-action realium-action-primary">
+              See the architecture <ArrowRight aria-hidden="true" size={18} />
             </a>
+            <a href="#redteam" className="realium-action realium-action-secondary">Addressing bottlenecks</a>
           </div>
+          <p className="realium-proof-context">
+            Presented to the ReEnvision conclave&apos;s senior technology panel, including CIOs,
+            CTOs, and CDIOs from banking, logistics, and consumer sectors.
+          </p>
+          <a href="#problem" className="realium-scroll-link">Scroll to explore <span aria-hidden="true">↓</span></a>
+        </div>
 
-          {/* Right: Pipeline Visualizer */}
-          <div className="lg:col-span-5 xl:col-span-6 w-full">
-            <div
-            >
-              <PipelineVisualizer />
-            </div>
+        <div className="realium-art-wrap">
+          <div className="realium-proof-stamp" aria-label="Top 3, ReEnvision 5.0, XLRI Conclave, July 2026">
+            <Trophy aria-hidden="true" size={17} />
+            <strong>Top 3</strong>
+            <span>ReEnvision 5.0</span>
+            <span>XLRI · July 2026</span>
           </div>
+          <PipelineVisualizer />
+          <p className="realium-art-caption">An illustrative chain from field evidence to modeled receivable.</p>
         </div>
       </div>
     </section>
@@ -433,20 +390,15 @@ function Architecture() {
                 transition={{ ...fadeUp.transition, delay: i * 0.08 }}
                 className="h-full"
               >
+                <a
+                  href={`#${l.key === 'evidence' ? 'try' : l.key === 'authority' ? 'mandate' : 'flow'}`}
+                  className="block h-full text-foreground no-underline"
+                  aria-label={`Explore ${l.title}`}
+                >
                 <GlowCard 
                   className="flex flex-col h-full cursor-pointer group" 
                   showTechBrackets={true} 
                   id={l.key} 
-                  role="link"
-                  tabIndex={0}
-                  aria-label={`Explore ${l.title}`}
-                  onClick={() => document.getElementById(l.key === 'evidence' ? 'try' : l.key === 'authority' ? 'mandate' : 'flow')?.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 'auto' : 'smooth' })}
-                  onKeyDown={(event) => {
-                    if (event.key === "Enter" || event.key === " ") {
-                      event.preventDefault();
-                      document.getElementById(l.key === 'evidence' ? 'try' : l.key === 'authority' ? 'mandate' : 'flow')?.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 'auto' : 'smooth' });
-                    }
-                  }}
                 >
                   <div className="flex items-center justify-between">
                     <div
@@ -522,6 +474,7 @@ function Architecture() {
                     </span>
                   </div>
                 </GlowCard>
+                </a>
               </motion.div>
               {i < layers.length - 1 && (
                 <div
@@ -830,10 +783,14 @@ function Value() {
             transition={{ ...fadeUp.transition, delay: i * 0.08 }}
             className="h-full"
           >
+            <a
+              href="#flow"
+              className="block h-full text-foreground no-underline"
+              aria-label={`Open liquidity calculator for ${v.who.toLowerCase()}`}
+            >
             <GlowCard 
               className="flex flex-col h-full border-foreground/10 cursor-pointer group" 
               showTechBrackets={true}
-              onClick={() => document.getElementById('flow')?.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 'auto' : 'smooth' })}
             >
               <div
                 className={`text-[11px] uppercase tracking-widest font-medium ${
@@ -869,6 +826,7 @@ function Value() {
                 </span>
               </div>
             </GlowCard>
+            </a>
           </motion.div>
         ))}
       </div>

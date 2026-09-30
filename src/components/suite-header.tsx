@@ -43,6 +43,7 @@ export function SuiteHeader({ name, sections }: { name: string; sections: Sectio
           <ThemeToggle />
         </div>
       </div>
+      <div className="suite-progress" aria-hidden="true" />
     </header>
   </>;
 }

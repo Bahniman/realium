@@ -1,46 +1,33 @@
 import { useState } from "react";
-import { Eye, Cpu, Fingerprint, Banknote } from "lucide-react";
+import { ArrowDown, Banknote, ClipboardCheck, HardHat } from "lucide-react";
 
 const steps = [
   {
-    label: "Evidence",
-    subLabel: "e-MB site entry",
-    icon: Eye,
-    title: "e-MB site measurement entry",
-    description: "Site engineers record digital measurement entries and attach geo-tagged photos to log finished public works.",
-    logKey: "e-MB_SYNC",
-    logVal: "Sample location · 12 items · 6 example photos",
-    metric: "Example input",
+    label: "Measure",
+    icon: HardHat,
+    title: "Field evidence",
+    description: "A proposed site record pairs e-MB entries and geo-tagged photos with a quantity check against the BOQ. Any automated comparison remains a proposal; the sample variance is illustrative.",
+    logKey: "EXAMPLE INPUT",
+    logVal: "1,240 m² segment · assumed +0.4% variance",
+    metric: "Illustrative input",
   },
   {
-    label: "Audit",
-    subLabel: "AI quantity check",
-    icon: Cpu,
-    title: "AI quantity audit vs. BOQ",
-    description: "Vision AI is proposed to compare measured material quantities with the Bill of Quantities. The value shown is illustrative.",
-    logKey: "AI_AUDIT",
-    logVal: "Sample 1,240 m² segment · assumed variance +0.4%",
-    metric: "Illustrative output",
-  },
-  {
-    label: "Authority",
-    subLabel: "Proposed approval",
-    icon: Fingerprint,
-    title: "Work-scoped approval",
-    description: "The proposal gives approvals a defined work scope and accountable owner. Cryptographic signing and mandate enforcement remain implementation requirements.",
-    logKey: "EXAMPLE_SCOPE",
-    logVal: "PWD-MH-1863900 · sample approval",
+    label: "Approve",
+    icon: ClipboardCheck,
+    title: "Human certification",
+    description: "An authorized engineer would review and certify the evidence. Named owners, scoped authority, and signed events are proposed controls, not live approvals in this prototype.",
+    logKey: "PROPOSED OWNER",
+    logVal: "Authorized engineer · no signed event",
     metric: "Proposed control",
   },
   {
-    label: "Liquidity",
-    subLabel: "Modeled payout",
+    label: "Model",
     icon: Banknote,
-    title: "Illustrative liquidity waterfall",
-    description: "A scenario models a 60% advance, 40% holdback, and later settlement. No bank offer or payment cycle has been validated.",
-    logKey: "MODEL_INPUTS",
-    logVal: "₹11,18,340 advance · ₹7,45,560 holdback · assumed 11% p.a.",
-    metric: "Scenario only",
+    title: "Modeled receivable",
+    description: "A scenario models a 60% advance, 40% holdback, and later treasury settlement. No bank offer, payment cycle, or timing assumption has been validated.",
+    logKey: "SCENARIO ONLY",
+    logVal: "60% day-one advance · 40% holdback",
+    metric: "Unvalidated model",
   },
 ];
 
@@ -50,13 +37,13 @@ export function PipelineVisualizer() {
   const Icon = current.icon;
 
   return (
-    <section aria-label="Illustrative Realium process" className="rounded-[16px] border border-outline-variant bg-surface-container p-5 sm:p-6">
-      <div className="mb-4 flex items-center justify-between gap-3 border-b border-outline-variant pb-3">
-        <h3 className="font-mono text-[11px] font-bold uppercase tracking-wider text-on-surface">Illustrative process</h3>
-        <span className="font-mono text-[10px] text-on-surface-variant">Select a step</span>
+    <section aria-label="Illustrative Realium process" className="realium-process suite-reveal">
+      <div className="realium-process-heading">
+        <span>Proposed route</span>
+        <span>Sample work item · PWD-MH-1863900</span>
       </div>
 
-      <div className="grid grid-cols-2 gap-2 sm:grid-cols-4" role="group" aria-label="Select a process step">
+      <div className="realium-stage-controls" role="group" aria-label="Choose a proposed process stage">
         {steps.map((step, index) => {
           const StepIcon = step.icon;
           const isActive = index === activeIndex;
@@ -66,35 +53,35 @@ export function PipelineVisualizer() {
               type="button"
               aria-pressed={isActive}
               onClick={() => setActiveIndex(index)}
-              className="pipeline-step flex min-h-[72px] flex-col items-start justify-center gap-1 rounded px-3 py-2 text-left"
+              className="realium-stage-button"
               data-active={isActive}
             >
-              <span className="flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wide">
-                <StepIcon aria-hidden="true" className="h-4 w-4" />
-                <span>0{index + 1} {step.label}</span>
+              <span className="realium-stage-topline">
+                <StepIcon aria-hidden="true" size={16} />
+                <span>0{index + 1}</span>
               </span>
-              <span className="pipeline-step-note pl-6 text-[11px] leading-snug">{step.subLabel}</span>
+              <strong>{step.label}</strong>
+              {index < steps.length - 1 && <ArrowDown aria-hidden="true" className="realium-stage-arrow" size={13} />}
             </button>
           );
         })}
       </div>
 
-      <div aria-live="polite" aria-atomic="true" className="pipeline-details mt-4 min-h-[272px] rounded border-2 border-foreground bg-card p-4">
-        <div className="flex flex-wrap items-start justify-between gap-3 border-b border-outline-variant pb-3">
-          <h4 className="flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wide text-foreground">
-            <Icon aria-hidden="true" className="pipeline-icon h-4 w-4" />
-            {current.title}
-          </h4>
-          <span className="rounded border border-outline bg-background px-2 py-1 font-mono text-[10px] font-bold text-foreground">
-            {current.metric}
-          </span>
+      <article aria-live="polite" aria-atomic="true" className="realium-process-slip">
+        <div className="realium-slip-head">
+          <div>
+            <span className="realium-slip-kicker">{current.metric}</span>
+            <h2><Icon aria-hidden="true" size={18} />{current.title}</h2>
+          </div>
+          <span className="realium-slip-stamp">{String(activeIndex + 1).padStart(2, "0")}/03</span>
         </div>
-        <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{current.description}</p>
-        <div className="mt-3 flex flex-wrap gap-x-2 gap-y-1 border-t border-outline-variant pt-3 font-mono text-xs">
-          <span className="pipeline-key font-bold">[{current.logKey}]</span>
-          <span className="text-muted-foreground">{current.logVal}</span>
+        <p>{current.description}</p>
+        <div className="realium-slip-data">
+          <strong>{current.logKey}</strong>
+          <span>{current.logVal}</span>
         </div>
-      </div>
+      </article>
+      <p className="realium-process-note">Illustrative concept only · no live PWD, bank, payment rail, ledger, or production AI connection</p>
     </section>
   );
 }
