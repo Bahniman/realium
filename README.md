@@ -8,7 +8,7 @@ Realium is a student project proposing a way to connect evidence of public-works
 
 ## Explore the site
 
-- **Evidence → Authority → Liquidity:** the proposed three-part workflow, with implementation questions and limits called out.
+- **Process board:** switch among proposed Measure, Approve, and Model stages for one sample work item; each stage distinguishes illustrative input from proposed controls and unvalidated financing assumptions.
 - **Certification-flow scenario:** step through a sample work item and see how proposed evidence and approval stages relate.
 - **Mandate playground:** change a sample mandate and inspect which example actions it would allow.
 - **Liquidity calculator:** compare modeled financing assumptions, including fees, deductions, released holdback, and shortfall recovery when charges exceed the holdback.
@@ -18,7 +18,7 @@ All figures and timings in the interactive scenarios are assumptions. The site d
 
 ## Design and accessibility
 
-Realium uses the shared Riso Poster visual system: paper-like cream surfaces, blue/pink/yellow accents, outlined components, and bold editorial type. It shares a responsive project header with Heirloom, Turnstile, and Windtunnel. On wide screens the header exposes section links; at smaller widths a native disclosure menu groups page sections and the other project links. A theme control switches between light and dark modes and stores the selection locally.
+Realium uses the shared Riso Poster visual system: paper-like cream surfaces, blue/pink/yellow accents, outlined components, and bold editorial type. Its selectable hero process board frames Measure, Approve, and Model as proposed stages, not completed live operations. The shared responsive header links the four projects and collapses section links into a native disclosure menu at smaller widths; the light/dark choice is saved locally. Wheel input uses smooth scrolling, while touch gestures and the browser scrollbar remain native. Section links update the URL fragment, move focus to the destination, and support browser back/forward. The header marks the current section and shows reading progress. A back-to-top link returns focus to the main content. Reduced-motion preferences keep reveals static.
 
 The page includes a skip-to-content link, semantic sections and headings, labeled controls, keyboard-operable buttons, pressed states, and a reduced-motion mode. These are implemented interface features, not a formal accessibility certification.
 
@@ -39,9 +39,10 @@ The `docs/` directory is the configured static build output for the `/realium/` 
 ## Source map
 
 - `src/page.tsx` — page sections and narrative.
-- `src/components/` — interactive scenarios and controls, including the certification flow, liquidity calculator, mandate playground, and process visuals.
+- `src/components/pipeline-visualizer.tsx` — selectable Measure/Approve/Model hero board, explicitly illustrative.
 - `src/lib/finance-scenario.ts` — local scenario calculations.
-- `src/components/suite-header.tsx`, `src/riso-tokens.css`, `src/riso-suite.css` — shared navigation and visual system.
+- `src/components/suite-header.tsx`, `src/components/suite-motion.tsx` — shared navigation, anchor focus/history, active-section state, progress, and back-to-top behavior.
+- `src/riso-tokens.css`, `src/riso-suite.css`, `src/riso-motion.css` — shared Riso tokens, components, and motion/reduced-motion rules.
 - `src/main.tsx`, `src/styles.css` — app entry and page styling.
 - `vite.config.ts` — Vite, aliases, base path, and `docs/` output.
 
