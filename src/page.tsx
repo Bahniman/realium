@@ -209,7 +209,7 @@ function Problem() {
                 <CountUpStat text={c.stat} />
               </div>
               <div className="mt-1 text-[11px] uppercase tracking-widest text-muted-foreground">
-                {c.label} <span className="text-muted-foreground/60">[{c.src}]</span>
+                {c.label} <span className="text-muted-foreground">[{c.src}]</span>
               </div>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                 {c.body}
@@ -1147,7 +1147,7 @@ function CTA() {
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <a
             href="#try"
-            className="btn-press inline-flex items-center gap-2 rounded-md bg-foreground px-6 py-3 font-medium text-background transition-all hover:scale-105"
+            className="realium-final-cta btn-press inline-flex items-center gap-2 rounded-md px-6 py-3 font-medium transition-all hover:scale-105"
           >
             Try the illustrative model <ArrowRight className="h-4 w-4" />
           </a>

@@ -24,6 +24,7 @@ section[id],main[id]{scroll-margin-top:0}
 :focus-visible{outline:3px solid var(--blue);outline-offset:4px}
 ::selection{background:var(--yellow);color:#1d1a16}
 input,textarea{caret-color:var(--tan)}
+.src a,.lnk,.text-primary{color:var(--blue-text)!important}
 @media(max-width:1080px){.suite-sections{display:none}.suite-mobile-sections{display:grid}}
 @media(max-width:600px){.suite-header-inner{height:64px;gap:8px}.suite-brand{font-size:17px;gap:7px}.suite-actions{gap:8px}.suite-portfolio{display:none}.suite-menu summary{padding:0 12px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
