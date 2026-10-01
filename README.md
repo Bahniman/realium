@@ -22,6 +22,8 @@ Realium uses the shared Riso Poster visual system: paper-like cream surfaces, bl
 
 The page includes a skip-to-content link, semantic sections and headings, labeled controls, keyboard-operable buttons, pressed states, and a reduced-motion mode. These are implemented interface features, not a formal accessibility certification.
 
+Small source links and scenario labels use readable ink variants in both themes. The lower-page call to action uses cream text on a fixed blue surface and takes keyboard users to the sample scenario heading below the header.
+
 ## Run locally
 
 Requires Node.js 22.12+ and npm.
