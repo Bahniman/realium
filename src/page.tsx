@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useRef, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   ArrowRight,
   Trophy,
@@ -34,51 +34,57 @@ const fadeUp = {
 
 /* ============================ HOOKS / HELPERS ============================ */
 
-function useActiveSection(ids: string[]) {
-  const [active, setActive] = useState<string>(ids[0] ?? "");
-  useEffect(() => {
-    const obs = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) setActive((e.target as HTMLElement).id);
-        });
-      },
-      { rootMargin: "-45% 0px -50% 0px", threshold: 0 },
-    );
-    ids.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) obs.observe(el);
-    });
-    return () => obs.disconnect();
-  }, [ids]);
-  return active;
-}
-
 function useCountUp(target: number, duration = 1400) {
   const ref = useRef<HTMLSpanElement>(null);
   const [val, setVal] = useState(0);
   const started = useRef(false);
   useEffect(() => {
-    if (!ref.current) return;
-    const el = ref.current;
-    const obs = new IntersectionObserver(
-      ([e]) => {
-        if (e.isIntersecting && !started.current) {
-          started.current = true;
-          const start = performance.now();
-          const tick = (now: number) => {
-            const p = Math.min(1, (now - start) / duration);
-            const eased = 1 - Math.pow(1 - p, 3);
-            setVal(target * eased);
-            if (p < 1) requestAnimationFrame(tick);
-          };
-          requestAnimationFrame(tick);
+    const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
+    started.current = false;
+    let frame: number | null = null;
+    let observer: IntersectionObserver | null = null;
+    const finish = () => {
+      if (frame !== null) cancelAnimationFrame(frame);
+      frame = null;
+      started.current = true;
+      setVal(target);
+    };
+    const animate = () => {
+      if (started.current) return;
+      started.current = true;
+      const start = performance.now();
+      const tick = (now: number) => {
+        const p = Math.min(1, (now - start) / duration);
+        const eased = 1 - Math.pow(1 - p, 3);
+        setVal(target * eased);
+        if (p < 1) frame = requestAnimationFrame(tick);
+        else frame = null;
+      };
+      frame = requestAnimationFrame(tick);
+    };
+    if (motionPreference.matches) finish();
+    else if (ref.current) {
+      observer = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) {
+          observer?.disconnect();
+          if (motionPreference.matches) finish();
+          else animate();
         }
-      },
-      { threshold: 0.4 },
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
+      }, { threshold: 0.4 });
+      observer.observe(ref.current);
+    }
+    const handleMotionChange = () => {
+      if (motionPreference.matches) {
+        observer?.disconnect();
+        finish();
+      }
+    };
+    motionPreference.addEventListener("change", handleMotionChange);
+    return () => {
+      if (frame !== null) cancelAnimationFrame(frame);
+      observer?.disconnect();
+      motionPreference.removeEventListener("change", handleMotionChange);
+    };
   }, [target, duration]);
   return { val, ref };
 }
@@ -174,7 +180,7 @@ const problemStats = [
 
 function Problem() {
   return (
-    <section id="problem" className="mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-12 xl:px-16 pt-8 pb-16">
+    <section id="problem" className="mx-auto realium-shell pt-8 pb-16">
       <motion.div {...fadeUp} className="mb-12 max-w-3xl">
         <div className="text-xs uppercase tracking-[0.2em] text-rose-400/80">
           The problem
@@ -319,7 +325,7 @@ const layers = [
 
 function Architecture() {
   return (
-    <section id="architecture" className="mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-12 xl:px-16 py-16 sm:py-24 lg:py-32">
+    <section id="architecture" className="mx-auto realium-shell py-16 sm:py-24 lg:py-32">
       <motion.div {...fadeUp} className="mb-14 max-w-3xl">
         <div className="text-xs uppercase tracking-[0.2em] text-emerald-600">
           The solution · one platform, three layers
@@ -540,7 +546,7 @@ const flowSteps = [
 
 function MoneyFlow() {
   return (
-    <section id="flow" className="mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-12 xl:px-16 py-16 sm:py-24 lg:py-32">
+    <section id="flow" className="mx-auto realium-shell py-16 sm:py-24 lg:py-32">
       <motion.div {...fadeUp} className="mb-12 max-w-3xl">
         <div className="text-xs uppercase tracking-[0.2em] text-emerald-600">
           How money moves
@@ -623,7 +629,7 @@ function RedTeam() {
     <section id="redteam" className="relative overflow-hidden py-16">
       <div className="pointer-events-none absolute inset-0 -z-10">
       </div>
-      <div className="mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-12 xl:px-16">
+      <div className="mx-auto realium-shell">
         <motion.div {...fadeUp} className="mb-12 max-w-3xl">
           <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-rose-400">
             <AlertTriangle className="h-3.5 w-3.5" />
@@ -690,7 +696,7 @@ function RedTeam() {
 
 function Synergy() {
   return (
-    <section className="mx-auto max-w-7xl px-4 py-10">
+    <section className="mx-auto realium-shell py-10">
       <motion.div {...fadeUp} className="mb-10 max-w-3xl">
         <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
           Event theme · Human-AI Synergy
@@ -765,7 +771,7 @@ const valueCards = [
 
 function Value() {
   return (
-    <section className="mx-auto max-w-7xl px-4 py-16">
+    <section className="mx-auto realium-shell py-16">
       <motion.div {...fadeUp} className="mb-12 max-w-3xl">
         <div className="text-xs uppercase tracking-[0.2em] text-emerald-600">
           Value
@@ -861,7 +867,7 @@ function Value() {
 
 function LiveDemo() {
   return (
-    <section id="try" className="mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-12 xl:px-16 py-20 sm:py-28 lg:py-36">
+    <section id="try" className="mx-auto realium-shell py-20 sm:py-28 lg:py-36">
       <motion.div {...fadeUp} className="mb-10 max-w-3xl">
           <div className="text-xs uppercase tracking-[0.2em] text-emerald-600">
           Illustrative model · sample scenario
@@ -885,7 +891,7 @@ function LiveDemo() {
 
 function MandateSection() {
   return (
-    <section id="mandate" className="mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-12 xl:px-16 py-20 sm:py-28 lg:py-36">
+    <section id="mandate" className="mx-auto realium-shell py-20 sm:py-28 lg:py-36">
       <motion.div {...fadeUp} className="mb-10 max-w-3xl">
         <div className="text-xs uppercase tracking-[0.2em] text-indigo-600">
           Local model · Layer 2 · Approver mandate
@@ -934,7 +940,7 @@ const validation = [
 
 function Validation() {
   return (
-    <section id="validation" className="mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-12 xl:px-16 py-24 sm:py-32">
+    <section id="validation" className="mx-auto realium-shell py-24 sm:py-32">
       <motion.div {...fadeUp} className="mb-12 max-w-3xl">
         <div className="text-xs uppercase tracking-[0.2em] text-emerald-600">
           Validation
@@ -1006,7 +1012,7 @@ const roadmap = [
 
 function Roadmap() {
   return (
-    <section className="mx-auto max-w-7xl px-4 py-24">
+    <section className="mx-auto realium-shell py-24">
       <motion.div {...fadeUp} className="mb-12 max-w-3xl">
         <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
           Roadmap
@@ -1085,7 +1091,7 @@ const sources = [
 
 function Sources() {
   return (
-    <section id="sources" className="mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-12 xl:px-16 py-20">
+    <section id="sources" className="mx-auto realium-shell py-20">
       <motion.div {...fadeUp} className="mb-8 max-w-3xl">
         <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">
           <BookOpen className="h-3.5 w-3.5" /> Sources
@@ -1125,7 +1131,7 @@ function Sources() {
 
 function CTA() {
   return (
-    <section className="mx-auto max-w-7xl px-4 pb-24">
+    <section className="mx-auto realium-shell pb-24">
       <motion.div
         {...fadeUp}
         className="glass relative overflow-hidden rounded-3xl p-10 text-center sm:p-16"
@@ -1162,7 +1168,7 @@ function CTA() {
 function Footer() {
   return (
     <footer className="border-t border-foreground/10">
-      <div className="mx-auto max-w-7xl px-4 py-10">
+      <div className="mx-auto realium-shell py-10">
         <div className="glass mb-6 flex flex-col items-start gap-3 rounded-2xl p-5 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <div className="text-[11px] uppercase tracking-widest text-emerald-400/80">
@@ -1213,58 +1219,10 @@ function SectionDivider() {
 /* ============================ PAGE ============================ */
 
 function LandingPage() {
-  const { scrollYProgress } = useScroll();
-
-  // Dynamic Scroll Progress percentage text for widescreen rails
-  const progressPercent = useTransform(scrollYProgress, (v) => `${Math.round(v * 100)}%`);
-
-  // Active section name tracking
-  const sectionIds = ["problem", "architecture", "flow", "redteam", "validation"];
-  const active = useActiveSection(sectionIds);
-  const labelMap: Record<string, string> = {
-    problem: "PROBLEM",
-    architecture: "PLATFORM",
-    flow: "MONEY FLOW",
-    redteam: "THE HARD QUESTION",
-    validation: "VALIDATION",
-  };
-  const activeLabel = active && labelMap[active] ? labelMap[active] : "INTRO";
-
   return (
     <main id="main" className="relative min-h-screen bg-transparent text-foreground overflow-hidden">
       {/* Base solid background color */}
       <div className="pointer-events-none fixed inset-0 -z-[100] bg-background" />
-
-
-
-      {/* Structural layout rails on left and right margins to fill the widescreen gaps */}
-      <div className="pointer-events-none fixed inset-y-0 left-1/2 -z-10 h-full w-full max-w-[1440px] -translate-x-1/2 border-x border-border/10 hidden 2xl:block">
-        {/* Left rail vertical details */}
-        <div className="absolute top-48 -left-14 flex flex-col gap-10 font-mono text-[9px] text-muted-foreground/45 tracking-[0.2em] select-none">
-          <div className="flex items-center gap-3 [writing-mode:vertical-lr] rotate-180">
-            <span className="text-foreground/70 font-medium uppercase">Realium Protocol</span>
-            <span className="h-10 w-px bg-border/20" />
-            <span className="text-[8px] opacity-80">SYS_LOC: LAT 19.0760° N</span>
-          </div>
-          <div className="flex items-center gap-3 [writing-mode:vertical-lr] rotate-180">
-            <span className="uppercase text-emerald-500/80 font-bold">Ledger: proposed</span>
-            <span className="h-10 w-px bg-border/20" />
-            <span className="text-[8px] opacity-80">MANDATE_V1.02</span>
-          </div>
-        </div>
-
-        {/* Right rail vertical details */}
-        <div className="absolute top-48 -right-14 flex flex-col items-center gap-10 font-mono text-[9px] text-muted-foreground/45 tracking-[0.2em] select-none">
-          <div className="flex items-center gap-3 [writing-mode:vertical-lr]">
-            <span className="text-foreground/70 font-medium uppercase">Scroll Progress</span>
-            <span className="h-10 w-px bg-border/20" />
-            <motion.span className="tabular-nums text-indigo-500 font-bold">{progressPercent}</motion.span>
-          </div>
-          <div className="flex items-center gap-3 [writing-mode:vertical-lr]">
-            <span className="text-[8px] uppercase">Active: {activeLabel}</span>
-          </div>
-        </div>
-      </div>
 
       <SuiteHeader name="Realium" sections={[
         { label: "Problem", href: "#problem" },
