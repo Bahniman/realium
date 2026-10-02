@@ -17,7 +17,7 @@ const presets: Preset[] = [
     amount: 1863900,
     days: 148,
     tier: 2,
-    deductions: 2,
+    deductions: 0,
   },
   {
     label: "School Construction (Tier 1)",
@@ -75,10 +75,10 @@ export function LiquidityCalculator() {
       <div className="mb-6 flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
         <div>
           <h3 className="text-xl font-bold text-foreground">
-            Liquidity scenario model
+            Follow the money
           </h3>
           <p className="mt-1 text-xs text-on-surface-variant">
-            Adjust the assumptions to compare a proposed advance with an informal-finance scenario. No payment or bank service is connected.
+            Move the bill, the delay and the deductions. Compare Realium with borrowing from an informal lender at 18% a year.
           </p>
         </div>
         {/* Presets */}
@@ -102,7 +102,7 @@ export function LiquidityCalculator() {
           {/* Invoice Amount */}
           <div>
             <div className="flex justify-between text-xs text-foreground/80">
-              <label htmlFor="scenario-invoice" className="font-medium uppercase tracking-wider text-[10px]">Invoice amount (scenario input)</label>
+              <label htmlFor="scenario-invoice" className="font-medium uppercase tracking-wider text-[10px]">Invoice amount</label>
               <span className="font-mono text-primary font-bold text-sm">
                 ₹{invoiceAmount.toLocaleString("en-IN")}
               </span>
@@ -156,7 +156,7 @@ export function LiquidityCalculator() {
           {/* Days to Settle */}
           <div>
             <div className="flex justify-between text-xs text-foreground/80">
-              <label htmlFor="scenario-delay" className="font-medium uppercase tracking-wider text-[10px]">Assumed settlement delay</label>
+              <label htmlFor="scenario-delay" className="font-medium uppercase tracking-wider text-[10px]">Days until the treasury pays</label>
               <span className="font-mono text-tertiary font-bold text-sm">
                 {daysToSettle} Days
               </span>
@@ -180,7 +180,7 @@ export function LiquidityCalculator() {
           {/* Deductions */}
           <div>
             <div className="flex justify-between text-xs text-foreground/80">
-              <label htmlFor="scenario-deductions" className="font-medium uppercase tracking-wider text-[10px]">Modeled deductions</label>
+              <label htmlFor="scenario-deductions" className="font-medium uppercase tracking-wider text-[10px]">Deductions</label>
               <span className="font-mono text-error font-bold text-sm">
                 {deductionsPercent}% (₹{deductionsAmount.toLocaleString("en-IN")})
               </span>
@@ -207,10 +207,10 @@ export function LiquidityCalculator() {
           <div>
             <div className="flex items-center justify-between border-b border-outline-variant pb-3">
               <div className="font-mono text-[10px] uppercase tracking-widest text-on-surface-variant">
-                Illustrative payout waterfall
+                Where the invoice goes
               </div>
               <div className="flex items-center gap-1.5 rounded-full border border-outline bg-primary-container px-2.5 py-0.5 text-[10px] font-bold text-on-primary-container uppercase">
-                <ShieldCheck className="h-3.5 w-3.5" /> Lock: 11% Bank Yield
+                <ShieldCheck className="h-3.5 w-3.5" /> Bank rate: 11% a year
               </div>
             </div>
 
@@ -271,7 +271,7 @@ export function LiquidityCalculator() {
                 <div className="flex items-center justify-between border-b border-outline-variant pb-2">
                   <div className="flex items-center gap-2">
                     <span className="h-2.5 w-2.5 shrink-0 rounded bg-primary" />
-              <span className="text-on-surface-variant">Modeled T+1 cash advance</span>
+              <span className="text-on-surface-variant">Cash on day one</span>
                   </div>
                   <span className="font-mono font-bold text-foreground">
                     ₹{advanceAmount.toLocaleString("en-IN")}
@@ -320,7 +320,7 @@ export function LiquidityCalculator() {
                   <div className="rounded-lg border border-error/35 bg-error-container p-3 text-xs text-on-error-container flex items-start gap-2">
                     <AlertTriangle className="h-4 w-4 shrink-0 mt-0.5" />
                     <div>
-                      <span className="font-medium">Modeled shortfall:</span> Fees and deductions exceed the holdback by <span className="font-mono font-bold">₹{deficitAmount.toLocaleString("en-IN")}</span>. Net proceeds below assume recovery of this amount from the advance. An actual agreement would need to define recovery and loss allocation.
+                      <span className="font-medium">Shortfall:</span> Fees and deductions exceed the holdback by <span className="font-mono font-bold">₹{deficitAmount.toLocaleString("en-IN")}</span>. Net proceeds below assume recovery of this amount from the advance. An actual agreement would need to define recovery and loss allocation.
                     </div>
                   </div>
                 </motion.div>
@@ -332,14 +332,14 @@ export function LiquidityCalculator() {
           {/* Comparison Card */}
           <div className="mt-6 border-t border-outline-variant pt-5">
             <div className="mb-3 font-mono text-[10px] uppercase tracking-widest text-on-surface-variant">
-              Modeled net proceeds after charges
+              What the contractor keeps
             </div>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {/* Realium */}
               <div className="rounded-lg border border-primary bg-primary-container p-3">
                 <div className="text-[10px] font-bold uppercase tracking-wider text-primary flex items-center gap-1">
-                  <TrendingUp className="h-3.5 w-3.5" /> Realium scenario
+                  <TrendingUp className="h-3.5 w-3.5" /> With Realium
                 </div>
                 <div className="mt-1 font-mono text-2xl font-bold text-primary">
                   {contractorNetTakePercent.toFixed(1)}%
@@ -352,7 +352,7 @@ export function LiquidityCalculator() {
               {/* Traditional */}
               <div className="rounded-lg border border-outline-variant bg-surface-container-low p-3">
                 <div className="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant flex items-center gap-1">
-                  <Landmark className="h-3.5 w-3.5" /> Status Quo (T+{daysToSettle} wait)
+                  <Landmark className="h-3.5 w-3.5" /> Informal loan at 18%
                 </div>
                 <div className="mt-1 font-mono text-2xl font-bold text-on-surface-variant">
                   {traditionalNetTakePercent.toFixed(1)}%

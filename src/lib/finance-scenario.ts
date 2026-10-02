@@ -2,7 +2,7 @@ export const BASE_FINANCE_INPUT = {
   invoiceAmount: 1_863_900,
   daysToSettle: 148,
   advanceRate: 60,
-  deductionsPercent: 2,
+  deductionsPercent: 0,
   bankInterestRate: 0.11,
   platformFeeRate: 0.0035,
   traditionalInterestRate: 0.18,

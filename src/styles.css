@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "./riso-tokens.css";
 @import "./riso-suite.css";
+@import "./poster.css";
 
 @theme inline {
   --font-sans: var(--sans);

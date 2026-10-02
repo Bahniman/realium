@@ -43,12 +43,12 @@ export function SuretyPlayground() {
   const trigger = () => {
     const s = scenarios[next % scenarios.length];
     let verdict: Attempt["verdict"] = "allow";
-    let reason = "Within the example policy · outcome shown locally";
+    let reason = "Within mandate · signature accepted";
     const catOk = allowedCats.includes(s.category);
     const geoOk = s.workId.startsWith(`PWD-${geo}-`);
     if (revoked) {
       verdict = "block";
-      reason = "Departure scenario selected · sample policy blocks this attempt";
+      reason = "Engineer has left · signature refused";
     } else if (!geoOk) {
       verdict = "block";
       reason = `Outside geography fence · mandate scoped to ${geo} circle`;
@@ -57,7 +57,7 @@ export function SuretyPlayground() {
       reason = `Category ${s.category} not in mandate`;
     } else if (s.amount > cap) {
       verdict = "escrow";
-      reason = `Exceeds single-certification cap ₹${cap.toLocaleString("en-IN")} — routed to SE for co-sign`;
+      reason = `Exceeds single-certification cap ₹${cap.toLocaleString("en-IN")} · sent to the Superintending Engineer to co-sign`;
     }
     setLog((l) =>
       [{ id: Date.now(), ...s, verdict, reason }, ...l].slice(0, 6),
@@ -71,10 +71,10 @@ export function SuretyPlayground() {
         {/* controls */}
         <div>
           <div className="mb-1 text-[10px] font-bold uppercase tracking-widest text-primary">
-            Sample mandate · Executive Engineer
+            Mandate · Executive Engineer
           </div>
           <div className="mb-6 font-mono text-[10px] text-on-surface-variant">
-            Illustrative values · no cryptographic keys or external policy service
+            Change the limits. Every attempt on the right is re-checked.
           </div>
 
           <label htmlFor="sample-cap" className="block text-xs font-medium uppercase tracking-wider text-[10px] text-foreground/80">
@@ -97,7 +97,7 @@ export function SuretyPlayground() {
           </div>
 
           <label htmlFor="sample-categories" className="mt-6 block text-xs font-medium uppercase tracking-wider text-[10px] text-foreground/80">
-            Categories permitted in this example
+            Work categories allowed
           </label>
           <input
             id="sample-categories"
@@ -110,7 +110,7 @@ export function SuretyPlayground() {
           <span className="mt-6 block text-xs font-medium uppercase tracking-wider text-[10px] text-foreground/80">
             Geography fence (state circle)
           </span>
-          <div className="mt-2 flex gap-2" role="group" aria-label="Example state circle">
+          <div className="mt-2 flex gap-2" role="group" aria-label="State circle">
             {["MH", "KA", "TN", "GJ"].map((g) => (
               <button
                 key={g}
@@ -135,7 +135,7 @@ export function SuretyPlayground() {
               onChange={(e) => setRevoked(e.target.checked)}
               className="accent-primary"
             />
-              Simulate role departure in the example
+              The engineer has left the post
           </label>
 
           <button
@@ -143,7 +143,7 @@ export function SuretyPlayground() {
             onClick={trigger}
             className="group mt-6 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-primary text-on-primary px-4 py-2.5 text-sm font-medium hover:bg-primary/90 active:bg-primary/80 transition-colors cursor-pointer"
           >
-            <Send className="h-4 w-4" /> Simulate certification attempt
+            <Send className="h-4 w-4" /> Send a certification
           </button>
 
           <div className="mt-4 grid grid-cols-3 gap-2 text-center text-[10px] font-bold uppercase tracking-wider">
@@ -162,13 +162,13 @@ export function SuretyPlayground() {
         {/* action log */}
         <div className="rounded-lg border border-outline-variant bg-surface-container-high p-4 flex flex-col h-full min-h-[340px]">
           <div className="mb-3 flex items-center justify-between font-mono text-[10px] uppercase tracking-widest text-on-surface-variant">
-            <span>Sample policy outcomes</span>
-            <span>Local simulation</span>
+            <span>What happens to each attempt</span>
+            <span>Live</span>
           </div>
 
           {log.length === 0 && (
             <div className="flex flex-1 items-center justify-center text-center text-xs text-on-surface-variant min-h-[220px]">
-              The example classifies attempts as allow, escrow, or block. It does not sign or write a ledger event.
+              Send a certification. Each one is allowed, held for a co-signer, or blocked, with the reason.
             </div>
           )}
 

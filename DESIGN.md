@@ -1,13 +1,7 @@
 # Realium design
 
-This site follows the Riso Poster system in `C:\Users\bahni\Downloads\Exports\Design Systems\Riso Poster\DESIGN.md`.
+Riso Poster, shared with the portfolio and the other three prototypes. Tokens in `src/riso-tokens.css`, header and motion in `src/riso-suite.css`, `src/riso-motion.css` and `src/components/suite-motion.tsx`, page composition in `src/poster.css` (identical in all four repos; edit one and copy it to the others).
 
-Use cream paper, ink outlines, blue and pink spot inks, and yellow only for sticker-like emphasis or active states. Use Bricolage Grotesque for display, Newsreader italic for the human voice, and Space Mono for labels and data. Cards use hard offset shadows and a small radius; tilt only object-like decoration. Keep copy, controls, inputs, and data rows straight. Keep forms calm, legible, keyboard accessible, and at least 44px tall. The site supports explicit light and dark themes with the same spot-ink logic.
+Page order: poster hero (overprinted headline, serif italic line, short dek, two buttons, tilted demo board with a yellow sticker), ticket strip (four facts, four what/built/for/stage rows), blue band with the one-line bet, the gap (prose plus a yellow quote card), three stamped cards for how it works, the live demo in a framed stage, objection cards, plain-English decoder and sources, then the next-prototype strip.
 
-Realium's visual signature is a two-ink public-works docket: a confident overprinted headline, a yellow round proof sticker, and an interactive paper route from site measurement to human approval to modeled liquidity. The route is a functional local illustration, not a dashboard or live workflow. Keep each value visibly identified as an example, proposal, or unvalidated model. Do not imply a real department, lender, payment rail, or production AI connection.
-
-Use a single bounded paper-settle entrance on the route plate and direct hover/press feedback on its stage controls. The controls themselves remain straight, keyboard accessible, and at least 44px tall. Halftone dots belong in the margins behind the plate, never behind explanatory text. Reduced motion shows the settled composition immediately.
-
-## Shared motion and navigation
-
-Updated 1 October 2026. The shared SuiteMotion runtime adds Lenis wheel and anchor smoothing, focus-safe section navigation with browser history, a pink reading-progress rule, active-section links, and a tactile back-to-top control. Touch scrolling, nested scroll regions and the visible browser scrollbar remain native. The animation-frame loop sleeps at rest. Reduced-motion preferences disable smoothing and spatial animation. Only selected narrative artifacts enter on scroll; working inputs and feedback remain stable.
+Set `--a` and `--b` on the page root to choose the lead ink. No glass, blur, gradients or soft shadows. Data stays straight and readable; tilt belongs to cards and boards, never to controls.

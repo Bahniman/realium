@@ -86,20 +86,20 @@ export function SuiteMotion() {
 
     // Prepare before the first paint so the opening never flashes fully visible.
     const heroItems = Array.from(new Set(document.querySelectorAll<HTMLElement>(
-      ".realium-hero-copy > *, .heirloom-hero-copy > *, .hero-grid > div:first-child > *"
+      ".pk-hero-copy > *, .realium-hero-copy > *, .heirloom-hero-copy > *, .hero-grid > div:first-child > *"
     )));
     heroItems.forEach((element, index) => {
       element.dataset.entry = "copy";
       element.style.setProperty("--entry-delay", `${Math.min(index * 80, 320)}ms`);
     });
-    const boards = Array.from(document.querySelectorAll<HTMLElement>(".realium-process, .memory-stack-board, .route-board, .price-sheet"));
+    const boards = Array.from(document.querySelectorAll<HTMLElement>(".pk-board, .realium-process, .memory-stack-board, .price-sheet"));
     boards.forEach(element => { element.dataset.entry = "board"; });
-    const stamps = Array.from(document.querySelectorAll<HTMLElement>(".realium-proof-stamp, .memory-scope-slip"));
+    const stamps = Array.from(document.querySelectorAll<HTMLElement>(".pk-sticker, .realium-proof-stamp, .memory-scope-slip"));
     stamps.forEach(element => { element.dataset.entry = "stamp"; });
     const entryItems = [...heroItems, ...boards, ...stamps];
     const revealElements = Array.from(new Set(document.querySelectorAll<HTMLElement>(
-      ".suite-reveal, .section-head, .rows > .row, .statement > .shell, .table-wrap, .prose > p, .src > li, .site-footer"
-    ))).filter(element => !element.closest(".hero-grid, .realium-hero") && !element.parentElement?.closest(".suite-reveal"));
+      ".suite-reveal, .pk-head, .pk-glance, .pk-split > *, .pk-cards > li, .pk-stage, .pk-weak > li, .pk-two > *, .pk-next-grid > a, .pk-home, .section-head, .rows > .row, .statement > .shell, .table-wrap, .prose > p, .src > li, .site-footer"
+    ))).filter(element => !element.closest(".pk-hero, .hero-grid, .realium-hero") && !element.parentElement?.closest(".suite-reveal"));
     const reveal = (element: HTMLElement) => { element.dataset.reveal = "visible"; };
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {

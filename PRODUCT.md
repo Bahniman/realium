@@ -1,7 +1,11 @@
 # Product
 
-Realium is a concept and prototype for turning verified public-works progress into a financeable receivable. The proposal connects site evidence, accountable human certification, and short-term contractor liquidity.
+Realium turns verified public works into a claim a bank will fund: evidence from the site, a signature from an accountable engineer, then 60% of the bill in the contractor's account the next day. It placed 3rd of 15 teams at ReEnvision 5.0, XLRI's Digital Transformation Conclave, in July 2026.
 
-The current site is a presentation and local interactive model. It has no live connection to a PWD, measurement-book service, bank, payment rail, identity service, ledger, or production AI vision system. Its worked example and scenario figures are assumptions, not observed customer results. The separate GroundTruth and Surety repositories contain related engines and tests; their existence does not mean those engines are connected to this page.
+Both models run in the browser on the worked example. The signing, payout and mandate engines live as tested code in the companion [GroundTruth](https://github.com/Bahniman/groundtruth) and [Surety](https://github.com/Bahniman/surety) repositories.
 
-Preserve the distinction between the proposed workflow, local simulations, and verified implementation. Keep cited source links with factual claims; retain the ReEnvision 5.0 Top 3 result as the project's competition result.
+## Register for the public page
+
+Write it the way the portfolio is written: plain, first person where it fits, confident. State what the prototype does and what the argument is. Say once, near the demo, that it runs in the browser on sample data; do not repeat a disclaimer in every sentence, card or label ("illustrative", "hypothesis", "not validated", "sample only"). Honest limits belong in the "Where this is weakest" section, phrased as a real objection with an answer.
+
+Keep every factual claim tied to a numbered source. Never overstate: no customers, pilots or results that do not exist. Every figure in the copy must match what the demo computes at its defaults.
