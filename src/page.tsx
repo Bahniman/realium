@@ -73,6 +73,35 @@ export default function LandingPage() {
           </div>
         </section>
 
+        {/* ---------------------------- two calendars ---------------------------- */}
+        <section className="pk-wrap pk-sec" id="wait" aria-labelledby="wait-title">
+          <div className="pk-head">
+            <p className="pk-kick"><span className="dot" /> The same bill</p>
+            <h2 id="wait-title">One road bill, <em>two calendars.</em></h2>
+          </div>
+          <div className="rl-cal">
+            <div className="rl-axis" aria-hidden="true">
+              {[0, 30, 60, 90, 120, 148].map(day => <span key={day} style={{ left: `${(day / 148) * 100}%` }}>Day {day}</span>)}
+            </div>
+            <div className="rl-lane">
+              <p className="rl-name">Today<small>Wait for the treasury</small></p>
+              <div className="rl-track">
+                <span className="rl-gap" style={{ left: 0, width: "100%" }}>148 days carrying labour, cement and bitumen on credit</span>
+                <span className="rl-pay rl-pay--late" style={{ left: "100%" }}><b>₹18.6L</b> arrives</span>
+              </div>
+            </div>
+            <div className="rl-lane">
+              <p className="rl-name">With Realium<small>Signed bill, funded</small></p>
+              <div className="rl-track">
+                <span className="rl-pay rl-pay--early" style={{ left: `${(1 / 148) * 100}%` }}><b>₹11.2L</b> day 1</span>
+                <span className="rl-gap rl-gap--quiet" style={{ left: `${(1 / 148) * 100}%`, width: `${(147 / 148) * 100}%` }}>work continues, crew paid</span>
+                <span className="rl-pay rl-pay--late" style={{ left: "100%" }}><b>₹6.9L</b> the rest, after fees</span>
+              </div>
+            </div>
+            <p className="rl-foot">Fees and interest come out of the held-back 40%, so the contractor keeps {pct(s.contractorNetTakePercent)} of the bill. Borrowing the same money informally at 18% leaves {pct(s.traditionalNetTakePercent)}.</p>
+          </div>
+        </section>
+
         {/* ------------------------------- the gap -------------------------------- */}
         <section className="pk-wrap pk-sec" id="problem">
           <div className="pk-head">

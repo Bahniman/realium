@@ -70,7 +70,7 @@ export function LiquidityCalculator() {
   };
 
   return (
-    <div className="rounded-[16px] border border-outline-variant bg-surface-container p-6 md:p-8">
+    <div className="money-demo">
       {/* Title / Description */}
       <div className="mb-6 flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
         <div>
@@ -88,6 +88,7 @@ export function LiquidityCalculator() {
               key={p.label}
               type="button"
               onClick={() => loadPreset(p)}
+              aria-pressed={invoiceAmount === p.amount && daysToSettle === p.days && selectedTier === p.tier && deductionsPercent === p.deductions}
               className="rounded-lg border border-outline bg-surface-container-low px-3 py-1.5 text-[11px] font-medium text-on-surface hover:bg-on-surface/8 transition-colors cursor-pointer"
             >
               {p.label.split(" (")[0]}
@@ -203,13 +204,13 @@ export function LiquidityCalculator() {
         </div>
 
         {/* Dynamic Visualization & Output */}
-        <div className="flex flex-col justify-between rounded-lg border border-outline-variant bg-surface-container-high p-5">
+        <div className="flex flex-col justify-between money-out">
           <div>
             <div className="flex items-center justify-between border-b border-outline-variant pb-3">
               <div className="font-mono text-[10px] uppercase tracking-widest text-on-surface-variant">
                 Where the invoice goes
               </div>
-              <div className="flex items-center gap-1.5 rounded-full border border-outline bg-primary-container px-2.5 py-0.5 text-[10px] font-bold text-on-primary-container uppercase">
+              <div className="flex items-center gap-1.5 rate-chip">
                 <ShieldCheck className="h-3.5 w-3.5" /> Bank rate: 11% a year
               </div>
             </div>
@@ -222,15 +223,15 @@ export function LiquidityCalculator() {
               </div>
               
               {/* Stacked Progress Bar */}
-              <div className="relative h-6 w-full overflow-hidden rounded-md border border-outline-variant bg-surface flex">
+              <div className="wf-bar relative h-9 w-full overflow-hidden flex">
                 {/* Advance Amount */}
                 <motion.div
                   layout
-                  className="h-full bg-primary relative flex items-center justify-center"
+                  className="h-full wf-adv relative flex items-center justify-center"
                   style={{ width: `${(Math.max(0, advanceAmount - deficitAmount) / invoiceAmount) * 100}%` }}
                   transition={{ type: "spring", stiffness: 100, damping: 20 }}
                 >
-                  <span className="font-mono text-[10px] font-bold text-on-primary select-none">
+                  <span className="font-mono text-[10px] font-bold select-none">
                     {principalExposed ? `${((Math.max(0, advanceAmount - deficitAmount) / invoiceAmount) * 100).toFixed(1)}% net` : `${advanceRate}%`}
                   </span>
                 </motion.div>
@@ -239,7 +240,7 @@ export function LiquidityCalculator() {
                 {remainingHoldback > 0 && (
                   <motion.div
                     layout
-                    className="h-full bg-primary/25 border-l border-r border-outline-variant relative"
+                    className="h-full wf-hold relative"
                     style={{ width: `${(remainingHoldback / invoiceAmount) * 100}%` }}
                     transition={{ type: "spring", stiffness: 100, damping: 20 }}
                   />
@@ -249,7 +250,7 @@ export function LiquidityCalculator() {
                 {((bankDiscount + platformFee) / invoiceAmount) * 100 > 0 && (
                   <motion.div
                     layout
-                    className="h-full bg-tertiary/40 border-r border-outline-variant relative"
+                    className="h-full wf-fee relative"
                     style={{ width: `${((bankDiscount + platformFee) / invoiceAmount) * 100}%` }}
                     transition={{ type: "spring", stiffness: 100, damping: 20 }}
                   />
@@ -259,7 +260,7 @@ export function LiquidityCalculator() {
                 {deductionsPercent > 0 && (
                   <motion.div
                     layout
-                    className="h-full bg-error/40 relative"
+                    className="h-full wf-ded relative"
                     style={{ width: `${deductionsPercent}%` }}
                     transition={{ type: "spring", stiffness: 100, damping: 20 }}
                   />
@@ -270,7 +271,7 @@ export function LiquidityCalculator() {
               <div className="mt-5 space-y-2.5 text-xs select-none">
                 <div className="flex items-center justify-between border-b border-outline-variant pb-2">
                   <div className="flex items-center gap-2">
-                    <span className="h-2.5 w-2.5 shrink-0 rounded bg-primary" />
+                    <span className="h-3 w-3 shrink-0 wf-dot wf-adv" />
               <span className="text-on-surface-variant">Cash on day one</span>
                   </div>
                   <span className="font-mono font-bold text-foreground">
@@ -279,7 +280,7 @@ export function LiquidityCalculator() {
                 </div>
                 <div className="flex items-center justify-between border-b border-outline-variant pb-2">
                   <div className="flex items-center gap-2">
-                    <span className="h-2.5 w-2.5 shrink-0 rounded bg-primary/25" />
+                    <span className="h-3 w-3 shrink-0 wf-dot wf-hold" />
                     <span className="text-on-surface-variant">Released Holdback</span>
                   </div>
                   <span className="font-mono font-bold text-primary">
@@ -288,7 +289,7 @@ export function LiquidityCalculator() {
                 </div>
                 <div className="flex items-center justify-between border-b border-outline-variant pb-2">
                   <div className="flex items-center gap-2">
-                    <span className="h-2.5 w-2.5 shrink-0 rounded bg-tertiary/40" />
+                    <span className="h-3 w-3 shrink-0 wf-dot wf-fee" />
                     <span className="text-on-surface-variant">Financing Fees</span>
                   </div>
                   <span className="font-mono font-bold text-foreground">
@@ -297,7 +298,7 @@ export function LiquidityCalculator() {
                 </div>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <span className="h-2.5 w-2.5 shrink-0 rounded bg-error/40" />
+                    <span className="h-3 w-3 shrink-0 wf-dot wf-ded" />
                     <span className="text-on-surface-variant">Deductions/Penalties</span>
                   </div>
                   <span className="font-mono font-bold text-error">
@@ -337,27 +338,27 @@ export function LiquidityCalculator() {
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {/* Realium */}
-              <div className="rounded-lg border border-primary bg-primary-container p-3">
-                <div className="text-[10px] font-bold uppercase tracking-wider text-primary flex items-center gap-1">
+              <div className="keep-card keep-win">
+                <div className="keep-label">
                   <TrendingUp className="h-3.5 w-3.5" /> With Realium
                 </div>
-                <div className="mt-1 font-mono text-2xl font-bold text-primary">
+                <div className="keep-num">
                   {contractorNetTakePercent.toFixed(1)}%
                 </div>
-                <div className="mt-0.5 font-mono text-xs text-on-primary-container font-medium">
+                <div className="keep-sub">
                   ₹{contractorNetTake.toLocaleString("en-IN")}
                 </div>
               </div>
 
               {/* Traditional */}
-              <div className="rounded-lg border border-outline-variant bg-surface-container-low p-3">
-                <div className="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant flex items-center gap-1">
+              <div className="keep-card">
+                <div className="keep-label">
                   <Landmark className="h-3.5 w-3.5" /> Informal loan at 18%
                 </div>
-                <div className="mt-1 font-mono text-2xl font-bold text-on-surface-variant">
+                <div className="keep-num">
                   {traditionalNetTakePercent.toFixed(1)}%
                 </div>
-                <div className="mt-0.5 font-mono text-xs text-on-surface-variant">
+                <div className="keep-sub">
                   ₹{traditionalNetTake.toLocaleString("en-IN")}
                 </div>
               </div>

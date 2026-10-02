@@ -147,6 +147,30 @@
   .pk-big .b { margin-left:.25em; }
   .pk-facts { grid-template-columns:1fr 1fr; }
   .pk-rows li { grid-template-columns:1fr; gap:4px; }
-  .pk-stage { box-shadow:6px 6px 0 var(--a); }
+  .pk-stage { box-shadow:6px 6px 0 var(--a); padding:24px 12px 14px; }
+  .pk-stage > * { min-width:0; }
 }
 @media (prefers-reduced-motion:reduce) { .pk-board,.pk-next-grid a,.pk-btn { transition:none; } }
+
+/* ---------- demo skin: the same riso controls inside every live demo ---------- */
+.pk-stage { font-size:15px; }
+.pk-stage .text-\[8px\],.pk-stage .text-\[9px\] { font-size:11px !important; line-height:1.45; }
+.pk-stage .text-\[10px\] { font-size:12px !important; line-height:1.45; }
+.pk-stage .text-\[11px\] { font-size:13px !important; line-height:1.5; }
+.pk-stage .text-xs { font-size:13.5px !important; line-height:1.5; }
+.pk-stage :is([class*="rounded-md"],[class*="rounded-lg"],[class*="rounded-xl"],[class*="rounded-2xl"]) { border-radius:4px !important; }
+.pk-stage :is(.border-outline-variant,.border-border,.border-outline) { border-color:var(--line-2) !important; }
+.pk-stage :is(.bg-surface-container,.bg-surface-container-low,.bg-surface-container-high,.bg-surface-container-highest) { background:var(--card) !important; }
+.pk-stage button { cursor:pointer; }
+.pk-stage button[aria-pressed] { border-width:2px !important; border-style:solid; }
+.pk-stage button[aria-pressed="true"] { background:var(--yellow) !important; color:#1d1a16 !important; border-color:#1d1a16 !important; box-shadow:3px 3px 0 var(--shc); font-weight:700; }
+.pk-stage button[aria-pressed="true"] :is(span,svg,small,strong) { color:#1d1a16 !important; }
+.pk-stage button[aria-pressed="true"] .route-tag { color:#1d1a16 !important; }
+.pk-stage button:disabled { cursor:not-allowed; }
+.pk-stage input[type="range"] { accent-color:var(--pink); }
+.pk-stage h3 { font-weight:800; letter-spacing:-.03em; }
+.pk-stage pre { font-size:12.5px !important; line-height:1.6 !important; }
+.vault-tag { flex:none; padding:2px 7px; border:1.5px solid currentColor; border-radius:99px; font:700 10.5px/1.4 var(--mono); letter-spacing:.03em; text-transform:uppercase; color:var(--sec); }
+.vault-tag-locked { color:var(--tan); }
+.vault-tag-gone { color:var(--tan); border-style:dashed; }
+button[aria-pressed="true"] .vault-tag { color:#1d1a16; }
