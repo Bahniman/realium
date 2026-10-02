@@ -92,7 +92,7 @@ export function SuiteMotion() {
       element.dataset.entry = "copy";
       element.style.setProperty("--entry-delay", `${Math.min(index * 80, 320)}ms`);
     });
-    const boards = Array.from(document.querySelectorAll<HTMLElement>(".pk-board, .realium-process, .memory-stack-board, .price-sheet"));
+    const boards = Array.from(document.querySelectorAll<HTMLElement>(".pk-board"));
     boards.forEach(element => { element.dataset.entry = "board"; });
     const stamps = Array.from(document.querySelectorAll<HTMLElement>(".pk-sticker, .realium-proof-stamp, .memory-scope-slip"));
     stamps.forEach(element => { element.dataset.entry = "stamp"; });
