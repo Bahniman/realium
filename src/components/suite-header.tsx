@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { ThemeToggle } from "./theme-toggle";
 
 type Section = { label: string; href: string };
-const projects = ["Realium", "Heirloom", "Turnstile", "Windtunnel"];
+const projects = ["Realium", "Heirloom", "Turnstile", "Windtunnel", "Heir"];
 
 export function SuiteHeader({ name, sections }: { name: string; sections: Section[] }) {
   const menu = useRef<HTMLDetailsElement>(null);
