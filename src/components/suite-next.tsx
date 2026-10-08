@@ -3,6 +3,7 @@ const PROJECTS = [
   { name: "Heirloom", tag: "Knowledge", line: "A firm's memory in a format the firm owns, with role-based access and a clean export." },
   { name: "Turnstile", tag: "Commerce", line: "Tell people, shopping agents and scrapers apart, then serve each the right storefront." },
   { name: "Windtunnel", tag: "Pricing", line: "Rehearse a price change on 500 simulated runs before customers react to the real one." },
+  { name: "Heir", tag: "Agents", line: "A student club's commitments, kept across handovers. Play the new head, then run the club with it." },
 ];
 
 export function SuiteNext({ current }: { current: string }) {
@@ -11,7 +12,7 @@ export function SuiteNext({ current }: { current: string }) {
     <section className="pk-next pk-wrap" aria-labelledby="next-title">
       <div className="pk-head">
         <p className="pk-kick"><span className="n">Next</span> Same notebook, different problem</p>
-        <h2 id="next-title">Three more <em>prototypes.</em></h2>
+        <h2 id="next-title">Four more <em>prototypes.</em></h2>
       </div>
       <div className="pk-next-grid">
         {others.map(project => (

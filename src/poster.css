@@ -116,11 +116,13 @@
 
 /* ---------- next prototype ---------- */
 .pk-next { padding-block:clamp(80px,10vw,140px) clamp(56px,7vw,96px); }
-.pk-next-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:22px; }
+.pk-next-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:22px; }
+@media (max-width:1200px) { .pk-next-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
 .pk-next-grid a { position:relative; display:flex; flex-direction:column; gap:10px; min-height:220px; padding:24px; border:var(--bw) solid var(--ink); border-radius:6px; background:var(--card); color:var(--ink); text-decoration:none; box-shadow:6px 6px 0 var(--shc); transition:transform .3s var(--ease),box-shadow .3s var(--ease); }
 .pk-next-grid a:nth-child(1) { rotate:-1.4deg; }
 .pk-next-grid a:nth-child(2) { rotate:1deg; background:var(--blue-fill); color:#fffaf1; box-shadow:6px 6px 0 var(--pink); }
 .pk-next-grid a:nth-child(3) { rotate:-.5deg; }
+.pk-next-grid a:nth-child(4) { rotate:.7deg; }
 .pk-next-grid a:nth-child(2) .pk-kick { color:#fffaf1; }
 .pk-next-grid a b { font-size:clamp(30px,2.8vw,40px); line-height:.95; letter-spacing:-.05em; }
 .pk-next-grid a p { color:inherit; margin:0; font-size:15.5px; line-height:1.5; }
